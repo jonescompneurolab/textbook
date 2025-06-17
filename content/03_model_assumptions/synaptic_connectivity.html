@@ -295,15 +295,21 @@ src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/im
 <p>Note that in the default model, within a layer, there is all-to-all
 connectivity between pyramidal neurons. The synaptic weights between
 neurons are scaled inversely by the distance in the XY plane (arbitrary
-units) between the neurons (d) using exponential fall-off following ,
-and space constant . The synaptic delays are scaled in proportion to the
-XY plane distance (d) between the neurons following , to account for the
-larger propagation. This scaling is illustrated in the figure below,
-with of 3. The figure below represents one neuron located at the center
-(x=0, y=0), with other neurons positioned relative to that neuron
-(neuron positions indicated with black dots). As shown, with increasing
-distance from the center, the synaptic weights decay, while the synaptic
-delays increase.</p>
+units) between the neurons (d) using exponential fall-off following
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>e</mi><mrow><mi>−</mi><msup><mi>d</mi><mn>2</mn></msup><mi>/</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow></msup><annotation encoding="application/x-tex">e^{-d^2 / \lambda^2}</annotation></semantics></math>,
+and space constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.
+The synaptic delays are scaled in proportion to the XY plane distance
+(d) between the neurons following
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mi>e</mi><mrow><mi>−</mi><msup><mi>d</mi><mn>2</mn></msup><mi>/</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow></msup></mrow><annotation encoding="application/x-tex">1 / e^{-d^2 / \lambda^2}</annotation></semantics></math>
+to account for the larger propagation. This scaling is illustrated in
+the figure below, with a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
+of 3. The figure below represents one neuron located at the center (x=0,
+y=0), with other neurons positioned relative to that neuron (neuron
+positions indicated with black dots). As shown, with increasing distance
+from the center, the synaptic weights decay, while the synaptic delays
+increase.</p>
 <div style="display:block; width:100%; margin: 0 auto;">
 <p><img
 src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/weight-scaling.png" /></p>
