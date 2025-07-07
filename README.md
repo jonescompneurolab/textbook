@@ -1,4 +1,4 @@
-# Website Redesign
+# HNN Textbook Source Code
 
 ## Where to access the deployed verison of this website?
 
@@ -25,4 +25,4 @@ Click here: <https://jonescompneurolab.github.io/textbook/content/preface.html>
 make create-conda-env-mpi
 ```
 
-The above will create a new Conda environment named `website-redesign-mpi` which you should use for building the HTML output in this repo.
+The above will create a new Conda environment named `textbook-env-mpi` which you should use for building the HTML output in this repo.

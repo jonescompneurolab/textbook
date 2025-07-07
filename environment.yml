@@ -1,4 +1,4 @@
-name: website-redesign
+name: textbook-env
 channels:
   - conda-forge
 dependencies:
