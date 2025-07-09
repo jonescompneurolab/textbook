@@ -1,5 +1,6 @@
 {
     "full_executed": false,
+    "hnn_version": "0.4.2",
     "api_alpha_beta.ipynb": {
         "Welcome to the HNN-Core Alpha and Beta tutorial": {
             "level": 1,

@@ -326,7 +326,13 @@ def main():
     parser.add_argument(
         "--execute-notebooks",
         action="store_true",
-        help="Execute notebooks before converting them to HTML."
+        help="Execute notebooks as needed based on their status "
+             "before converting them to HTML."
+    )
+    parser.add_argument(
+        "--force-execute-all",
+        action="store_true",
+        help="Force execute all notebooks regardless of their status"
     )
     args = parser.parse_args()
 
@@ -338,6 +344,7 @@ def main():
         hash_path=hash_path,
         write_html=True,
         execute_notebooks=args.execute_notebooks,
+        force_execute_all=args.force_execute_all,
     )
 
     page_paths = get_page_paths()

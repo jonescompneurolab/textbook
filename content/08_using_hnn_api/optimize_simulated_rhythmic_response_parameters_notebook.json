@@ -1,5 +1,6 @@
 {
     "full_executed": true,
+    "hnn_version": "0.4.2",
     "optimize_simulated_rhythmic_response_parameters_notebook.ipynb": {
         "7.10: Optimize simulated rhythmic response parameters": {
             "level": 1,

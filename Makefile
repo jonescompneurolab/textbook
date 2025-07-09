@@ -9,6 +9,9 @@ all: build
 build:
 	python build.py
 
+force-execute-all-notebooks:
+	python build.py --force-execute-all
+
 execute-notebooks:
 	python build.py --execute-notebooks
 

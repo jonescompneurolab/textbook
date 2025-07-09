@@ -1,16 +1,17 @@
 # %%
-import os
 import base64
-import html
-import re
-import json
-import nbformat
-# import markdown
 import hashlib
+import html
+import json
+import os
+import re
+
+import nbformat
 import pypandoc
+from hnn_core import __version__ as hnn_version
 from nbconvert.preprocessors import (
-    ExecutePreprocessor,
     ClearOutputPreprocessor,
+    ExecutePreprocessor,
 )
 
 
@@ -424,6 +425,7 @@ def convert_notebooks_to_html(
         use_base64=False,
         write_html=False,
         execute_notebooks=False,
+        force_execute_all=False,
         hash_path="notebook_hashes.json",
         ):
     """
@@ -445,6 +447,13 @@ def convert_notebooks_to_html(
     ) as f:
         notebooks_to_skip = json.load(f)
     notebooks_to_skip = notebooks_to_skip['skip_execution']
+
+    if force_execute_all:
+        print(
+            "The force_execute_all argument has been set to True. All "
+            "notebooks will be re-executed unless flagged to be skipped "
+            "in the notebooks_to_skip.json file."
+        )
 
     # iterate through input directory and process notebooks
     for root, list_folders, list_files in os.walk(input_folder):
@@ -470,54 +479,33 @@ def convert_notebooks_to_html(
                     filename,
                 )
 
-                # check if notebook should be skipped
-                skip_notebook = False
-                if filename in notebooks_to_skip:
-                    skip_notebook = True
+                # default value for skip_notebook, to be updated based
+                # on notebooks_to_skip.json per the main loop below
+                skip_notebook=False
 
-                # for cases where the hash has not changed
-                if skip_notebook:
-                    print(
-                        f"Notebook '{filename}' has been flagged to be"
-                        " skipped. Execution will not be attempted for"
-                        " this notebook."
-                    )
-                elif (filename in notebook_hashes) and \
-                        (notebook_hashes[filename] == current_hash):
+                # when force_execute_all is True, all notebooks
+                # should be executed unless flagged to be skipped
+                # --------------------------------------------------
+                if force_execute_all:
+                    # update the skip_notebook flag
+                    if filename in notebooks_to_skip:
+                        skip_notebook = True
 
-                    # check if notebook has been fully executed
-                    if not notebook_executed:
+                    # check if notebook should be skipped
+                    # --------------------------------------------------
+                    if skip_notebook:
                         print(
-                            f"Warning: Notebook {filename} has not been"
-                            " fully executed."
+                            f"Notebook '{filename}' has been flagged to be"
+                            " skipped. Execution will not be attempted for"
+                            " this notebook."
                         )
-                        if execute_notebooks:
-                            loaded_notebook = get_notebook(
-                                nb_path,
-                                execute=True,
-                            )
-                            print('Notebook has been executed')
-                            notebook_executed = is_notebook_fully_executed(
-                                loaded_notebook
-                            )
-                        else:
-                            print(
-                                "Notebook execution skipped since"
-                                " execute_notebooks is False."
-                            )
+                    # run all notebooks not flagged to be skipped
+                    # --------------------------------------------------
                     else:
                         print(
-                            f"Notebook {filename} is unchanged and already"
-                            " fully executed"
+                            f"Executing {filename}"
                         )
-                # if the file is new (unhashed) or has been changed, execute
-                # the notebook and update the hash dict
-                else:
-                    print(
-                        f"Notebook {filename} is new or has been updated and"
-                        " needs to be executed"
-                    )
-                    if execute_notebooks:
+
                         loaded_notebook = get_notebook(
                             nb_path,
                             execute=True,
@@ -529,11 +517,82 @@ def convert_notebooks_to_html(
                             loaded_notebook
                         )
 
+                # when force_execute_all is False, notebooks are
+                # conditionally executed based on the hash and
+                # the skip condition
+                # --------------------------------------------------
+                else:
+                    # check if notebook should be skipped
+                    if filename in notebooks_to_skip:
+                        skip_notebook = True
+
+                    # 1) skip notebook if indicated in json
+                    # --------------------------------------------------
+                    if skip_notebook:
+                        print(
+                            f"Notebook '{filename}' has been flagged to be"
+                            " skipped. Execution will not be attempted for"
+                            " this notebook."
+                        )
+                    # 2) if the hash has not changed
+                    # --------------------------------------------------
+                    elif (filename in notebook_hashes) and \
+                            (notebook_hashes[filename] == current_hash):
+
+                        # case when notebook is *not* fully executed
+                        if not notebook_executed:
+                            print(
+                                f"Warning: Notebook {filename} has not been"
+                                " fully executed."
+                            )
+                            # execute the notebook if execute_notebooks is True
+                            if execute_notebooks:
+                                loaded_notebook = get_notebook(
+                                    nb_path,
+                                    execute=True,
+                                )
+                                print('Notebook has been executed')
+                                notebook_executed = is_notebook_fully_executed(
+                                    loaded_notebook
+                                )
+                            # skip notebook if execute_notebooks is False
+                            else:
+                                print(
+                                    "Notebook execution skipped since"
+                                    " execute_notebooks is False."
+                                )
+                        # case when notebook *is* fully executed
+                        else:
+                            print(
+                                f"Notebook {filename} is unchanged and already"
+                                " fully executed"
+                            )
+                    # 3) if the file is new (un-hashed) or has been changed,
+                    # conditionally execute the notebook and update the hash dict
+                    # --------------------------------------------------
                     else:
                         print(
-                            "Skipping notebook execution since"
-                            " execute_notebook is False"
+                            f"Notebook {filename} is new or has been updated and"
+                            " needs to be executed"
                         )
+                        # execute the notebook if execute_notebooks is True
+                        if execute_notebooks:
+                            loaded_notebook = get_notebook(
+                                nb_path,
+                                execute=True,
+                            )
+                            print(
+                                "Notebook has been executed"
+                            )
+                            notebook_executed = is_notebook_fully_executed(
+                                loaded_notebook
+                            )
+                        # skip notebook if execute_notebooks is False
+                        else:
+                            print(
+                                "Skipping notebook execution since"
+                                " execute_notebook is False"
+                            )
 
                 # update the hash dictionary
                 updated_hashes[filename] = current_hash
@@ -573,8 +632,10 @@ def convert_notebooks_to_html(
                 )
 
                 # Add execution status directly to json output
+                # Track version used in notebook execution
                 nb_html_json = {
                     "full_executed": notebook_executed,
+                    "hnn_version": hnn_version,
                     **nb_html_json,
                 }
 
