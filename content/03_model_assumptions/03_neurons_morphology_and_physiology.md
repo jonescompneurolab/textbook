@@ -35,26 +35,26 @@ Membrane voltages in each simulated compartment are calculated using the standar
 ![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png)
 </div>
 
-<table style="border:none">
-  <tr>
-    <td style="border:none" width=>
-    ![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/morph-params-01.png)
-    </td>
-    <td style="border:none; vertical-align:middle;">
-    ![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/morph-params-02.png)
-    </td>
-  </tr>
-</table>
-
 ### Physiology
 
-The following table displays the ion channels and mechanisms in each cell type in the model (**X** indicates the presence of the channel/mechanism in the cell type; for advanced modelers: to see the NEURON simulator equations used in the channel/mechanism, click on the links in the table).
+The following table displays the ion channels and mechanisms in each cell type in the model (✅ indicates the presence of the channel/mechanism in the cell type; for advanced modelers: to see the NEURON simulator equations used in the channel/mechanism, click on the links in the table).
 
-| Cell Type      | Na (fast) | K (fast) | Km | KCa | Ca (L-type) | Ca (T-type) | Ca (decay) | HCN | Leak | Dipole |
-|:--------------:|----------:|:--------:|:--:|:---:|:-----------:|:-----------:|:----------:|:---:|:----:|:------:|
-| Basket         |         X | X        |    |     |             |             |            |     | X    |        |
-| L2/3 Pyramidal |         X | X        | X  |     |             |             |            |     | X    | X      |
-| P5 Pyramidal   |         X | X        | X  | X   | X           | X           | X          | X   | X    | X      |
+<div class="md_table md-equal-cols">
+
+|                   | Basket | L2/3 Pyramidal | P5 Pyramidal |
+| ----------------- | ------ | -------------- | ------------ |
+| Na (fast)         | ✅     | ✅             | ✅           |
+| K (fast)          | ✅     | ✅             | ✅           |
+| Km                |        | ✅             | ✅           |
+| KCa               |        |                | ✅           |
+| Ca (L-type)       |        |                | ✅           |
+| Ca (T-type)       |        |                | ✅           |
+| Ca (decay)        |        |                | ✅           |
+| HCN               |        |                | ✅           |
+| Leak              | ✅     | ✅             | ✅           |
+| Dipole            |        | ✅             | ✅           |
+
+</div>
 
 In the table above, Na (fast) / K (fast) are the fast sodium and potassium channels responsible for generating action potentials. Km is the muscarine sensitive potassium channel, with a relatively slow time-constant and KCa is the calcium-dependent potassium channel, which contributes to hyperpolarization after calcium influx into the cell. The L- and T-type calcium (Ca) channels represent the high-threshold and low-threshold activated calcium channels which together with the hyperpolarization-activated cyclic nucleotide gated channel (HCN) contribute to bursting. Ca decay represents the calcium extrusion pump, which causes intracellular calcium to decay towards a baseline level. Leak represents the passive channel, with constant conductance. Dipole represents the mechanism that takes into account the primary axial current flow within pyramidal neuron dendrites, responsible for the generation of simulated signals comparable to MEG/EEG recordings. For more details see [@jones_quantitative_2009].
 

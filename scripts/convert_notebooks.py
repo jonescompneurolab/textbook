@@ -483,6 +483,9 @@ def convert_notebooks_to_html(
                 # on notebooks_to_skip.json per the main loop below
                 skip_notebook=False
 
+                # flag for whether the notebook was run
+                notebook_was_run=False
+
                 # when force_execute_all is True, all notebooks
                 # should be executed unless flagged to be skipped
                 # --------------------------------------------------
@@ -510,6 +513,7 @@ def convert_notebooks_to_html(
                             nb_path,
                             execute=True,
                         )
+                        notebook_was_run=True
                         print(
                             "Notebook has been executed"
                         )
@@ -551,6 +555,7 @@ def convert_notebooks_to_html(
                                     nb_path,
                                     execute=True,
                                 )
+                                notebook_was_run=True
                                 print('Notebook has been executed')
                                 notebook_executed = is_notebook_fully_executed(
                                     loaded_notebook
@@ -581,6 +586,7 @@ def convert_notebooks_to_html(
                                 nb_path,
                                 execute=True,
                             )
+                            notebook_was_run=True
                             print(
                                 "Notebook has been executed"
                             )
@@ -631,17 +637,33 @@ def convert_notebooks_to_html(
                     filename,
                 )
 
-                # Add execution status directly to json output
-                # Track version used in notebook execution
-                nb_html_json = {
-                    "full_executed": notebook_executed,
-                    "hnn_version": hnn_version,
-                    **nb_html_json,
-                }
-
                 output_json = os.path.join(
                     root, f"{os.path.splitext(filename)[0]}.json"
                 )
+
+                if notebook_was_run:
+                    # Add execution status directly to json output
+                    # Track version used in notebook execution
+                    nb_html_json = {
+                        "full_executed": notebook_executed,
+                        "hnn_version": hnn_version,
+                        **nb_html_json,
+                    }
+                else:
+                    # get previously-used hnn version from json file
+                    previous_version="NA"
+                    if os.path.exists(output_json):
+                        with open(output_json, "r") as f:
+                            nb_html_json = json.load(f)
+                        # check for hnn_version key
+                        if "hnn_version" in nb_html_json:
+                            previous_version = nb_html_json["hnn_version"]
+                    nb_html_json = {
+                        "full_executed": notebook_executed,
+                        "hnn_version": previous_version,
+                        **nb_html_json,
+                    }
+
                 with open(output_json, "w") as f:
                     json.dump(nb_html_json, f, indent=4)
                 # ----------------------------------------

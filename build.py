@@ -78,24 +78,41 @@ def generate_page_html(page_paths):
         # set the output path
         out_path = out_directory + html_page
 
-        # update 'header' page_component with the relative stylesheet path
+        # update header imports with the relative paths
         # ------------------------------------------------------------
-        # set the path from root directory to the stylesheet
+        # get path from root to styles.css
         css_path = os.path.join(
             os.getcwd(),
             "content",
             "assets",
-            "styles.css"
+            "styles.css",
         )
-        # get the relative path
+        # get the relative path for the styles.css
         relative_css_path = os.path.relpath(
             css_path,
-            start=out_directory
+            start=out_directory,
         )
-        # update the 'header' page_component with the correct path
+        # update the 'header' import for styles.css
         page_components['header'] = page_components['header'].replace(
             '<link rel="stylesheet" href="styles.css">',
             f'<link rel="stylesheet" href="{relative_css_path}">'
+        )
+
+        # get path from root to scripts.js
+        js_path = os.path.join(
+            os.getcwd(),
+            "templates",
+            "scripts.js",
+        )
+        # get relative path for scripts.js
+        relative_js_path = os.path.relpath(
+            js_path,
+            start=out_directory,
+        )
+        # update the 'header' import for scripts.js
+        page_components['header'] = page_components['header'].replace(
+            '<script src="scripts.js" defer></script>',
+            f'<script src="{relative_js_path}" defer></script>'
         )
 
         # update 'footer' page_component with the correct links

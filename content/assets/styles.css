@@ -1238,6 +1238,282 @@ body.dark-mode .code-cell code .token.punctuation {
 
 /* 
 # ------------------------------------------------------------
+# Standard markdown table style
+# ------------------------------------------------------------ 
+*/
+
+/* 
+    Notes:
+    To apply the standard markdown table formatting, insert the 
+    following code (including the new line) before your table in 
+    your markdown file.
+        ```
+        <div class="md_table md_table--equal-cols">
+
+        ```
+    Additionally, you must close the div element as follows, 
+    again including the new line.
+        ```
+
+        </div>
+        ``` 
+    Note that the "md_table--equal-cols" class is an optional
+    addition that ensures the columns widths are equal. 
+*/
+
+/*
+# Basic styling
+# ------------------------------
+*/
+
+.md_table {
+    align-items: center;
+    position: relative;
+    overflow-x: auto;
+    width: 95%;
+}
+
+.md_table table {
+    table-layout: fixed !important;
+    width: auto !important;
+    min-width: max-content;
+    position: relative;
+    margin: 0px auto;
+    border: 1px solid var(--light-gray);
+    border-collapse: collapse; 
+}
+
+/* 
+    Element: .md-equal-cols td
+    Description: div class / flag to set equal column widths
+    Notes: 
+        if the "md-equal-cols" class is added to the 
+        div, javascript will determine the number of
+        columns and add it to the "--col-count" property
+        of the the container. That property is used 
+        with the css below to set the column widths
+*/
+.md-equal-cols td {
+    width: calc(100% / var(--col-count)) !important;
+}
+
+/* style headers */
+.md_table th {
+    padding: 2px 5px;
+    border: 1px solid var(--light-gray);
+    text-align: center !important;
+    /* white-space: normal; */
+    /* word-break: break-word; */
+}
+
+/* style rows, cells */
+.md_table tr td {
+    padding: 2px 5px !important;
+    border: 1px solid var(--light-gray);
+    text-align: center !important;
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+}
+
+/*
+# Add blur when table content overflows to scroll
+# ------------------------------
+*/
+
+/* Add wrapper to hold blur */
+.md_table-wrapper {
+    position: relative;
+    width: 95%;
+}
+
+/*
+    Element: .md-table-wrapper > .md_table 
+    Notes: 
+        sets md_table width to 100% only when the 
+        md-wrapper is inserted. This is handled by
+        javascipt, which adds the md_table-wrapper
+        with blur when the content overflows
+*/
+.md_table-wrapper > .md_table {
+    width: 100%;
+}
+
+.md-table-blur {
+  position: absolute;
+  top: 0;
+  width: 8%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.md-table-blur.left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255,255,255,0.85), transparent);
+}
+
+.md-table-blur.right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255,255,255,0.85), transparent);
+}
+
+body.dark-mode .md-table-blur.left {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), transparent);
+}
+
+body.dark-mode .md-table-blur.right {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.6), transparent);
+}
+
+
+/* 
+# ------------------------------------------------------------
+# [UNUSED] Expandable markdown table style
+# ------------------------------------------------------------ 
+*/
+
+.expandable-table {
+    position: relative;
+    /* max-width: 95%; */
+    overflow-x: hidden;
+    padding-bottom: 17px;
+    box-sizing: content-box;
+}
+
+.expandable-table.expand {
+    overflow-x: auto;
+    padding-bottom: 0px;
+}
+
+/* first column set at 15% */
+.expandable-table col:nth-child(1) {
+    width: 15% !important;
+}
+
+/* 10 subsequent columns comprise remaining 85% */
+.expandable-table col:not(:first-child) {
+    width: 8.5% !important;
+}
+
+/* default (condensed) version of table */
+.expandable-table table {
+    border: 1px solid var(--light-gray);
+    border-collapse: collapse; 
+}
+
+.expandable-table:not(.expand) table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+/*
+    Element: .expandable-table.expand table
+    Description: expanded version of table 
+    Notes: the .expand class is added by javascript
+*/
+.expandable-table.expand table {
+    table-layout: auto !important;
+    width: auto !important;
+    min-width: max-content !important;
+}
+
+/* style headers */
+.expandable-table th {
+    padding: 2px 5px;
+    border: 1px solid var(--light-gray);
+    text-align: center !important;
+    /* white-space: normal; */
+    /* word-break: break-word; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* style rows, cells */
+.expandable-table tr td {
+    padding: 2px 5px !important;
+    border: 1px solid var(--light-gray);
+    text-align: center !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*
+# Expand button
+# ------------------------------
+*/
+
+/* wrapper to hold expand button in fixed position */
+.expandable-table-wrapper {
+    position: relative;
+    max-width: 95%;
+}
+
+/* expand button in top right corner of table */
+.expand-toggle {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 20;
+    padding: 2px 6px;
+    font-size: 16px;
+    border-radius: 4px;
+    background: white;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    /* opacity: 0.85; */
+    /* transition: opacity 0.2s; */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.expandable-table-wrapper:hover .expand-toggle {
+    opacity: 0.85;
+}
+
+/* .expand-toggle:hover {
+    opacity: 1;
+} */
+
+/*
+# Blur effect on expanded table
+# ------------------------------
+*/
+
+.expandable-table-blur {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 5;
+}
+
+.expandable-table-blur.left {
+    left: 0;
+    width: 5%;
+    background: linear-gradient(to right, rgba(255,255,255,0.85), transparent);
+}
+
+.expandable-table-blur.right {
+    right: 0;
+    width: 5%;
+    background: linear-gradient(to left, rgba(255,255,255,0.85), transparent);
+}
+
+/* only allow blur when expanded */
+.expandable-table:not(.expand) + .expandable-table-blur {
+    display: none !important;
+}
+
+
+/* 
+# ------------------------------------------------------------
 # Workshop page
 # ------------------------------------------------------------ 
 */
