@@ -197,6 +197,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // -------------------------------
 // Flag to track tooltip visibility
 let isTooltipVisible = false;
+// Track pending tooltip timeout
+let tooltipTimeoutId = null;
 
 // Add text to the 'sidebar-tooltip' attribute for sidebar anchor tags
 document.querySelectorAll('.sidebar a').forEach(anchor => {
@@ -216,7 +218,7 @@ document.querySelectorAll('.sidebar a').forEach(function(link) {
             const delay = 500; // Set the delay time (in ms), adjust as needed
 
             // Create the tooltip after the delay
-            setTimeout(function() {
+            tooltipTimeoutId = setTimeout(function() {
                 // Remove any existing tooltips
                 const existingTooltip = document.querySelector('.sidebar-tooltip');
                 if (existingTooltip) {
@@ -246,11 +248,19 @@ document.querySelectorAll('.sidebar a').forEach(function(link) {
 
                 // Set the flag to true indicating that the tooltip is visible
                 isTooltipVisible = true;
+
+                // Reset the timeout id
+                tooltipTimeoutId = null;
             }, delay); // Delay the tooltip creation
         }
     });
 
     link.addEventListener('mouseleave', function(event) {
+        if (tooltipTimeoutId !== null) {
+            clearTimeout(tooltipTimeoutId);
+            tooltipTimeoutId = null;
+        }
+
         // Remove the tooltip when the mouse leaves
         const tooltip = document.querySelector('.sidebar-tooltip');
         if (tooltip) {

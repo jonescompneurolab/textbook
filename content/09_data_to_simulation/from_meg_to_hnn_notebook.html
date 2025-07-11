@@ -34,14 +34,6 @@ automatically.</p>
 		%pip install -q mne nibabel ipyevents "pyvista[all]" pyvistaqt
 	</code>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Note: you may need to restart the kernel to use updated packages.
-
-	</div>
-</div>
 <div class='code-cell'>
 	<code class='language-python'>
 		# Needed for certain plotting to work
@@ -50,14 +42,6 @@ from mne.viz import set_3d_backend
 set_3d_backend('notebook')
 pv.set_jupyter_backend('client')
 	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Using notebook 3d backend.
-
-	</div>
 </div>
 <div class='markdown-cell'>
 	<p>We will import the packages needed for computing the inverse solution
@@ -94,21 +78,6 @@ fwd_fname = op.join(data_path, 'derivatives', 'sub-{}'.format(subject),
 subjects_dir = op.join(data_path, 'derivatives', 'freesurfer', 'subjects')
 	</code>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Using default location ~/mne_data for somato...
-
-		Creating /home/runner/mne_data
-
-		Attempting to create new mne-python configuration file:
-/home/runner/.mne/mne-python.json
-
-		Download complete in 22s (582.2 MB)
-
-	</div>
-</div>
 <div class='markdown-cell'>
 	<p>Then, we load the raw data and estimate the inverse operator.</p>
 
@@ -135,138 +104,6 @@ cov = mne.compute_covariance(epochs)
 inv = make_inverse_operator(epochs.info, fwd, cov)
 	</code>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Opening raw data file /home/runner/mne_data/MNE-somato-data/sub-01/meg/sub-01_task-somato_meg.fif...
-
-		    Range : 237600 ... 506999 =    791.189 ...  1688.266 secs
-
-		Ready.
-
-		Reading 0 ... 269399  =      0.000 ...   897.077 secs...
-
-		Filtering raw data in 1 contiguous segment
-
-		Setting up band-pass filter from 1 - 40 Hz
-
-		
-
-		FIR filter parameters
-
-		---------------------
-
-		Designing a one-pass, zero-phase, non-causal bandpass filter:
-
-		- Windowed time-domain design (firwin) method
-
-		- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
-
-		- Lower passband edge: 1.00
-
-		- Lower transition bandwidth: 1.00 Hz (-6 dB cutoff frequency: 0.50 Hz)
-
-		- Upper passband edge: 40.00 Hz
-
-		- Upper transition bandwidth: 10.00 Hz (-6 dB cutoff frequency: 45.00 Hz)
-
-		- Filter length: 993 samples (3.307 s)
-
-		
-
-		111 events found on stim channel STI 014
-
-		Event IDs: [1]
-
-		Not setting metadata
-
-		111 matching events found
-
-		No baseline correction applied
-
-		0 projection items activated
-
-		Using data from preloaded Raw for 111 events and 112 original time points ...
-
-		0 bad epochs dropped
-
-		Reading forward solution from /home/runner/mne_data/MNE-somato-data/derivatives/sub-01/sub-01_task-somato-fwd.fif...
-
-		    Reading a source space...
-
-		    [done]
-
-		    Reading a source space...
-
-		    [done]
-
-		    2 source spaces read
-
-		    Desired named matrix (kind = 3523 (FIFF_MNE_FORWARD_SOLUTION_GRAD)) not available
-
-		    Read MEG forward solution (8155 sources, 306 channels, free orientations)
-
-		    Source spaces transformed to the forward solution coordinate frame
-
-		Reducing data rank from 306 -&gt; 306
-
-		Estimating covariance using EMPIRICAL
-
-		Done.
-
-		Number of samples used : 12432
-
-		[done]
-
-		Converting forward solution to surface orientation
-
-		    No patch info available. The standard source space normals will be employed in the rotation to the local surface coordinates....
-
-		    Converting to surface-based source orientations...
-
-		    [done]
-
-		Computing inverse operator with 306 channels.
-
-		    306 out of 306 channels remain after picking
-
-		Selected 306 channels
-
-		Creating the depth weighting matrix...
-
-		    204 planar channels
-
-		    limit = 7615/8155 = 10.004172
-
-		    scale = 5.17919e-08 exp = 0.8
-
-		Applying loose dipole orientations to surface source spaces: 0.2
-
-		Whitening the forward solution.
-
-		Computing rank from covariance with rank=None
-
-		    Using tolerance 2e-12 (2.2e-16 eps * 306 dim * 29  max singular value)
-
-		    Estimated rank (mag + grad): 64
-
-		    MEG: rank 64 computed from 306 data channels with 0 projectors
-
-		    Setting small MEG eigenvalues to zero (without PCA)
-
-		Creating the source covariance matrix
-
-		Adjusting source covariance matrix.
-
-		Computing SVD of whitened and weighted lead field matrix.
-
-		    largest singular value = 2.42284
-
-		    scaling factor to adjust the trace = 3.86104e+18 (nchan = 306 nzero = 242)
-
-	</div>
-</div>
 <div class='markdown-cell'>
 	<p>There are several methods to do source reconstruction. Some of the
 methods such as MNE are distributed source methods whereas dipole
@@ -288,36 +125,6 @@ stc = apply_inverse(evoked, inv, lambda2, method='MNE',
                     verbose=True)
 	</code>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Preparing the inverse operator for use...
-
-		    Scaled noise and source covariance from nave = 1 to nave = 111
-
-		    Created the regularized inverter
-
-		    The projection vectors do not apply to these channels.
-
-		    Created the whitener using a noise covariance matrix with rank 64 (242 small eigenvalues omitted)
-
-		Applying inverse operator to &quot;1&quot;...
-
-		    Picked 306 channels from the data
-
-		    Computing inverse...
-
-		    Eigenleads need to be weighted ...
-
-		    Computing residual...
-
-		    Explained  86.1% variance
-
-		[done]
-
-	</div>
-</div>
 <div class='markdown-cell'>
 	<p>To extract the primary response in primary somatosensory cortex (S1),
 we create a label for the postcentral gyrus (S1) in source-space</p>
@@ -331,16 +138,6 @@ label_s1 = mne.read_labels_from_annot(subject, parc='aparc.a2009s', hemi=hemi,
                                       regexp=label_tag,
                                       subjects_dir=subjects_dir)[0]
 	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Reading labels from parcellation...
-
-		   read 1 labels from /home/runner/mne_data/MNE-somato-data/derivatives/freesurfer/subjects/01/label/rh.aparc.a2009s.annot
-
-	</div>
 </div>
 <div class='markdown-cell'>
 	<p>Visualizing the distributed S1 activation in reference to the
@@ -368,13 +165,6 @@ brain = stc_label.plot(subjects_dir=subjects_dir, hemi=hemi, surface='white',
                        backend='pyvista')
 '''
 	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		&quot;\nBrain = mne.viz.get_brain_class()\nbrain_label = Brain(subject, hemi, &#x27;white&#x27;, subjects_dir=subjects_dir)\nbrain_label.add_label(label_s1, color=&#x27;green&#x27;, alpha=0.9)\nstc_label = stc.in_label(label_s1)\nbrain = stc_label.plot(subjects_dir=subjects_dir, hemi=hemi, surface=&#x27;white&#x27;,\n                       view_layout=&#x27;horizontal&#x27;, initial_time=0.04,\n                       backend=&#x27;pyvista&#x27;)\n&quot;
-	</div>
 </div>
 <div class='markdown-cell'>
 	<figure>
@@ -421,18 +211,6 @@ plt.xlim((0, 170))
 plt.axhline(0, c='k', ls=':')
 plt.show()
 	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Extracting time courses for 1 labels (mode: pca_flip)
-
-		&lt;Figure size 640x480 with 1 Axes&gt;
-	</div>
-</div>
-<div class='output-cell'>
-	<img src='output_nb_from_meg_to_hnn_notebook/fig_01.png'/>
 </div>
 <div class='markdown-cell'>
 	<p>Now, let us try to simulate the same with <code>hnn-core</code>. We
@@ -535,72 +313,6 @@ with JoblibBackend(n_jobs=2):
     dpls = simulate_dipole(net, tstop=170., n_trials=n_trials)
 	</code>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		Joblib will run 2 trial(s) in parallel by distributing trials over 2 jobs.
-
-		Loading custom mechanism files from /usr/share/miniconda/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-
-		[Done]
-Trial 2: 0.03 ms...
-[Done]
-Trial 1: 0.03 ms...
-
-		Trial 2: 10.0 ms...
-Trial 1: 10.0 ms...
-
-		Trial 2: 20.0 ms...
-Trial 1: 20.0 ms...
-
-		Trial 2: 30.0 ms...
-Trial 1: 30.0 ms...
-
-		Trial 2: 40.0 ms...
-Trial 1: 40.0 ms...
-
-		Trial 2: 50.0 ms...
-Trial 1: 50.0 ms...
-
-		Trial 2: 60.0 ms...
-Trial 1: 60.0 ms...
-
-		Trial 2: 70.0 ms...
-Trial 1: 70.0 ms...
-
-		Trial 2: 80.0 ms...
-Trial 1: 80.0 ms...
-
-		Trial 2: 90.0 ms...
-Trial 1: 90.0 ms...
-
-		Trial 2: 100.0 ms...
-Trial 1: 100.0 ms...
-
-		Trial 2: 110.0 ms...
-Trial 1: 110.0 ms...
-
-		Trial 2: 120.0 ms...
-Trial 1: 120.0 ms...
-
-		Trial 2: 130.0 ms...
-Trial 1: 130.0 ms...
-
-		Trial 2: 140.0 ms...
-Trial 1: 140.0 ms...
-
-		Trial 2: 150.0 ms...
-Trial 1: 150.0 ms...
-
-		Trial 2: 160.0 ms...
-Trial 1: 160.0 ms...
-
-	</div>
-</div>
 <div class='markdown-cell'>
 	<p>Since the model is a reduced representation of the larger network
 contributing to the response, the model response is noisier than it
@@ -640,26 +352,6 @@ axes[1].legend(['MNE label average', 'HNN simulation'])
 axes[1].set_ylabel('Current Dipole (nAm)')
 net.cell_response.plot_spikes_raster(ax=axes[2])
 	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		&lt;Figure size 600x600 with 3 Axes&gt;
-	</div>
-</div>
-<div class='output-cell'>
-	<img src='output_nb_from_meg_to_hnn_notebook/fig_02.png'/>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		&lt;Figure size 600x600 with 3 Axes&gt;
-	</div>
-</div>
-<div class='output-cell'>
-	<img src='output_nb_from_meg_to_hnn_notebook/fig_03.png'/>
 </div>
 <div class='markdown-cell'>
 	<h2>References</h2>
