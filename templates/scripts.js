@@ -515,6 +515,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.querySelectorAll(".collapsible-header").forEach(header => {
+    header.addEventListener("click", function () {
+        const section = this.closest(".collapsible-section"); // Get parent section
+        section.classList.toggle("active");
+        this.classList.toggle("active"); // Keep this for toggling the plus/minus sign
+
+        const content = section.querySelector(".collapsible-content");
+        content.style.display = content.style.display === "block" ? "none" : "block";
+    });
+});
+
 // ----------------------------------------
 // Style standard markdown table
 // ----------------------------------------

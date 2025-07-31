@@ -12,19 +12,19 @@ This tutorial is meant to illustrate the bare minimum usage of the GUI. For more
 
 ## Setup
 
-Make sure you have followed our [Installation section here](../01_getting_started/installation.html).
+Make sure you have followed our [Installation section here](../01_getting_started/installation.html), and are either using HNN in the cloud, using the `conda` package, or installing GUI support using `pip`.
 
 If you are running HNN "in the cloud", follow the instructions in the method you have chosen until you can access a webpage that resembles [Figure 1](#figure-1).
 
-If you are using a local installation of HNN, then activate your Python environment (see our [Local Installation Guide](https://jonescompneurolab.github.io/hnn-core/stable/install.html) for details), and run the following command in your terminal:
+If you are using a local installation of HNN, then activate your Python environment (see our [Local Installation Guide](../01_getting_started/installation.html#local-installation) for details), and run the following command in your terminal:
 
 ```
 hnn-gui
 ```
 
-On Linux, Mac, or native Windows, the above command should open a new tab in your browser which contains the HNN GUI and resembles [Figure 1](#figure-1). 
+On Linux, Mac, or native Windows, the above command should open a new tab in your browser which contains the HNN GUI and resembles [Figure 1](#figure-1).
 
-Note that if you are on Windows and installed HNN-Core through "Windows Subsystem for Linux", then after running the above command, you need to manually navigate in your browser to the URL that is shown after`[Voila] Voilà is running at:`, which is probably <http://localhost:8866>.
+Note that if you are on Windows and installed HNN through "Windows Subsystem for Linux", then after running the above command, you need to manually navigate in your browser to the URL that is shown after`[Voila] Voilà is running at:`, which is probably <http://localhost:8866>.
 
 <div class="stylefig">
 ### Figure 1
