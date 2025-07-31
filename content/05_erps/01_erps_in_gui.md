@@ -30,6 +30,14 @@ Adapted from Jones et al. 2007 [@jones_neural_2007]. Comparison of SI evoked res
 
 In summary, to simulate the SI evoked response, a sequence of exogenous excitatory synaptic drive was simulated (by creating presynaptic spikes that activate layer specific synapses in the neocortical network) consisting of proximal drive at ~25 ms, followed by distal drive at ~60 ms, followed by a second proximal drive at ~122 ms. Given this background information, we can now walk you through the steps of simulating a similar ERP, using a subset of the data shown in Figure 1.
 
+## Video Walkthrough
+
+In addition to the written tutorial below, we also provide a video walkthrough of simulating ERPs in the GUI from one of our recent online workshop. Note that the video tutorial is not a 1-1 match to the workflows described below, and it is meant as a supplementary tool to give you more expose to simulating ERPs in the GUI. 
+
+<div style="text-align:center;">
+<iframe src="https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview" width="640" height="480" allow="autoplay"></iframe>
+</div>
+
 ## Tutorial Table of Contents
 
 [1. Load/view data](#1-loadview-data)
