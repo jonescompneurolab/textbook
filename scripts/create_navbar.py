@@ -29,6 +29,11 @@ def generate_navbar_html():
 
     html = \
         '\t<div id="mySidebar" class="sidebar">' + \
+        f'\n{indent}<div class="sidebar-close">' + \
+        f'\n{indent}<svg class="popup-symbol" viewBox="0 0 24 24">' + \
+        f'\n{indent}<use href="#popup-symbol" />' + \
+        f'\n{indent}</svg>' + \
+        f'\n{indent}</div>' + \
         f'\n{indent}<div class="navbar-header">' + \
         f'\n{indent}<a>' + \
         f'\n\t{indent}Human Neocortical Neurosolver' + \

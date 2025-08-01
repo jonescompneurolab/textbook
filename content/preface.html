@@ -10,8 +10,25 @@
     <script src="../templates/scripts.js" defer></script>
 </head>
 <body>
+    <svg style="display: none;">
+        <symbol id="popup-symbol" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" 
+                fill="var(--fill-color, transparent)" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" />
+            <path d="M9 9L15 15M15 9L9 15" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" 
+                stroke-linecap="round" />
+        </symbol>
+    </svg>
 
 	<div id="mySidebar" class="sidebar">
+		<div class="sidebar-close">
+		<svg class="popup-symbol" viewBox="0 0 24 24">
+		<use href="#popup-symbol" />
+		</svg>
+		</div>
 		<div class="navbar-header">
 		<a>
 			Human Neocortical Neurosolver
