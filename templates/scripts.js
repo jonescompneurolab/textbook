@@ -1,4 +1,78 @@
 // ----------------------------------------
+// Define page load ordering
+// ----------------------------------------
+function initSidebar() {
+    const sidebar = document.getElementById("mySidebar");
+    const savedState = localStorage.getItem("sidebarState");
+
+    if (savedState === "closed") {
+        sidebar.style.width = "0";
+    } else {
+        sidebar.style.width = maxWidth;
+    }
+
+    sidebar.style.visibility = "visible";
+}
+
+function initTopbar() {
+    const topbar = document.querySelector(".topbar");
+    const sidebarWidth = localStorage.getItem("sidebarState") === "closed" ? "0" : maxWidth;
+
+    topbar.style.marginLeft = sidebarWidth;
+    topbar.style.width = sidebarWidth === "0" ? "100%" : `calc(100% - ${sidebarWidth})`;
+    topbar.style.visibility = "visible";
+}
+
+function initMainContent() {
+    const main = document.getElementById("main");
+    main.style.visibility = "visible";
+}
+
+function injectIframe() {
+    const container = document.getElementById("video-container");
+    if (container && container.dataset.src && !container.querySelector("iframe")) {
+        const iframe = document.createElement("iframe");
+        iframe.src = container.dataset.src;
+        iframe.width = "640";
+        iframe.height = "480";
+        iframe.style.border = "none";
+        iframe.style.display = "block";
+        iframe.style.margin = "0 auto";
+        iframe.allowFullscreen = true;
+        container.appendChild(iframe);
+    }
+}
+
+function hideIframes() {
+    // Hide all iframes initially
+    document.querySelectorAll('iframe').forEach(iframe => {
+        iframe.style.visibility = 'hidden';
+    });
+}
+
+function showIframes() {
+    // Reveal all iframes after delay
+    document.querySelectorAll('iframe').forEach(iframe => {
+        iframe.style.visibility = 'visible';
+    });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    initSidebar();
+});
+
+window.addEventListener("load", () => {
+    initTopbar();
+    initMainContent();
+    hideIframes();
+    injectIframe();
+
+    setTimeout(() => {
+        showIframes();
+    }, 500);
+});
+
+// ----------------------------------------
 // Manage footer
 // ----------------------------------------
 // This function will update the footer links when a page is loaded

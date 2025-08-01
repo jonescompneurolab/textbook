@@ -34,9 +34,11 @@ In summary, to simulate the SI evoked response, a sequence of exogenous excitato
 
 In addition to the written tutorial below, we also provide a video walkthrough of simulating ERPs in the GUI from one of our recent online workshop. Note that the video tutorial is not a 1-1 match to the workflows described below, and it is meant as a supplementary tool to give you more expose to simulating ERPs in the GUI. 
 
-<div style="text-align:center;">
-<iframe src="https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview" width="640" height="480" allow="autoplay"></iframe>
-</div>
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview"
+></div>
 
 ## Tutorial Table of Contents
 

@@ -5,6 +5,16 @@
 */
 
 /* 
+    set visibility to hidden initially to explicitly define
+    page load ordering in javascript
+*/
+#mySidebar,
+.topbar,
+#main {
+  visibility: hidden;
+}
+
+/* 
 # Default (light mode) styling for basic elements
 # ------------------------------------------------------------ 
 */

@@ -15,9 +15,11 @@
 
 In addition to the written tutorial below, we also provide a video walkthrough of simulating alpha/beta oscillations in the GUI from one of our recent online workshop. Note that the video tutorial is not a 1-1 match to the workflows described below, and it is meant as a supplementary tool to give you more expose to simulating alpha/beta oscillations in the GUI. 
 
-<div style="text-align:center;">
-<iframe src="https://drive.google.com/file/d/14FSnc2wKDJRBqZPvzx5yzhSjrlhx8uoB/preview" width="640" height="480" allow="autoplay"></iframe>
-</div>
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/14FSnc2wKDJRBqZPvzx5yzhSjrlhx8uoB/preview"
+></div>
 
 ## Tutorial Table of Contents
 
