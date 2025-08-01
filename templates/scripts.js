@@ -159,6 +159,10 @@ sidebar.addEventListener('transitionend', function() {
     }
 });
 
+// add event listener to the sidebar close button
+// that appears only on small screens
+document.querySelector(".sidebar-close").addEventListener("click", toggleNav);
+
 // Open the sidebar on page load
 // -----------------------------
 
@@ -680,3 +684,14 @@ document.querySelectorAll('.md_table').forEach(container => {
     window.addEventListener('resize', updateBlur);
     updateBlur();
 });
+
+// ----------------------------------------
+// Check for mobile devices
+// ----------------------------------------
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobileDevice()) {
+    document.body.classList.add("is-mobile");
+}

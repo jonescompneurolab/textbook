@@ -390,6 +390,55 @@ body.sidebar-closed #main {
     transition: transform 0.3s;
 }
 
+/* add sidebar close button */
+
+.sidebar-close {
+    display: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.popup-symbol {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: auto;
+    color: #fff;
+    --fill-color: transparent;
+    border-radius: 50%;
+    shape-rendering: auto;
+}
+
+.popup-symbol:hover {
+    color: var(--hnn-yellow)
+}
+
+/* display sidebar-close on screens < 420px */
+
+@media (max-width: 420px) {
+    .sidebar-close {
+        display: block;
+        position: relative;
+        top: 10px;
+        left: 20px;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+
+/* always display sidebar-close on mobile devices */
+body.is-mobile .sidebar-close {
+    display: block;
+    position: relative;
+    top: 10px;
+    left: 20px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 /*
     Element: .submenu
     Description: Hides submenus by default
