@@ -161,7 +161,10 @@ sidebar.addEventListener('transitionend', function() {
 
 // add event listener to the sidebar close button
 // that appears only on small screens
-document.querySelector(".sidebar-close").addEventListener("click", toggleNav);
+const closeBtn = document.querySelector(".sidebar-close");
+if (closeBtn) {
+  closeBtn.addEventListener("click", toggleNav);
+}
 
 // Open the sidebar on page load
 // -----------------------------
