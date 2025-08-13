@@ -28,9 +28,9 @@ the ["Getting Started"](https://hnn.brown.edu/getting-started/) page
 for more details on the functionality of HNN-GUI and HNN-Core, and how
 more specialized neocortical template models can be used and developed.
 
-#### [3.1 Cortical Column Structure](../03_model_assumptions/cortical_column_structure.html)
-#### [3.2 Primary Electrical Currents](../03_model_assumptions/primary_electric_currents.html)
-#### [3.3 Neurons: Morphology and Physiology](../03_model_assumptions/neurons_morphology_and_physiology.html)
-#### [3.4 Synaptic Connectivity](../03_model_assumptions/synaptic_connectivity.html)
-#### [3.5 Evoked and Rhythmic Driving Inputs](../03_model_assumptions/evoked_and_rhythmic_driving_inputs.html)
-#### [3.6 Tonic and Noisy Driving Inputs](../03_model_assumptions/tonic_and_noisy_driving_inputs.html)
+#### [2.1 Cortical Column Structure](../03_model_assumptions/cortical_column_structure.html)
+#### [2.2 Primary Electrical Currents](../03_model_assumptions/primary_electric_currents.html)
+#### [2.3 Neurons: Morphology and Physiology](../03_model_assumptions/neurons_morphology_and_physiology.html)
+#### [2.4 Synaptic Connectivity](../03_model_assumptions/synaptic_connectivity.html)
+#### [2.5 Evoked and Rhythmic Driving Inputs](../03_model_assumptions/evoked_and_rhythmic_driving_inputs.html)
+#### [2.6 Tonic and Noisy Driving Inputs](../03_model_assumptions/tonic_and_noisy_driving_inputs.html)
