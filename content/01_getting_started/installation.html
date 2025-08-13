@@ -825,7 +825,7 @@ Testing Your Installation
 <p><a id="testing-your-installation"></a></p>
 <p>To check whether HNN was installed correctly, you can run the
 following command:</p>
-<pre><code>python -c &quot;from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20)&quot;</code></pre>
+<pre><code>python -c &quot;from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20) ; print(&#39;--&gt; SUCCESS: The test worked!&#39;)&quot;</code></pre>
 <p>This will run a very short test simulation, and should not give any
 Error messages (Warning messages are okay).</p>
 <p>If you installed MPI, it is <strong>strongly recommended</strong> to
@@ -836,6 +836,7 @@ command:</p>
 from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
 with MPIBackend():
     simulate_dipole(jones_2009_model(), tstop=20)
+print(&#39;--&gt; SUCCESS: The test worked!&#39;)
 &quot;</code></pre>
 <p>If either of the above commands run into Errors (Warnings are okay),
 then feel free to ask for help on <a

@@ -454,7 +454,7 @@ If you want to contribute to development, then once you have installed HNN this 
 To check whether HNN was installed correctly, you can run the following command:
 
 ```
-python -c "from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20)"
+python -c "from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20) ; print('--> SUCCESS: The test worked!')"
 ```
 
 This will run a very short test simulation, and should not give any Error messages (Warning messages are okay).
@@ -466,6 +466,7 @@ python -c "
 from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
 with MPIBackend():
     simulate_dipole(jones_2009_model(), tstop=20)
+print('--> SUCCESS: The test worked!')
 "
 ```
 
