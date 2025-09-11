@@ -473,12 +473,14 @@ body.is-mobile .sidebar-close {
 
 /*
     Element: .navbar-header
-    Description: Used for collapse all button
+    Description: Contain top-level and non-indexed sidebar elements
 */
 .navbar-header {
     display: flex;
     padding: 10px 0px 20px 0px;
     align-items: center;
+    word-wrap: break-word;
+    flex-direction: column;
 
 }
 
@@ -486,9 +488,29 @@ body.is-mobile .sidebar-close {
     margin: 0px;
 }
 
+/*
+    Element: .title-row
+    Description: Used for Title and collapse all button
+*/
+
+.title-row a {
+    margin: 0px;
+
+}
+
+.title-row a:hover {
+    color: #fff
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 /* 
     Element: .collapse-icon
-    Description: Styling for the SVG icon
+    Description: Styling for the SVG icon in title-row
 */
 .collapse-icon {
     display: block;
@@ -503,6 +525,65 @@ body.is-mobile .sidebar-close {
 .collapse-icon:hover {
     fill: var(--hnn-yellow);
 }
+
+/*
+    Element: .install-row
+    Description: Used for Title and collapse all button
+*/
+
+
+
+.install-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.install-row a {
+    margin: 0px;
+    padding: 0px 20px 0px 0px;
+    transition: none !important;
+
+}
+
+/* On hover, apply transitions */
+.install-row:hover a,
+.install-row:hover .download-icon {
+    transition: color 0.2s ease-in-out !important, stroke 0.2s ease-in-out !important;
+}
+
+.install-row:hover a {
+    color: var(--hnn-yellow);
+}
+
+.install-row:hover .download-icon {
+    stroke: var(--hnn-yellow);
+}
+
+
+/* 
+    Element: .collapse-icon
+    Description: Styling for the SVG icon in install-row
+*/
+
+
+.download-icon {
+    display: block;
+    margin-left: 25px;
+    padding-right: 5px;
+    width: 20px;
+    stroke: #fff; 
+    fill: none; 
+    cursor: pointer;
+}
+
+.download-icon-link {
+    padding: 0px 5px 0px 0px !important;
+}
+
+
+
+
 
 /*
 # Custom sidebar tooltip

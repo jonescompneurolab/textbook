@@ -698,3 +698,18 @@ function isMobileDevice() {
 if (isMobileDevice()) {
     document.body.classList.add("is-mobile");
 }
+
+
+// ----------------------------------------
+// Create link variables and assign to corresponding div elements 
+// ----------------------------------------
+// Install page link
+const installUrl = "https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html";
+
+// Get all <a> children of .install-row
+const installLinks = document.querySelectorAll(".install-row > a");
+
+// Set the href of each link
+installLinks.forEach(link => {
+    link.href = installUrl;
+});
