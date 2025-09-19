@@ -8,10 +8,10 @@ import textwrap
 
 def generate_navbar_html():
     """Function to generate the navbar from the structure specified
-       in the index.json file"""
+    in the index.json file"""
 
-    base_indent = '\t'
-    indent = '\t\t'  # need to deprecate this but it's currently used later
+    base_indent = "\t"
+    indent = "\t\t"  # need to deprecate this but it's currently used later
 
     # create mySidebar
     # create the header "navbar header"
@@ -48,8 +48,10 @@ def generate_navbar_html():
             </div>
     """)
 
-    html = textwrap.indent(html, base_indent)
-
+    html = textwrap.indent(
+        html,
+        base_indent,
+    )
 
     # workshop_link = \
     #     f'\n{indent}<a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html">' + \
@@ -63,31 +65,37 @@ def generate_navbar_html():
     # load page index .json file
     index_path = os.getcwd() + "/index.json"
 
-    with open(index_path, 'r') as f:
+    with open(index_path, "r") as f:
         json_page_index = json.load(f)
 
     def get_absolute_paths(path=None):
         """Get paths to all .md pages to be converted to html"""
         md_pages = {}
         if path is None:
-            path = os.path.join(os.getcwd(), "content")
+            path = os.path.join(
+                os.getcwd(),
+                "content",
+            )
 
         directories = os.listdir(path)
         for item in directories:
-            item_path = os.path.join(path, item)
+            item_path = os.path.join(
+                path,
+                item,
+            )
             if os.path.isdir(item_path):
                 # add items from new dict into md_pages
                 md_pages.update(get_absolute_paths(item_path))
             else:
                 if not item == "README.md" and item.endswith(".md"):
                     # get the relative path for the web content only
-                    location = item_path.split(os.getcwd()+os.sep)[1]
+                    location = item_path.split(os.getcwd() + os.sep)[1]
                     location = location.split(item)[0]
 
                     page = item.split("_", 1)[1]
                     page = page.split(".md")[0] + ".html"
 
-                    md_pages[item] = '/textbook/' + location + page
+                    md_pages[item] = "/textbook/" + location + page
         return md_pages
 
     def create_page_link(file, label, page_paths, indent):
@@ -95,17 +103,19 @@ def generate_navbar_html():
         return f'\n{indent}<a href="{file_path}">{label}</a>'
 
     def create_toggle_section(toggle_label):
-        section = f'\n{indent}<div class="sidebar-list">' + \
-                  f'\n{indent}\t<a id="sidebar-header"' + \
-                    ' onclick="toggleSubmenu(event)">' + \
-                  f'\n{indent}<span class="toggle-icon">+</span>' + \
-                  f'\n{indent}{indent}{toggle_label}' + \
-                  f'\n{indent}\t</a>' + \
-                  f'\n{indent}\t<div class="submenu">'
+        section = (
+            f'\n{indent}<div class="sidebar-list">'
+            + f'\n{indent}\t<a id="sidebar-header"'
+            + ' onclick="toggleSubmenu(event)">'
+            + f'\n{indent}<span class="toggle-icon">+</span>'
+            + f"\n{indent}{indent}{toggle_label}"
+            + f"\n{indent}\t</a>"
+            + f'\n{indent}\t<div class="submenu">'
+        )
         return section
 
     def build_navbar(json_page_index):
-        navbar_html = ''
+        navbar_html = ""
         page_paths = get_absolute_paths()
         ordered_links = []
         ordered_pages = []
@@ -132,21 +142,21 @@ def generate_navbar_html():
                         sub_page,
                         sub_name,
                         page_paths,
-                        indent+indent,
+                        indent + indent,
                     )
                     ordered_links.append(page_paths[sub_page])
                     ordered_pages.append(sub_name)
                 # Close toggle <div> sections
-                navbar_html += f'\n{indent}\t</div>'
-                navbar_html += f'\n{indent}</div>'
+                navbar_html += f"\n{indent}\t</div>"
+                navbar_html += f"\n{indent}</div>"
 
             # save ordered page links
             out_path = os.getcwd() + "/templates/ordered_page_links.json"
             ordered_page_links = {}
-            ordered_page_links['links'] = ordered_links
-            ordered_page_links['titles'] = ordered_pages
+            ordered_page_links["links"] = ordered_links
+            ordered_page_links["titles"] = ordered_pages
 
-            with open(out_path, 'w', encoding='utf-8') as f:
+            with open(out_path, "w", encoding="utf-8") as f:
                 json.dump(
                     ordered_page_links,
                     f,
@@ -159,7 +169,7 @@ def generate_navbar_html():
     navbar_html, ordered_links = build_navbar(json_page_index)
     html += navbar_html
     html += "\n\t<div style='height: 30px;'></div>"
-    html += '\n\t</div>'
+    html += "\n\t</div>"
     return html, ordered_links
 
 

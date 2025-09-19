@@ -1,17 +1,17 @@
 # %% ######################################################################
-import os
 import json
+import os
 
 # %% ######################################################################
 
 
 def get_title(file_path):
-    file = open(file_path, 'r')
-    title = 'NA'
+    file = open(file_path, "r")
+    title = "NA"
     for line in file:
         if "# Title: " in line:
             title = line[9:]
-            if title.endswith('\n'):
+            if title.endswith("\n"):
                 title = title[0:-1]
     return title
 
@@ -29,8 +29,10 @@ def index_md_pages(path):
             if os.path.isfile(readme_path):
                 # Recursively search directories for files to index
                 section_title = get_title(readme_path)
-                page_index[item] = [section_title,
-                                    index_md_pages(item_path)]
+                page_index[item] = [
+                    section_title,
+                    index_md_pages(item_path),
+                ]
         else:
             # Add entry for .md file
             if item.endswith(".md"):
@@ -43,7 +45,7 @@ def update_page_index():
     home = os.getcwd() + "/content"
     indexed_pages = index_md_pages(home)
 
-    with open('index.json', 'w', encoding='utf-8') as f:
+    with open("index.json", "w", encoding="utf-8") as f:
         json.dump(indexed_pages, f, ensure_ascii=False, indent=4)
 
 
