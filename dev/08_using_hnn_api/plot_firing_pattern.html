@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNN Textbook</title>
+    <!-- <base href="/textbook/"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../content/assets/styles.css">
+    <script src="../../templates/scripts.js" defer></script>
+</head>
+<body>
+    <svg style="display: none;">
+        <symbol id="popup-symbol" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" 
+                fill="var(--fill-color, transparent)" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" />
+            <path d="M9 9L15 15M15 9L9 15" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" 
+                stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+	<div id="mySidebar" class="sidebar">
+		<div class="sidebar-close">
+		<svg class="popup-symbol" viewBox="0 0 24 24">
+		<use href="#popup-symbol" />
+		</svg>
+		</div>
+		<div class="navbar-header">
+		<a>
+			Human Neocortical Neurosolver
+		</a>
+		<br>
+			<svg class="collapse-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+				<path d="M9 9H4v1h5V9z"/>
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1 2h4l1 1v4h2V3H6v2zm4 1H3v7h7V6z"/>
+			</svg>
+		</div>
+		<a href="/textbook/dev/preface.html">Preface</a>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				1. Getting Started
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/01_getting_started/challenge.html">1.1 Introducing HNN</a>
+				<a href="/textbook/dev/01_getting_started/template_model.html">1.2 Template Model</a>
+				<a href="/textbook/dev/01_getting_started/installation.html">1.3 Installation</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				2. Model Assumptions
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/03_model_assumptions/cortical_column_structure.html">2.1 Cortical Column Structure</a>
+				<a href="/textbook/dev/03_model_assumptions/primary_electric_currents.html">2.2 Primary Electrical Currents</a>
+				<a href="/textbook/dev/03_model_assumptions/neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a>
+				<a href="/textbook/dev/03_model_assumptions/synaptic_connectivity.html">2.4 Synaptic Connectivity</a>
+				<a href="/textbook/dev/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a>
+				<a href="/textbook/dev/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				3. Using the HNN GUI
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/04_using_hnn_gui/gui_quickstart.html">3.1 GUI Quickstart</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				4. Simulating ERPs
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/05_erps/erps_in_gui.html">4.1 GUI Tutorial of ERPs Simulation</a>
+				<a href="/textbook/dev/05_erps/hnn_core.html">4.2 API Tutorial of ERPs Simulation</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				5. Simulating Alpha/Beta Rhythms
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/06_alpha_beta/gui.html">5.1 GUI Tutorial of Alpha/Beta Rhythms</a>
+				<a href="/textbook/dev/06_alpha_beta/api.html">5.2 API Tutorial of Alpha/Beta Rhythms</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				6. Simulating Gamma Rhythms
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/07_gamma/gamma_in_gui.html">6.1 GUI Tutorial of Gamma Rhythms</a>
+				<a href="/textbook/dev/07_gamma/gamma_in_api.html">6.2 API Tutorial of Gamma Rhythms</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				7. Using the HNN API
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/08_using_hnn_api/plot_firing_pattern.html">7.1 Plot Firing Pattern</a>
+				<a href="/textbook/dev/08_using_hnn_api/record_and_plot_extracellular_potentials.html">7.2 Record & Plot Extracellular Potentials</a>
+				<a href="/textbook/dev/08_using_hnn_api/modifying_local_connectivity.html">7.3 Modifying Local Connectivity</a>
+				<a href="/textbook/dev/08_using_hnn_api/animating_hnn_simulations.html">7.4 Animating HNN Simulations</a>
+				<a href="/textbook/dev/08_using_hnn_api/batch_simulation.html">7.5 Batch Simulation</a>
+				<a href="/textbook/dev/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-modulated ERP</a>
+				<a href="/textbook/dev/08_using_hnn_api/parallelism_joblib.html">7.7 Parallelism: Joblib</a>
+				<a href="/textbook/dev/08_using_hnn_api/parallelism_mpi.html">7.8 Parallelism: MPI</a>
+				<a href="/textbook/dev/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
+				<a href="/textbook/dev/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+			<a id="sidebar-header" onclick="toggleSubmenu(event)">
+		<span class="toggle-icon">+</span>
+				8. From Data to Simulation
+			</a>
+			<div class="submenu">
+				<a href="/textbook/dev/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG sensor-space data to HNN simulation</a>
+			</div>
+		</div>
+	<div style='height: 30px;'></div>
+	</div>
+
+
+    <div class="topbar">
+        
+        <!-- Topbar menu -->
+        <div class="menu-container">
+            <div class="menu-icons">
+                <button class="openbtn" onclick="toggleNav()">
+                    ☰
+                </button>
+                <a href="https://hnn.brown.edu" class="home-link">
+                    <div class="home-icon-container">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24" 
+                            height="24"
+                            viewBox="0 0 24 24" 
+                            class="home-icon">
+                            <path
+                                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+                            />
+                        </svg>
+                    </div>
+                </a>
+                <button class="theme-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown">
+                    <button 
+                        id="dropdownButton" 
+                        class="dropdown-button">
+                            <img
+                                src="/textbook/content/assets/icons/fontsize.png"
+                                alt="fontsize"
+                            />
+                    </button>
+                    <div class="dropdown-content">
+                        <button 
+                            class="fontsize-btn" 
+                            onclick="decreaseFontSize()">
+                            <img
+                                src="/textbook/content/assets/icons/fontminus.png"
+                                alt="fontminus"
+                            />
+                        </button>
+                        <button 
+                            class="fontsize-btn" 
+                            onclick="increaseFontSize()">
+                            <img
+                                src="/textbook/content/assets/icons/fontplus.png"
+                                alt="fontplus"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topbar image -->
+        <div class="topbar-logo-container">
+            <img 
+                id="topbar-logo"
+                src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/frontpage/logos/logo-hnn-medium.png"
+            />
+        </div>
+
+        <!-- Right side of topbar -->
+        <div class="socials-container">
+            <div class="social-icons">
+                <a 
+                    href="https://github.com/jonescompneurolab/hnn-core" 
+                    target="_blank" 
+                    aria-label="GitHub">
+                    <img 
+                        src="/textbook/content/assets/icons/github.png"
+                        alt="GitHub">
+                </a>
+                <a 
+                    href="https://bsky.app/profile/hnnsolver.bsky.social" 
+                    target="_blank"
+                    aria-label="BlueSky">
+                    <img 
+                        src="/textbook/content/assets/icons/bluesky.png"
+                        alt="BlueSky">
+                </a>
+                <a 
+                    href="https://www.linkedin.com/company/human-neocortical-neurosolver/" 
+                    target="_blank"
+                    aria-label="LinkedIn">
+                    <img 
+                        src="/textbook/content/assets/icons/linkedin.png"
+                        alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+    <div id="content-wrapper">
+    <div id="content">
+
+<!--
+# Title: 7.1 Plot Firing Pattern
+# Updated: 2025-02-04
+#
+# Contributors:
+    # Dylan Daniels
+-->
+
+		<div class="notebook-download-wrapper">
+		    <a href='plot_firing_pattern_notebook.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
+<div class='markdown-cell'>
+    <h1>7.1: Plot firing pattern</h1>
+<p>This example demonstrates how to inspect the firing pattern of cells
+in the HNN model.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        # Authors: Mainak Jas <mjas@harvard.mgh.edu>
+#          Nick Tolley <nick nicholas_tolley@brown.edu>
+
+import os.path as op
+import tempfile
+    </code>
+</div>
+<div class='markdown-cell'>
+    <p>Let us import <code>hnn_core</code>.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        import hnn_core
+from hnn_core import read_spikes, jones_2009_model, simulate_dipole
+    </code>
+</div>
+<div class='markdown-cell'>
+    <p>Now let's build the network. We have used the same weights as in the
+<a
+href="https://jonescompneurolab.github.io/textbook/content/05_erps/hnn_core.html">ERP
+example</a>.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        import matplotlib.pyplot as plt
+
+net = jones_2009_model()
+    </code>
+</div>
+<div class='markdown-cell'>
+    <p><code>net</code> does not have any driving inputs and only defines
+the local network connectivity. Let us go ahead and first add a distal
+evoked drive. We need to define the AMPA and NMDA weights for the
+connections. An "evoked drive" defines inputs that are normally
+distributed with a certain mean and standard deviation.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        weights_ampa_d1 = {'L2_basket': 0.006562, 'L2_pyramidal': 7e-6,
+                   'L5_pyramidal': 0.142300}
+weights_nmda_d1 = {'L2_basket': 0.019482, 'L2_pyramidal': 0.004317,
+                   'L5_pyramidal': 0.080074}
+synaptic_delays_d1 = {'L2_basket': 0.1, 'L2_pyramidal': 0.1,
+                      'L5_pyramidal': 0.1}
+net.add_evoked_drive(
+    'evdist1', mu=63.53, sigma=3.85, numspikes=1, weights_ampa=weights_ampa_d1,
+    weights_nmda=weights_nmda_d1, location='distal',
+    synaptic_delays=synaptic_delays_d1, event_seed=274)
+    </code>
+</div>
+<div class='markdown-cell'>
+    <p>The reason it is called an "evoked drive" is it can be used to
+simulate waveforms resembling evoked responses. Here, we show how to do
+it with two proximal drives which drive current up the dendrite and one
+distal drive which drives current down the dendrite producing the
+negative deflection.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        weights_ampa_p1 = {'L2_basket': 0.08831, 'L2_pyramidal': 0.01525,
+                   'L5_basket': 0.19934, 'L5_pyramidal': 0.00865}
+synaptic_delays_prox = {'L2_basket': 0.1, 'L2_pyramidal': 0.1,
+                        'L5_basket': 1., 'L5_pyramidal': 1.}
+
+# all NMDA weights are zero; pass None explicitly
+net.add_evoked_drive(
+    'evprox1', mu=26.61, sigma=2.47, numspikes=1, weights_ampa=weights_ampa_p1,
+    weights_nmda=None, location='proximal',
+    synaptic_delays=synaptic_delays_prox, event_seed=544)
+    </code>
+</div>
+<div class='markdown-cell'>
+    <p>Now we add the second proximal evoked drive and simulate the network
+dynamics with somatic voltage recordings enabled. Note: only AMPA
+weights differ from first.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        weights_ampa_p2 = {'L2_basket': 0.000003, 'L2_pyramidal': 1.438840,
+                   'L5_basket': 0.008958, 'L5_pyramidal': 0.684013}
+# all NMDA weights are zero; omit weights_nmda (defaults to None)
+net.add_evoked_drive(
+    'evprox2', mu=137.12, sigma=8.33, numspikes=1,
+    weights_ampa=weights_ampa_p2, location='proximal',
+    synaptic_delays=synaptic_delays_prox, event_seed=814)
+
+dpls = simulate_dipole(net, tstop=170., record_vsec='soma')
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Loading custom mechanism files from /opt/homebrew/Caskroom/miniconda/base/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Building the NEURON model
+
+        [Done]
+Trial 1: 0.03 ms...
+
+        Trial 1: 10.0 ms...
+Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
+Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+
+        Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
+
+    </div>
+</div>
+<div class='markdown-cell'>
+    <p>Here, we explain more details about the data structures and how they
+can be used to better interpret the data. The cell IDs (gids) uniquely
+define neurons in the network and are stored in the <a
+href="https://jonescompneurolab.github.io/hnn-core/stable/generated/hnn_core.Network.html#hnn_core.Network">Network</a>
+object as a dictionary</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        gid_ranges = net.gid_ranges
+print(net.gid_ranges)
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        OrderedDict({&#x27;L2_basket&#x27;: range(0, 35), &#x27;L2_pyramidal&#x27;: range(35, 135), &#x27;L5_basket&#x27;: range(135, 170), &#x27;L5_pyramidal&#x27;: range(170, 270), &#x27;evdist1&#x27;: range(270, 505), &#x27;evprox1&#x27;: range(505, 775), &#x27;evprox2&#x27;: range(775, 1045)})
+
+    </div>
+</div>
+<div class='markdown-cell'>
+    <p>Simulated voltage in the soma and other cell sections are stored in
+<a
+href="https://jonescompneurolab.github.io/hnn-core/stable/generated/hnn_core.CellResponse.html#hnn_core.CellResponse">CellResponse</a>
+as a dictionary. The CellResponse object stores data produced by
+individual cells including spikes, voltages and currents.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        trial_idx = 0
+vsec = net.cell_response.vsec[trial_idx]
+print(vsec.keys())
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        dict_keys([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269])
+
+    </div>
+</div>
+<div class='markdown-cell'>
+    <p>We can plot the firing pattern of individual cells by indexing with
+the gid</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        gid = 170
+plt.figure(figsize=(4, 4), constrained_layout=True)
+plt.plot(net.cell_response.times, vsec[gid]['soma'])
+plt.title('%s (gid=%d)' % (net.gid_to_type(gid), gid))
+plt.xlabel('Time (ms)')
+plt.ylabel('Voltage (mV)')
+plt.show()
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        &lt;Figure size 400x400 with 1 Axes&gt;
+    </div>
+</div>
+<div class='output-cell'>
+    <img src='output_nb_plot_firing_pattern_notebook/fig_01.png'/>
+</div>
+<div class='markdown-cell'>
+    <p>Also, we can plot the spikes in the network and write them to text
+files. Note that we can use formatting syntax to specify the filename
+pattern with which each trial will be written
+<code>(&amp;#x27;spk_1.txt&amp;#x27;, &amp;#x27;spk_2.txt, ...)</code>.
+To read spikes back in, we can use wildcard expressions.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        net.cell_response.plot_spikes_raster(show=False)
+with tempfile.TemporaryDirectory() as tmp_dir_name:
+    net.cell_response.write(op.join(tmp_dir_name, 'spk_%d.txt'))
+    cell_response = read_spikes(op.join(tmp_dir_name, 'spk_*.txt'))
+cell_response.plot_spikes_raster(show=False)
+plt.show()
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        Writing file /var/folders/j9/rnclgw5s2kn7l6wt55q4gv7c0000gp/T/tmpztut58lr/spk_0.txt
+
+        &lt;Figure size 640x480 with 1 Axes&gt;
+    </div>
+</div>
+<div class='output-cell'>
+    <img src='output_nb_plot_firing_pattern_notebook/fig_02.png'/>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        &lt;Figure size 640x480 with 1 Axes&gt;
+    </div>
+</div>
+<div class='output-cell'>
+    <img src='output_nb_plot_firing_pattern_notebook/fig_03.png'/>
+</div>
+<div class='markdown-cell'>
+    <p>We can additionally calculate the mean spike rates for each cell
+class by specifying a time window with <code>tstart</code> and
+<code>tstop</code>.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        all_rates = cell_response.mean_rates(tstart=0, tstop=170,
+                                     gid_ranges=net.gid_ranges,
+                                     mean_type='all')
+trial_rates = cell_response.mean_rates(tstart=0, tstop=170,
+                                       gid_ranges=net.gid_ranges,
+                                       mean_type='trial')
+print('Mean spike rates across trials:')
+print(all_rates)
+print('Mean spike rates for individual trials:')
+print(trial_rates)
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        Mean spike rates across trials:
+{}
+Mean spike rates for individual trials:
+{}
+
+    </div>
+</div>
+<div class='markdown-cell'>
+    <p>Finally, we can plot the soma voltage along with the spiking activity
+with raster plots and histograms for the pyramidal cells.</p>
+
+</div>
+<div class='code-cell'>
+    <code class='language-python'>
+        fig, axes = plt.subplots(3, 1, figsize=(5, 7), sharex=True)
+
+for idx in range(10):  # only 10 cells per cell-type
+    gid = gid_ranges['L2_pyramidal'][idx]
+    axes[0].plot(net.cell_response.times, vsec[gid]['soma'], color='g')
+    gid = gid_ranges['L5_pyramidal'][idx]
+    axes[0].plot(net.cell_response.times, vsec[gid]['soma'], color='r')
+
+net.cell_response.plot_spikes_raster(ax=axes[1], show=False)
+net.cell_response.plot_spikes_hist(ax=axes[2],
+                                   spike_types=['L5_pyramidal',
+                                                'L2_pyramidal'],
+                                   show=False)
+plt.show()
+    </code>
+</div>
+<div class='output-cell'><div class='output-label'>
+    Out:
+</div>
+    <div class='output-code'>
+        &lt;Figure size 500x700 with 3 Axes&gt;
+    </div>
+</div>
+<div class='output-cell'>
+    <img src='output_nb_plot_firing_pattern_notebook/fig_04.png'/>
+</div>
+        <!-- footer area -->
+        <!----------------->
+        <div class="footer-area">
+            <div class="previous-area" data-link="/textbook/dev/07_gamma/gamma_in_api.html">
+                <div class="previous-icon">
+                    <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="arrow-path" d="M15 5L9 12L15 19" />
+                    </svg>
+                </div>
+                <div class="previous-text">
+                    <p>Previous</p>
+                    <a>6.2 API Tutorial of Gamma Rhythms</a>
+                </div>
+            </div>
+            <div class="next-area" data-link="/textbook/dev/08_using_hnn_api/record_and_plot_extracellular_potentials.html">
+                <div class="next-text">
+                    <p>Next</p>
+                    <a>7.2 Record & Plot Extracellular Potentials</a>
+                </div>
+                <div class="next-icon">
+                    <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="arrow-path" d="M15 5L9 12L15 19" />
+                    </svg>
+                </div>
+            </div>
+        </div> <!-- close footer -->
+    </div> <!-- close content -->
+    </div> <!-- close content wrapper -->
+</div> <!-- close main --><!------------------------ #
+# Code syntax highlighting #
+# ------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+
+</body>
+</html>

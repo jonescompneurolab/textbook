@@ -1,6 +1,8 @@
 <html><body>
-<div class='markdown-cell'>
-	<h1>7.2: Record and plot extracellular potentials</h1>
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <h1>7.2: Record and plot extracellular potentials</h1>
 <p>The main output of HNN simulations is the 'dipole' waveform, i.e.,
 the net intracellular current flowing in pyramidal cell apical
 dendrites. At the large distances between cells and M/EEG sensors, this
@@ -11,10 +13,13 @@ active and passive membrane channels. Under some simplifying
 assumptions, we may approximate the LFP at virtual electrodes placed in
 and around the HNN network model.</p>
 
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		# Authors: Christopher Bailey <cjb@cfin.au.dk>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Authors: Christopher Bailey <cjb@cfin.au.dk>
 #          Mainak Jas <mainakjas@gmail.com>
 #          Nick Tolley <nicholas_tolley@brown.edu>
 
@@ -22,10 +27,13 @@ import matplotlib.pyplot as plt
 
 from hnn_core import jones_2009_model, simulate_dipole
 from hnn_core.network_models import add_erp_drives_to_jones_model
-	</code>
-</div>
-<div class='markdown-cell'>
-	<p>The default network model defined in (Jones et al. 2009) consists of
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The default network model defined in (Jones et al. 2009) consists of
 a square grid of pyramidal cells. The in-plane distance between
 pyramidal cell somas on the grid can be set by the user, which will have
 an influence on the extracellular potentials (but not on the calculated
@@ -34,39 +42,59 @@ network of model cells spaced 30 um apart. To drive the network
 dynamics, we'll use three evoked 'ERP' drives; see the event-related
 potential (ERP) example for details.</p>
 
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		net = jones_2009_model()
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net = jones_2009_model()
 add_erp_drives_to_jones_model(net)
 
 net.set_cell_positions(inplane_distance=30.)
-	</code>
-</div>
-<div class='markdown-cell'>
-	<p>Extracellular recordings require specifying the electrode positions.
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Extracellular recordings require specifying the electrode positions.
 It can be useful to visualize the cells of the network to decide on the
 placement of each electrode.</p>
 
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		net.plot_cells(show=False)
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net.plot_cells(show=False)
 plt.show()
-	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
 		&lt;Figure size 640x480 with 1 Axes&gt;
-	</div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
-	<img src='output_nb_record_and_plot_extracellular_potentials_notebook/fig_01.png'/>
+    <img src='output_nb_record_and_plot_extracellular_potentials_notebook/fig_01.png'/>
 </div>
-<div class='markdown-cell'>
-	<p>The default network consists of 2 layers (L2 and L5), within which
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The default network consists of 2 layers (L2 and L5), within which
 the cell somas are arranged in a regular grid, and apical dendrites are
 aligned along the z-axis. We can simulate a linear multielectrode array
 with 100 um intercontact spacing (Kajikawa and Schroeder 2011) by
@@ -80,16 +108,22 @@ for calculations; see <a
 href="https://jonescompneurolab.github.io/hnn-core/stable/generated/hnn_core.Network.html#hnn_core.Network.add_electrode_array">hnn_core.Network.add_electrode_array</a>
 for details.</p>
 
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		depths = list(range(-325, 2150, 100))
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        depths = list(range(-325, 2150, 100))
 electrode_pos = [(135, 135, dep) for dep in depths]
 net.add_electrode_array('shank1', electrode_pos)
-	</code>
-</div>
-<div class='markdown-cell'>
-	<p>The electrode arrays are stored under <code>Network.rec_arrays</code>
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The electrode arrays are stored under <code>Network.rec_arrays</code>
 as a dictionary of <a
 href="https://jonescompneurolab.github.io/hnn-core/stable/generated/hnn_core.extracellular.ExtracellularArray.html#hnn_core.extracellular.ExtracellularArray">hnn_core.extracellular.ExtracellularArray</a>
 objects that are now attached to the network and will be recorded during
@@ -99,32 +133,48 @@ down the simulation. <a
 href="https://jonescompneurolab.github.io/textbook/content/09_feature_demos/use_mpi_backend_for_parallelization.html">Using
 MPI</a> will speed up computation considerably.</p>
 
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		print(net.rec_arrays)
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        print(net.rec_arrays)
 net.plot_cells(show=False)
 plt.show()
 
 dpl = simulate_dipole(net, tstop=170)
-	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
 		{&#x27;shank1&#x27;: &lt;ExtracellularArray | 25 electrodes, conductivity=0.3, method=psa (no data recorded yet)&gt;}
 
 		&lt;Figure size 640x480 with 1 Axes&gt;
-	</div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
-	<img src='output_nb_record_and_plot_extracellular_potentials_notebook/fig_02.png'/>
+    <img src='output_nb_record_and_plot_extracellular_potentials_notebook/fig_02.png'/>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
 		Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
 Loading custom mechanism files from /usr/share/miniconda/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
@@ -164,18 +214,24 @@ Trial 1: 0.03 ms...
 
 		Trial 1: 160.0 ms...
 
-	</div>
-</div>
-<div class='markdown-cell'>
-	<p>For plotting both aggregate dipole moment and LFP traces, we'll use a
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>For plotting both aggregate dipole moment and LFP traces, we'll use a
 10 ms smoothing window, after which both data can be decimated by a
 factor of 20 from 40 to 2 kHz sampling rates (note that decimation is
 applied in two steps). Decimation speeds up plotting significantly.</p>
 
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		trial_idx = 0
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        trial_idx = 0
 window_len = 10  # ms
 decimate = [5, 4]  # from 40k to 8k to 2k
 
@@ -184,11 +240,14 @@ dpl[trial_idx].smooth(window_len=window_len)
 
 # Use the same smoothing window on the LFP traces to allow comparison to dipole
 electrode_data = net.rec_arrays['shank1'][trial_idx].smooth(window_len=window_len)
-	</code>
-</div>
-<div class='code-cell'>
-	<code class='language-python'>
-		fig, axs = plt.subplots(4, 1, 
+                    </code>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig, axs = plt.subplots(4, 1, 
                         sharex=True, 
                         figsize=(6, 8),
                         gridspec_kw={'height_ratios': [1, 2, 2, 2]})
@@ -217,20 +276,31 @@ axs[3].set_ylabel('Electrode depth (um)')
 axs[3].set_title('CSD Plot')
 plt.tight_layout()
 plt.show()
-	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
 		&lt;Figure size 600x800 with 4 Axes&gt;
-	</div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
-	<img src='output_nb_record_and_plot_extracellular_potentials_notebook/fig_03.png'/>
+    <img src='output_nb_record_and_plot_extracellular_potentials_notebook/fig_03.png'/>
 </div>
-<div class='markdown-cell'>
-	<h2>References</h2>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <h2>References</h2>
 <ul>
 <li><p>Jones, Stephanie R., Dominique L. Pritchett, Michael A. Sikora,
 Steven M. Stufflebeam, Matti Hämäläinen, and Christopher I. Moore. 2009.
@@ -243,10 +313,14 @@ the Local Field Potential?” Neuron 72 (5): 847–58. <a
 href="https://doi.org/10.1016/j.neuron.2011.09.029">https://doi.org/10.1016/j.neuron.2011.09.029</a>.</p></li>
 </ul>
 
-</div>
+                </div>
+
+
+<!-- code cell -->
 <div class='code-cell'>
-	<code class='language-python'>
-		
-	</code>
+    <code class='language-python'>
+
+    </code>
 </div>
+
 </body></html>

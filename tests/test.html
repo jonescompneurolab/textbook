@@ -1,50 +1,83 @@
 <html><body>
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	<h1>Section A</h1>
+    <h1>Section A</h1>
+
 </div>
+
+
+<!-- code cell -->
 <div class='code-cell'>
-	<code class='language-python'>
-		print("hello world")
-	</code>
+    <code class='language-python'>
+        print("hello world")
+    </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
 		hello world
 
-	</div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	<h2>Subsection i</h2>
+    <h2>Subsection i</h2>
+
 </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	<h2>Subsection ii</h2>
+    <h2>Subsection ii</h2>
+
 </div>
-<div class='code-cell'>
-	<code class='language-python'>
-		import matplotlib.pyplot as plt
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import matplotlib.pyplot as plt
 import numpy as np
 
 x = np.linspace(0, 2 * np.pi, 100)
 y = np.sin(x)
 plt.plot(x, y)
-	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
-		[&lt;matplotlib.lines.Line2D at 0x11d7ead10&gt;]
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+		[&lt;matplotlib.lines.Line2D at 0x114183650&gt;]
 		&lt;Figure size 640x480 with 1 Axes&gt;
-	</div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
-	<img src='output_nb_test/fig_01.png'/>
+    <img src='output_nb_test/fig_01.png'/>
 </div>
-<div class='code-cell'>
-	<code class='language-python'>
-		x = '## Test'
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        x = '## Test'
 header_level = x.count("#")
 x = x.split("# ")[-1]
 
@@ -52,30 +85,64 @@ print(
     x,
     header_level
 )
-	</code>
-</div>
-<div class='output-cell'><div class='output-label'>
-	Out:
-</div>
-	<div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
 		Test 2
 
-	</div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	<h4>header</h4>
+    <h4>header</h4>
+
 </div>
-<div class='markdown-cell'>
-	<h3>test</h3>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <h3>test</h3>
 <p>markdown cell spanning multiple lines</p>
-</div>
+
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	<p>standalone markdown text</p>
+    <p>standalone markdown text</p>
+
 </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	<h1>Top Level Header</h1>
+    <h1>Top Level Header</h1>
+
 </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
-	
+
+
 </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        x=1
+    </code>
+</div>
+
 </body></html>
