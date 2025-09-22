@@ -573,7 +573,10 @@ def convert_notebooks_to_html(
                 print(f"\nProcessing notebook: {filename}")
 
                 # get the path to the notebook
-                nb_path = os.path.join(current_directory, filename)
+                nb_path = os.path.join(
+                    current_directory,
+                    filename,
+                )
 
                 # get the notebook without executing it
                 loaded_notebook = get_notebook(

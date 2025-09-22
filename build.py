@@ -492,17 +492,6 @@ def main():
         help="Force execute all notebooks regardless of their status",
     )
 
-    parser.add_argument(
-        "--cloud-deploy",
-        type=str,
-        help="To identify if the build is for cloud deployment",
-    )
-
-    # parser.add_argument(
-    #     "--build-on-dev",
-    #     action="store_true",
-    #     help="Indicator to build notebooks from the current master"
-    # )
 
     parser.add_argument(
         "--build-on-dev",
@@ -632,23 +621,12 @@ def main():
                 "the version of hnn-core that should be used."
             )
 
-    ##################################################
-    # left off here
-    # not sure if having dev_version installed makes sense
-    # but i can at least use this for testing i guess
-    # next up: track the versions run in dev in the dev_hashes file
-    # might want to check against version run in /content? or maybe not?
-    # start simple and add complexity?
-    ##################################################
-
     convert_notebooks_to_html(
         input_folder=content_path,
         hash_path=hash_path,
         write_html=True,
         execute_notebooks=args.execute_notebooks,
         force_execute_all=args.force_execute_all,
-        # cloud_deploy=args.cloud_deploy,
-        # dev_build=args.build_on_dev,
         dev_build=commit_hash,
     )
 
