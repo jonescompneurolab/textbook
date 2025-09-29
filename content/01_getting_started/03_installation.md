@@ -64,7 +64,9 @@ Note: If you want a minimal install of only the API using `conda`, then follow t
 
 1. Install the [Anaconda Python Distribution](https://www.anaconda.com/download/success). If you are unfamiliar with using Anaconda/Conda virtual environments, [you can find resources here](https://www.anaconda.com/docs/getting-started/getting-started).
 
-2. Open a Terminal, then create and activate a new Python 3.12 Conda environment by running the following commands:
+2. (MacOS only) If you want to use the HNN GUI, you must download and install the program [XQuartz, found here](https://www.xquartz.org/). **Restart your computer after installation**.
+
+3. Open a Terminal, then create and activate a new Python 3.12 Conda environment by running the following commands:
 
     ```
     conda create -y -q -n hnn-core-env python=3.12
@@ -73,21 +75,21 @@ Note: If you want a minimal install of only the API using `conda`, then follow t
 
     Feel free to change the environment name `hnn-core-env`. **You must use Python 3.12 for our `conda` packages.**
 
-3. Install our package using the following command:
+4. Install our package using the following command:
 
     ```
     conda install hnn-core-all -c jonescompneurolab -c conda-forge
     ```
 
-4. (Optional) Run the following command, and write down the number that is output. You can use this number as the number of CPU "Cores", which will *greatly* speed up your simulations.
+5. (Optional) Run the following command, and write down the number that is output. You can use this number as the number of CPU "Cores", which will *greatly* speed up your simulations.
 
     ```
     python -c "import psutil ; print(psutil.cpu_count(logical=False)-1)"
     ```
 
-5. That's it! HNN should now be installed. Proceed to the rest of [our HNN Textbook][] to get started.
+6. That's it! HNN should now be installed. Proceed to the rest of [our HNN Textbook][] to get started.
 
-6. Note: The next time you need to re-enter the Conda Environment, all you need to do is run `conda activate hnn-core-env`.
+7. Note: The next time you need to re-enter the Conda Environment, all you need to do is run `conda activate hnn-core-env`.
 
 ## `conda` on Windows
 
@@ -178,6 +180,9 @@ If you use a virtual environment, you must first create the environment, and the
     Command line tools are already installed.`, then you already have it installed, do
     not need to restart your computer, and can proceed to the next step. Finally, note
     that you do *not* need to install Xcode in its entirety; only the above is required.
+
+- If you want to use the HNN GUI, you must download and install the program [XQuartz,
+  found here](https://www.xquartz.org/). **Restart your computer after installation**.
 
 ### `pip` on Linux
 
@@ -432,6 +437,9 @@ If you use a virtual environment, you must first create the environment, and the
     If you run the above command and see output that resembles `xcode-select: note: Command
     line tools are already installed.`, then you already have it installed, do not need to
     restart your computer, and can proceed to the next step. Finally, note that you do *not* need to install Xcode in its entirety; only the above is required.
+
+- If you want to use the HNN GUI, you must download and install the program [XQuartz,
+  found here](https://www.xquartz.org/). **Restart your computer after installation**.
 
 ### `pip` on Linux
 
