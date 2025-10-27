@@ -504,7 +504,7 @@ from 5 to 2 ms.</p>
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        net.cell_types['L5_pyramidal'].synapses['gabaa']['tau2'] = 2
+                        net.cell_types['L5_pyramidal']['cell_object'].synapses['gabaa']['tau2'] = 2
 
 dpls = simulate_dipole(
     net,

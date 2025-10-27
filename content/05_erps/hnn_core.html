@@ -300,18 +300,24 @@
     <h1>4.2 API Tutorial of Event Related Potentials (ERPs) Simulation</h1>
 
 </div>
-<div class='markdown-cell'>
-    <p>This example demonstrates how to simulate a threshold level tactile
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>This example demonstrates how to simulate a threshold level tactile
 evoked response, as detailed in the <a href="">HNN GUI ERP tutorial</a>,
 using HNN-core. We recommend you first review the GUI tutorial.</p>
 <p>The workflow below recreates an example of the threshold level
 tactile evoked response, as observed in Jones et al. J. Neuroscience
 2007 [1], albeit without a direct comparison to the recorded data.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        # Authors: Mainak Jas <mmjas@mgh.harvard.edu>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Authors: Mainak Jas <mmjas@mgh.harvard.edu>
 #          Sam Neymotin <samnemo@gmail.com>
 #          Blake Caldwell <blake_caldwell@brown.edu>
 #          Christopher Bailey <cjb@cfin.au.dk>
@@ -320,53 +326,84 @@ import os.path as op
 import tempfile
 
 import matplotlib.pyplot as plt 
-    </code>
-</div>
+                    </code>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
     <p>Let us import hnn_core</p>
 
 </div>
-<div class='code-cell'>
-    <code class='language-python'>
-        import hnn_core
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import hnn_core
 from hnn_core import simulate_dipole, jones_2009_model
 from hnn_core.viz import plot_dipole
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Let us first create our default network and visualize the cells
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Let us first create our default network and visualize the cells
 inside it.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        net = jones_2009_model()
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net = jones_2009_model()
 net.plot_cells()
-net.cell_types['L5_pyramidal'].plot_morphology();
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+net.cell_types['L5_pyramidal']['cell_object'].plot_morphology();
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_plot_simulate_evoked/fig_01.png'/>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_plot_simulate_evoked/fig_02.png'/>
 </div>
-<div class='markdown-cell'>
-    <p>The network of cells is now defined, to which we add external drives
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The network of cells is now defined, to which we add external drives
 as required. Weights are prescribed separately for AMPA and NMDA
 receptors (receptors that are not used can be omitted or set to zero).
 The possible drive types include the following:</p>
@@ -376,14 +413,20 @@ The possible drive types include the following:</p>
 <li><code>hnn_core.Network.add_bursty_drive</code></li>
 </ul>
 
-</div>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
     <p>First, we add a distal evoked drive</p>
 
 </div>
-<div class='code-cell'>
-    <code class='language-python'>
-        weights_ampa_d1 = {
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        weights_ampa_d1 = {
     'L2_basket': 0.006562,
     'L2_pyramidal': .000007,
     'L5_pyramidal': 0.142300
@@ -410,15 +453,21 @@ net.add_evoked_drive(
     synaptic_delays=synaptic_delays_d1,
     event_seed=274
 )
-    </code>
-</div>
+                    </code>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
     <p>Then, we add two proximal drives</p>
 
 </div>
-<div class='code-cell'>
-    <code class='language-python'>
-        weights_ampa_p1 = {
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        weights_ampa_p1 = {
     'L2_basket': 0.08831,
     'L2_pyramidal': 0.01525,
     'L5_basket': 0.19934,
@@ -463,55 +512,78 @@ net.add_evoked_drive(
     synaptic_delays=synaptic_delays_prox,
     event_seed=814
 )
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Now let's simulate the dipole, running 2 trials with the
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now let's simulate the dipole, running 2 trials with the
 <code>hnn_core.parallel_backends.Joblib</code> backend. To run them in
 parallel we could set <code>n_jobs</code> to equal the number of trials.
 The <code>Joblib</code> backend allows running the simulations in
 parallel across trials.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        from hnn_core import JoblibBackend
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        from hnn_core import JoblibBackend
 
 with JoblibBackend(n_jobs=2):
     dpls = simulate_dipole(net, tstop=170., n_trials=2)
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Joblib will run 2 trial(s) in parallel by distributing trials over 2 jobs.
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>Rather than reading smoothing and scaling parameters from file, we
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Rather than reading smoothing and scaling parameters from file, we
 recommend explicit use of the
 <code>~hnn_core.dipole.Dipole.smooth</code> and
 <code>~hnn_core.dipole.Dipole.scale</code> methods instead. Note that
 both methods operate in-place, i.e., the objects are modified.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        window_len, scaling_factor = 30, 3000
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        window_len, scaling_factor = 30, 3000
 for dpl in dpls:
     dpl.smooth(window_len).scale(scaling_factor)
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Plot the amplitudes of the simulated aggregate dipole moments over
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Plot the amplitudes of the simulated aggregate dipole moments over
 time</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        import matplotlib.pyplot as plt
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import matplotlib.pyplot as plt
 fig, axes = plt.subplots(
     2,
     1, 
@@ -531,56 +603,84 @@ net.cell_response.plot_spikes_hist(
     ax=axes[1],
     spike_types=['evprox', 'evdist']
 );
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 600x600 with 2 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_plot_simulate_evoked/fig_03.png'/>
 </div>
-<div class='markdown-cell'>
-    <p>If you want to analyze how the different cortical layers contribute
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>If you want to analyze how the different cortical layers contribute
 to different net waveform features, then instead of passing
 <code>agg</code> to <code>layer</code>, you can provide a list of layers
 to be visualized and optionally a list of axes to <code>ax</code> to
 visualize the dipole moments separately.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        plot_dipole(
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        plot_dipole(
     dpls,
     average=False,
     layer=['L2', 'L5', 'agg'],
     show=False
 );
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 640x480 with 3 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_plot_simulate_evoked/fig_04.png'/>
 </div>
-<div class='markdown-cell'>
-    <p>Now, let us try to make the exogenous driving inputs to the cells
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now, let us try to make the exogenous driving inputs to the cells
 synchronous and see what happens. This is achieved by setting
 <code>n_drive_cells=1</code> and <code>cell_specific=False</code> when
 adding each drive.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        net_sync = jones_2009_model()
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net_sync = jones_2009_model()
 
 n_drive_cells=1
 cell_specific=False
@@ -625,35 +725,52 @@ net_sync.add_evoked_drive(
     synaptic_delays=synaptic_delays_prox,
     event_seed=814
 )
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>You may interrogate current values defining the spike event time
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>You may interrogate current values defining the spike event time
 dynamics by</p>
 
-</div>
+                </div>
+
+
+<!-- code cell -->
 <div class='code-cell'>
     <code class='language-python'>
         print(net_sync.external_drives['evdist1']['dynamics'])
     </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         {&#x27;mu&#x27;: 63.53, &#x27;sigma&#x27;: 3.85, &#x27;numspikes&#x27;: 1}
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>Finally, let's simulate this network. Rather than modifying the
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Finally, let's simulate this network. Rather than modifying the
 dipole object, this time we make a copy of it before smoothing and
 scaling.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        dpls_sync = simulate_dipole(
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        dpls_sync = simulate_dipole(
     net_sync,
     tstop=170.,
     n_trials=1
@@ -663,14 +780,19 @@ trial_idx = 0
 
 dpls_sync[trial_idx].copy().smooth(window_len).scale(scaling_factor).plot()
 net_sync.cell_response.plot_spikes_hist();
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-Loading custom mechanism files from /opt/homebrew/Caskroom/miniconda/base/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
 
         [Done]
@@ -695,22 +817,36 @@ Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
         &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_plot_simulate_evoked/fig_05.png'/>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_plot_simulate_evoked/fig_06.png'/>
-</div><div class='markdown-cell'>
-    <h4>Warning</h4>
+</div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h4>Warning</h4>
 <ul>
 <li><p>Always look at dipoles in conjunction with raster plots and spike
 histogram to avoid misinterpretation.</p></li>
@@ -718,14 +854,17 @@ histogram to avoid misinterpretation.</p></li>
 different drives seeds before drawing conclusions.</p></li>
 </ul>
 
-</div><div class='markdown-cell'>
-    <h2>References</h2>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>References</h2>
 <p>[1] Jones, Stephanie R., et al. "Neural correlates of tactile
 detection: a combined magnetoencephalography and biophysically based
 computational modeling study." Journal of Neuroscience 27.40 (2007):
 10751-10764.</p>
 
-</div>
+                </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

@@ -296,8 +296,8 @@
 		</div>
 
 
-<div class='markdown-cell'>
-    <h1>5.2 API Tutorial of Alpha/Beta Rhythms</h1>
+                <div class='markdown-cell'>
+                    <h1>5.2 API Tutorial of Alpha/Beta Rhythms</h1>
 <p>This example demonstrates how to simulate alpha and beta frequency
 activity in the alpha/beta complex of the SI mu-rhythm [1]_, as detailed
 in the <a
@@ -309,29 +309,41 @@ tutorial, and the alpha/beta complex similar to Figure 20 in the GUI
 tutorial, albeit without visualization of the corresponding
 time-frequency spectrograms [1]_.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        # Authors: Mainak Jas <mjas@mgh.harvard.edu>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Authors: Mainak Jas <mjas@mgh.harvard.edu>
 #          Sam Neymotin <samnemo@gmail.com>
 #          Nick Tolley <nicholas_tolley@brown.edu>
 #          Christopher Bailey <bailey.cj@gmail.com>
 
 import os.path as op
-    </code>
-</div>
+                    </code>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
     <p>Let us import hnn_core</p>
 
 </div>
-<div class='code-cell'>
-    <code class='language-python'>
-        import hnn_core
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import hnn_core
 from hnn_core import simulate_dipole, jones_2009_model
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Now let's simulate the dipole and plot it. To excite the network, we
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now let's simulate the dipole and plot it. To excite the network, we
 add a ~10 Hz "bursty" drive starting at 50 ms and continuing to the end
 of the simulation. Each burst consists of a pair (2) of spikes, spaced
 10 ms apart. The occurrence of each burst is jittered by a random,
@@ -340,10 +352,13 @@ burst train 10 times, each time with unique randomization. The drive is
 only connected to the :term:<code>proximal</code> (dendritic) AMPA
 synapses on L2/3 and L5 pyramidal neurons.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        net = jones_2009_model()
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net = jones_2009_model()
 
 location = 'proximal'
 burst_std = 20
@@ -361,14 +376,19 @@ dpl = simulate_dipole(net, tstop=310., n_trials=1)
 trial_idx = 0  # single trial simulated, choose the first index
 # to emulate a larger patch of cortex, we can apply a simple scaling factor
 dpl[trial_idx].scale(3000)
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-Loading custom mechanism files from /opt/homebrew/Caskroom/miniconda/base/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-env-mpi/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
 
         [Done]
@@ -391,9 +411,9 @@ Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
+Trial 1: 170.0 ms...
 
-        Trial 1: 170.0 ms...
-Trial 1: 180.0 ms...
+        Trial 1: 180.0 ms...
 Trial 1: 190.0 ms...
 Trial 1: 200.0 ms...
 Trial 1: 210.0 ms...
@@ -401,18 +421,21 @@ Trial 1: 220.0 ms...
 Trial 1: 230.0 ms...
 Trial 1: 240.0 ms...
 Trial 1: 250.0 ms...
-Trial 1: 260.0 ms...
 
-        Trial 1: 270.0 ms...
+        Trial 1: 260.0 ms...
+Trial 1: 270.0 ms...
 Trial 1: 280.0 ms...
 Trial 1: 290.0 ms...
 Trial 1: 300.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x108862840&gt;
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>Prior to plotting, we can choose to smooth the dipole waveform (note
+        &lt;hnn_core.dipole.Dipole at 0x107f85400&gt;
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Prior to plotting, we can choose to smooth the dipole waveform (note
 that the :meth:<code>~hnn_core.dipole.smooth</code>-method operates
 in-place, <em>i.e.</em>, it alters the data inside the
 <code>Dipole</code> object). Smoothing approximates the effect of signal
@@ -421,10 +444,13 @@ included in our biophysical model. We can confirm that what we simulate
 is indeed 10 Hz activity by plotting the power spectral density
 (PSD).</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        import matplotlib.pyplot as plt
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import matplotlib.pyplot as plt
 from hnn_core.viz import plot_dipole, plot_psd
 
 fig, axes = plt.subplots(2, 1, constrained_layout=True)
@@ -444,30 +470,44 @@ plot_psd(dpl[trial_idx], fmin=1., fmax=1e3, tmin=tmin, ax=axes[1], show=False)
 axes[1].set_xscale('log')
 plt.tight_layout()
 plt.show()
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 640x480 with 2 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_api_alpha_beta_short/fig_01.png'/>
 </div>
-<div class='markdown-cell'>
-    <p>The next step is to add a simultaneous 10 Hz
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The next step is to add a simultaneous 10 Hz
 :term:<code>distal</code> drive with a lower within-burst spread of
 spike times (<code>burst_std</code>) compared with the proximal one. The
 different arrival times of spikes at opposite ends of the pyramidal
 cells will tend to produce bursts of 15-30 Hz power known as beta
 frequency events.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        location = 'distal'
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        location = 'distal'
 burst_std = 15
 weights_ampa_d = {'L2_pyramidal': 5.4e-5, 'L5_pyramidal': 5.4e-5}
 syn_delays_d = {'L2_pyramidal': 5., 'L5_pyramidal': 5.}
@@ -476,65 +516,76 @@ net.add_bursty_drive(
     spike_isi=10, n_drive_cells=10, location=location,
     weights_ampa=weights_ampa_d, synaptic_delays=syn_delays_d, event_seed=296)
 dpl = simulate_dipole(net, tstop=310., n_trials=1)
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
 Building the NEURON model
 
         [Done]
 Trial 1: 0.03 ms...
+Trial 1: 10.0 ms...
 
-        Trial 1: 10.0 ms...
-Trial 1: 20.0 ms...
+        Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
 Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
+Trial 1: 90.0 ms...
 
-        Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
+        Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
 Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
-
-        Trial 1: 170.0 ms...
+Trial 1: 170.0 ms...
 Trial 1: 180.0 ms...
-Trial 1: 190.0 ms...
+
+        Trial 1: 190.0 ms...
 Trial 1: 200.0 ms...
 Trial 1: 210.0 ms...
 Trial 1: 220.0 ms...
 Trial 1: 230.0 ms...
 Trial 1: 240.0 ms...
-
-        Trial 1: 250.0 ms...
+Trial 1: 250.0 ms...
 Trial 1: 260.0 ms...
-Trial 1: 270.0 ms...
+
+        Trial 1: 270.0 ms...
 Trial 1: 280.0 ms...
 Trial 1: 290.0 ms...
 Trial 1: 300.0 ms...
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>We can verify that beta frequency activity was produced by inspecting
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We can verify that beta frequency activity was produced by inspecting
 the PSD of the most recent simulation. The dominant power in the signal
 is shifted from alpha (~10 Hz) to beta (15-25 Hz) frequency range. All
 plotting and smoothing parameters are as above, but here no scaling is
 applied, leading to smaller absolute values in the plots.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        fig, axes = plt.subplots(3, 1, constrained_layout=True)
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig, axes = plt.subplots(3, 1, constrained_layout=True)
 
 net.cell_response.plot_spikes_hist(ax=axes[0], show=False)
 
@@ -548,25 +599,36 @@ smooth_dpl.plot(tmin=tmin, tmax=tmax, ax=axes[1], color='r', show=False)
 dpl[trial_idx].plot_psd(fmin=0., fmax=40., tmin=tmin, ax=axes[2], show=False)
 plt.tight_layout()
 plt.show()
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 640x480 with 3 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_api_alpha_beta_short/fig_02.png'/>
-</div><div class='markdown-cell'>
-    <h2>References</h2>
+</div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>References</h2>
 <p>[1] Jones, S. R. et al. Quantitative analysis and biophysically
 realistic neural modeling of the MEG mu rhythm: rhythmogenesis and
 modulation of sensory-evoked responses. J. Neurophysiol. 102, 3554–3572
 (2009).</p>
 
-</div>
+                </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

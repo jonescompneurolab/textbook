@@ -292,8 +292,8 @@
 		</div>
 
 
-<div class='markdown-cell'>
-    <h1>8.1: From MEG sensor-space data to HNN simulation</h1>
+                <div class='markdown-cell'>
+                    <h1>8.1: From MEG sensor-space data to HNN simulation</h1>
 <p>This example demonstrates how to calculate an inverse solution of the
 median nerve evoked response potential (ERP) in S1 from the MNE
 somatosensory dataset, and then simulate a biophysical model network
@@ -306,78 +306,112 @@ proximal and distal drives needed to simulate evoked responses, see the
 here is not part of a current publication but is motivated by prior
 studies [1], [2].</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        # Authors: Mainak Jas <mainakjas@gmail.com>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Authors: Mainak Jas <mainakjas@gmail.com>
 #          Ryan Thorpe <ryan_thorpe@brown.edu>
 
 # sphinx_gallery_thumbnail_number = 2
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Note: This specific notebook requires the installation of several
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Note: This specific notebook requires the installation of several
 other, non-HNN packages in order to run and plot MNE output properly.
 The next cell will install these packages into your Python environment
 automatically.</p>
 
-</div>
+                </div>
+
+
+<!-- code cell -->
 <div class='code-cell'>
     <code class='language-python'>
         %pip install -q mne nibabel ipyevents "pyvista[all]" pyvistaqt
     </code>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Note: you may need to restart the kernel to use updated packages.
 
-    </div>
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        # Needed for certain plotting to work
+                    </div>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Needed for certain plotting to work
 import pyvista as pv
 from mne.viz import set_3d_backend
 set_3d_backend('notebook')
 pv.set_jupyter_backend('client')
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Using notebook 3d backend.
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>We will import the packages needed for computing the inverse solution
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We will import the packages needed for computing the inverse solution
 from the MNE somatosensory dataset. <code>MNE</code>, and its dependency
 <code>NiBabel</code> should have been installed using the previous
 <code>pip</code> command. The somatosensory dataset can be downloaded by
 importing <code>somato</code> from <code>mne.datasets</code>.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        import os.path as op
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import os.path as op
 import matplotlib.pyplot as plt
 
 import mne
 from mne.datasets import somato
 from mne.minimum_norm import apply_inverse, make_inverse_operator
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Now we set the the path of the <code>somato</code> dataset for
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now we set the the path of the <code>somato</code> dataset for
 subject <code>&amp;#x27;01&amp;#x27;</code>.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        data_path = somato.data_path()
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        data_path = somato.data_path()
 subject = '01'
 task = 'somato'
 raw_fname = op.join(data_path, 'sub-{}'.format(subject), 'meg',
@@ -385,15 +419,21 @@ raw_fname = op.join(data_path, 'sub-{}'.format(subject), 'meg',
 fwd_fname = op.join(data_path, 'derivatives', 'sub-{}'.format(subject),
                     'sub-{}_task-{}-fwd.fif'.format(subject, task))
 subjects_dir = op.join(data_path, 'derivatives', 'freesurfer', 'subjects')
-    </code>
-</div>
+                    </code>
+                </div>
+
+
+<!-- markdown cell -->
 <div class='markdown-cell'>
     <p>Then, we load the raw data and estimate the inverse operator.</p>
 
 </div>
-<div class='code-cell'>
-    <code class='language-python'>
-        # Read and band-pass filter the raw data
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Read and band-pass filter the raw data
 raw = mne.io.read_raw_fif(raw_fname, preload=True)
 l_freq, h_freq = 1, 40
 raw.filter(l_freq, h_freq)
@@ -411,13 +451,18 @@ epochs = mne.Epochs(raw, events, event_id, tmin, tmax, baseline=baseline,
 fwd = mne.read_forward_solution(fwd_fname)
 cov = mne.compute_covariance(epochs)
 inv = make_inverse_operator(epochs.info, fwd, cov)
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
-        Opening raw data file /Users/dylandaniels/mne_data/MNE-somato-data/sub-01/meg/sub-01_task-somato_meg.fif...
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Opening raw data file /Users/austinsoplata/mne_data/MNE-somato-data/sub-01/meg/sub-01_task-somato_meg.fif...
 
             Range : 237600 ... 506999 =    791.189 ...  1688.266 secs
 
@@ -429,7 +474,7 @@ inv = make_inverse_operator(epochs.info, fwd, cov)
 
         Setting up band-pass filter from 1 - 40 Hz
 
-        
+
 
         FIR filter parameters
 
@@ -451,7 +496,9 @@ inv = make_inverse_operator(epochs.info, fwd, cov)
 
         - Filter length: 993 samples (3.307 s)
 
-        
+
+
+        Finding events on: STI 014
 
         111 events found on stim channel STI 014
 
@@ -469,7 +516,7 @@ inv = make_inverse_operator(epochs.info, fwd, cov)
 
         0 bad epochs dropped
 
-        Reading forward solution from /Users/dylandaniels/mne_data/MNE-somato-data/derivatives/sub-01/sub-01_task-somato-fwd.fif...
+        Reading forward solution from /Users/austinsoplata/mne_data/MNE-somato-data/derivatives/sub-01/sub-01_task-somato-fwd.fif...
 
             Reading a source space...
 
@@ -543,10 +590,13 @@ inv = make_inverse_operator(epochs.info, fwd, cov)
 
             scaling factor to adjust the trace = 3.86104e+18 (nchan = 306 nzero = 242)
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>There are several methods to do source reconstruction. Some of the
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>There are several methods to do source reconstruction. Some of the
 methods such as MNE are distributed source methods whereas dipole
 fitting will estimate the location and amplitude of a single current
 dipole. At the moment, we do not offer explicit recommendations on which
@@ -555,21 +605,29 @@ users to note that the dipole currents simulated with HNN are assumed to
 be normal to the cortical surface. Hence, using the option
 <code>pick_ori=&amp;#x27;normal&amp;#x27;</code> is appropriate.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        snr = 3.
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        snr = 3.
 lambda2 = 1. / snr ** 2
 evoked = epochs.average()
 stc = apply_inverse(evoked, inv, lambda2, method='MNE',
                     pick_ori="normal", return_residual=False,
                     verbose=True)
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Preparing the inverse operator for use...
 
             Scaled noise and source covariance from nave = 1 to nave = 111
@@ -594,34 +652,48 @@ stc = apply_inverse(evoked, inv, lambda2, method='MNE',
 
         [done]
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>To extract the primary response in primary somatosensory cortex (S1),
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>To extract the primary response in primary somatosensory cortex (S1),
 we create a label for the postcentral gyrus (S1) in source-space</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        hemi = 'rh'
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        hemi = 'rh'
 label_tag = 'G_postcentral'
 label_s1 = mne.read_labels_from_annot(subject, parc='aparc.a2009s', hemi=hemi,
                                       regexp=label_tag,
                                       subjects_dir=subjects_dir)[0]
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Reading labels from parcellation...
 
-           read 1 labels from /Users/dylandaniels/mne_data/MNE-somato-data/derivatives/freesurfer/subjects/01/label/rh.aparc.a2009s.annot
+           read 1 labels from /Users/austinsoplata/mne_data/MNE-somato-data/derivatives/freesurfer/subjects/01/label/rh.aparc.a2009s.annot
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>Visualizing the distributed S1 activation in reference to the
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Visualizing the distributed S1 activation in reference to the
 geometric structure of the cortex (i.e., plotted on a structural MRI)
 can help us figure out how to orient the dipole. Note that in the HNN
 framework, positive and negative deflections of a current dipole source
@@ -633,10 +705,13 @@ should get 2 plots, the first showing the post-central gyrus label from
 which the dipole time course was extracted and the second showing MNE
 activation at 0.040 sec that resemble the following images.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        '''
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        '''
 Brain = mne.viz.get_brain_class()
 brain_label = Brain(subject, hemi, 'white', subjects_dir=subjects_dir)
 brain_label.add_label(label_s1, color='green', alpha=0.9)
@@ -645,35 +720,49 @@ brain = stc_label.plot(subjects_dir=subjects_dir, hemi=hemi, surface='white',
                        view_layout='horizontal', initial_time=0.04,
                        backend='pyvista')
 '''
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &quot;\nBrain = mne.viz.get_brain_class()\nbrain_label = Brain(subject, hemi, &#x27;white&#x27;, subjects_dir=subjects_dir)\nbrain_label.add_label(label_s1, color=&#x27;green&#x27;, alpha=0.9)\nstc_label = stc.in_label(label_s1)\nbrain = stc_label.plot(subjects_dir=subjects_dir, hemi=hemi, surface=&#x27;white&#x27;,\n                       view_layout=&#x27;horizontal&#x27;, initial_time=0.04,\n                       backend=&#x27;pyvista&#x27;)\n&quot;
-    </div>
-</div>
-<div class='markdown-cell'>
-    <figure>
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <figure>
 <img
 src="https://user-images.githubusercontent.com/20212206/106524603-cfe75c80-64b0-11eb-9607-3415195c3e7a.png"
 alt="mne_label_fig" />
 <figcaption aria-hidden="true">mne_label_fig</figcaption>
 </figure>
 
-</div>
-<div class='markdown-cell'>
-    <figure>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <figure>
 <img
 src="https://user-images.githubusercontent.com/20212206/106524542-b514e800-64b0-11eb-835e-497454e75eb9.png"
 alt="mne_activity_fig" />
 <figcaption aria-hidden="true">mne_activity_fig</figcaption>
 </figure>
 
-</div>
-<div class='markdown-cell'>
-    <p>Now we extract the representative time course of dipole activation in
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now we extract the representative time course of dipole activation in
 our labeled brain region using
 <code>mode=&amp;#x27;pca_flip&amp;#x27;</code> (see
 <code>this MNE-python example</code>_ for more details). Note that the
@@ -684,10 +773,13 @@ deflection at ~0.040 sec is pointed downwards. Thus, the ~0.040 sec
 deflection corresponds to current flow traveling from superficial to
 deep layers of cortex.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        flip_data = stc.extract_label_time_course(label_s1, inv['src'],
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        flip_data = stc.extract_label_time_course(label_s1, inv['src'],
                                           mode='pca_flip')
 dipole_tc = -flip_data[0] * 1e9
 
@@ -698,39 +790,56 @@ plt.ylabel('Current Dipole (nAm)')
 plt.xlim((0, 170))
 plt.axhline(0, c='k', ls=':')
 plt.show()
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Extracting time courses for 1 labels (mode: pca_flip)
 
         &lt;Figure size 640x480 with 1 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_from_meg_to_hnn_notebook/fig_01.png'/>
 </div>
-<div class='markdown-cell'>
-    <p>Now, let us try to simulate the same with <code>hnn-core</code>. We
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now, let us try to simulate the same with <code>hnn-core</code>. We
 read in the network parameters from <code>N20.json</code> and
 instantiate the network.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        import hnn_core
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import hnn_core
 from hnn_core import simulate_dipole, jones_2009_model
 from hnn_core import average_dipoles, JoblibBackend
 
 hnn_core_root = op.dirname(hnn_core.__file__)
 params_fname = op.join(hnn_core_root, 'param', 'N20.json')
 net = jones_2009_model(params_fname)
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>To simulate the source of the median nerve evoked response, we add a
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>To simulate the source of the median nerve evoked response, we add a
 sequence of synchronous evoked drives: 1 proximal, 2 distal, and 1 final
 proximal drive. In order to understand the physiological implications of
 proximal and distal drive as well as the general process used to
@@ -739,10 +848,13 @@ responses, see the <code>HNN ERP tutorial</code>_. Note that setting
 <code>n_drive_cells=1</code> and <code>cell_specific=False</code>
 creates a drive with synchronous input across cells in the network.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        # Early proximal drive
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Early proximal drive
 weights_ampa_p = {'L2_basket': 0.0036, 'L2_pyramidal': 0.0039,
                   'L5_basket': 0.0019, 'L5_pyramidal': 0.0020}
 weights_nmda_p = {'L2_basket': 0.0029, 'L2_pyramidal': 0.0005,
@@ -797,32 +909,46 @@ net.add_evoked_drive(
     n_drive_cells=1, cell_specific=False, weights_ampa=weights_ampa_d,
     weights_nmda=weights_nmda_d, synaptic_delays=synaptic_delays_d,
     event_seed=275)
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Now we run the simulation over 2 trials so that we can plot the
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now we run the simulation over 2 trials so that we can plot the
 average aggregate dipole. For a better match to the empirical waveform,
 set <code>n_trials</code> to be &gt;=25.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        n_trials = 2
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        n_trials = 2
 # n_trials = 25
 with JoblibBackend(n_jobs=2):
     dpls = simulate_dipole(net, tstop=170., n_trials=n_trials)
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         Joblib will run 2 trial(s) in parallel by distributing trials over 2 jobs.
 
-    </div>
-</div>
-<div class='markdown-cell'>
-    <p>Since the model is a reduced representation of the larger network
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Since the model is a reduced representation of the larger network
 contributing to the response, the model response is noisier than it
 would be in the net activity from a larger network where these effects
 are averaged out, and the dipole amplitude is smaller than the recorded
@@ -831,24 +957,33 @@ dipole response allow us to more accurately approximate the true signal
 responsible for the recorded macroscopic evoked response [1]<em>,
 [2]</em>.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        dpl_smooth_win = 20
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        dpl_smooth_win = 20
 dpl_scalefctr = 12
 for dpl in dpls:
     dpl.smooth(dpl_smooth_win)
     dpl.scale(dpl_scalefctr)
-    </code>
-</div>
-<div class='markdown-cell'>
-    <p>Finally, we plot the driving spike histogram, empirical and simulated
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Finally, we plot the driving spike histogram, empirical and simulated
 median nerve evoked response waveforms, and output spike histogram.</p>
 
-</div>
-<div class='code-cell'>
-    <code class='language-python'>
-        fig, axes = plt.subplots(3, 1, sharex=True, figsize=(6, 6),
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig, axes = plt.subplots(3, 1, sharex=True, figsize=(6, 6),
                          constrained_layout=True)
 net.cell_response.plot_spikes_hist(ax=axes[0],
                                    spike_types=['evprox', 'evdist'],
@@ -859,29 +994,48 @@ average_dipoles(dpls).plot(ax=axes[1], show=False)
 axes[1].legend(['MNE label average', 'HNN simulation'])
 axes[1].set_ylabel('Current Dipole (nAm)')
 net.cell_response.plot_spikes_raster(ax=axes[2])
-    </code>
-</div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 600x600 with 3 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_from_meg_to_hnn_notebook/fig_02.png'/>
 </div>
-<div class='output-cell'><div class='output-label'>
-    Out:
-</div>
-    <div class='output-code'>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
         &lt;Figure size 600x600 with 3 Axes&gt;
-    </div>
-</div>
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
 <div class='output-cell'>
     <img src='output_nb_from_meg_to_hnn_notebook/fig_03.png'/>
-</div><div class='markdown-cell'>
-    <h2>References</h2>
+</div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>References</h2>
 <p>[1] Jones, S. R., Pritchett, D. L., Stufflebeam, S. M., Hämäläinen,
 M. &amp; Moore, C. I. Neural correlates of tactile detection: a combined
 magnetoencephalography and biophysically based computational modeling
@@ -892,7 +1046,7 @@ Neurosolver (HNN), a new software tool for interpreting the cellular and
 network origin of human MEG/EEG data. eLife 9, e51214 (2020).
 https://doi.org/10.7554/eLife.51214</p>
 
-</div>
+                </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

@@ -1,7 +1,7 @@
 
 .PHONY: all build clean create-conda-env create-conda-env-mpi
 
-HNN_VERSION := 0.4.2
+HNN_VERSION := 0.5.0
 OS := $(shell uname -s)
 
 all: build
@@ -81,7 +81,6 @@ create-textbook-dev-build:
 
 	@# Get the latest commit hash of hnn-core master branch
 	LATEST_HASH=$$(git ls-remote https://github.com/jonescompneurolab/hnn-core.git master | cut -f1);
-	
 	@# Install hnn-core in developer mode, forcing reinstall without cache
 	conda run -n textbook-dev-build pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"; \
 
