@@ -1,6 +1,8 @@
 {
     "skip_execution": [
-        "api_alpha_beta.ipynb"
+        "api_alpha_beta.ipynb",
+        "optimize_simulated_evoked_response_parameters_notebook.ipynb",
+        "optimize_simulated_rhythmic_response_parameters_notebook.ipynb"
     ],
     "dev": [
         "api_alpha_beta.ipynb",
@@ -15,6 +17,8 @@
         "plot_firing_pattern_notebook.ipynb",
         "parallelism_mpi_notebook.ipynb",
         "parallelism_joblib_notebook.ipynb",
-        "replaying_spike_data_as_input.ipynb"
+        "replaying_spike_data_as_input.ipynb",
+        "optimize_simulated_evoked_response_parameters_notebook.ipynb",
+        "optimize_simulated_rhythmic_response_parameters_notebook.ipynb"
     ]
 }
