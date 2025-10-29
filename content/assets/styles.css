@@ -152,6 +152,20 @@ code {
     border: 2px solid var(--lighter-gray);
 }
 
+code-basic {
+    color: var(--hnn-violet);
+    font-size: 90%;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; 
+    font-weight: normal;
+}
+
+ul.sm-gray code-basic {
+    color: var(--text-light);
+    font-size: 80%;
+    font-family: 'Courier New', monospace !important;
+    font-size: 0.95em !important;
+}
+
 #block {
     color: var(--text-light);
     display: block;
@@ -186,6 +200,17 @@ pre code {
     word-wrap: break-word;
     overflow: hidden;
 }
+
+p .code-text, ul.code-text, ul.code-text li {
+    font-family: 'Courier New', monospace !important;
+    font-size: 0.95em !important;
+}
+
+p .code-text {
+    color: var(--hnn-violet);
+}
+
+
 
 /*
     Element: .csl-entry
@@ -484,6 +509,16 @@ body.is-mobile .sidebar-close {
 
 }
 
+/*
+    Element: .title-row
+    Description: style 'title' text in navbar header
+*/
+.navbar-header .title-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .navbar-header a {
     margin: 0px;
 }
@@ -503,7 +538,7 @@ body.is-mobile .sidebar-close {
 }
 
 .title-row {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     width: 100%;
 }
@@ -547,10 +582,10 @@ body.is-mobile .sidebar-close {
 }
 
 /* On hover, apply transitions */
-.install-row:hover a,
+/* .install-row:hover a,
 .install-row:hover .download-icon {
     transition: color 0.2s ease-in-out !important, stroke 0.2s ease-in-out !important;
-}
+} */
 
 .install-row:hover a {
     color: var(--hnn-yellow);
