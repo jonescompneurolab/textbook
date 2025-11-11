@@ -218,7 +218,7 @@ window.onload = function() {
 }
 
 function toggleSubmenu(event) {
-    const header = event.target.closest('#sidebar-header');
+    const header = event.target.closest('#sidebar-section');
         // Get the clicked header
     const submenu = header.nextElementSibling;
         // Get the submenu
@@ -356,7 +356,7 @@ document.querySelectorAll('.sidebar a').forEach(function(link) {
 // Close all open submenus in the sidebar
 // --------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
-    // Function to close all open submenus in the navbar
+    // Function to close all open submenus in the sidebar
     function closeAllSubmenus() {
         const allSubmenus = document.querySelectorAll('.submenu.open'); // Select all open submenus
         allSubmenus.forEach(submenu => {
@@ -382,6 +382,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // -----------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
     // Get the full path relative to the 'content' folder
+    // TODO? Currently breaks automatic sidebar display of current page  on "dev"
+    // builds, but probably not worth fixing
     const currentPage = window.location.pathname.split("/content/")[1].split("?")[0];
 
     // Find the active link using the full path

@@ -15,7 +15,6 @@
         "batch_simulation_notebook.ipynb",
         "modifying_local_connectivity_notebook.ipynb",
         "plot_firing_pattern_notebook.ipynb",
-        "parallelism_mpi_notebook.ipynb",
         "parallelism_joblib_notebook.ipynb",
         "replaying_spike_data_as_input.ipynb",
         "optimize_simulated_evoked_response_parameters_notebook.ipynb",

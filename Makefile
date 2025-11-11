@@ -45,25 +45,25 @@ endef
 all: build
 
 build:
-	@#"This option is now equivalent to running build with '--execution-filter no-execution'."
+	@#"This option is now equivalent to running build with '--execution-type no-execution'."
 	python build.py
 
 force-execute-all-notebooks:
-	@echo "This option has been replaced with '--execution-filter execute-all-unskipped-notebooks'"
+	@echo "This option has been replaced with '--execution-type execute-all-unskipped-notebooks'"
 	@echo "You can run 'make execute-all-unskipped-notebooks' for the same command."
 
 execute-notebooks:
-	@echo "This option has been replaced with '--execution-filter execute-updated-unskipped-notebooks'"
+	@echo "This option has been replaced with '--execution-type execute-updated-unskipped-notebooks'"
 	@echo "You can run 'make execute-updated-unskipped-notebooks' for the same command."
 
 execute-absolutely-all-notebooks:
-	python build.py --execution-filter execute-absolutely-all-notebooks
+	python build.py --execution-type execute-absolutely-all-notebooks
 
 execute-all-unskipped-notebooks:
-	python build.py --execution-filter execute-all-unskipped-notebooks
+	python build.py --execution-type execute-all-unskipped-notebooks
 
 execute-updated-unskipped-notebooks:
-	python build.py --execution-filter execute-updated-unskipped-notebooks
+	python build.py --execution-type execute-updated-unskipped-notebooks
 
 clean:
 	rm -rf content/*.html
