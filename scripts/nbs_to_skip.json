@@ -1,10 +1,10 @@
 {
-    "skip_execution": [
+    "skip_if_stable": [
         "api_alpha_beta.ipynb",
         "optimize_simulated_evoked_response_parameters_notebook.ipynb",
         "optimize_simulated_rhythmic_response_parameters_notebook.ipynb"
     ],
-    "dev": [
+    "skip_if_dev": [
         "api_alpha_beta.ipynb",
         "plot_simulate_gamma.ipynb",
         "api_alpha_beta_short.ipynb",

@@ -8,3 +8,5 @@ dependencies:
   - pip==25.0
   - pypandoc==1.15
   - markdown=3.4
+  - openmpi>5
+  - mpi4py

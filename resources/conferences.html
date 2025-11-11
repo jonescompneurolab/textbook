@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNN Textbook</title>
+    <!-- <base href="/textbook/"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../content/assets/styles.css">
+    <script src="../templates/scripts.js" defer></script>
+</head>
+<body>
+    <svg style="display: none;">
+        <symbol id="lightbulb" viewBox="0 0 24 24">
+            <path d="M12 2.75C8.27208 2.75 5.25 5.77208 5.25 9.5C5.25 11.4985 6.11758 13.2934 7.49907 14.5304L7.50342 14.5343C8.06008 15.0328 8.48295 15.4114 8.78527 15.6886C9.06989 15.9495 9.29537 16.1628 9.41353 16.3086L9.42636 16.3244C9.64763 16.5974 9.84045 16.8353 9.9676 17.1199C10.0948 17.4044 10.1434 17.7067 10.1992 18.0537L10.2024 18.0738C10.231 18.2517 10.2425 18.4701 10.247 18.75H13.753C13.7575 18.4701 13.769 18.2517 13.7976 18.0738L13.8008 18.0537C13.8566 17.7067 13.9052 17.4044 14.0324 17.1199C14.1596 16.8353 14.3524 16.5974 14.5736 16.3244L14.5865 16.3086C14.7046 16.1628 14.9301 15.9495 15.2147 15.6886C15.5171 15.4114 15.94 15.0327 16.4966 14.5343L16.5009 14.5304C17.8824 13.2934 18.75 11.4985 18.75 9.5C18.75 5.77208 15.7279 2.75 12 2.75ZM13.7436 20.25H10.2564C10.2597 20.3542 10.2646 20.4453 10.2721 20.5273C10.2925 20.7524 10.3269 20.8341 10.3505 20.875C10.4163 20.989 10.511 21.0837 10.625 21.1495C10.6659 21.1731 10.7476 21.2075 10.9727 21.2279C11.2082 21.2493 11.5189 21.25 12 21.25C12.4811 21.25 12.7918 21.2493 13.0273 21.2279C13.2524 21.2075 13.3341 21.1731 13.375 21.1495C13.489 21.0837 13.5837 20.989 13.6495 20.875C13.6731 20.8341 13.7075 20.7524 13.7279 20.5273C13.7354 20.4453 13.7403 20.3542 13.7436 20.25ZM3.75 9.5C3.75 4.94365 7.44365 1.25 12 1.25C16.5563 1.25 20.25 4.94365 20.25 9.5C20.25 11.9428 19.1874 14.1384 17.5016 15.6479C16.9397 16.151 16.5234 16.5238 16.2284 16.7942C16.0809 16.9295 15.9681 17.0351 15.8849 17.1162C15.8434 17.1566 15.8117 17.1886 15.788 17.2134C15.7763 17.2256 15.7675 17.2352 15.7611 17.2423C15.7546 17.2496 15.7518 17.253 15.7519 17.2529C15.4917 17.574 15.4354 17.6568 15.4019 17.7319C15.3683 17.8069 15.3442 17.9041 15.2786 18.3121C15.2527 18.4732 15.25 18.7491 15.25 19.5V19.5322C15.25 19.972 15.25 20.3514 15.2218 20.6627C15.192 20.9918 15.1259 21.3178 14.9486 21.625C14.7511 21.967 14.467 22.2511 14.125 22.4486C13.8178 22.6259 13.4918 22.692 13.1627 22.7218C12.8514 22.75 12.472 22.75 12.0322 22.75H11.9678C11.528 22.75 11.1486 22.75 10.8374 22.7218C10.5082 22.692 10.1822 22.6259 9.875 22.4486C9.53296 22.2511 9.24892 21.967 9.05144 21.625C8.87407 21.3178 8.80802 20.9918 8.77818 20.6627C8.74997 20.3514 8.74998 19.972 8.75 19.5322L8.75 19.5C8.75 18.7491 8.74735 18.4732 8.72144 18.3121C8.6558 17.9041 8.63166 17.8069 8.59812 17.7319C8.56459 17.6568 8.50828 17.574 8.24812 17.2529C8.24792 17.2527 8.24514 17.2493 8.23888 17.2423C8.23249 17.2352 8.22369 17.2256 8.21199 17.2134C8.18835 17.1886 8.15661 17.1566 8.11513 17.1162C8.03189 17.0351 7.91912 16.9295 7.77161 16.7942C7.4766 16.5238 7.06034 16.151 6.49845 15.6479C4.81263 14.1384 3.75 11.9428 3.75 9.5ZM9.89202 13.3508C10.2506 13.1434 10.7094 13.2659 10.9168 13.6245C11.134 14 11.5383 14.25 12 14.25C12.4617 14.25 12.866 14 13.0832 13.6245C13.2906 13.2659 13.7494 13.1434 14.108 13.3508C14.4665 13.5582 14.589 14.017 14.3816 14.3755C14.0284 14.9862 13.4454 15.4496 12.75 15.6464V17C12.75 17.4142 12.4142 17.75 12 17.75C11.5858 17.75 11.25 17.4142 11.25 17V15.6464C10.5546 15.4496 9.97163 14.9862 9.61836 14.3755C9.41095 14.017 9.53347 13.5582 9.89202 13.3508Z"/>
+        </symbol>
+    </svg>
+    <svg style="display: none;">
+        <symbol id="popup-symbol" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" 
+                fill="var(--fill-color, transparent)" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" />
+            <path d="M9 9L15 15M15 9L9 15" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" 
+                stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+
+	<div id="mySidebar" class="sidebar">
+	    <div class="sidebar-close">
+	        <svg class="popup-symbol" viewBox="0 0 24 24">
+	            <use href="#popup-symbol" />
+	        </svg>
+	    </div>
+	    <div class="navbar-header">
+	        <div class="title-row">
+	            <a>
+	                Human Neocortical Neurosolver
+	            </a>
+	            <br>
+	                <svg class="collapse-icon" viewBox="0 0 16 16"
+	                    xmlns="http://www.w3.org/2000/svg">
+	                    <path d="M9 9H4v1h5V9z"/>
+	                    <path fill-rule="evenodd" clip-rule="evenodd"
+	                        d="M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1
+	                            2h4l1 1v4h2V3H6v2zm4 1H3v7h7V6z"/>
+	                </svg>
+	        </div>
+	        <div class="install-row">
+	            <a class="download-icon-link">
+	                <svg class="download-icon" viewBox="0 0 24 24" fill="none"
+	                    xmlns="http://www.w3.org/2000/svg">
+	                <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1
+	                    14C1 11.3501 3.06139 9.18169 5.66806 9.01084C6.78942
+	                    6.64027 9.20316 5 12 5C15.5268 5 18.4445 7.60822 18.9293
+	                    11.001L19 11C21.2091 11 23 12.7909 23 15C23 17.1422 21.316
+	                    18.8911 19.1996 18.9951L17 19M12 10V18M12 18L15 15M12 18L9
+	                    15"
+	                   stroke-width="2" stroke-linecap="round"
+	                   stroke-linejoin="round"/>
+	                </svg>
+	            </a>
+	            <a>
+	                Installation
+	            </a>
+	        </div>
+	    </div>
+
+		<a href="/textbook/content/preface.html">Preface</a>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        1. Getting Started
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
+				<a href="/textbook/content/01_getting_started/template_model.html">1.2 Template Model</a>
+				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        2. Model Assumptions
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/03_model_assumptions/cortical_column_structure.html">2.1 Cortical Column Structure</a>
+				<a href="/textbook/content/03_model_assumptions/primary_electric_currents.html">2.2 Primary Electrical Currents</a>
+				<a href="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a>
+				<a href="/textbook/content/03_model_assumptions/synaptic_connectivity.html">2.4 Synaptic Connectivity</a>
+				<a href="/textbook/content/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a>
+				<a href="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        3. Using the HNN GUI
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/04_using_hnn_gui/gui_quickstart.html">3.1 GUI Quickstart</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        4. Simulating ERPs
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/05_erps/erps_in_gui.html">4.1 GUI Tutorial of ERPs Simulation</a>
+				<a href="/textbook/content/05_erps/hnn_core.html">4.2 API Tutorial of ERPs Simulation</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        5. Simulating Alpha/Beta Rhythms
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/06_alpha_beta/gui.html">5.1 GUI Tutorial of Alpha/Beta Rhythms</a>
+				<a href="/textbook/content/06_alpha_beta/api.html">5.2 API Tutorial of Alpha/Beta Rhythms</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        6. Simulating Gamma Rhythms
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/07_gamma/gamma_in_gui.html">6.1 GUI Tutorial of Gamma Rhythms</a>
+				<a href="/textbook/content/07_gamma/gamma_in_api.html">6.2 API Tutorial of Gamma Rhythms</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        7. Using the HNN API
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/08_using_hnn_api/plot_firing_pattern.html">7.1 Plot Firing Pattern</a>
+				<a href="/textbook/content/08_using_hnn_api/record_and_plot_extracellular_potentials.html">7.2 Record & Plot Extracellular Potentials</a>
+				<a href="/textbook/content/08_using_hnn_api/modifying_local_connectivity.html">7.3 Modifying Local Connectivity</a>
+				<a href="/textbook/content/08_using_hnn_api/animating_hnn_simulations.html">7.4 Animating HNN Simulations</a>
+				<a href="/textbook/content/08_using_hnn_api/batch_simulation.html">7.5 Batch Simulation</a>
+				<a href="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-modulated ERP</a>
+				<a href="/textbook/content/08_using_hnn_api/parallelism_joblib.html">7.7 Parallelism: Joblib</a>
+				<a href="/textbook/content/08_using_hnn_api/parallelism_mpi.html">7.8 Parallelism: MPI</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-header" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        8. From Data to Simulation
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG sensor-space data to HNN simulation</a>
+			</div>
+		</div>
+	    <div style='height: 30px;'></div>
+	</div>
+
+
+
+    <div class="topbar">
+        
+        <!-- Topbar menu -->
+        <div class="menu-container">
+            <div class="menu-icons">
+                <button class="openbtn" onclick="toggleNav()">
+                    ☰
+                </button>
+                <a href="https://hnn.brown.edu" class="home-link">
+                    <div class="home-icon-container">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24" 
+                            height="24"
+                            viewBox="0 0 24 24" 
+                            class="home-icon">
+                            <path
+                                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+                            />
+                        </svg>
+                    </div>
+                </a>
+                <button class="theme-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown">
+                    <button 
+                        id="dropdownButton" 
+                        class="dropdown-button">
+                            <img
+                                src="/textbook/content/assets/icons/fontsize.png"
+                                alt="fontsize"
+                            />
+                    </button>
+                    <div class="dropdown-content">
+                        <button 
+                            class="fontsize-btn" 
+                            onclick="decreaseFontSize()">
+                            <img
+                                src="/textbook/content/assets/icons/fontminus.png"
+                                alt="fontminus"
+                            />
+                        </button>
+                        <button 
+                            class="fontsize-btn" 
+                            onclick="increaseFontSize()">
+                            <img
+                                src="/textbook/content/assets/icons/fontplus.png"
+                                alt="fontplus"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topbar image -->
+        <div class="topbar-logo-container">
+            <img 
+                id="topbar-logo"
+                src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/frontpage/logos/logo-hnn-medium.png"
+            />
+        </div>
+
+        <!-- Right side of topbar -->
+        <div class="socials-container">
+            <div class="social-icons">
+                <a 
+                    href="https://github.com/jonescompneurolab/hnn-core" 
+                    target="_blank" 
+                    aria-label="GitHub">
+                    <img 
+                        src="/textbook/content/assets/icons/github.png"
+                        alt="GitHub">
+                </a>
+                <a 
+                    href="https://bsky.app/profile/hnnsolver.bsky.social" 
+                    target="_blank"
+                    aria-label="BlueSky">
+                    <img 
+                        src="/textbook/content/assets/icons/bluesky.png"
+                        alt="BlueSky">
+                </a>
+                <a 
+                    href="https://www.linkedin.com/company/human-neocortical-neurosolver/" 
+                    target="_blank"
+                    aria-label="LinkedIn">
+                    <img 
+                        src="/textbook/content/assets/icons/linkedin.png"
+                        alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+    <div id="content-wrapper">
+    <div id="content">
+
+        <!--
+        # Title: Conferences
+        # Updated: 2025-11-11
+        #
+        # Contributors:
+            # Dylan Daniels
+        -->
+            
+        <h1>
+            2025 Society for Neuroscience
+        </h1>
+        <h3>
+            Katharina Duecker's Poster
+        </h3>
+        <p>
+            <ul>
+                <li>
+                    <a href="">Digital poster link</a>
+                </li>
+                <li>
+                    Title:
+                </li>
+                <li>
+                    Session name:
+                </li>
+                <li>
+                    Session number:
+                </li>
+                <li>
+                    Session date: 
+                </li>
+            </ul>
+        </p>
+
+        <h3>
+            Dylan Daniels' Poster
+        </h3>
+        <p>
+            <ul>
+                <li>
+                    <a href="">Digital poster link</a>
+                </li>
+                <li>
+                    Title:
+                </li>
+                <li>
+                    Session name:
+                </li>
+                <li>
+                    Session number:
+                </li>
+                <li>
+                    Session date: 
+                </li>
+            </ul>
+        </p>
+        <h3>
+            Joyce Gao's Poster
+        </h3>
+        <p>
+            <ul>
+                <li>
+                    <a href="">Digital poster link</a>
+                </li>
+                <li>
+                    Title:
+                </li>
+                <li>
+                    Session name:
+                </li>
+                <li>
+                    Session number:
+                </li>
+                <li>
+                    Session date: 
+                </li>
+            </ul>
+        </p>
+        <h3>
+            Liz Kaplan's Poster
+        </h3>
+        <p>
+            <ul>
+                <li>
+                    <a href="">Digital poster link</a>
+                </li>
+                <li>
+                    Title:
+                </li>
+                <li>
+                    Session name:
+                </li>
+                <li>
+                    Session number:
+                </li>
+                <li>
+                    Session date: 
+                </li>
+            </ul>
+        </p>
+
+
+    </div> <!-- close content -->
+    </div> <!-- close content wrapper -->
+</div> <!-- close main -->
+
+<!-- ############################################################ -->
+<!-- Newly-developed content for CuttingMEEG workshop, 2025-10-30 -->
+
+        <!-- <h4>
+            Interactive Exercise 1
+        </h4>
+        <p>
+            In this exercise, we will try to improve the fit of the dipole to the data in the time period around the first proximal drive. Below, we provide two possible "paths" for you. Please read them and decide on one option to try. We also include instructions to get the the "starting point" for this exercise.
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 1 Starting Point
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                <li>
+                    Stay tuned...
+                </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Path A: Adjusting the Drive Standard Deviation
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    Perhaps you have a hypothesis that the initial feedforward input to the network has a wider standard deviation in your experimental population. Given this hypothesis, let's try adjusting the standard deviation of the first proximal input, and see if that yields a better fit to the experimental data. 
+                </p>
+                <ul>
+                    <li>
+                        If you're following from the <code>Exercise 1 Starting Point</code> outlined above, click on the <code>External drives</code> tab and then select <code>evprox1 (proximal)</code> - this is the first proximal drive. 
+                    </li>
+                    <li>
+                        The starting value for the standard deviation should be 2.52.
+                    </li>
+                    <li> 
+                        Before making each of the changes below, write down a prediction on how you think the dipoles and the spiking will change.
+                    </li>
+                    <li>
+                        Try changing the <code>Std dev time</code> to each of the following values, and see if the fit for your simulation improves:
+                    </li>
+                    <ul>
+                        <li>
+                            <code>Std dev time: 3.5</code>
+                        </li>
+                        <li>
+                            <code>Std dev time: 5.0</code>
+                        </li>
+                    </ul>
+                </ul>
+                <div class="callout callout-note">
+                    <table class="callout-table">
+                        <tr>
+                            <td class="emoji-cell">
+                                <svg class="lightbulb-icon" width="20" height="20">
+                                    <use href="#lightbulb"></use>
+                                </svg>
+                            </td>
+                            <td class="text-cell">
+                                Remember that each time you change a parameter, you must return to the <code>Simulation</code> tab to update the "Name" field to something new. 
+                            </td>
+                            <td class="emoji-cell"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Path B: Adjusting the Drive Mean Arrival Time
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    Perhaps you have a hypothesis that the initial feedforward input to the network arrives earlier in your experimental population. Given this hypothesis, let's try adjusting the <code>Mean time</code> of the first proximal input, and see if that yields a better fit to the experimental data. 
+                </p>
+                <ul>
+                    <li>
+                        If you're following from the <code>Exercise 1 Starting Point</code> outlined above, click on the <code>External drives</code> tab and then select <code>evprox1 (proximal)</code> - this is the first proximal drive. 
+                    </li>
+                    <li>
+                        The starting value for the <code>Mean time</code> should be 28.
+                    </li>
+                    <li> 
+                        Before making each of the changes below, write down a prediction on how you think the dipoles and the spiking will change.
+                    </li>
+                    <li>
+                        Try changing the <code>Mean time</code> to each of the following values, and see if the fit for your simulation improves:
+                    </li>
+                    <ul>
+                        <li>
+                            <code>Mean time: 23</code>
+                        </li>
+                        <li>
+                            <code>Mean time: 18</code>
+                        </li>
+                    </ul>
+                </ul>
+                <div class="callout callout-note">
+                    <table class="callout-table">
+                        <tr>
+                            <td class="emoji-cell">
+                                <svg class="lightbulb-icon" width="20" height="20">
+                                    <use href="#lightbulb"></use>
+                                </svg>
+                            </td>
+                            <td class="text-cell">
+                                Remember that each time you change a parameter, you must return to the <code>Simulation</code> tab to update the "Name" field to something new. 
+                            </td>
+                            <td class="emoji-cell"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b>
+            <ul>
+                <li>
+                    Did the fit of the simulation to the data improve?
+                </li>
+                <li>
+                    Did the spiking and dipoles change in the ways you expected?
+                </li>
+            </ul>
+        </p>
+
+
+
+
+
+
+
+
+        <h4>
+            Interactive Exercise 2
+        </h4>
+        <p>
+            In this exercise, we will try to improve the fit of the dipole to the data in the time period around the first distal drive. Below, we provide two possible "paths" for you. Please read them and decide on one option to try. We also include instructions to get the the "starting point" for this exercise.
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 2 Starting Point
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                <li>
+                    Stay tuned...
+                </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Path A: Adjusting the E-I and E-I synaptic gains
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    Perhaps you have a hypothesis that the excitatory connections in the local network are stronger in your experimental population. Given this hypothesis, let's try adjusting the synaptic gains to see if that yields a better fit to the experimental data.
+                </p>
+                <ul>
+                    <li>
+                        If you're following from the <code>Exercise 2 Starting Point</code> outlined above, click on the <code>Network</code> tab
+                    </li>
+                    <li>
+                        At the top of the <code>Connectivity</code> sub tab, you should see a section with the <code>Global Synaptic Gain Modifiers</code>. These should all have initial values of 1, which means all the weights for the specified connection type are multiplied by 1.
+                    </li>
+                    <li> 
+                        Before making each of the changes below, write down a prediction on how you think the dipoles and the spiking will change.
+                    </li>
+                    <li>
+                        Try changing the <code>Exc-to-Exc</code> and the <code>Exc-to-Inh</code> gains to each of the following values listed below, and see if the fit for your simulation improves:
+                    </li>
+                    <ul>
+                        <li>
+                            Simulation 1
+                        </li>
+                        <ul>
+                            <li>
+                                Exc-to-Exc: 1.5
+                            </li>
+                            <li>
+                                Exc-to-Inh: 1.5
+                            </li>
+                        </ul>
+                        <li>
+                            Simulation 2
+                        </li>
+                        <ul>
+                            <li>
+                                Exc-to-Exc: 2
+                            </li>
+                            <li>
+                                Exc-to-Inh: 2
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+                <div class="callout callout-note">
+                    <table class="callout-table">
+                        <tr>
+                            <td class="emoji-cell">
+                                <svg class="lightbulb-icon" width="20" height="20">
+                                    <use href="#lightbulb"></use>
+                                </svg>
+                            </td>
+                            <td class="text-cell">
+                                Remember that each time you change a parameter, you must return to the <code>Simulation</code> tab to update the "Name" field to something new. 
+                            </td>
+                            <td class="emoji-cell"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Path B: Adjusting the I-I and I-E synaptic gains
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    Perhaps you have a hypothesis that the inhibitory connections in the local network are stronger in your experimental population. Given this hypothesis, let's try adjusting the synaptic gains to see if that yields a better fit to the experimental data.
+                </p>
+                <ul>
+                    <li>
+                        If you're following from the <code>Exercise 2 Starting Point</code> outlined above, click on the <code>Network</code> tab
+                    </li>
+                    <li>
+                        At the top of the <code>Connectivity</code> sub tab, you should see a section with the <code>Global Synaptic Gain Modifiers</code>. These should all have initial values of 1, which means all the weights for the specified connection type are multiplied by 1.
+                    </li>
+                    <li> 
+                        Before making each of the changes below, write down a prediction on how you think the dipoles and the spiking will change.
+                    </li>
+                    <li>
+                        Try changing the <code>Inh-to-Ing</code> and the <code>Inh-to-Exc</code> gains to each of the following values listed below, and see if the fit for your simulation improves:
+                    </li>
+                    <ul>
+                        <li>
+                            Simulation 1
+                        </li>
+                        <ul>
+                            <li>
+                                Inh-to-Inh: 1.5
+                            </li>
+                            <li>
+                                Inh-to-Exc: 1.5
+                            </li>
+                        </ul>
+                        <li>
+                            Simulation 2
+                        </li>
+                        <ul>
+                            <li>
+                                Inh-to-Inh: 2
+                            </li>
+                            <li>
+                                Inh-to-Exc: 2
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+                <div class="callout callout-note">
+                    <table class="callout-table">
+                        <tr>
+                            <td class="emoji-cell">
+                                <svg class="lightbulb-icon" width="20" height="20">
+                                    <use href="#lightbulb"></use>
+                                </svg>
+                            </td>
+                            <td class="text-cell">
+                                Remember that each time you change a parameter, you must return to the <code>Simulation</code> tab to update the "Name" field to something new. 
+                            </td>
+                            <td class="emoji-cell"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br>
+        </div>
+        <p>
+            <b>Discussion Questions:</b>
+            <ul>
+                <li>
+                    Did the fit of the simulation to the data improve?
+                </li>
+                <li>
+                    Did the spiking and dipoles change in the ways you expected?
+                </li>
+            </ul>
+        </p> -->
+
+<!-- ############################################################ -->
+<!-- Previously-developed content for online workshop, 2025-04-30 -->
+
+        <!-- <h4>
+            Interactive Exercise 1
+        </h4>
+        <p>
+            In this exercise, we will adjust the <code>Smooth Window</code> and the <code>Dipole Scaling</code> of the simulated waveform to see if we can get a better match to the experimental data we load into HNN. 
+        </p>
+        <p>
+            Remember that "scaling" in this case refers to a scaling factor applied to our simulated waveform. You can think of the scaling factor as a measure of the number of cells contributing to the simulated signal. "Smoothing" is also related to the number of cells contributing to the signal, and can be thought of as the effect of averaging across a large population of cells.
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 1 Starting Point
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                <li>
+                    Refresh the HNN GUI to restore the default state.
+                </li>
+                <li>
+                    Click <code>Load data</code>.
+                </li>
+                <li>
+                    From the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder, select the <code>experimental_S1_SupraT.txt</code> data file. 
+                </li>
+                <li>
+                    Click <code>Run</code> to run the "default" simulation
+                </li>
+                <li>
+                    Click the <code>Visualization</code> tab. This should bring you to the tab "ax1" of "Figure 2", corresponding to the lower subplot of Figure 2. 
+                </li>
+                <li>
+                    Under the "ax1" tab, click on the downdown box next to <code>Data to compare</code> and select <code>experimental_S1_SupraT</code>. 
+                </li>
+                <li>
+                    Click the <code>Clear axis</code> button at the bottom of the "ax1" tab
+                </li>
+                <li>
+                    Click the <code>Add plot</code> button
+                </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 1.1
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                    <li>
+                        From the <code>Visualization</code> tab, adjust the <code>Dipole Smooth Window (ms)</code> in the dipole plot produced by your simulation.
+                    </li>
+                    <li>
+                        If you're following from the <b>Exercise 1 Starting Point</b> outlined above, this would correspond to the "ax1" tab of "Figure 2".
+                    </li>
+                    <ul>
+                        <li>
+                            Note that "ax1" in this case refers to the lower subplot of Figure 2 and has a "Type" of "current dipole"
+                        </li>
+                    </ul>
+                    <li>
+                        If you need to plot the data, ensure that <code>Data to compare</code> is set to <code>experimental_S1_SupraT</code>. Otherwise, set it to <code>None</code>.
+                    </li>
+                    <li>
+                        Try each of the following values: 
+                        <ul>
+                            <li>
+                                <code>Value 1: &nbsp;0</code>
+                            </li>
+                            <li>
+                                <code>Value 2: 15</code>
+                            </li>
+                            <li>
+                                <code>Value 3: 90</code>
+                            </li>
+                        </ul>
+                    <li>
+                        After each update to the value of <code>Dipole Smooth Window</code>, click <code>Add plot</code> to overlay the new dipole on your figure.
+                    </li>
+                    <li>
+                        Alternatively, you can first click <code>Clear axis</code> and then <code>Add plot</code> if you do not want to overlay your new dipole on the same plot.
+                    </li>
+                </ul>
+                <div class="callout callout-note">
+                    <table class="callout-table">
+                        <tr>
+                            <td class="emoji-cell">
+                                <svg class="lightbulb-icon" width="20" height="20">
+                                    <use href="#lightbulb"></use>
+                                </svg>
+                            </td>
+                            <td class="text-cell">
+                                Note that you do not need to re-run the simulation when changing parameters in the <code>Visualization</code> tab. 
+                            </td>
+                            <td class="emoji-cell"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b>
+            <ul>
+                <li>
+                    What is the effect of increasing the smoothing window on the waveform shape?
+                </li>
+                <li>
+                    How do you determine the "right" level of smoothing? 
+                </li>
+            </ul>
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 1.2
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                    <li>
+                        Reset the <code>Dipole Smooth Window (ms)</code> to its default value of <code>30</code>
+                    </li>
+                    <li>
+                        Click <code>Clear axis</code>
+                    </li>
+                    <li>
+                        Ensure the <code>Simulation Data</code> field is set to <code>default</code>, and the <code>Data to Compare</code> field is set to <code>experimental_S1_SupraT</code>
+                    </li>
+                    <li>
+                        Next, click <code>Add plot</code>. This should reset your figure to the state it was in before Exercise 1.1.
+                    </li>
+                    <li>
+                        Set the <code>Data to Compare</code> field to <code>None</code>
+                    </li>
+                    <li>
+                        Next, adjust the <code>Simulation Dipole Scaling</code> in your figure.
+                    </li>
+                    <li>
+                        Try each of the following values: 
+                        <ul>
+                            <li>
+                                <code>Value 1: &nbsp;1500</code>
+                            </li>
+                            <li>
+                                <code>Value 2: &nbsp;5000</code>
+                            </li>
+                            <li>
+                                <code>Value 3: 10000</code>
+                            </li>
+                        </ul>
+                    <li>
+                        After each update to the value of <code>Simulation Dipole Scaling</code>, click <code>Add plot</code> to overlay the new dipole on your figure.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b> 
+            <ul>
+                <li>
+                    How does changing the scaling factor affect the waveform shape?
+                </li>
+                <li>
+                    Why might you choose one scaling value over another?
+                </li>
+            </ul>
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 1.3
+            </h5>
+
+            <div class="collapsible-content">
+                <p>
+                    Let's now load a different set of evoked drives that was tuned for the suprathreshold experimental condition and compare the new simulation to the <code>default</code> simulation. 
+                </p>
+                <ul>
+                    <li>
+                        Select the <code>External Drives</code> tab
+                    </li>
+                    <li>
+                        Click the <code>Load external drives</code> button.
+                    </li>
+                    <li>
+                        From the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder, select the <code>ERPSupraT_All_Drives.json</code> parameter file.
+                    </li>
+                    <li>
+                        In the <code>Simulation</code> tab, change the name of the simulation to <code>All_Drives</code>
+                    </li>
+                    <li>
+                        Click <code>Run</code> to start the simulation
+                    </li>
+                    <li>
+                        Once your simulation has finished, navigate to the <code>Visualization</code> tab.
+                    </li>
+                    <li>
+                        From your newly-generated figure, click on the <code>Data to compare</code> dropdown box and select <code>experimental_S1_SupraT</code>
+                    </li>
+                    <li>
+                        Click <code>Clear axis</code> and then <code>Add plot</code>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b> 
+            <ul>
+                <li>
+                    What differences do you observe in the input histograms and the dipole waveforms for the two simulations?
+                </li>
+                <li>
+                    Which simulation yields a lower RMSE when compared to the data? Which simulation yields a dipole that more closely matches the shape of the experimental data?
+                </li>
+                <li>
+                    Is it the case that the simulation with the lower RMSE is always the better starting point when "tuning" the simulation to experimental data? Why might you choose one simulation over another as a starting point?
+                </li>
+            </ul>
+        </p>
+        <div class="callout callout-note">
+            <table class="callout-table">
+                <tr>
+                    <td class="emoji-cell">
+                        <svg class="lightbulb-icon" width="20" height="20">
+                            <use href="#lightbulb"></use>
+                        </svg>
+                    </td>
+                    <td class="text-cell">
+                        Note that you can use any of the network configuration we provide in 'hnn-data' as a starting point when "tuning" your simulations to your experimental data. 
+                    </td>
+                    <td class="emoji-cell"></td>
+                </tr>
+            </table>
+        </div>
+        <h4>
+            Interactive Exercise 2
+        </h4>
+        <p>
+            In this exercise, we will focus on hand tuning the parameters for the first proximal drive only. The goal is to improve the fit of the simulated waveform to the experimental data, focusing solely on the first peak (referred to as the "M25" peak in our published work and in <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#figure-b">Figure B</a> above). 
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 2 Starting Point
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                    <li>
+                        If needed, refresh the page to return the HNN GUI to the default state. Note that previous simulations will be cleared when refreshing the page.
+                    </li>
+                    <li>
+                        Click <code>Load data</code>
+                    </li>
+                    <li>
+                        From the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder, select the <code>experimental_S1_SupraT.txt</code> data file. 
+                    </li>
+                    <li>
+                        Click <code>Run</code> to run the "default" simulation.
+                    </li>
+                    <li>
+                        From the <code>External drives</code> tab, click the <code>Load external drives</code> button and select the select the <code>ERPSupraT_All_Drives.json</code> parameter file from the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder.
+                    </li>
+                    <li>
+                        In the <code>Simulation</code> tab, change the name of the simulation to <code>All_Drives</code>
+                    </li>
+                    <li>
+                        Click <code>Run</code> to run the "All_Drives" simulation.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 2.1
+            </h5>
+
+            <div class="collapsible-content">
+                <p>
+                    In this exercise, we'll be adjusting the AMPA weights for the first proximal drive to the Layer 2/3 and Layer 5 pyramidal neurons, and we'll explore how changing these variables affects our simulation.
+                </p>
+                <p>
+                    Since we'll be looking at the first proximal drive only, as noted above, we'll first need to remove the other drives and re-run the simulation.
+                </p>
+                <p>
+                    <ul>
+                        <li>
+                            From the <code>External Drives</code> tab, delete the drives labelled <code>evdist1</code> and <code>evprox2</code>.
+                        </li>
+                        <li>
+                            You can do so by selecting the drive and then clicking the <code>Delete</code> button at the bottom of the drive parameters.
+                        </li>
+                        <ul>
+                            <li>
+                                Alternatively, you can click the <code>Load external drives</code> button and load the <code>ERPSupraT_Prox1.json</code> parameter file from "hnn-data"
+                            </li>
+                        </ul>
+                        <li>
+                            From the <code>Simulation</code> tab, change the "Name" field to <code>Prox1_Only</code>
+                        </li>
+                        <li>
+                            Click the <code>Run</code> button to run the "Prox1_Only" simulation.
+                        </li>
+                        <li>
+                            From the <code>Visualization</code> tab, overlay the experimental data on your newly-generated figure by setting <code>Data to compare</code> to <code>experimental_S1_SupraT</code>
+                        </li>
+                        <li>
+                            Click <code>Clear axis</code> and then <code>Add plot</code>
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    One you've added the data to your figure, select the drive labelled <code>evprox1</code> from the list of drives in the <code>External drives</code> tab. You should now see all of the editable drive parameters for the first proximal drive.
+                </p>
+                <p>
+                    Next, adjust the values of the Layer 2/3 (L2) and Layer 5 (L5) pyramidal cell <b>AMPA weights</b>. Try the following combinations: 
+                    <ul>
+                        <li>
+                            Simulation 01:
+                            <ul>
+                                <li>
+                                    <code>Name (suggested): Prox1_Only_01</code>
+                                </li>
+                                <li>
+                                    <code>L5_pyramidal AMPA weight ("evprox1"): 0.2400</code>
+                                </li>
+                                <li>
+                                    <code>L2_pyramidal AMPA weight ("evprox1"): 1.0515</code>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            Simulation 02:
+                            <ul>
+                                <li>
+                                    <code>Name (suggested): Prox1_Only_02</code>
+                                </li>
+                                <li>
+                                    <code>L5_pyramidal AMPA weight ("evprox1"): 0.0480</code>
+                                </li>
+                                <li>
+                                    <code>L2_pyramidal AMPA weight ("evprox1"): 0.2103</code>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    Once you've run the two simulations above, create a new Figure that displays all of the simulated dipoles and the experimental data on the same graph.
+                </p>
+                <p>    
+                    You can do this by selecting any previously-generated figure and adding your new simulations to the dipole plot. For example, if you're working from the <b>Starting Point</b> outlined above:
+                    <ul>
+                        <li>
+                            Select "ax1" of "Figure 2" from the <code>Visualization</code> tab 
+                        </li>
+                        <li>
+                            Click the <code>Simulation Data</code> dropdown and select one of your new simulations.
+                        </li>
+                        <li>
+                            If you need to plot the data, ensure that <code>Data to compare</code> is set to <code>experimental_S1_SupraT</code>. Otherwise, set it to <code>None</code>.
+                        </li>
+                        <li>
+                            Click the <code>Add plot</code> button.
+                        </li>
+                        <li>
+                            Repeat these steps for each simulation you would like to compare.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b>
+            <ul>
+                <li>
+                    How do the AMPA weights relate to current flow in our simulation? Refer to <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#figure-a">Figure A</a> above for a visual representation of the network and drives.
+                </li>
+                <li>
+                    Which of these three simulations is the "best"? You should choose your "best" simulation based on which one most closely matches the "M25" peak, as shown in <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#figure-b">Figure B</a> above.
+                </li>
+            </ul>
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 2.2
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    Next, compare and contrast the dipoles and the spiking profiles for the initial simulation (before changing the AMPA weights) and your "best" simulation (after changing the AMPA weights).
+                </p>
+                <p>
+                    You can create a raster plot with the layer-specific dipoles overlaid by following the steps below:
+                    <ul>
+                        <li>
+                            Select <code>Dipole Layers-Spikes (1x1)</code> from the "Layout template" dropdown menu in the <code>Visualization</code> tab.
+                        </li>
+                        <li>
+                            Doing so will trigger the <code>Dataset</code> dropdown box to appear below the "Layout template" dropdown. 
+                        </li>
+                        <li>
+                            From the "Dataset" dropdown box, select your simulation and then click <code>Make figure</code>.
+                        </li>
+                        <li>
+                            Repeat these steps for each simulation you want to visualize
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <p>
+            <b>Discussion Questions:</b>
+            <ul>
+                <li>
+                    What differences do you observe in the layer-specific dipoles and the spiking profiles between the initial simulation and the "best" simulation?
+                </li>
+                <li>
+                    Try changing the <code>Dipole Smooth Window</code> to <code>0</code>, and then regenerate the spiking profile. Does this change your interpretation of how the spiking relates to the layer-specific dipoles?
+                </li>
+            </ul>
+        </p>
+
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 2.3
+            </h5>
+
+            <div class="collapsible-content">
+                <p>
+                    Next, we'll "turn off" the driving inputs to the Layer 2/3 and Layer 5 basket cells by setting their weights to 0, and we'll see how that changes our results. Before running the simulation, take a moment to consider what you think will happen to the dipole and to the spiking.
+                    <ul>
+                        <li>
+                            From the <code>External Drives</code> tab, first set the AMPA weights for the Layer 2/3 and Layer 5 pyramidal neurons to the values from Exercise 2.1 that produced the "best" fit to the "M25" peak.
+                        </li>
+                        <li>
+                            Next, set the AMPA and NMDA weights to <code>0</code> for the <code>L5_basket</code> and <code>L2_basket</code> cells in the <code>evprox1</code> drive parameters.
+                        </li>
+                        <li>
+                            From the <code>Simulation</code> tab, change the value of the "Name" field to <code>Prox1_Only_noBasket</code>
+                        </li>
+                        <li>
+                            Click <code>Run</code> to run the "Prox1_Only_noBasket" simulation.
+                        </li>
+                    </ul>
+                    Once you've run the above simulation, compare the spiking and the layer-specific dipoles for the new simulation with the best simulation from Exercise 2.1.
+                </p>
+                <p>
+                    You can create a raster plot with the layer-specific dipoles overlaid by following the steps in <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#exercise-22">Exercise 2.2</a> above. 
+                </p>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b> 
+            <ul>
+                <li>
+                    What happens to the dipole when you set the basket cell AMPA/NMDA weights to <code>0</code>?
+                </li>
+                <li>
+                    What changes do you observe in the spiking profile, and what might be driving those changes?
+                </li>
+            </ul>
+        </p>
+        <h4>
+            Interactive Exercise 3
+        </h4>
+        <p>
+            In this section, we will hand tune the parameters for the first distal drive. The goal is to improve the fit of the simulated waveform to the experimental data, focusing on the trough at ~ 70ms ("M70").
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 3 Starting Point
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                    <li>
+                        Follow all instructions in the <code>Exercise 2 Starting Point</code> section above
+                    </li>
+                    <li>
+                        From the <code>External drives</code> tab, click the <code>Load external drives</code> button and select the select the <code>ERPSupraT_Prox1.json</code> parameter file from the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder.
+                    </li>
+                    <li>
+                        From the <code>Simulation</code> tab, change the "Name" field to <code>Prox1_Only</code>
+                    </li>
+                    <li>
+                        Click the <code>Run</code> button to run the "Prox1_Only" simulation.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 3.1
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    In this exercise, we'll be adjusting the timing of the first distal drive, and we'll explore how doing so affects our simulation.
+                </p>
+                <p>
+                    This time, we'll start by load in a parameter set that includes the "tuned" version of the first proximal drive, as well as the un-tuned distal drive. 
+                </p>
+                <ul>
+                    <li>
+                        Select the <code>External Drives</code> tab.
+                    </li>
+                    <li>
+                        Click the <code>Load external drives</code> button. From the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder, select the <code>SupraT_Prox1_Dist1.json</code> parameter file.
+                    </li>
+                    <li>
+                        From the <code>Simulation</code> tab, change the value of the "Name" field to <code>P1_D1</code>
+                    </li>
+                    <li>
+                        Click <code>Run</code> to run the "P1_D1" simulation.
+                    </li>
+                    <li>
+                        From the <code>Visualization</code> tab, overlay the experimental data on your newly-generated figure by setting <code>Data to compare</code> to <code>experimental_S1_SupraT</code>
+                    </li>
+                    <li>
+                        Click <code>Clear axis</code> and then <code>Add plot</code>
+                    </li>
+                </ul>
+                <p>
+                    Next, we'll try adjusting the standard deviation of the distal drive. Note that this is only one parameter that affects the timing of the driving input. 
+                </p>
+                <p>
+                    Before running the simulations below, take a moment to consider what you think will happen to the dipole and to the spiking.
+                </p>
+                <ul>
+                    <li>
+                        From the <code>External Drives</code> tab, select <code>evdist1</code>. You should now see all of the editable drive parameters for the distal drive.
+                    </li>
+                    <li> 
+                        Adjust the value of the standard deviation around the mean arrival time, listed as: <code>Std dev time</code>.
+                    </li>
+                    <li>
+                        Try the following combinations:
+                    </li>
+                    <ul>
+                        <li>
+                            Simulation 01:
+                            <ul>
+                                <li>
+                                    <code>Name (suggested): P1_D1_01</code>
+                                </li>
+                                <li>
+                                    <code>Std dev time: 13.81</code>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            Simulation 02:
+                            <ul>
+                                <li>
+                                    <code>Name (suggested): P1_D1_02</code>
+                                </li>
+                                <li>
+                                    <code>Std dev time: 3.81</code>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </ul>
+
+                <p>
+                    Compare the layer-specific dipoles and the spiking profiles for each simulation, as done in <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#exercise-22">Exercise 2.2</a> above. 
+                </p>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b> 
+            <ul>
+                <li>
+                    How does increasing / decreasing the standard deviation of the distal drive's arrival time affect the amplitude of the "M70" trough"?
+                </li>
+                <li>
+                    What differences do you observe in the raster plots for the different simulations? How do the differences in spiking relate to the differences observed in the layer-specific dipoles?
+                </li>
+            </ul>
+        </p>
+        <h4>
+            Interactive Exercise 4
+        </h4>
+        <p>
+            In this section, we will hand tune the parameters for the second proximal drive, with the goal of continuing to improve the fit of the simulated waveform to the experimental data. 
+            <br><br>
+            Note that we will simulate a single peak that fits the overall shape of both the "M100" and "M135" peaks shown in <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#figure-b">Figure B</a>. Capturing the nuanced dynamics that yield the two distinct "M100" and "M135" peaks requires simulating many trials, as we do in our published work. So we simplify the exercise here for illustrative purposes and to make it feasible to run the exercises in a short amount of time. 
+        </p>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 4 Starting Point
+            </h5>
+
+            <div class="collapsible-content">
+                <ul>
+                    <li>
+                        Follow all instructions in the <code>Exercise 2 Starting Point</code> and <code>Exercise 3 Starting Point</code> sections above
+                    </li>
+                    <li>
+                        From the <code>External drives</code> tab, click the <code>Load external drives</code> button and select the select the <code>ERPSupraT_Prox1_Dist1.json</code> parameter file from the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder.
+                    </li>
+                    <li>
+                        From the <code>Simulation</code> tab, change the "Name" field to <code>P1_D1</code>
+                    </li>
+                    <li>
+                        Click the <code>Run</code> button to run the "P1_D1" simulation.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="collapsible-section">
+            <h5 class="collapsible-header">
+                Exercise 4.1
+            </h5>
+            <div class="collapsible-content">
+                <p>
+                    In this exercise, we'll be adjusting the timing of the second proximal drive, and we'll explore how doing so affects our simulation.
+                </p>
+                <p>
+                    This time, we'll start by load in a parameter set that includes the "tuned" version of the first proximal and first distal drives, as well as the "un-tuned" second proximal drive. 
+                </p>
+                <ul>
+                    <li>
+                        Select the <code>External Drives</code> tab.
+                    </li>
+                    <li>
+                        Click the <code>Load external drives</code> button. From the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder, select the <code>SupraT_Prox1_Dist1_Prox2.json</code> parameter file.
+                    </li>
+                    <li>
+                        From the <code>Simulation</code> tab, change the value of the "Name" field to <code>P1D1P2</code>
+                    </li>
+                    <li>
+                        Click <code>Run</code> to run the "P1D1P2" simulation.
+                    </li>
+                    <li>
+                        From the <code>Visualization</code> tab, overlay the experimental data on your newly-generated figure by setting <code>Data to compare</code> to <code>experimental_S1_SupraT</code>
+                    </li>
+                    <li>
+                        Click <code>Clear axis</code> and then <code>Add plot</code>
+                    </li>
+                </ul>
+                <p>
+                    Next, we'll try adjusting the mean arrival time of the second proximal drive, which is another parameter (in addition to the standard deviation) that affects the timing of the driving inputs.
+                </p>
+                <p>
+                    Before running the simulations below, take a moment to consider what you think will happen to the dipole and to the spiking.
+                </p>
+                <ul>
+                    <li>
+                        From the <code>External Drives</code> tab, select <code>evprox2</code>. You should now see all of the editable drive parameters for the second proximal drive.
+                    </li>
+                    <li> 
+                        Adjust the value of the mean arrival time of the drive, listed as: <code>Mean time</code>.
+                    </li>
+                    <li>
+                        Try the following combinations:
+                    </li>
+                    <ul>
+                        <li>
+                            Simulation 01:
+                            <ul>
+                                <li>
+                                    <code>Name (suggested): P1D1P2_01</code>
+                                </li>
+                                <li>
+                                    <code>Mean time: 105</code>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            Simulation 02:
+                            <ul>
+                                <li>
+                                    <code>Name (suggested): P1D1P2_02</code>
+                                </li>
+                                <li>
+                                    <code>Std dev time: 95</code>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </ul>
+
+                <p>
+                    Compare the layer-specific dipoles and the spiking profiles for each simulation, as done in <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#exercise-22">Exercise 2.2</a> above. 
+                </p>
+            </div>
+        </div>
+        <p>
+            <b>Discussion Questions:</b> 
+            <ul>
+                <li>
+                    How does changing the mean arrival time of the second proximal drive affect the amplitude of the "M135" peak? Explain your reasoning.
+                </li>
+                <li>
+                    Does changing the mean arrival time of the second proximal drive affect other parts of the dipole? If so, what difference do you observe in other time windows, and why might this be the case?
+                </li>
+            </ul>
+        </p>
+        <h4>
+            Interactive Exercise 5
+        </h4>
+        <p>
+            Now that you have simulated all three drives, you may notice that there are still some discrepancies between the simulated data and the experimental data. What additional parameters might you adjust to continue to improve the fit? Try to adjust the timing and strength of any of the external drives and see if you can get a RMSE value less than 18.5.
+        </p>
+        <p>
+            Note that some features of the waveform will be difficult to capture when we're only simulating one trial due to the lack of stochasticity. In practice, we would simulate a large number of trials and tune to the average waveform. However, there is still room for improvement even when simulating only one trial.
+        </p>
+        <b>Discussion Questions:</b> 
+        <ul>
+            <li>
+                Which parameters did you change and why?
+            </li>
+            <li>
+                Did your parameter changes always yield the results you expected? If not, can you explain the discrepancies? (Hint: try looking at the spiking plots and the layer-specific dipoles in conjunction with the <a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#figure-a">schematic</a> above.)
+            </li>
+        </ul>
+        <p>
+            Once you've run some simulations and answered the above questions, you can load our "solution" from the <code>External Drives</code> tab by clicking the <code>Load external drives</code> button and selecting the "ERPSupraT_hand-tuned.json" file from the "workshops/erp_gui_walkthrough" directory of the "hnn-data" folder. Note that our "solution" is merely one possible answer among many, and so don't feel constrained by the solution we provide.
+        </p>
+    <br> -->
+    <!-- <h2>
+        Simulating Oscillations in the HNN GUI
+    </h2>
+    <p>
+        In this section, we will be simulating oscillations in the HNN GUI.
+    </p>
+    <p>
+        <a href="https://brown.zoom.us/s/97539625885">Click here</a> 
+        to join the hand-on session with Dr. Soplata.
+    </p>
+    <p>
+        To follow along with the interactive portions of the workshop, please 
+        <a href="https://jonescompneurolab.github.io/textbook/content/06_alpha_beta/gui.html">click here</a>
+        to be redirected to the Alpha-Beta GUI tutorial.
+    </p>
+    <br> -->
+    <!-- <ul>
+        <li>
+            <a href="https://colab.research.google.com/drive/1sGSAvophP8v-42zFk9t-dpWbGvycUo2u?usp=sharing">Simulating ERPs with HNN API</a>
+        </li>
+        <ul>
+            <li>
+                Note that this notebook largely empty, as Dr. Fernandez will be "live coding" for this portion of the workshop. 
+            </li>
+            <li>
+                We will send out the "filled in" version of this notebook at the end of the session
+            </li>
+        </ul>
+        <li>
+            <a href="https://colab.research.google.com/drive/1kb5gA-S2y8j8a3DCbT0MIOH2UXRXT1hL?usp=sharing">Optimizing ERPs with HNN API</a>
+        </li>
+    </ul> -->
+
+<!------------------------ #
+# Code syntax highlighting #
+# ------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+
+</body>
+</html>

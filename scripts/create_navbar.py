@@ -3,26 +3,173 @@ import json
 import os
 import textwrap
 
-# %% ######################################################################
+# %% #####################################
+# functions to generate html for the
+# dynamic components of the sidebar
+# ########################################
 
 
-def generate_navbar_html(dev_build=False):
-    """Function to generate the navbar from the structure specified
-    in the index.json file"""
+def get_absolute_paths(path=None):
+    """
+    Get paths to all .md pages to be converted to html
+    """
+    md_pages = {}
+    if path is None:
+        path = os.path.join(
+            os.getcwd(),
+            "content",
+        )
+
+    directories = os.listdir(path)
+    for item in directories:
+        item_path = os.path.join(
+            path,
+            item,
+        )
+        if os.path.isdir(item_path):
+            # add items from new dict into md_pages
+            md_pages.update(get_absolute_paths(item_path))
+        else:
+            if not item == "README.md" and item.endswith(".md"):
+                # get the relative path for the web content only
+                location = item_path.split(os.getcwd() + os.sep)[1]
+                location = location.split(item)[0]
+
+                page = item.split("_", 1)[1]
+                page = page.split(".md")[0] + ".html"
+
+                md_pages[item] = "/textbook/" + location + page
+    return md_pages
+
+
+def create_page_link(
+    file,
+    label,
+    page_paths,
+    indent,
+    dev_build=False,
+):
+    file_path = page_paths[file]
+    if dev_build:
+        file_path = file_path.replace(
+            "content",
+            "dev",
+        )
+    return f'\n{indent}<a href="{file_path}">{label}</a>'
+
+
+def create_toggle_section(toggle_label):
+    section = textwrap.dedent(f"""
+        <div class="sidebar-list">
+            <a id="sidebar-header" onclick="toggleSubmenu(event)">
+                <span class="toggle-icon">+</span>
+                {toggle_label}
+            </a>
+            <div class="submenu">
+    """)
+    section = textwrap.indent(
+        section,
+        "\t\t",
+    )
+
+    return section
+
+
+def build_navbar(json_page_index):
+    dynamic_links_html = ""
+    indent = "\t\t"
+    page_paths = get_absolute_paths()
+    ordered_links = []
+    ordered_pages = []
+    for section, contents in json_page_index.items():
+        # For pages that are not nested in a toggle
+        if isinstance(contents, str):
+            dynamic_links_html += create_page_link(
+                section,
+                contents,
+                page_paths,
+                indent,
+            )
+            ordered_links.append(page_paths[section])
+            ordered_pages.append(contents)
+        # For pages that are nested in a toggle
+        elif isinstance(contents, list):
+            toggle_label = contents[0]
+            toggle_contents = contents[1]
+            # Add toggle <div> sections and link
+            dynamic_links_html += create_toggle_section(toggle_label)
+            # Add pages under toggle
+            for sub_page, sub_name in toggle_contents.items():
+                dynamic_links_html += create_page_link(
+                    sub_page,
+                    sub_name,
+                    page_paths,
+                    indent + indent,
+                )
+                ordered_links.append(page_paths[sub_page])
+                ordered_pages.append(sub_name)
+            # Close toggle <div> sections
+            dynamic_links_html += f"\n{indent}\t</div>"
+            dynamic_links_html += f"\n{indent}</div>"
+
+        # save ordered page links
+        out_path = os.getcwd() + "/templates/ordered_page_links.json"
+        ordered_page_links = {}
+        ordered_page_links["links"] = ordered_links
+        ordered_page_links["titles"] = ordered_pages
+
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(
+                ordered_page_links,
+                f,
+                ensure_ascii=False,
+                indent=4,
+            )
+
+    return dynamic_links_html, ordered_links
+
+
+# %% #####################################
+# build the complete sidebar html
+# ########################################
+
+
+def generate_sidebar_html(
+    index_path,
+    add_workshop_link=False,
+):
+    """
+    Function to generate the sidebar ("mySidebar"), including both the static elements
+    and the dynamic elements. The dynamic elements are built from the structure
+    specified in the index.json file, which is updated when this function runs
+
+    Inputs
+    ------
+    dev_build : str or bool
+        False if not running a dev build. Otherwise, this variable will be
+        a string containing the repo and commit hash to be used for the build
+
+    Returns
+    -------
+    html : str
+        The complete sidebar html contained in a string
+    ordered_links :
+    """
 
     base_indent = "\t"
-    indent = "\t\t"  # need to deprecate this but it's currently used later
 
     # create mySidebar
-    # create the header "navbar header"
-    # using textwrap.dedent() to make is easier to use html style in python
-    # without introducing extra indentation in the final html
-    html = textwrap.dedent("""
+    # create the "navbar header"
+    # ---------------------------------
+    # notes:
+    #   the "navbar header" contains the HNN name and the installation page link,
+    #   which are not generated dynamically from the directory/file structure
+    sidebar_html = textwrap.dedent("""
         <div id="mySidebar" class="sidebar">
             <div class="sidebar-close">
-            <svg class="popup-symbol" viewBox="0 0 24 24">
-            <use href="#popup-symbol" />
-            </svg>
+                <svg class="popup-symbol" viewBox="0 0 24 24">
+                    <use href="#popup-symbol" />
+                </svg>
             </div>
             <div class="navbar-header">
                 <div class="title-row">
@@ -31,7 +178,7 @@ def generate_navbar_html(dev_build=False):
                     </a>
                     <br>
                         <svg class="collapse-icon" viewBox="0 0 16 16"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 9H4v1h5V9z"/>
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1
@@ -59,141 +206,55 @@ def generate_navbar_html(dev_build=False):
             </div>
     """)
 
-    html = textwrap.indent(
-        html,
+    sidebar_html = textwrap.indent(
+        sidebar_html,
         base_indent,
     )
 
-    # workshop_link = (
-    #     f'\n{indent}<a href="https://jonescompneurolab.github.io/textbook/tests/workshop.html">'
-    #     + f"\n{indent}<div>"
-    #     + f'\n{indent}\t<code class="workshop-button">Workshop Page</code>'
-    #     + f"\n{indent}</div>"
-    #     + f"\n{indent}</a>"
-    # )
+    # optionally add a workshop link after the header
+    # -----------------------------------------------
+    # notes:
+    #   the formatting likely needs to be updated to accommodate this addition
+    #   as the styling has changed since the last workshop (April 2025)
+    if add_workshop_link:
+        page_link = "https://jonescompneurolab.github.io/textbook/tests/workshop.html"
+        workshop_link = textwrap.dedent(f"""
+            <a href="{page_link}">
+                <div>
+                    <code class="workshop-button">
+                        Workshop Page
+                    </code>
+                </div>
+            </a>
+        """)
+        workshop_link = textwrap.indent(
+            workshop_link,
+            base_indent,
+        )
 
-    # html += workshop_link
+        sidebar_html += workshop_link
 
-    # load page index .json file
-    index_path = os.getcwd() + "/index.json"
-
-    with open(index_path, "r") as f:
+    # AES updating of the index has been moved upwards into generate_page_html
+    with open(index_path, "r",) as f:
         json_page_index = json.load(f)
 
-    def get_absolute_paths(path=None):
-        """Get paths to all .md pages to be converted to html"""
-        md_pages = {}
-        if path is None:
-            path = os.path.join(
-                os.getcwd(),
-                "content",
-            )
+    # build the page navigation elements
+    # from the updated page index
+    # ----------------------------------
+    dynamic_links_html, ordered_links = build_navbar(json_page_index)
 
-        directories = os.listdir(path)
-        for item in directories:
-            item_path = os.path.join(
-                path,
-                item,
-            )
-            if os.path.isdir(item_path):
-                # add items from new dict into md_pages
-                md_pages.update(get_absolute_paths(item_path))
-            else:
-                if not item == "README.md" and item.endswith(".md"):
-                    # get the relative path for the web content only
-                    location = item_path.split(os.getcwd() + os.sep)[1]
-                    location = location.split(item)[0]
+    close_sidebar = textwrap.dedent("""
+            <div style='height: 30px;'></div>
+        </div>
+    """)
+    close_sidebar = textwrap.indent(close_sidebar, "\t")
 
-                    page = item.split("_", 1)[1]
-                    page = page.split(".md")[0] + ".html"
+    # add page navigation to sidebar html
+    # ----------------------------------
+    sidebar_html += dynamic_links_html
+    sidebar_html += close_sidebar
 
-                    md_pages[item] = "/textbook/" + location + page
-        return md_pages
-
-    def create_page_link(
-        file,
-        label,
-        page_paths,
-        indent,
-        dev_build=dev_build,
-    ):
-        file_path = page_paths[file]
-        if dev_build:
-            file_path = file_path.replace(
-                "content",
-                "dev",
-            )
-        return f'\n{indent}<a href="{file_path}">{label}</a>'
-
-    def create_toggle_section(toggle_label):
-        section = (
-            f'\n{indent}<div class="sidebar-list">'
-            + f'\n{indent}\t<a id="sidebar-header"'
-            + ' onclick="toggleSubmenu(event)">'
-            + f'\n{indent}<span class="toggle-icon">+</span>'
-            + f"\n{indent}{indent}{toggle_label}"
-            + f"\n{indent}\t</a>"
-            + f'\n{indent}\t<div class="submenu">'
-        )
-        return section
-
-    def build_navbar(json_page_index):
-        navbar_html = ""
-        page_paths = get_absolute_paths()
-        ordered_links = []
-        ordered_pages = []
-        for section, contents in json_page_index.items():
-            # For pages that are not nested in a toggle
-            if isinstance(contents, str):
-                navbar_html += create_page_link(
-                    section,
-                    contents,
-                    page_paths,
-                    indent,
-                )
-                ordered_links.append(page_paths[section])
-                ordered_pages.append(contents)
-            # For pages that are nested in a toggle
-            elif isinstance(contents, list):
-                toggle_label = contents[0]
-                toggle_contents = contents[1]
-                # Add toggle <div> sections and link
-                navbar_html += create_toggle_section(toggle_label)
-                # Add pages under toggle
-                for sub_page, sub_name in toggle_contents.items():
-                    navbar_html += create_page_link(
-                        sub_page,
-                        sub_name,
-                        page_paths,
-                        indent + indent,
-                    )
-                    ordered_links.append(page_paths[sub_page])
-                    ordered_pages.append(sub_name)
-                # Close toggle <div> sections
-                navbar_html += f"\n{indent}\t</div>"
-                navbar_html += f"\n{indent}</div>"
-
-            # save ordered page links
-            out_path = os.getcwd() + "/templates/ordered_page_links.json"
-            ordered_page_links = {}
-            ordered_page_links["links"] = ordered_links
-            ordered_page_links["titles"] = ordered_pages
-
-            with open(out_path, "w", encoding="utf-8") as f:
-                json.dump(
-                    ordered_page_links,
-                    f,
-                    ensure_ascii=False,
-                    indent=4,
-                )
-
-        return navbar_html, ordered_links
-
-    navbar_html, ordered_links = build_navbar(json_page_index)
-    html += navbar_html
-    html += "\n\t<div style='height: 30px;'></div>"
-    html += "\n\t</div>"
-    return html, ordered_links
+    return sidebar_html, ordered_links
 
 
-# print(generate_navbar_html())
+# print(generate_sidebar_html())
