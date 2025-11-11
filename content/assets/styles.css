@@ -15,6 +15,14 @@
 }
 
 /* 
+    scroll padding to account for topbar height so anchor
+    links work correctly
+*/
+html {
+  scroll-padding-top: 60px;
+}
+
+/* 
 # Default (light mode) styling for basic elements
 # ------------------------------------------------------------ 
 */
