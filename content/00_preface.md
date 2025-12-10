@@ -20,4 +20,6 @@ To get the most out of this textbook, we recommend that you [use HNN from the cl
 
 If you have any questions, please visit our [HNN Discussion board](https://github.com/jonescompneurolab/hnn-core/discussions) on GitHub.
 
+Finally, it *greatly* helps HNN's development if you are willing to [volunteer your demographic information using our survey here](https://docs.google.com/forms/d/e/1FAIpQLSfN2F4IkGATs6cy1QBO78C6QJqvm9y14TqsCUsuR4Rrkmr1Mg/viewform).
+
 Happy modeling!

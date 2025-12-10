@@ -713,3 +713,15 @@ const installLinks = document.querySelectorAll(".install-row > a");
 installLinks.forEach(link => {
     link.href = installUrl;
 });
+
+
+// Survey page link
+const surveyUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfN2F4IkGATs6cy1QBO78C6QJqvm9y14TqsCUsuR4Rrkmr1Mg/viewform";
+
+// Get all <a> children of .survey-row
+const surveyLinks = document.querySelectorAll(".survey-row > a");
+
+// Set the href of each link
+surveyLinks.forEach(link => {
+    link.href = surveyUrl;
+});
