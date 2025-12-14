@@ -379,7 +379,7 @@ Given the timing and magnitude differences we see in the plot, we can hypothesiz
 1. An increase in the strength of the inputs that created the evoked response, and
 2. A reduction in the delay in the arrival time of the inputs to the network. 
 
-To test these hypotheses, we’ll adjust the parameters as described. For simplicity, we have also created a parameter file that accounts for such changes and accurately reproduces the new data. Load the `ERPYesSuparT.json` file into `External Drives`.
+To test these hypotheses, we’ll adjust the parameters as described. For simplicity, we have also created a parameter file that accounts for such changes and accurately reproduces the new data. Load the `ERPYesSupraT.json` file into `External Drives`.
 
 You should see the new values in the dropdowns.
 
