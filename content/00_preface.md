@@ -23,3 +23,11 @@ If you have any questions, please visit our [HNN Discussion board](https://githu
 Finally, it *greatly* helps HNN's development if you are willing to [volunteer your demographic information using our survey here](https://docs.google.com/forms/d/e/1FAIpQLSfN2F4IkGATs6cy1QBO78C6QJqvm9y14TqsCUsuR4Rrkmr1Mg/viewform).
 
 Happy modeling!
+
+---
+
+HNN-core development has been funded in part by the following United States of America federal government grants:
+
+- NIH R01EB022889 Human Neocortical Neurosolver
+- NIH 1U24NS129945 Dissemination of the Human Neocortical Neurosolver (HNN) software for circuit level interpretation of human MEG/EEG
+- NSF IIS 2424101 Collaborative Research: CRCNS Research Proposal: Uncovering the mechanisms and meaning of brain rhythm frequency shifts during decision making
