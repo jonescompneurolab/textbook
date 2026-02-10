@@ -4,10 +4,15 @@ channels:
 dependencies:
   - python=3.12
   - beautifulsoup4==4.12.3
+  - ipyevents
+  - markdown=3.4
+  - mne
+  - mpi4py
+  - nibabel
+  - openmpi>5
   - pandoc==3.6.2
   - pip==25.0
-  - pooch<1.9.0
+  - pooch==1.8.2
   - pypandoc==1.15
-  - markdown=3.4
-  - openmpi>5
-  - mpi4py
+  - pyvista[all]
+  - pyvistaqt
