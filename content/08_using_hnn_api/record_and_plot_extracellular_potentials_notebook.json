@@ -1,6 +1,6 @@
 {
-    "full_executed": true,
-    "hnn_version": "0.5.0",
+    "last_execution_successful": true,
+    "last_hnn_version_used": "0.5.0",
     "record_and_plot_extracellular_potentials_notebook.ipynb": {
         "7.2: Record and plot extracellular potentials": {
             "level": 1,

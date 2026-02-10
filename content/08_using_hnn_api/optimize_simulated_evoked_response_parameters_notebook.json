@@ -1,6 +1,6 @@
 {
-    "full_executed": false,
-    "hnn_version": "NA",
+    "last_execution_successful": false,
+    "last_hnn_version_used": "NA",
     "optimize_simulated_evoked_response_parameters_notebook.ipynb": {
         "7.9: Optimize simulated evoked response parameters": {
             "level": 1,

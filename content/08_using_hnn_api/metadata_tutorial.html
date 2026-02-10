@@ -272,19 +272,16 @@
     <div id="content">
 
 <!--
-# Title: 7.7 Parallelism: Joblib
+# Title: 7.11 Cell Metadata Tutorial
 # Updated: 2025-02-04
 #
 # Contributors:
-    # Dylan Daniels
-    # Mainak Jas <mmjas@mgh.harvard.edu>
-    # Sam Neymotin <samnemo@gmail.com>
-    # Blake Caldwell <blake_caldwell@brown.edu>
-    # Christopher Bailey <cjb@cfin.au.dk>
+    # Chetan Kandpal <chetankandpal3@gmail.com>
+    # Katharina Duecker <katharina.duecker@gmail.com>
 -->
 
 		<div class="notebook-download-wrapper">
-		    <a href='parallelism_joblib_notebook.ipynb' download>
+		    <a href='meta_data_tutorial_documented.ipynb' download>
 		        <button class="notebook-download">
 		            <svg xmlns="http://www.w3.org/2000/svg"
 		                width="20"
@@ -307,69 +304,9 @@
 
 
                 <div class='markdown-cell'>
-                    <h1>7.7: Parallelism: Using the Joblib backend</h1>
-<p>This example demonstrates how to use the Joblib backend for
-simulating dipoles using <code>hnn_core</code>.</p>
-<p><code>hnn_core</code> can take advantage of <a
-href="https://joblib.readthedocs.io/en/stable/">the Joblib library</a>
-to run <strong>multiple</strong> independent simulations simultaneously
-across <strong>multiple</strong> CPU processors. This is an example of
-<a
-href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">"embarrassingly
-parallel" processing jobs</a>. In HNN, this is commonly done if you want
-to run many "trials" of the same simulation. Since each trial simulation
-is fully independent of the other trial simulations, each trial
-simulation can be run on its own CPU core. Joblib parallelism is
-particularly useful if you are using <a
-href="https://jonescompneurolab.github.io/textbook/content/08_using_hnn_api/batch_simulation.html">batch
-simulation to explore parameter spaces</a>.</p>
-<p>Note that to use Joblib parallelism, you need either the
-<code>conda</code> install or the <code>pip</code>
-<code>Joblib Installation</code> dependencies described <a
-href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html">in
-our Installation Guide here</a>.</p>
-<p>Note that Joblib parallelism is distinct from <code>hnn_core</code>'s
-use of <a
-href="https://jonescompneurolab.github.io/textbook/content/08_using_hnn_api/parallelism_mpi.html">MPI
-parallelism, which can be found here</a>.</p>
-
-                </div>
-
-
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        # Authors: Mainak Jas <mjas@mgh.harvard.edu>
-#          Blake Caldwell <blake_caldwell@brown.edu>
-#          Austin Soplata <austin_soplata@brown.edu>
-                    </code>
-                </div>
-
-
-<!-- markdown cell -->
-<div class='markdown-cell'>
-    <p>Let us import what we need from <code>hnn_core</code>:</p>
-
-</div>
-
-
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        import matplotlib.pyplot as plt
-
-from hnn_core import simulate_dipole, jones_2009_model
-from hnn_core.viz import plot_dipole
-                    </code>
-                </div>
-
-
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>Following our <a
-href="https://jonescompneurolab.github.io/textbook/content/06_alpha_beta/api.html">Alpha
-example</a>, we will create our network and add a ~10 Hz "bursty"
-drive:</p>
+                    <h2>Initializing the Network</h2>
+<p>First, we instantiate the standard Jones 2009 model. This model
+serves as the baseline for our exploration.</p>
 
                 </div>
 
@@ -378,37 +315,8 @@ drive:</p>
                 <div class='code-cell'>
                     <code class='language-python'>
                         net = jones_2009_model()
-
-weights_ampa = {'L2_pyramidal': 5.4e-5, 'L5_pyramidal': 5.4e-5}
-net.add_bursty_drive(
-    'bursty', tstart=50., burst_rate=10, burst_std=20., numspikes=2,
-    spike_isi=10, n_drive_cells=10, location='distal',
-    weights_ampa=weights_ampa, event_seed=278)
-                    </code>
-                </div>
-
-
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>Finally, we will simulate using the <a
-href="https://jonescompneurolab.github.io/hnn-core/dev/generated/hnn_core.parallel_backends.JoblibBackend.html#hnn_core.parallel_backends.JoblibBackend"><code>JoblibBackend</code>
-class</a>. You can control the number of CPU cores to use via
-<code>n_jobs</code>, while the number of total trials to be run can be
-specified by <code>n_trials</code>. Note that these numbers do NOT have
-to match: you can ask for more trials than there are jobs available, and
-Joblib will simply execute later jobs after the first batch has
-completed.</p>
-
-                </div>
-
-
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        from hnn_core import JoblibBackend
-
-with JoblibBackend(n_jobs=4):
-    dpls = simulate_dipole(net, tstop=210., n_trials=6)
+print(f"Network created with {len(net.cell_types)} cell types")
+print(f"Cell types: {list(net.cell_types.keys())}")
                     </code>
                 </div>
 
@@ -420,212 +328,124 @@ with JoblibBackend(n_jobs=4):
                     </div>
                     <div class='output-code'>
 
-        Joblib will run 6 trial(s) in parallel by distributing trials over 4 jobs.
-
-        Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-build/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-build/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-build/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-build/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Building the NEURON model
-
-        [Done]
-Trial 2: 0.03 ms...
-[Done]
-[Done]
-[Done]
-Trial 4: 0.03 ms...
-Trial 1: 0.03 ms...
-Trial 3: 0.03 ms...
-
-        Trial 2: 10.0 ms...
-Trial 4: 10.0 ms...
-Trial 3: 10.0 ms...
-Trial 1: 10.0 ms...
-
-        Trial 2: 20.0 ms...
-Trial 4: 20.0 ms...
-
-        Trial 3: 20.0 ms...
-Trial 1: 20.0 ms...
-
-        Trial 2: 30.0 ms...
-Trial 4: 30.0 ms...
-
-        Trial 3: 30.0 ms...
-Trial 1: 30.0 ms...
-
-        Trial 2: 40.0 ms...
-Trial 4: 40.0 ms...
-
-        Trial 3: 40.0 ms...
-Trial 1: 40.0 ms...
-
-        Trial 2: 50.0 ms...
-Trial 4: 50.0 ms...
-
-        Trial 3: 50.0 ms...
-Trial 1: 50.0 ms...
-
-        Trial 4: 60.0 ms...
-Trial 2: 60.0 ms...
-
-        Trial 3: 60.0 ms...
-Trial 1: 60.0 ms...
-
-        Trial 4: 70.0 ms...Trial 2: 70.0 ms...
-
-
-        Trial 3: 70.0 ms...
-Trial 1: 70.0 ms...
-
-        Trial 4: 80.0 ms...
-Trial 2: 80.0 ms...
-
-        Trial 3: 80.0 ms...
-Trial 1: 80.0 ms...
-
-        Trial 4: 90.0 ms...
-Trial 2: 90.0 ms...
-
-        Trial 3: 90.0 ms...
-Trial 1: 90.0 ms...
-
-        Trial 4: 100.0 ms...
-Trial 2: 100.0 ms...
-
-        Trial 3: 100.0 ms...
-Trial 1: 100.0 ms...
-
-        Trial 4: 110.0 ms...
-Trial 2: 110.0 ms...
-
-        Trial 3: 110.0 ms...
-Trial 1: 110.0 ms...
-
-        Trial 4: 120.0 ms...
-Trial 2: 120.0 ms...
-
-        Trial 3: 120.0 ms...
-Trial 1: 120.0 ms...
-
-        Trial 4: 130.0 ms...
-Trial 2: 130.0 ms...
-
-        Trial 3: 130.0 ms...
-Trial 1: 130.0 ms...
-
-        Trial 4: 140.0 ms...
-Trial 2: 140.0 ms...
-
-        Trial 3: 140.0 ms...
-Trial 1: 140.0 ms...
-
-        Trial 4: 150.0 ms...
-Trial 2: 150.0 ms...
-
-        Trial 3: 150.0 ms...
-Trial 1: 150.0 ms...
-
-        Trial 4: 160.0 ms...
-Trial 2: 160.0 ms...
-
-        Trial 3: 160.0 ms...
-Trial 1: 160.0 ms...
-
-        Trial 4: 170.0 ms...
-Trial 2: 170.0 ms...
-
-        Trial 3: 170.0 ms...
-Trial 1: 170.0 ms...
-
-        Trial 4: 180.0 ms...
-Trial 2: 180.0 ms...
-
-        Trial 3: 180.0 ms...
-Trial 1: 180.0 ms...
-
-        Trial 4: 190.0 ms...
-Trial 2: 190.0 ms...
-
-        Trial 3: 190.0 ms...
-Trial 1: 190.0 ms...
-
-        Trial 4: 200.0 ms...
-Trial 2: 200.0 ms...
-
-        Trial 3: 200.0 ms...
-Trial 1: 200.0 ms...
-
-        Building the NEURON model
-Building the NEURON model
-
-        [Done]
-Trial 5: 0.03 ms...
-[Done]
-Trial 6: 0.03 ms...
-
-        Trial 5: 10.0 ms...
-Trial 6: 10.0 ms...
-
-        Trial 5: 20.0 ms...
-Trial 6: 20.0 ms...
-
-        Trial 5: 30.0 ms...
-Trial 6: 30.0 ms...
-
-        Trial 5: 40.0 ms...
-Trial 6: 40.0 ms...
-
-        Trial 5: 50.0 ms...
-Trial 6: 50.0 ms...
-
-        Trial 5: 60.0 ms...
-Trial 6: 60.0 ms...
-
-        Trial 5: 70.0 ms...
-Trial 6: 70.0 ms...
-
-        Trial 5: 80.0 ms...
-Trial 6: 80.0 ms...
-
-        Trial 5: 90.0 ms...
-Trial 6: 90.0 ms...
-
-        Trial 5: 100.0 ms...
-Trial 6: 100.0 ms...
-
-        Trial 5: 110.0 ms...
-Trial 6: 110.0 ms...
-
-        Trial 5: 120.0 ms...
-Trial 6: 120.0 ms...
-
-        Trial 5: 130.0 ms...
-Trial 6: 130.0 ms...
-
-        Trial 5: 140.0 ms...
-Trial 6: 140.0 ms...
-
-        Trial 5: 150.0 ms...
-Trial 6: 150.0 ms...
-
-        Trial 5: 160.0 ms...
-Trial 6: 160.0 ms...
-
-        Trial 5: 170.0 ms...
-Trial 6: 170.0 ms...
-
-        Trial 6: 180.0 ms...
-Trial 5: 180.0 ms...
-
-        Trial 6: 190.0 ms...
-Trial 5: 190.0 ms...
-
-        Trial 6: 200.0 ms...
-Trial 5: 200.0 ms...
+        Network created with 4 cell types
+Cell types: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x27;, &#x27;L5_pyramidal&#x27;]
+
+                    </div>
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        type(net.cell_types) # cell types are returned as a dictionary now for us to see
+    </code>
+</div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        dict
+                    </div>
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        net.cell_types  # each cell type is a dictionary containing the cell object and cell metadata
+    </code>
+</div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        {&#x27;L2_basket&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
+  &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;basket&#x27;,
+   &#x27;electro_type&#x27;: &#x27;inhibitory&#x27;,
+   &#x27;layer&#x27;: &#x27;2&#x27;,
+   &#x27;measure_dipole&#x27;: False,
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}},
+ &#x27;L2_pyramidal&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
+  &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;pyramidal&#x27;,
+   &#x27;electro_type&#x27;: &#x27;excitatory&#x27;,
+   &#x27;layer&#x27;: &#x27;2&#x27;,
+   &#x27;measure_dipole&#x27;: True,
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}},
+ &#x27;L5_basket&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
+  &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;basket&#x27;,
+   &#x27;electro_type&#x27;: &#x27;inhibitory&#x27;,
+   &#x27;layer&#x27;: &#x27;5&#x27;,
+   &#x27;measure_dipole&#x27;: False,
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}},
+ &#x27;L5_pyramidal&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
+  &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;pyramidal&#x27;,
+   &#x27;electro_type&#x27;: &#x27;excitatory&#x27;,
+   &#x27;layer&#x27;: &#x27;5&#x27;,
+   &#x27;measure_dipole&#x27;: True,
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}}}
+                    </div>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # The cell metadata contains information on morphology, cell type (inhibitory/excitatory), layer, and whether the cell contributes to the dipole
+for cell_type_name, cell_type_data in net.cell_types.items():
+    print(f"\n{cell_type_name}:")
+    metadata = cell_type_data["cell_metadata"]
+    for key, value in metadata.items():
+        print(f"  {key}: {value}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+
+L2_basket:
+  morpho_type: basket
+  electro_type: inhibitory
+  layer: 2
+  measure_dipole: False
+  reference: https://doi.org/10.7554/eLife.51214
+
+L2_pyramidal:
+  morpho_type: pyramidal
+  electro_type: excitatory
+  layer: 2
+  measure_dipole: True
+  reference: https://doi.org/10.7554/eLife.51214
+
+L5_basket:
+  morpho_type: basket
+  electro_type: inhibitory
+  layer: 5
+  measure_dipole: False
+  reference: https://doi.org/10.7554/eLife.51214
+
+L5_pyramidal:
+  morpho_type: pyramidal
+  electro_type: excitatory
+  layer: 5
+  measure_dipole: True
+  reference: https://doi.org/10.7554/eLife.51214
 
                     </div>
                 </div>
@@ -634,7 +454,225 @@ Trial 5: 200.0 ms...
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        plot_dipole(dpls, show=False)
+                        # The cell object contains the properties of the cell, such as its sections, synapses, and ion channels (see below for an example)
+# the properties of each section can be accessed as follows:
+
+cell_type = "L2_pyramidal"
+for key, value in net.cell_types[cell_type]["cell_object"].sections.items():
+    print(f"\nSection: {key}")
+    print(f"  Properties: {value}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+
+Section: apical_trunk
+  Properties: L=59.5, diam=4.25, cm=0.6195, Ra=200.0
+
+Section: apical_1
+  Properties: L=306.0, diam=4.08, cm=0.6195, Ra=200.0
+
+Section: apical_tuft
+  Properties: L=238.0, diam=3.4, cm=0.6195, Ra=200.0
+
+Section: apical_oblique
+  Properties: L=340.0, diam=3.91, cm=0.6195, Ra=200.0
+
+Section: basal_1
+  Properties: L=85.0, diam=4.25, cm=0.6195, Ra=200.0
+
+Section: basal_2
+  Properties: L=255.0, diam=2.72, cm=0.6195, Ra=200.0
+
+Section: basal_3
+  Properties: L=255.0, diam=2.72, cm=0.6195, Ra=200.0
+
+Section: soma
+  Properties: L=22.1, diam=23.4, cm=0.6195, Ra=200.0
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Querying Cell Types</h2>
+<p>The <code>net.cell_types</code> dictionary contains the metadata for
+each cell type. We can filter and query this information to find
+specific groups of cells based on their properties, such as layer,
+ephys, or morphology.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        excitatory = net.filter_cell_types(electro_type='excitatory')
+print(f"Excitatory cells: {excitatory}")
+
+layer2_cells = net.filter_cell_types(layer='2')
+print(f"Layer 2 cells: {layer2_cells}")
+
+dipole_contributors = net.filter_cell_types(measure_dipole=True)
+print(f"Dipole contributors: {dipole_contributors}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Excitatory cells: [&#x27;L2_pyramidal&#x27;, &#x27;L5_pyramidal&#x27;]
+Layer 2 cells: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;]
+Dipole contributors: [&#x27;L2_pyramidal&#x27;, &#x27;L5_pyramidal&#x27;]
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Inspecting Connection Weights</h2>
+<p>We can also use metadata to investigate the connectivity of the
+network. The existing <code>net.connectivity</code> list stores
+information about all connections, which we can inspect to understand
+the default weights and delays.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        src_example = 'L2_pyramidal'
+target_example = 'L2_pyramidal'
+
+print(f"Example: {src_example} \u2192 {target_example} proximal connections")
+
+for conn in net.connectivity:
+    if (conn['src_type'] == src_example and 
+        conn['target_type'] == target_example and 
+        conn['loc'] == 'proximal'):
+
+        weight = conn['nc_dict']['A_weight']
+        gain = conn['nc_dict'].get('gain', 1.0)
+
+        print(f"Receptor: {conn['receptor']}")
+        print(f"  Base weight: {weight:.6f} \u03bcS")
+        print(f"  Gain factor: {gain}")
+        print(f"  Effective weight: {weight * gain:.6f} \u03bcS")
+        print(f"  Delay: {conn['nc_dict']['A_delay']} ms")
+        print(f"  Space constant: {conn['nc_dict']['lamtha']}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Example: L2_pyramidal → L2_pyramidal proximal connections
+Receptor: nmda
+  Base weight: 0.000500 μS
+  Gain factor: 1.0
+  Effective weight: 0.000500 μS
+  Delay: 1.0 ms
+  Space constant: 3.0
+Receptor: ampa
+  Base weight: 0.000500 μS
+  Gain factor: 1.0
+  Effective weight: 0.000500 μS
+  Delay: 1.0 ms
+  Space constant: 3.0
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h3>Identifying Dipole Contributors</h3>
+<p>The <code>measure_dipole</code> metadata field indicates whether a
+cell type's activity is included in the dipole calculation. This is
+something that would not be used in your Day to Day activity, but is
+relevant if you want to know more about the model you are working
+with!</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        #cells that contribute to the dipole
+dipole_cells = net.filter_cell_types(measure_dipole=True)
+non_dipole_cells = net.filter_cell_types(measure_dipole=False)
+
+print("Cells contributing to dipole signal:")
+for cell_type in dipole_cells:
+    print(f"{cell_type}")
+
+print("\nCells NOT contributing to dipole signal:")
+for cell_type in non_dipole_cells:
+    print(f"{cell_type}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Cells contributing to dipole signal:
+L2_pyramidal
+L5_pyramidal
+
+Cells NOT contributing to dipole signal:
+L2_basket
+L5_basket
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h3>Visualizing Cell Morphologies</h3>
+<p>another usecase is that metadata can be used to organize and annotate
+visualizations</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig = plt.figure(figsize=(14, 10))
+
+for idx, (cell_name, cell_data) in enumerate(net.cell_types.items()):
+    ax = fig.add_subplot(2, 2, idx + 1, projection='3d')  # Create 3D subplot
+    cell_obj = cell_data["cell_object"]
+    cell_obj.plot_morphology(ax=ax, show=False)
+    #below we use annotations based on the metaData
+    ax.set_title(f'{cell_name}\n({cell_data["cell_metadata"]["morpho_type"]}, '
+                 f'{cell_data["cell_metadata"]["electro_type"]})')
+
+plt.suptitle('Cell Morphologies in the Network', fontsize=14, y=0.98)
+plt.tight_layout()
 plt.show()
                     </code>
                 </div>
@@ -647,19 +685,128 @@ plt.show()
                     </div>
                     <div class='output-code'>
 
-        &lt;Figure size 640x480 with 1 Axes&gt;
+        &lt;Figure size 1400x1000 with 4 Axes&gt;
                     </div>
                 </div>
 
 
 <!-- code cell image -->
 <div class='output-cell'>
-    <img src='output_nb_parallelism_joblib_notebook/fig_01.png'/>
+    <img src='output_nb_meta_data_tutorial_documented/fig_01.png'/>
 </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Combining queries</h2>
+<p>combine multiple criteria to filter cell types. For example, we might
+want to find all excitatory cells in a specific layer.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # excitatory cells in layer 2
+l2_excitatory = net.filter_cell_types(layer='2', electro_type='excitatory')
+print(f"Layer 2 excitatory cells: {l2_excitatory}")
+
+# properties of this filtered population
+if l2_excitatory:
+    cell_type = l2_excitatory[0]
+    metadata = net.cell_types[cell_type]['cell_metadata']
+    cell_count = len(net.pos_dict[cell_type])
+
+    print(f"\nProperties of {cell_type}:")
+    print(f"  Cell count: {cell_count}")
+    print(f"  Morphology: {metadata['morpho_type']}")
+    print(f"  Contributes to dipole: {metadata['measure_dipole']}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Layer 2 excitatory cells: [&#x27;L2_pyramidal&#x27;]
+
+Properties of L2_pyramidal:
+  Cell count: 100
+  Morphology: pyramidal
+  Contributes to dipole: True
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h3>Inspecting Ion Channel Conductances</h3>
+<p>Another usecase allowing you to access the conductance parameters of
+ion channels across different cell types</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # metadata to find a pyramidal cell, then examine its conductances
+pyramidal_cells = net.filter_cell_types(morpho_type='pyramidal')
+example_pyramidal = pyramidal_cells[0]
+
+print(f"Conductances in {example_pyramidal}:")
+
+cell_obj = net.cell_types[example_pyramidal]['cell_object']
+
+# soma conductances as an example
+if 'soma' in cell_obj.sections:
+    soma_mechs = cell_obj.sections['soma'].mechs
+    print("\nSoma ion channels:")
+    for mech_name, mech_params in soma_mechs.items():
+        conductances = {k: v for k, v in mech_params.items() 
+                       if 'gbar' in k or 'gkbar' in k or 'gnabar' in k}
+        if conductances:
+            print(f"  {mech_name}: {conductances}")
+
+# same for the dendritic section
+if 'apical_tuft' in cell_obj.sections:
+    tuft_mechs = cell_obj.sections['apical_tuft'].mechs
+    if tuft_mechs:
+        print("\nApical tuft ion channels:")
+        for mech_name, mech_params in tuft_mechs.items():
+            conductances = {k: v for k, v in mech_params.items() if 'gbar' in k}
+            if conductances:
+                print(f"  {mech_name}: {conductances}")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Conductances in L2_pyramidal:
+
+Soma ion channels:
+  km: {&#x27;gbar_km&#x27;: 250.0}
+  hh2: {&#x27;gkbar_hh2&#x27;: 0.01, &#x27;gnabar_hh2&#x27;: 0.18}
+
+Apical tuft ion channels:
+  km: {&#x27;gbar_km&#x27;: 250.0}
+
+                    </div>
+                </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
-            <div class="previous-area" data-link="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">
+            <div class="previous-area" data-link="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">
                 <div class="previous-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="arrow-path" d="M15 5L9 12L15 19" />
@@ -667,13 +814,13 @@ plt.show()
                 </div>
                 <div class="previous-text">
                     <p>Previous</p>
-                    <a>7.6 Simulate Beta-modulated ERP</a>
+                    <a>7.10 Optimize simulated rhythmic response parameters</a>
                 </div>
             </div>
-            <div class="next-area" data-link="/textbook/content/08_using_hnn_api/parallelism_mpi.html">
+            <div class="next-area" data-link="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">
                 <div class="next-text">
                     <p>Next</p>
-                    <a>7.8 Parallelism: MPI</a>
+                    <a>8.1 From MEG sensor-space data to HNN simulation</a>
                 </div>
                 <div class="next-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

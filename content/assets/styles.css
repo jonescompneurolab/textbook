@@ -505,10 +505,10 @@ body.is-mobile .sidebar-close {
 }
 
 /*
-    Element: .navbar-header
+    Element: .sidebar-header
     Description: Contain top-level and non-indexed sidebar elements
 */
-.navbar-header {
+.sidebar-header {
     display: flex;
     padding: 10px 0px 20px 0px;
     align-items: center;
@@ -521,13 +521,13 @@ body.is-mobile .sidebar-close {
     Element: .title-row
     Description: style 'title' text in navbar header
 */
-.navbar-header .title-row {
+.sidebar-header .title-row {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.navbar-header a {
+.sidebar-header a {
     margin: 0px;
 }
 
@@ -850,7 +850,7 @@ body.dark-mode .topbar {
 
 
 /*
-# Collapse navbar
+# Collapse sidebar
 # ------------------------------------------------------------ 
 */
 
