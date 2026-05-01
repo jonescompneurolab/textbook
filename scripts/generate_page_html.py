@@ -118,14 +118,26 @@ def _add_ordering_to_footer(input_footer, page_idx, flat_index):
         '<div class="next-area" data-link="None">',
         f'<div class="next-area" data-link="{next_page}">',
     )
-    output_footer = output_footer.replace(
-        "<a>PreviousTitle</a>",
-        f"<a>{prev_title}</a>",
-    )
-    output_footer = output_footer.replace(
-        "<a>NextTitle</a>",
-        f"<a>{next_title}</a>",
-    )
+    if prev_title:
+        output_footer = output_footer.replace(
+            "<a>PreviousTitle</a>",
+            f"<a>{prev_title}</a>",
+        )
+    else:
+        output_footer = output_footer.replace(
+            "<a>PreviousTitle</a>",
+            "",
+        )
+    if next_title and next_title != "None":
+        output_footer = output_footer.replace(
+            "<a>NextTitle</a>",
+            f"<a>{next_title}</a>",
+        )
+    else:
+        output_footer = output_footer.replace(
+            "<a>NextTitle</a>",
+            "",
+        )
 
     return output_footer
 

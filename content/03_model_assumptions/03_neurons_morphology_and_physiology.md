@@ -32,7 +32,7 @@ Membrane voltages in each simulated compartment are calculated using the standar
     - L2/3 and L5 basket interneurons are identical but their synaptic parameters and local circuit connectivity differs.
 
 <div style="display:block; width:50%; margin: 0 auto;">
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png)
+![Detailed connectivity diagram of the template cortical column model, showing synaptic connections among L2/3 and L5 pyramidal neurons and inhibitory basket neurons.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png)
 </div>
 
 ### Physiology
@@ -41,7 +41,7 @@ The following table displays the ion channels and mechanisms in each cell type i
 
 <div class="md_table md-equal-cols">
 
-|                   | Basket | L2/3 Pyramidal | P5 Pyramidal |
+|  Mechanisms       | Basket | L2/3 Pyramidal | P5 Pyramidal |
 | ----------------- | ------ | -------------- | ------------ |
 | Na (fast)         | ✅     | ✅             | ✅           |
 | K (fast)          | ✅     | ✅             | ✅           |

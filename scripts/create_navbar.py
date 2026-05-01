@@ -64,6 +64,7 @@ def create_toggle_section(toggle_label):
             <a id="sidebar-header" onclick="toggleSubmenu(event)">
                 <span class="toggle-icon">+</span>
                 {toggle_label}
+                <label class="toggle-label">Dark/Light-mode Toggle</label>
             </a>
             <div class="submenu">
     """)
@@ -186,7 +187,7 @@ def generate_sidebar_html(
                         </svg>
                 </div>
                 <div class="install-row">
-                    <a class="download-icon-link">
+                    <a class="download-icon-link" aria-label="Installation">
                         <svg class="download-icon" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1
@@ -235,7 +236,10 @@ def generate_sidebar_html(
         sidebar_html += workshop_link
 
     # AES updating of the index has been moved upwards into generate_page_html
-    with open(index_path, "r",) as f:
+    with open(
+        index_path,
+        "r",
+    ) as f:
         json_page_index = json.load(f)
 
     # build the page navigation elements
@@ -248,7 +252,7 @@ def generate_sidebar_html(
                      20px
                 ;"></div>
                 <div class="survey-row">
-                    <a class="download-icon-link">
+                    <a class="download-icon-link" aria-label="Take the HNN Survey">
                         <svg class="download-icon" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                            <path stroke="none" fill="#fff" d="M8 6H5c-.553

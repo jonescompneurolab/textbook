@@ -141,8 +141,8 @@ def validate_hnn_versions(
                 "To build the textbook website against the latest 'master', you can "
                 "create a valid environment by running the following commands in a "
                 "terminal:"
-                "\n   $ make create-textbook-dev-build"
-                "\n   $ conda activate textbook-dev-build"
+                "\n   $ make create-textbook-dev-env"
+                "\n   $ conda activate textbook-dev-env"
                 "\n   $ pip install --upgrade --force-reinstall --no-cache-dir "
                 f'"hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@{latest_master_commit}"'
                 "\nSee 'build.py --help' for more details."
@@ -207,8 +207,8 @@ def validate_hnn_versions(
                 "\nTo build the textbook website against the owner and commit you "
                 "provided, you can create a valid environment by running the following "
                 "commands in a terminal:"
-                "\n   $ make create-textbook-dev-build"
-                "\n   $ conda activate textbook-dev-build"
+                "\n   $ make create-textbook-dev-env"
+                "\n   $ conda activate textbook-dev-env"
                 "\n   $ pip install --upgrade --force-reinstall --no-cache-dir "
                 f'"hnn-core[dev] @ git+https://github.com/{owner}/hnn-core.git@{full_provided_commit}"'
                 "\nSee 'build.py --help' for more details."

@@ -173,7 +173,7 @@ def create_sidebar_html(
                         </svg>
                 </div>
                 <div class="install-row">
-                    <a class="download-icon-link">
+                    <a class="download-icon-link" aria-label="Installation">
                         <svg class="download-icon" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1

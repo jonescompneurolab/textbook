@@ -66,10 +66,7 @@ In general, PING rhythms are initiated by "excitation" to the excitatory (E) cel
 <div class="stylefig">
 ### Figure 1
 <!-- was originally at ![](https://raw.githubusercontent.com/jonescompneurolab/hnn-tutorials/master/gamma/images/image19.png) -->
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_01.png)
-<p align="justify">
-Schematic illustration of the circuit mechanisms underlying PING rhythms.
-</p>
+![Schematic illustration showing the PING rhythm mechanism with excitatory pyramidal neurons firing first, followed by inhibitory interneurons, with timing controlled by GABA-A decay, adapted from several figures in the papers of the Background section](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_01.png)
 </div>
 
 In this tutorial, we will explore the generation of PING rhythms in the HNN model. We will provide example parameter files and walk through simulations that generate gamma activity in both Layers 2/3 and Layer 5, as in [@lee_distinguishing_2013]. This tutorial relies on a different type of exogenous drive to "activate" the local network than the other tutorials. Here, the necessary excitation to generate spiking in the pyramidal neurons that initiates the rhythm (see PING description above) is provided by a continuous train of action potentials with a Poisson distribution that activates post-synaptic excitatory AMPA synapses on the pyramidal neurons. This Poisson drive causes the pyramidal neurons to fire, dependent on the chosen conductance of the AMPA currents. The inhibition in the network is strong enough to overcome the Poisson drive and entrain the network spiking into a gamma frequency rhythm.
@@ -132,7 +129,7 @@ The adjustable network parameters are displayed in the dropdown boxes under the 
 <div class="stylefig">
 ### Figure 2
 <!-- Was originally at (note that 03 and 02 were swapped) ![](images/gamma_fig_03.png) -->
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_02.png)
+![Screenshot of HNN GUI `Network` tab showing connectivity parameters with various synaptic weights between different neuron types](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_02.png)
 </div>
 
 In our loaded configuration file, the strengths of synaptic connections are significantly different than in the [HNN Template Model](../01_getting_started/template_model.html) for the sake of simulating gamma oscillations. In addition to many connection strengths being increased or decreased, all connections **between** Layer 2/3 and Layer 5 have been turned off (weight = 0 $\mu S$). Connections between excitatory cells within each layer are also turned off. Additionally, note that the inhibitory conductances within layers are stronger than the excitatory conductances, and that there are strong inhibitory-to-inhibitory (i.e., basket-to-basket) connections. This strong autonomous inhibition will cause synchrony among the basket cells, and hence strong inhibition onto the pyramidal neurons.
@@ -168,7 +165,7 @@ You should now see a dropdown menu which contains the adjustable drive parameter
 <div class="stylefig">
 ### Figure 3
 <!-- Was originally at (note that 03 and 02 were swapped) ![](images/gamma_fig_02.gif) -->
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_03.gif)
+![Animated GUI screenshot showing `External Drives` tab with `extpois` proximal Poisson drive parameters being revealed and adjusted](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_03.gif)
 </div>
 
 <a id="toc-6"></a>
@@ -199,7 +196,7 @@ The console below the `Run` button will print progress as the simulation is runn
 
 <div class="stylefig">
 ### Figure 4
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_04.png)
+![GUI screenshot of simulation output showing Poisson drive histogram without rhythmicity in top panel and resulting rhythmic dipole signal in bottom panel](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_04.png)
 </div>
 
 A histogram displaying the Poisson drive to the excitatory cells is shown in the top panel, displaying no clear rhythmicity. However, in the simulated dipole below it, there *is* some obvious rhythmicity in the signal!
@@ -215,7 +212,7 @@ To confirm that the rhythmicity is in the gamma frequency range, let's plot a sp
 
 <div class="stylefig">
 ### Figure 5
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_05.png)
+![Spectrogram visualization showing strong gamma frequency activity at approximately 55 Hz throughout the simulation time](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_05.png)
 </div>
 
 The spectrogram confirms that, for this network and drive configuration, the dipole signal contains spectral content in the gamma range (~55 Hz).
@@ -232,7 +229,7 @@ We can make a new figure to view the spiking activity generated by the different
 
 <div class="stylefig">
 ### Figure 6
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_06.png)
+![GUI screenshot of spike rastergram showing pyramidal neurons in orange and red firing before inhibitory basket cells in blue and green, demonstrating the essential PING rhythm dynamics](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_06.png)
 </div>
 
 Notice that the excitatory pyramidal neurons in each layer (orange and red dots / lines) fire before the inhibitory basket cells in each layer (blue and green dots / lines). The pyramidal neuron firing drives the basket cells to fire. The basket cells are highly synchronous due to the strong inhibitory-to-inhibitory connections. The basket cells then prevent the pyramidal neurons from firing for ~25 ms, generating the PING rhythms. The pyramidal neurons are firing periodically, but with lower synchrony due to the Poisson drive, which creates randomized spike times across the populations (once the inhibition sufficiently wears off). This type of dispersed pyramidal neuron firing is considered **"weak" PING** - hence the configuration file name including "weak" in the name.
@@ -245,7 +242,7 @@ We can also confirm that this oscillation is in the gamma frequency range by vie
 
 <div class="stylefig">
 ### Figure 7
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_07.png)
+![GUI screenshot of power spectral density plots for Layer 2/3, Layer 5, and aggregate signal, showing gamma peak around 55 Hz with larger amplitude in Layer 5](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_07.png)
 </div>
 
 Notice that the power in the gamma band is much smaller in Layer 2/3 than in Layer 5 (pay attention to the scale of the y-axes). This is reflective, in part, of the fact that the length of the Layer 2/3 pyramidal neurons is smaller than Layer 5. Hence, Layer 2/3 cells produce smaller current dipole moments that can be masked by activity in Layer 5 (see [@lee_distinguishing_2013] for further discussion).
@@ -273,19 +270,19 @@ The simulation will yield a gamma rhythm that looks similar to the one we observ
 
 <div class="stylefig">
 ### Figure 8
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_08.png)
+![GUI screenshot of simulation output for Layer-5-only configuration showing Poisson drive input and resulting dipole with weak PING gamma rhythm](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_08.png)
 </div>
 
 However, if you create new `Drive-Spikes (2x1)` and `PSD Layers (3x1)` plots for this new simulation, you will see activity from **only** Layer 5. You can do this by reproducing the steps for the plots described in [Section 7](#toc-7) above, but making sure you change `Dataset` to the newer simulation `gamma_L5weak_only`. You should see plots similar to those shown below in [Figure 9.A](#figure-9-a) and [Figure 9.B](#figure-9-b).
 
 <div class="stylefig">
 ### Figure 9-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_09_A.png)
+![GUI screenshot of spike rastergram for Layer-5-only simulation showing weakly synchronous pyramidal firing followed by synchronous inhibitory firing in weak PING pattern](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_09_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 9-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_09_B.png)
+![GUI screenshot of power spectral density plot for Layer-5-only simulation showing gamma peak at approximately 55 Hz](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_09_B.png)
 </div>
 
 Notice the weak PING rhythm in Layer 5 consisting of weakly synchronous pyramidal neuron firing, followed by synchronous inhibitory neuron firing. The synchronous inhibitory spiking gates the network dipole rhythm to ~55 Hz.
@@ -306,7 +303,7 @@ Your `External drives` tab should look similar to [Figure 10](#figure-10) below.
 
 <div class="stylefig">
 ### Figure 10
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_10.png)
+![GUI screenshot of `External Drives` tab showing `Tonic1` drive with 2 nA amplitude set for L5_pyramidal cells](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_10.png)
 </div>
 
 After adding the tonic drive, we will run a new simulation. Do the following:
@@ -318,17 +315,17 @@ The simulation will yield the output shown in [Figure 11-A](#figure-11-a) below.
 
 <div class="stylefig">
 ### Figure 11-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_11_A.png)
+![GUI screenshot of simulation output with weak tonic input showing stabilization after 50 ms with more synchronized gamma rhythm compared to pure Poisson drive](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_11_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 11-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_11_B.png)
+![GUI screenshot of spike rastergram with weak tonic input showing increased pyramidal neuron synchrony while maintaining some noise from Poisson drive](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_11_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 11-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_11_C.png)
+![GUI screenshot of power spectral density with weak tonic input showing gamma frequency decreased slightly to approximately 48 Hz](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_11_C.png)
 </div>
 
 Note that network takes longer to stabilize due to the initial impact of the tonic current. From about 50 ms onward, we see that the initial impact of the tonic input has subsided and the influence of both the tonic and Poisson drives is more evident.
@@ -355,17 +352,17 @@ This will produce a simulation figure similar to [Figure 12-A](#figure-12-a) bel
 
 <div class="stylefig">
 ### Figure 12-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_12_A.png)
+![GUI screenshot of simulation output with higher tonic input showing significantly more synchronized gamma rhythm with strong periodic deflections](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_12_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 12-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_12_B.png)
+![GUI screenshot of spike rastergram with higher tonic input showing highly synchronous pyramidal and inhibitory neuron firing patterns](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_12_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 12-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_12_C.png)
+![GUI screenshot of power spectral density with higher tonic input showing gamma frequency further decreased to approximately 44 Hz due to stronger inhibitory recruitment](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_12_C.png)
 </div>
 
 Compared to the prior `gamma_L5weak_tonic_01` simulation, this new `gamma_L5weak_tonic_02` simulation is *significantly* more synchronous, which you can see especially when comparing [Figure 12-B](#figure-12-b) to [Figure 11-B](#figure-11-b). However, for the same reason as before (more pyramidal firing causing greater recruitment of inhibitory neurons), the frequency of `gamma_L5weak_tonic_02` is even lower than the previous simulation, decreasing slightly from approximately ~48 Hz to ~44 Hz.
@@ -388,17 +385,17 @@ As we've done in previous sections, you'll want to generate additional visualiza
 
 <div class="stylefig">
 ### Figure 13-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_A.png)
+![GUI screenshot of simulation output with weakened excitatory-to-inhibitory connections showing continued gamma rhythm with modified dynamics](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 13-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_B.png)
+![GUI screenshot of spike rastergram with weakened E-to-I connections showing increased lag in inhibitory cell response to excitation](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 13-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_C.png)
+![GUI screenshot of power spectral density with weakened E-to-I connections paradoxically showing gamma frequency decreased to approximately 40 Hz due to delayed basket cell response](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_C.png)
 </div>
 
 You may be thinking something like *"The last several simulations gradually increased pyramidal firing, which caused increased inhibitory cell firing, which then caused the frequency to go down. If we're weakening the E-to-I connection in this simulation, then the frequency should increase."* However! Part of what makes science interesting is the unexpected and counter-intuitive. In [Figure 13-C](#figure-13-c), you can clearly see that the gamma rhythm has continued to **decrease**, from ~44 Hz to ~40 Hz. This slowing is still due to the fact that the excitatory-to-inhibitory connection was greatly weakened. It now takes longer for the basket cells to respond to the excitation: notice how there there is an increase in the "lag" in the response of the inhibitory cells (green) in [Figure 13-B](#figure-13-b) which is longer than in the earlier simulation [Figure 12-B](#figure-12-b).
@@ -430,17 +427,17 @@ Next, let's experiment with removing the inhibitory-to-inhibitory connections. D
 
 <div class="stylefig">
 ### Figure 14-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_A.png)
+![GUI screenshot of simulation output without inhibitory-to-inhibitory connections showing irregular and noisy gamma rhythm compared to baseline](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 14-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_B.png)
+![GUI screenshot of spike rastergram without inhibitory-to-inhibitory connections showing desynchronized and noisy inhibitory neuron firing patterns](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 14-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_C.png)
+![GUI screenshot of power spectral density without inhibitory-to-inhibitory connections showing broader, less distinct gamma peak due to rhythm irregularity](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_C.png)
 </div>
 
 Notice that the rhythm is still present but is much less regular and much more noisy (compare [Figure 14-A](#figure-14-a) to [Figure 8](#figure-8)). You can also observe this in the spiking activity by comparing [Figure 14-B](#figure-14-b) to [Figure 9-A](#figure-9-a). This lack of regularity is due to the fact that removal of the inhibitory-to-inhibitory connections causes the inhibition to be less synchronous and noisier. This causes the overall PING rhythm to become noisier itself.
@@ -449,7 +446,7 @@ Indeed, if we plot the spectrogram of this simulation without the inhibitory-to-
 
 <div class="stylefig">
 ### Figure 15
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_15.png)
+![GUI screenshot of spectrogram without inhibitory-to-inhibitory connections showing unstable gamma oscillation that gradually changes frequency over time](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_15.png)
 </div>
 
 <a id="toc-8-6"></a>
@@ -473,22 +470,22 @@ Lastly, we'll show that the time constant of inhibitory decay is an essential pa
 <div class="stylefig">
 ### Figure 16
 <!-- Was originally figure 15 -->
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_16.png)
+![GUI Screenshot of `Network` tab Cell parameters showing L5 Pyramidal synapses with GABAA decay time reduced from 5 to 2 ms](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_16.png)
 </div>
 
 <div class="stylefig">
 ### Figure 17-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_17_A.png)
+![GUI screenshot of simulation output with faster GABAA decay showing increased gamma frequency as pyramidal neurons recover more quickly from inhibition](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_17_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 17-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_17_B.png)
+![GUI screenshot of spike rastergram with faster GABAA decay showing pyramidal neurons firing more rapidly after inhibitory events](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_17_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 17-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_17_C.png)
+![GUI screenshot of power spectral density with faster GABAA decay showing gamma peak increased to approximately 60 Hz](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_17_C.png)
 </div>
 
 Notice that the rhythm is now faster at ~60 Hz (compare [Figure 17-C](#figure-17-c) to [Figure 9-B](#figure-9-b)). As illustrated in the spiking activity, the faster decay of inhibition allows the pyramidal neurons to recover more quickly from the inhibition and respond to the Poisson drive, resulting in a faster network oscillation (compare [Figure 17-B](#figure-17-b) to [Figure 9-A](#figure-9-a)).
@@ -546,7 +543,7 @@ Your `External drives` tab should look like [Figure 18](#figure-18) below.
 
 <div class="stylefig">
 ### Figure 18
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_18.png)
+![Screenshot of `External` drives tab showing `Tonic0` drive with 4 nA to L2_pyramidal and 6 nA to L5_pyramidal cells for strong PING setup](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_18.png)
 </div>
 
 Finally, let's run the simulation:
@@ -558,22 +555,22 @@ Finally, let's run the simulation:
 
 <div class="stylefig">
 ### Figure 19-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_A.png)
+![GUI screenshot of simulation output for strong PING showing sharp downward dipole deflections from highly synchronous pyramidal and inhibitory firing in both layers](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 19-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_B.png)
+![GUI screenshot of spike rastergram for strong PING showing highly synchronous firing in both Layer 2/3 and Layer 5 with distinct E-I firing patterns](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 19-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_C.png)
+![GUI screenshot of power spectral density for strong PING showing distinct peaks at approximately 45 Hz in Layer 5 and 85 Hz in both layers](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_C.png)
 </div>
 
 <div class="stylefig">
 ### Figure 19-D
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_D.png)
+![GUI screenshot of spectrogram for strong PING showing sustained gamma oscillations at approximately 45 Hz throughout the simulation period](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_D.png)
 </div>
 
 In this simulation, there are no spiking inputs provided to the model; instead, a current clamp provides a constant depolarizing current to the pyramidal neuron somas, causing the cells to fire. This firing initiates the PING rhythm through mechanisms similar to that described above. In contrast to the Poisson drive, the constant depolarization to pyramidal neurons creates higher excitability in the pyramidal neurons, causing more synchronous firing. In turn, this causes the interneurons to fire synchronously, producing a higher amplitude gamma oscillation.
@@ -621,22 +618,22 @@ Let's run our simulation by doing the following:
 
 <div class="stylefig">
 ### Figure 20-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_A.png)
+![GUI screenshot of simulation output with 50 Hz rhythmic subthreshold drive showing clear gamma rhythm produced without any spiking activity](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 20-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_B.png)
+![GUI screenshot of empty spike rastergram demonstrating that rhythmic drive simulation generates subthreshold gamma oscillations without neuronal firing](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 20-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_C.png)
+![GUI screenshot of power spectral density for rhythmic drive showing dominant 50 Hz peak generated solely by Layer 5 pyramidal neurons](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_C.png)
 </div>
 
 <div class="stylefig">
 ### Figure 20-D
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_D.png)
+![GUI screenshot of spectrogram for rhythmic drive showing consistent 50 Hz gamma activity throughout the simulation with minimal frequency variation](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_D.png)
 </div>
 
 The net dipole signal in this simulation, shown in [Figure 20-A](#figure-20-a) and elsewhere, shows a clear gamma rhythm at ~50 Hz, produced by the Layer 5 pyramidal neurons. In [Figure 20-B](#figure-20-b), our spike rastergram is completely empty unlike before, because these are *sub-threshold* oscillations. Note that here, the Layer 2/3 pyramidal neurons are not receiving any drive, and therefore do not contribute to the dipole current (visible in [Figure 20-C](#figure-20-c)). There is only minor stochasticity to the synaptic inputs (recall that `Burst std dev (Hz)` is 2.5). Also note that the waveform shape in this simulation is distinct from the previous examples in both the total magnitude of the dipole moment and in the lack of sharp deflections (which, previously, were produced by neuronal firing and strong somatic inhibition during PING).
@@ -656,17 +653,17 @@ In the final simulation of this section, we will add more noise to the previousl
 
 <div class="stylefig">
 ### Figure 21-A
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_21_A.png)
+![GUI screenshot of simulation output with noisy rhythmic drive showing gamma rhythm with increased temporal variability compared to low-noise condition](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_21_A.png)
 </div>
 
 <div class="stylefig">
 ### Figure 21-B
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_21_B.png)
+![GUI screenshot of power spectral density with noisy rhythmic drive showing broader 50 Hz gamma peak plus lower-frequency components due to increased variability](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_21_B.png)
 </div>
 
 <div class="stylefig">
 ### Figure 21-C
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_21_C.png)
+![GUI screenshot of spectrogram with noisy rhythmic drive showing intermittent and less consistent gamma events at 50 Hz compared to low-noise condition](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_21_C.png)
 </div>
 
 Due to the higher variability in synaptic input timing, there is now more variability in the temporal dynamics and frequency content seen in the dipole signal (compare [Figure 21-A](#figure-21-a) to [Figure 20-A](#figure-20-a)). This can also be seen in the less-consistent 50 Hz gamma events in the spectrogram (compare [Figure 21-C](#figure-21-c) to [Figure 20-D](#figure-20-d)). With the added noise, we also observe lower-frequency peaks with relatively high power in the average PSD, though the intermittent gamma events still yield the highest-power peak observed in the PSD (compare [Figure 21-B](#figure-21-b) to [Figure 20-C](#figure-20-c)).

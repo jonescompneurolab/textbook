@@ -45,7 +45,7 @@
 	                </svg>
 	        </div>
 	        <div class="install-row">
-	            <a class="download-icon-link">
+	            <a class="download-icon-link" aria-label="Installation">
 	                <svg class="download-icon" viewBox="0 0 24 24" fill="none"
 	                    xmlns="http://www.w3.org/2000/svg">
 	                <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1
@@ -178,7 +178,7 @@
                 <button class="openbtn" onclick="toggleNav()">
                     ☰
                 </button>
-                <a href="https://hnn.brown.edu" class="home-link">
+                <a href="https://hnn.brown.edu" class="home-link" aria-label="HNN homepage">
                     <div class="home-icon-container">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@
                         </svg>
                     </div>
                 </a>
-                <button class="theme-toggle">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
                     </svg>
@@ -233,6 +233,7 @@
             <img 
                 id="topbar-logo"
                 src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/frontpage/logos/logo-hnn-medium.png"
+                alt="HNN Logo"
             />
         </div>
 
@@ -342,28 +343,24 @@ href="#ref-jones_when_2016" role="doc-biblioref">Stephanie R. Jones
 2016</a>)</span>.)</p>
 <section class="stylefig">
 <h3>Figure 1</h3>
+<figure>
 <img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image03.png" />
-<p align="justify">
-<strong>Figure 1 Left:</strong> Spectrogram of spontaneous activity from
-current dipole source in SI averaged across 100 trials from an example
-subject. The spectrogram shows nearly continuous prestimulus alpha and
-beta oscillations. At time zero, a brief tap was given to the
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image03.png"
+alt="Left: Spectrogram of spontaneous activity from current dipole source in SI averaged across 100 trials from an example subject. The spectrogram shows nearly continuous prestimulus alpha and beta oscillations. At time zero, a brief tap was given to the contralateral finger tip, causing the spontaneous oscillations to briefly desynchronize. Right: A closer look at the prestimulus waveform and spectrogram from spontaneous activity during individual example signal trials. This illustrates that the alpha and beta oscillations occur intermittently and are frequently non-overlapping. All figures in Figure 1 are from (Stephanie R. Jones et al. 2009) or related work." />
+<figcaption aria-hidden="true">Left: Spectrogram of spontaneous activity
+from current dipole source in SI averaged across 100 trials from an
+example subject. The spectrogram shows nearly continuous prestimulus
+alpha and beta oscillations. At time zero, a brief tap was given to the
 contralateral finger tip, causing the spontaneous oscillations to
-briefly desynchronize.
-</p>
-<p align="justify">
-<strong>Figure 1 Right:</strong> A closer look at the prestimulus
-waveform and spectrogram from spontaneous activity during individual
-example signal trials. This illustrates that the alpha and beta
-oscillations occur intermittently and are frequently non-overlapping.
-</p>
-<p align="justify">
-All figures in Figure 1 are from <span class="citation"
+briefly desynchronize. Right: A closer look at the prestimulus waveform
+and spectrogram from spontaneous activity during individual example
+signal trials. This illustrates that the alpha and beta oscillations
+occur intermittently and are frequently non-overlapping. All figures in
+Figure 1 are from <span class="citation"
 data-cites="jones_quantitative_2009">(<a
 href="#ref-jones_quantitative_2009" role="doc-biblioref">Stephanie R.
-Jones et al. 2009</a>)</span> or related work.
-</p>
+Jones et al. 2009</a>)</span> or related work.</figcaption>
+</figure>
 </section>
 <p>Our goal was to use our neocortical model to reproduce features of
 the waveform and spectrogram observed on single (un-averaged) trials (<a
@@ -383,12 +380,13 @@ simultaneously high only around 50% of the time, as shown in <a
 href="#figure-2">Figure 2</a>.</p>
 <section class="stylefig">
 <h3>Figure 2</h3>
+<figure>
 <img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/old-image29.png" />
-<p align="justify">
-<strong>Figure 2</strong>: Key features of the spontaneous non-average
-SI alpha/beta complex include: intermittent transient bouts of
-alpha/beta activity, a waveform that oscillates around 0 nAm, power
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/old-image29.png"
+alt="Key features of the spontaneous non-average SI alpha/beta complex include: intermittent transient bouts of alpha/beta activity, a waveform that oscillates around 0 nAm, power spectral densities (PSD) with peaks in the alpha and beta bands, primarily non-overlapping alpha and beta events, and a symmetric waveform oscillation. The model was able to reproduce each of these features. The subplots in the top row are from experimental MEG data exhibiting these features, while the corresponding subplots in the bottom row are from simulations of the model. See (Stephanie R. Jones et al. 2009)." />
+<figcaption aria-hidden="true">Key features of the spontaneous
+non-average SI alpha/beta complex include: intermittent transient bouts
+of alpha/beta activity, a waveform that oscillates around 0 nAm, power
 spectral densities (PSD) with peaks in the alpha and beta bands,
 primarily non-overlapping alpha and beta events, and a symmetric
 waveform oscillation. The model was able to reproduce each of these
@@ -397,8 +395,8 @@ exhibiting these features, while the corresponding subplots in the
 bottom row are from simulations of the model. See <span class="citation"
 data-cites="jones_quantitative_2009">(<a
 href="#ref-jones_quantitative_2009" role="doc-biblioref">Stephanie R.
-Jones et al. 2009</a>)</span>.
-</p>
+Jones et al. 2009</a>)</span>.</figcaption>
+</figure>
 </section>
 <p>We found that a sequence of exogenous subthreshold excitatory
 synaptic drive could activate the network in a manner that reproduced
@@ -425,17 +423,18 @@ data-cites="hughes_thalamic_2005">(<a href="#ref-hughes_thalamic_2005"
 role="doc-biblioref">Hughes and Crunelli 2005</a>)</span>).</p>
 <section class="stylefig">
 <h3>Figure 3</h3>
+<figure>
 <img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image04.png" />
-<p align="justify">
-<strong>Figure 3</strong>: Schematic illustration of exogenous 10 Hz
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image04.png"
+alt="Schematic illustration of exogenous 10 Hz burst drives through proximal and distal projection pathways. “Population bursts”, consisting of a set number of “burst units” (10 instances of 2-spike bursts as shown) drive post-synaptic conductances in the local network with a set frequency (100 ms inter-burst-interval, equal to 10 Hz) and a variable mean delay between proximal and distal drives." />
+<figcaption aria-hidden="true">Schematic illustration of exogenous 10 Hz
 burst drives through proximal and distal projection pathways.
 “Population bursts”, consisting of a set number of “burst units” (10
 instances of 2-spike bursts as shown) drive post-synaptic conductances
 in the local network with a set frequency (100 ms inter-burst-interval,
 equal to 10 Hz) and a variable mean delay between proximal and distal
-drives.
-</p>
+drives.</figcaption>
+</figure>
 </section>
 <p>We assumed that the macroscale rhythms generating the observed alpha
 and beta activity arose from subthreshold current flow in a large
@@ -542,8 +541,15 @@ will greatly increase your simulation speed.</li>
 </ol>
 <section class="stylefig">
 <h3>Figure 4</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/core-gui-alpha-initial-setup.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/core-gui-alpha-initial-setup.png"
+alt="Screenshot of HNN GUI Simulation tab showing initial parameter setup after the above instructions, including simulation name, tstop of 700 ms, dipole smoothing at 0, and spectral frequency range 5-40 Hz" />
+<figcaption aria-hidden="true">Screenshot of HNN GUI
+<code>Simulation</code> tab showing initial parameter setup after the
+above instructions, including simulation name, tstop of 700 ms, dipole
+smoothing at 0, and spectral frequency range 5-40 Hz</figcaption>
+</figure>
 </section>
 <p><a id="toc-4"></a></p>
 <h2>4. Simulating Rhythmic Proximal Inputs: Alpha Only</h2>
@@ -578,49 +584,43 @@ href="#figure-5">Figure 5</a>):</p>
 proximal input, click the dropdown menu labeled
 <code>bursty1 (proximal)</code>.</li>
 </ol>
-<div class="stylefig">
-<table>
+<section class="stylefig">
 <h3>Figure 5</h3>
+</section>
+<table>
 <tr>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/initial-external-drives-look-01.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/initial-external-drives-look-01.png" width="1800" height="3000" alt="GUI Screenshot showing `External drives` tab with `Load external drives` button">
 </td>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/initial-external-drives-look-02.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/initial-external-drives-look-02.png" width="1800" height="3000" alt="GUI Screenshot showing `External drives` tab after loading with `bursty1` proximal drive visible">
 </td>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/initial-external-drives-look-03.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/initial-external-drives-look-03.png" width="1800" height="3000" alt="GUI Screenshot showing expanded `bursty1` proximal drive parameters including timing, AMPA weights, NMDA weights, and synaptic delays">
 </td>
 </tr>
 </table>
-</div>
 <p>You should now be able to scroll and see the values of adjustable
 parameters, displayed as in the dialog boxes below in <a
 href="#figure-6">Figure 6</a>. There are 4 sections, which we will
 describe in greater detail below. For now, we will <strong>not</strong>
 change any of these parameters, but instead only describe them.</p>
-<div class="stylefig">
-<table>
+<section class="stylefig">
 <h3>Figure 6</h3>
+</section>
+<table>
 <tr>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image08.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image08.png" width="1800" height="3000" alt="Close-up of GUI `bursty1` proximal drive timing parameters showing start time, burst rate, burst standard deviation, and number of spikes settings">
 </td>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image09.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image09.png" width="1800" height="3000" alt="Close-up of GUI `bursty1` proximal drive AMPA and NMDA weight parameters for different cell types">
 </td>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image10.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image10.png" width="1800" height="3000" alt="Close-up of GUI `bursty1` proximal drive synaptic delay parameters for different cell type">
 </td>
 </tr>
 </table>
-</div>
 <ol type="1">
 <li><strong>bursty1 (proximal)</strong>: The first section deals with
 all properties of the drive not included in other sections, including
@@ -672,8 +672,15 @@ minutes to run using the Google CoLab notebook. Once completed, you will
 see output similar to that shown below.</p>
 <section class="stylefig">
 <h3>Figure 7</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicProx-initial.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicProx-initial.png"
+alt="GUI screenshot of simulation output for proximal-only input showing red histogram of ~10 Hz proximal drive bursts and blue dipole waveform with positive deflections above zero" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output for
+proximal-only input showing red histogram of ~10 Hz proximal drive
+bursts and blue dipole waveform with positive deflections above
+zero</figcaption>
+</figure>
 </section>
 <p>Concerning stochasticity: As shown in the red histogram in the top
 panel of <a href="#figure-7">Figure 7</a> above, with this parameter
@@ -711,8 +718,15 @@ whatever you set the <code>Name</code> to previously).</li>
 </ol>
 <section class="stylefig">
 <h3>Figure 8</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicProx_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicProx_Spect.png"
+alt="GUI screenshow of simulation visualization on right showing proximal drive histogram, dipole waveform, and spectrogram with continuous high-power 10 Hz alpha activity" />
+<figcaption aria-hidden="true">GUI screenshow of simulation
+visualization on right showing proximal drive histogram, dipole
+waveform, and spectrogram with continuous high-power 10 Hz alpha
+activity</figcaption>
+</figure>
 </section>
 <p>The bottom panel of <a href="#figure-8">Figure 8</a> shows the
 corresponding time-frequency spectrogram for this waveform, which
@@ -763,33 +777,37 @@ network in a <strong>distal</strong> projection pattern, which are
 illustrated in <a href="#figure-3">Figure 3</a> and <a
 href="https://jonescompneurolab.github.io/textbook/tests/workshop.html#figure-a">Figure
 A on the Workshop page</a>.</p>
-<div class="stylefig">
-<table>
+<section class="stylefig">
 <h3>Figure 9</h3>
+</section>
+<table>
 <tr>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image15.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image15.png" width="1800" height="3000" alt="GUI screenshot showing bursty2 distal drive timing parameters with 10 Hz burst rate">
 </td>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image16.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image16.png" width="1800" height="3000" alt="GUI screenshot showing bursty2 distal drive AMPA and NMDA weight parameters">
 </td>
 <td>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image17.png" />
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image17.png" width="1800" height="3000" alt="GUI screenshot showing bursty2 distal drive synaptic delay parameters">
 </td>
 </tr>
 </table>
-</div>
 <p>To run this simulation, navigate to the main GUI window and
 click:</p>
 <pre><code>Start Simulation</code></pre>
 <p>Once completed, you will see output similar to that shown below.</p>
 <section class="stylefig">
 <h3>Figure 10</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicDist.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicDist.png"
+alt="GUI screenshot of simulation output for distal-only input showing green histogram of ~10 Hz distal drive bursts and blue dipole waveform with negative deflections below zero" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output for
+distal-only input showing green histogram of ~10 Hz distal drive bursts
+and blue dipole waveform with negative deflections below
+zero</figcaption>
+</figure>
 </section>
 <p>As shown in the green histogram in the top panel of the HNN GUI
 above, with this parameter set, a burst of distal input spikes is
@@ -821,8 +839,14 @@ to previously).</li>
 </ol>
 <section class="stylefig">
 <h3>Figure 11</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicDist_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/OnlyRhythmicDist_Spect.png"
+alt="GUI screenshot of visualization showing distal drive histogram, dipole waveform, and spectrogram with continuous high-power 10 Hz alpha activity from distal inputs" />
+<figcaption aria-hidden="true">GUI screenshot of visualization showing
+distal drive histogram, dipole waveform, and spectrogram with continuous
+high-power 10 Hz alpha activity from distal inputs</figcaption>
+</figure>
 </section>
 <p>The bottom panel shows the corresponding time-frequency spectrogram
 for this waveform that exhibits a high power continuous 10 Hz signal.
@@ -867,8 +891,14 @@ distal input, click the dropdown menus labeled
 <p>You should see the values displayed in the dialogue boxes below.</p>
 <section class="stylefig">
 <h3>Figure 12</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image20.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image20.png"
+alt="GUI screenshot showing parameters for combined proximal and distal drives with synchronized start times at 50 ms" />
+<figcaption aria-hidden="true">GUI screenshot showing parameters for
+combined proximal and distal drives with synchronized start times at 50
+ms</figcaption>
+</figure>
 </section>
 <p>In this simulation, all external drive parameters the same as they
 were for each drive in the previous simulations (except for the random
@@ -890,8 +920,14 @@ the <code>Simulation</code> tab and then click:</p>
 <p>Once completed, you will see output similar to that shown below.</p>
 <section class="stylefig">
 <h3>Figure 13</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta.png"
+alt="GUI screenshot of simulation output showing both proximal and distal drive histograms with dipole waveform oscillating around zero, simulating an alpha/beta complex" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output
+showing both proximal and distal drive histograms with dipole waveform
+oscillating around zero, simulating an alpha/beta complex</figcaption>
+</figure>
 </section>
 <p>Follow the steps in the previous sections (such as <a
 href="#toc-4-3">Section 4.3</a>) to create a time-frequency spectrogram
@@ -900,8 +936,15 @@ recent simulation, <code>AlphaAndBeta</code>. The output will look
 similar to the figure below:</p>
 <section class="stylefig">
 <h3>Figure 14</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta_Spect.png"
+alt="GUI screenshot of a spectrogram of combined alpha/beta simulation showing intermittent transient alpha and beta events emerging from stochastic interactions between proximal and distal inputs" />
+<figcaption aria-hidden="true">GUI screenshot of a spectrogram of
+combined alpha/beta simulation showing intermittent transient alpha and
+beta events emerging from stochastic interactions between proximal and
+distal inputs</figcaption>
+</figure>
 </section>
 <p>As shown in the green and red histogram in the top panel of the GUI
 Figures above, with this parameter set, bursts of both proximal and
@@ -965,8 +1008,15 @@ the network. Do the following steps to see our spiking rastergram:</p>
 </ol>
 <section class="stylefig">
 <h3>Figure 20</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta_Spikes.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta_Spikes.png"
+alt="GUI screenshot of spike rastergram showing proximal and distal drive histograms with empty bottom panel demonstrating no neuronal spiking, confirming subthreshold generation of alpha and beta events" />
+<figcaption aria-hidden="true">GUI screenshot of spike rastergram
+showing proximal and distal drive histograms with empty bottom panel
+demonstrating no neuronal spiking, confirming subthreshold generation of
+alpha and beta events</figcaption>
+</figure>
 </section>
 <p>In this window, the rhythmic distal (green/top) and proximal
 (red/middle) input-burst-histograms are shown above the spiking activity
@@ -1014,12 +1064,24 @@ distal input, click the dropdown menus labeled
 <h3>Figure 15</h3>
 <tr>
 <td>
+<figure>
 <img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image21.png" />
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image21.png"
+alt="GUI screenshot showing bursty1 proximal drive parameters with start time standard deviation increased to 50 ms for jittered timing" />
+<figcaption aria-hidden="true">GUI screenshot showing
+<code>bursty1</code> proximal drive parameters with start time standard
+deviation increased to 50 ms for jittered timing</figcaption>
+</figure>
 </td>
 <td>
+<figure>
 <img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image22.png" />
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image22.png"
+alt="GUI screenshot showing bursty2 distal drive parameters with start time standard deviation increased to 50 ms for jittered timing" />
+<figcaption aria-hidden="true">GUI screenshot showing
+<code>bursty2</code> distal drive parameters with start time standard
+deviation increased to 50 ms for jittered timing</figcaption>
+</figure>
 </td>
 </tr>
 </table>
@@ -1058,8 +1120,15 @@ href="#toc-4-3">Section 4.3</a> and selecting the new dataset for
 below:</p>
 <section class="stylefig">
 <h3>Figure 16</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaJitter50_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaJitter50_Spect.png"
+alt="GUI screenshot of an averaged spectrogram across 3 trials with jittered start times showing more continuous alpha and beta bands due to accumulation of non-time-locked events" />
+<figcaption aria-hidden="true">GUI screenshot of an averaged spectrogram
+across 3 trials with jittered start times showing more continuous alpha
+and beta bands due to accumulation of non-time-locked
+events</figcaption>
+</figure>
 </section>
 <p>Notice that the input histograms for distal (green) and proximal
 (red) input accumulated across the 10 trials now show little rhythmicity
@@ -1157,8 +1226,15 @@ greater amount of current flow down the pyramidal neuron dendrites. Your
 following:</p>
 <section class="stylefig">
 <h3>Figure 17</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image28.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image28.png"
+alt="GUI screenshot showing bursty2 distal drive parameters with decreased burst standard deviation to 10 Hz and increased AMPA weights to 0.00006 for stronger beta" />
+<figcaption aria-hidden="true">GUI screenshot showing
+<code>bursty2</code> distal drive parameters with decreased burst
+standard deviation to 10 Hz and increased AMPA weights to 0.00006 for
+stronger beta</figcaption>
+</figure>
 </section>
 <ol type="1">
 <li>Run the simulation by clicking <code>Run</code>.</li>
@@ -1171,13 +1247,25 @@ making sure to set the <code>Dataset</code> to the latest simulation,
 below:</p>
 <section class="stylefig">
 <h3>Figure 18</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta.png"
+alt="GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output
+showing narrower distal drive bursts and sharper negative dipole
+deflections from strengthened synchronized distal input</figcaption>
+</figure>
 </section>
 <section class="stylefig">
 <h3>Figure 19</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta_Spect.png"
+alt="GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive" />
+<figcaption aria-hidden="true">GUI screenshot of a spectrogram showing
+increased beta activity at approximately 20 Hz relative to alpha
+activity due to stronger and more synchronous distal drive</figcaption>
+</figure>
 </section>
 <p>First, notice that the histogram profile of the distal input bursts
 (green) are narrower, corresponding to more synchronous input than in
@@ -1238,13 +1326,26 @@ making sure to set the <code>Dataset</code> to the latest simulation,
 <p>Once completed, you will see output similar to that shown below.</p>
 <section class="stylefig">
 <h3>Figure 20</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly.png"
+alt="GUI screenshot of simulation output showing antiphase proximal and distal drive histograms with dipole waveform producing continuous alpha oscillation without beta" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output
+showing antiphase proximal and distal drive histograms with dipole
+waveform producing continuous alpha oscillation without
+beta</figcaption>
+</figure>
 </section>
 <section class="stylefig">
 <h3>Figure 21</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly_Spect.png"
+alt="GUI screenshot of spectrogram showing continuous pure alpha activity at 10 Hz without beta components from alternating out-of-phase proximal and distal drives" />
+<figcaption aria-hidden="true">GUI screenshot of spectrogram showing
+continuous pure alpha activity at 10 Hz without beta components from
+alternating out-of-phase proximal and distal drives</figcaption>
+</figure>
 </section>
 <p>Notice that the histogram profile of the proximal (red) and distal
 (green) input bursts are generally ½ cycle out-of-phase (antiphase).
@@ -1301,14 +1402,26 @@ file <code>AlphaAndBeta.json</code>.</li>
 the following:</p>
 <section class="stylefig">
 <h3>Figure 22</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image25.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image25.png"
+alt="GUI screenshot showing bursty2 distal drive parameters with greatly increased AMPA weights to 0.0004 for inducing spiking activity" />
+<figcaption aria-hidden="true">GUI screenshot showing
+<code>bursty2</code> distal drive parameters with greatly increased AMPA
+weights to 0.0004 for inducing spiking activity</figcaption>
+</figure>
 </section>
 <p>Your simulation output should look like the following:</p>
 <section class="stylefig">
 <h3>Figure 23</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking.png"
+alt="GUI screenshot of simulation output showing sharp rapidly oscillating dipole waveform from spiking activity induced by strong distal inputs" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output
+showing sharp rapidly oscillating dipole waveform from spiking activity
+induced by strong distal inputs</figcaption>
+</figure>
 </section>
 <p>Because we have greatly increased postsynaptic conductance of the
 distal driving spikes, our distal inputs have induced spiking activity
@@ -1320,8 +1433,14 @@ spectrogram using the instructions provided in previous steps, you
 should see the following:</p>
 <section class="stylefig">
 <h3>Figure 24</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_Spect.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_Spect.png"
+alt="GUI screenshot of a spectrogram showing broadband high-frequency spiking activity from 60-120 Hz due to pyramidal neuron firing and rapid dendritic repolarization" />
+<figcaption aria-hidden="true">GUI screenshot of a spectrogram showing
+broadband high-frequency spiking activity from 60-120 Hz due to
+pyramidal neuron firing and rapid dendritic repolarization</figcaption>
+</figure>
 </section>
 <p>The corresponding dipole spectrogram shows broadband spiking from
 ~60-120 Hz. This type of activity is not typically seen in EEG or MEG
@@ -1339,8 +1458,15 @@ spiking raster plots. Do the following:</p>
 </ol>
 <section class="stylefig">
 <h3>Figure 25</h3>
-<p><img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_SpikingOverlay.png" /></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_SpikingOverlay.png"
+alt="GUI screenshot of a spike rastergram overlaid on layer dipole contributions showing highly synchronous neuronal spiking in each population coinciding with high-frequency dipole events" />
+<figcaption aria-hidden="true">GUI screenshot of a spike rastergram
+overlaid on layer dipole contributions showing highly synchronous
+neuronal spiking in each population coinciding with high-frequency
+dipole events</figcaption>
+</figure>
 </section>
 <p>In this new plot, the grey lines correspond to each layer’s
 contribution to the previously-seen dipole signals. The other colors

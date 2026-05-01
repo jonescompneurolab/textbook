@@ -24,9 +24,9 @@ def load_nb_json_output(
     nb_json_output_dir,
 ):
     """
-    Load the JSON output for a notebook file, depending on "stable"/"dev" build.
+    Load the JSON output for a notebook file, depending on "content"/"dev" build.
 
-    Important: If doing a "stable" build, then ONLY the '<textbook-root>/content/**'
+    Important: If doing a "content" build, then ONLY the '<textbook-root>/content/**'
     version of the JSON output file will attempt to be loaded. However, if doing a "dev"
     build, then ONLY the '<textbook-root>/dev/**' version of the JSON output file will
     attempt to be loaded. In other words, in the "dev" case, we are reading the notebook

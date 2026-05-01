@@ -45,7 +45,7 @@
 	                </svg>
 	        </div>
 	        <div class="install-row">
-	            <a class="download-icon-link">
+	            <a class="download-icon-link" aria-label="Installation">
 	                <svg class="download-icon" viewBox="0 0 24 24" fill="none"
 	                    xmlns="http://www.w3.org/2000/svg">
 	                <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1
@@ -178,7 +178,7 @@
                 <button class="openbtn" onclick="toggleNav()">
                     ☰
                 </button>
-                <a href="https://hnn.brown.edu" class="home-link">
+                <a href="https://hnn.brown.edu" class="home-link" aria-label="HNN homepage">
                     <div class="home-icon-container">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@
                         </svg>
                     </div>
                 </a>
-                <button class="theme-toggle">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
                     </svg>
@@ -233,6 +233,7 @@
             <img 
                 id="topbar-logo"
                 src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/frontpage/logos/logo-hnn-medium.png"
+                alt="HNN Logo"
             />
         </div>
 
@@ -335,23 +336,23 @@ recorded ERP data and used to predict the number of neurons contributing
 to the recorded ERP (purple circle, Figure 1, right panel). The dipole
 units were in nAm, with a one-to-one comparison between data and model
 output due to the biophysical detail in our model.</p>
-<div style="display:block; width:100%; margin: 0 auto;">
+<section class="stylefig">
+<h3>Figure 1</h3>
 <figure>
-<img src="images/erp_fig_01.png" alt="Figure 1" />
-<figcaption aria-hidden="true">Figure 1</figcaption>
-</figure>
-</div>
-<p style="text-align:justify; display: block; margin: 0 auto;width: 90%; font-size: 1em;">
-Adapted from Jones et al. 2007 <span class="citation"
+<img src="images/erp_fig_01.png"
+alt="Adapted from (Jones et al. 2007). Comparison of SI evoked response in experiment and neural model simulation. Left: MEG data showing tactile evoked response (ERP) source localized to the hand area of SI (Fig 3 B of the paper). Red: suprathreshold stimulation; Blue: Threshold stimulation (average of n=100 trials). Right: Neural model simulation depicting proximal/distal inputs needed to replicate the ERP waveform (average of n=25 trials) (Fig 5 A of the paper)" />
+<figcaption aria-hidden="true">Adapted from <span class="citation"
 data-cites="jones_neural_2007">(<a href="#ref-jones_neural_2007"
 role="doc-biblioref">Jones et al. 2007</a>)</span>. Comparison of SI
 evoked response in experiment and neural model simulation. Left: MEG
 data showing tactile evoked response (ERP) source localized to the hand
-area of SI. Red: suprathreshold stimulation; Blue: Threshold stimulation
-(avg. n=100 trials). Right: Neural model simulation depicting
-proximal/distal inputs needed to replicate the ERP waveform (avg. n=25
-trials)
-</p>
+area of SI (Fig 3 B of the paper). Red: suprathreshold stimulation;
+Blue: Threshold stimulation (average of n=100 trials). Right: Neural
+model simulation depicting proximal/distal inputs needed to replicate
+the ERP waveform (average of n=25 trials) (Fig 5 A of the
+paper)</figcaption>
+</figure>
+</section>
 <p>In summary, to simulate the SI evoked response, a sequence of
 exogenous excitatory synaptic drive was simulated (by creating
 presynaptic spikes that activate layer specific synapses in the
@@ -366,7 +367,7 @@ walkthrough of simulating ERPs in the GUI from one of our recent online
 workshop. Note that the video tutorial is not a 1-1 match to the
 workflows described below, and it is meant as a supplementary tool to
 give you more expose to simulating ERPs in the GUI.</p>
-<div id="video-container" style="text-align: center;"
+<div id="video-container" class="text-align: center;"
 data-src="https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview">
 
 </div>
@@ -410,9 +411,15 @@ shown below.</p>
 <p>Alternatively, if you have not cloned the hnn-data repository, you
 can download the file directly by clicking
 <a href="https://github.com/jonescompneurolab/hnn/blob/master/data/MEG_detection_data/yes_trial_S1_ERP_all_avg.txt">here</a>.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 2</h3>
-<p><img src="images/erp_fig_02.gif" /></p>
+<figure>
+<img src="images/erp_fig_02.gif"
+alt="Animated screenshot of the GUI showing how to load ERP data file through the Load data button" />
+<figcaption aria-hidden="true">Animated screenshot of the GUI showing
+how to load ERP data file through the <code>Load data</code>
+button</figcaption>
+</figure>
 </section>
 <p>Note, the software can be used without loading data. If you wish to
 play with simulations without data, proceed to Step 2 first.</p>
@@ -428,9 +435,15 @@ click the <code>Load external drives</code> button. Navigate to the
 select <code>ERPYes100Trials.json</code>, or
 <a href="https://github.com/jonescompneurolab/hnn/tree/master/param">download
 the parameter file</a> and load it into the GUI.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 3</h3>
-<p><img src="images/erp_fig_03.gif" /></p>
+<figure>
+<img src="images/erp_fig_03.gif"
+alt="Animated screenshot of the GUI showing how to load an external drives parameter file from the External Drives tab" />
+<figcaption aria-hidden="true">Animated screenshot of the GUI showing
+how to load an external drives parameter file from the
+<code>External Drives</code> tab</figcaption>
+</figure>
 </section>
 <p>The template cortical column networks structure for this simulation
 is described in the <a href="https://hnn.brown.edu/under-the-hood/">“HNN
@@ -455,23 +468,30 @@ simulation for your hypothesis testing goals by using the
 the location as either “proximal” or “distal”. Other types of drives can
 also be defined including poisson, rhythmic, and tonic, as detailed in
 other tutorials.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 4</h3>
-<p><img src="images/erp_fig_04.png" /></p>
+<figure>
+<img src="images/erp_fig_04.png"
+alt="GUI Screenshot showing the External drives tab with evprox1, evdist1, and evprox2 drives configured with their timing and conductance parameters" />
+<figcaption aria-hidden="true">GUI Screenshot showing the
+<code>External drives</code> tab with <code>evprox1</code>,
+<code>evdist1</code>, and <code>evprox2</code> drives configured with
+their timing and conductance parameters</figcaption>
+</figure>
 </section>
 <!-- <div class="stylefig">
 <table>
 <h3>Figure 4</h3>
 <tr>
 <td>
-<div style="max-width:500px;">
+<div class="max-width:500px;">
 
 ![Figure 4a](images/erp_fig_04_01.png)
 
 </div>
 </td>
 <td>
-<div style="max-width:500px;">
+<div class="max-width:500px;">
 
 ![Figure 4a](images/erp_fig_04_02.png)
 
@@ -519,9 +539,15 @@ both backends are installed.</p>
 <p>Hit the <code>Run</code> button to run the simulation. A simulation
 log is shown under the Run button that will tell you the status of your
 simulaion.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 5</h3>
-<p><img src="images/erp_fig_05.png" /></p>
+<figure>
+<img src="images/erp_fig_05.png"
+alt="GUI Screenshot of Simulation tab showing the run configuration for a simulation with 3 trials named ERPyes-3trials" />
+<figcaption aria-hidden="true">GUI Screenshot of <code>Simulation</code>
+tab showing the run configuration for a simulation with 3 trials named
+<code>ERPyes-3trials</code></figcaption>
+</figure>
 </section>
 <p>Once complete, a new Figure 2 window will appear showing the output
 of the simulation as in the figure below. The thin blue traces are net
@@ -543,9 +569,15 @@ then click <code>Add plot</code>.</p>
 <p>Note you can change what is shown in either of these subplots by
 selecting <code>clear axis</code>, picking the <code>Type</code> of data
 from the pulldown menu, and clicking <code>Add plot</code>.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 6</h3>
-<p><img src="images/erp_fig_06.gif" /></p>
+<figure>
+<img src="images/erp_fig_06.gif"
+alt="Animated screenshot of the GUI showing how to use the Visualization tab to create drive input histograms and dipole comparisons to data" />
+<figcaption aria-hidden="true">Animated screenshot of the GUI showing
+how to use the <code>Visualization</code> tab to create drive input
+histograms and dipole comparisons to data</figcaption>
+</figure>
 </section>
 <p>Importantly, note that a scaling factor of 3000.00 was multiplied by
 the net dipole produced by the model, as seen on the y-axis scale in the
@@ -563,9 +595,16 @@ smoothing will occur. To turn off smoothing entirely, set the window
 size to 0. Below, we provide an example of the same simulation with
 smoothing turned off entirely. Note the higher-frequency content
 compared to the ERP simulation with smoothing turned on.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 7</h3>
-<p><img src="images/erp_fig_07.png" /></p>
+<figure>
+<img src="images/erp_fig_07.png"
+alt="GUI screenshot with dipole plot, illustrating that the ERP simulation output without smoothing displays higher-frequency content and noise compared to the smoothed version" />
+<figcaption aria-hidden="true">GUI screenshot with dipole plot,
+illustrating that the ERP simulation output without smoothing displays
+higher-frequency content and noise compared to the smoothed
+version</figcaption>
+</figure>
 </section>
 <h2>4. A closer look inside the simulations: contribution of layers and
 cell types</h2>
@@ -583,9 +622,16 @@ from the <code>Layout template</code> dropdown menu. From the
 <code>Dataset</code> dropdown, select the simulation data you would like
 to visualize. Next, click <code>Make figure</code> to generate a new
 figure.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 8</h3>
-<p><img src="images/erp_fig_08.png" /></p>
+<figure>
+<img src="images/erp_fig_08.png"
+alt="GUI screenshot showing layer-specific dipole visualizations, which shows separate contributions from Layer 2/3, Layer 5, and aggregate (combined L2/3 and L5) dipole signals" />
+<figcaption aria-hidden="true">GUI screenshot showing layer-specific
+dipole visualizations, which shows separate contributions from Layer
+2/3, Layer 5, and aggregate (combined L2/3 and L5) dipole
+signals</figcaption>
+</figure>
 </section>
 <p>The new figure shows the dipole contributions from Layer 2/3 (top),
 Layer 5 (middle), and the aggregate (bottom). Note the different
@@ -600,9 +646,16 @@ from the <code>Layout template</code> dropdown menu. From the
 <code>Dataset</code> dropdown, select the simulation data you would like
 to visualize. Next, click <code>Make figure</code> to generate a new
 figure.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 9</h3>
-<p><img src="images/erp_fig_09.png" /></p>
+<figure>
+<img src="images/erp_fig_09.png"
+alt="GUI screenshot of simulation results, showing drive input histograms above and a rastergram of spiking activity below, across different neuronal populations color-coded by cell type and layer" />
+<figcaption aria-hidden="true">GUI screenshot of simulation results,
+showing drive input histograms above and a rastergram of spiking
+activity below, across different neuronal populations color-coded by
+cell type and layer</figcaption>
+</figure>
 </section>
 <p>This window shows the spiking activity produced in each population in
 response to the evoked inputs. The top two panels show histograms of
@@ -625,9 +678,15 @@ matplotlib control at the top.</p>
 <p><strong>4.3 Viewing ERP Spectrograms</strong></p>
 <p>HNN also allows you to generate a time-frequency representation of
 ERP dipole signals.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 10 spectrogram</h3>
-<p><img src="images/erp_fig_10.png" /></p>
+<figure>
+<img src="images/erp_fig_10.png"
+alt="GUI screenshot showing a time-frequency spectrogram representation of the ERP dipole signal, which shows frequency content evolution over time" />
+<figcaption aria-hidden="true">GUI screenshot showing a time-frequency
+spectrogram representation of the ERP dipole signal, which shows
+frequency content evolution over time</figcaption>
+</figure>
 </section>
 <h2>5. Comparing model output and recorded data</h2>
 <p>When loading data, the root-mean-squared-error (RMSE) is calculate
@@ -639,9 +698,17 @@ changes.</p>
 and the simulated average ERP changed to 5.59. Depending on the number
 of trials you run and what adjustments you make to the parameter values,
 you may be able to reduce the RMSE.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 11</h3>
-<p><img src="images/erp_fig_11.png" /></p>
+<figure>
+<img src="images/erp_fig_11.png"
+alt="Left: GUI screenshot showing a comparison of the 3-trial simulation to experimental data, exhibiting an RMSE of 5.51. Right: GUI screenshot showing a comparison of a new 10-trial simulation to experimental data, exhibiting improved fit with RMSE of 5.59" />
+<figcaption aria-hidden="true">Left: GUI screenshot showing a comparison
+of the 3-trial simulation to experimental data, exhibiting an RMSE of
+5.51. Right: GUI screenshot showing a comparison of a new 10-trial
+simulation to experimental data, exhibiting improved fit with RMSE of
+5.59</figcaption>
+</figure>
 </section>
 <h2>6. Adjusting parameters</h2>
 <p>Parameter adjustments will be key to developing and testing
@@ -668,9 +735,16 @@ simulation data to a file with this new name.</p>
 <p>Then, to provide synchronous exogenous drives to all cells in the
 network, go to <code>External drives</code> and set the
 <code>Std dev time</code> for all drives to 0.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 12</h3>
-<p><img src="images/erp_fig_12.png" /></p>
+<figure>
+<img src="images/erp_fig_12.png"
+alt="GUI screenshot showing External drives tab parameters with all Std dev time values set to 0, enabling “synchronous” stimulation with no variability in input timing" />
+<figcaption aria-hidden="true">GUI screenshot showing
+<code>External drives</code> tab parameters with all
+<code>Std dev time</code> values set to 0, enabling “synchronous”
+stimulation with no variability in input timing</figcaption>
+</figure>
 </section>
 <p>After the simulation has completed, you’ll see the following output.
 Although the model replicates some gross features of the experimental
@@ -680,9 +754,16 @@ times in the histograms at the top of the figure (compare to evoked
 response inputs shown in Step 5), predicting (in this case) the evoked
 responses are more likely to be non-synchronous. Remember, however, that
 this simulation is only based on two trials.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
+<section class="stylefig">
 <h3>Figure 13</h3>
-<p><img src="images/erp_fig_13.png" /></p>
+<figure>
+<img src="images/erp_fig_13.png"
+alt="GUI screenshot showing output from a simulation with synchronous stimulation, exhibiting worse fit to data with an RMSE of 14.15 and less variable input timing histograms" />
+<figcaption aria-hidden="true">GUI screenshot showing output from a
+simulation with synchronous stimulation, exhibiting worse fit to data
+with an RMSE of 14.15 and less variable input timing
+histograms</figcaption>
+</figure>
 </section>
 <p><strong>6.1.1 Exercises for further exploration</strong></p>
 <p>Try adjusting the following. How do they affect the simulation? -
@@ -699,12 +780,9 @@ Notice that the timing and magnitude of the peaks in this new data set are quite
 
 HNN will automatically recalculate the model fit to the data (i.e, the RMSE between the average model response and the loaded data) based on the prior simulations (Step 6.1), showing that the previously used parameter set gave a poor fit to the new data (RMSE = 30.83).
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 14  
-
-![](images/erp_fig_14.png)
-
+![Plot showing threshold-level parameter set applied to non-detected trial data with poor fit and RMSE of 30.83](images/erp_fig_14.png)
 </div>
 
 Notice that the magnitudes of the peaks in the model are larger than the data, and the timing of the peaks is faster.
@@ -719,12 +797,9 @@ To test these hypotheses, we’ll adjust the parameters as described. For simpli
 
 You should see the new values in the dropdowns.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 15 
-
-![](images/erp_fig_15.png)
-
+![Screenshot showing External drives parameters loaded from ERPNo100Trials.json with adjusted timing and conductance values for non-detected trials](images/erp_fig_15.png)
 </div>
 
 Let's take a closer look at what parameters we changed. 
@@ -733,22 +808,16 @@ Notice that in a given layer, weights (post-synaptic conductances) of the evoked
 
 Also, notice that the mean input times are larger for all inputs, and the variances has increased for the Proximal 2 input. This means that we are overall delaying the input arrival times to the network, thereby testing the second part of our hypothesis. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 16 new param values vs. old param values. Highlight the old para values and compare them side-by-side
-
-![](images/erp_fig_16.png)
-
+![Side-by-side comparison of parameter values showing decreased pyramidal weights and delayed timing for non-detected trial simulation](images/erp_fig_16.png)
 </div>
 
 Let’s reduce the number of trials to 2 for speed, change the simulation name, and run the simulation! This simulation should tell us how well our adjusted parameters fit the new non-detected data. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 17 simulation result (joyce: the simulation doesn't seem to fit very well?)
-
-![](images/erp_fig_17_no_trials_simulation.png)
-
+![Simulation output for non-detected trials showing fit to experimental data with adjusted parameters for weaker delayed inputs](images/erp_fig_17_no_trials_simulation.png)
 </div>
 
 With our new parameter set, the simulation is now a better fit to the experimental data (RMSE = ___). We can interprete these results as supporting our hypothesis that on non-detected trials, the feedback (distal 1) and late-feedforward (proximal 2) inputs to the network are more delayed, less synchronous, and overall weaker than on detected trials. -->
@@ -761,10 +830,18 @@ threshold level data.</p>
 <p>First, let’s load the data from the supra-threshold detected trials
 <code>S1_SupraT.txt</code> and the data from the threshold-level
 detected trials <code>yes_trial_S1_ERP_all_avg</code>.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
-<h3>Figure 18</h3>
-<p><img src="images/erp_fig_18.png" /></p>
-</section>
+<div class="stylefig">
+<!-- ### Figure 18 -->
+<h3>Figure 14</h3>
+<figure>
+<img src="images/erp_fig_18.png"
+alt="GUI screenshot showing a comparison of threshold-level and supra-threshold experimental data waveforms, which exhibit differences in timing, amplitude, and peak sharpness" />
+<figcaption aria-hidden="true">GUI screenshot showing a comparison of
+threshold-level and supra-threshold experimental data waveforms, which
+exhibit differences in timing, amplitude, and peak
+sharpness</figcaption>
+</figure>
+</div>
 <p>Notice that the two waveforms displayed have very different features,
 including altered timing, amplitude, and sharpness of the peaks in this
 new data set.</p>
@@ -775,10 +852,17 @@ RMSE between the average model response and the loaded data) based on
 the threshold-level simulation, showing that
 <code>ERPYes100Trials.json</code> gives a poor fit to the
 supra-threshold data (RMSE = 30.31).</p>
-<section style="display:block; width:90%; margin: 0 auto;">
-<h3>Figure 19</h3>
-<p><img src="images/erp_fig_19.png" /></p>
-</section>
+<div class="stylefig">
+<!-- ### Figure 19 -->
+<h3>Figure 15</h3>
+<figure>
+<img src="images/erp_fig_19.png"
+alt="GUI screenshot showing the poor fit of threshold-level simulation to supra-threshold experimental data with RMSE of 30.31" />
+<figcaption aria-hidden="true">GUI screenshot showing the poor fit of
+threshold-level simulation to supra-threshold experimental data with
+RMSE of 30.31</figcaption>
+</figure>
+</div>
 <p>What might account for these differences between our simulation and
 the data for the supra-threshold detected trials? We can formulate some
 hypotheses and use HNN to test it.</p>
@@ -794,10 +878,17 @@ such changes and accurately reproduces the new data. Load the
 <code>External Drives</code>.</p>
 <p>You should see the new values in the dropdowns.</p>
 <p>Next, let’s run the simulation using the <code>Run</code> button.</p>
-<section style="display:block; width:90%; margin: 0 auto;">
-<h3>Figure 20</h3>
-<p><img src="images/erp_fig_20.png" /></p>
-</section>
+<div class="stylefig">
+<!-- ### Figure 20 -->
+<h3>Figure 16</h3>
+<figure>
+<img src="images/erp_fig_20.png"
+alt="GUI screenshot showing the improved fit of supra-threshold simulation output supra-threshold data with RMSE of 24.39 and stronger earlier inputs" />
+<figcaption aria-hidden="true">GUI screenshot showing the improved fit
+of supra-threshold simulation output supra-threshold data with RMSE of
+24.39 and stronger earlier inputs</figcaption>
+</figure>
+</div>
 <p>Let’s take a look at the output. First, note that the previous
 threshold-level simulation was not removed to allow comparison to the
 new supra-threshold simulation. For the new suprathreshold detection
@@ -825,7 +916,9 @@ based on your own hypotheses.</p>
 tutorial can be found by clicking here or by visiting the following URL:
 https://github.com/jonescompneurolab/hnn/tree/master/param.</p>
 <p><strong>8.2 Video walkthrough</strong> A video walkthrough of an
-abridged version of the tutorial can be found by clicking here.</p>
+abridged version of the tutorial can be found by <a
+href="https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview">clicking
+here</a>.</p>
 <h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent"
 data-entry-spacing="0" role="list">

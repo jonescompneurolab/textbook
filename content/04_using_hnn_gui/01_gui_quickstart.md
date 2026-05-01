@@ -28,10 +28,7 @@ Note that if you are on Windows and installed HNN through "Windows Subsystem for
 
 <div class="stylefig">
 ### Figure 1
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_01_blank_gui.png)
-<p align="justify">
-HNN GUI shown after starting the program.
-</p>
+![Screenshot of the HNN GUI interface after launching, showing the default empty state with tabs for Simulation, Network, External drives, and Visualization.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_01_blank_gui.png)
 </div>
 
 ## Changing parameters
@@ -44,10 +41,7 @@ You can also change the parameters of the network itself, as opposed to the exte
 
 <div class="stylefig">
 ### Figure 2
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_02_evdist_box.png)
-<p align="justify">
-`evdist1` parameter box
-</p>
+![The GUI with expanded `evdist1` parameter box on the left showing various configurable parameters for the distal external drive, including timing, location, and synaptic weight settings.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_02_evdist_box.png)
 </div>
 
 ## Running a simulation
@@ -58,10 +52,7 @@ Finally, click the purple `Run` button to run your simulation! After a minute or
 
 <div class="stylefig">
 ### Figure 3
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_03_run_first.png)
-<p align="justify">
-A successfully-run default simulation.
-</p>
+![The GUI after successful simulation output. On the right are output figures with the top subplot showing the three default external drives (`evprox1` in red, then `evdist1` in green, then `evprox2` in red) and the bottom subplot showing the resulting current dipole moment over time.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_03_run_first.png)
 </div>
 
 ## Creating more visualizations
@@ -72,10 +63,7 @@ Note that for the default simulation, because we are modeling such a short signa
 
 <div class="stylefig">
 ### Figure 4
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_04_viz.png)
-<p align="justify">
-A new visualization of the same simulation showing the drive inputs and a spike rastergram.
-</p>
+![Another visualization of the simulation output from Figure 3. On the right top subplot, this shows external drives, and in the right bottom subplot, this shows a spike rastergram of all cell types (each cell type is color-coded) displaying individual neuron firing patterns over time.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_04_viz.png)
 </div>
 
 ## Continue on to other tutorials

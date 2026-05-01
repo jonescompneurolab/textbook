@@ -18,7 +18,7 @@ textbook_root_path = Path(__file__).parents[1]
 # integrated with the code.
 
 
-def check_version(enable_debug=True, root_path=None):
+def check_version(enable_debug=False, root_path=None):
     """
     Return True if all notebooks are run on the same version of hnn_core,
     else False
@@ -81,9 +81,8 @@ def check_version(enable_debug=True, root_path=None):
         nbs_to_skip = json.load(f)
 
     # get names of nbs to skip
-    # AES TODO BUG, this was not upgraded for "dev" builds, maybe by accident. Maybe it
-    # shouldn't deal with dev builds, but that's for our later workflow architecture
-    # discussion.
+    # Since this script is only run in the stable build, we only need to skip the
+    # appopriate notebooks.
     nbs_to_skip = nbs_to_skip["skip_if_stable"]
     logger.debug(
         "\n",
@@ -135,18 +134,19 @@ def check_version(enable_debug=True, root_path=None):
     latest = resp.json()["info"]["version"]
 
     if len(nb_versions) != 1:
-        latest_version_check = False
+        latest_version_check_success = False
 
     else:
-        latest_version_check = nb_versions[0] == latest
+        latest_version_check_success = nb_versions[0] == latest
 
-    if latest_version_check:
+    if latest_version_check_success:
         print(f"All notebooks were executed with the latest hnn-core=={latest}")
     else:
         print(
             f"\nLatest version of hnn-core: {latest}",
             f"\nVersions of hnn-core used in executed notebooks: {nb_versions}",
-            "Notebooks should be re-executed using the latest version",
+            "\nERROR: Notebooks should be re-executed using the latest version",
+            f"\n\nfExecution statuses:\n{execution_statuses}",
         )
 
     logger.debug(
@@ -155,17 +155,21 @@ def check_version(enable_debug=True, root_path=None):
         execution_statuses,
     )
 
-    print("\nReturn:")
-    return latest_version_check
+    return latest_version_check_success
 
 
 if __name__ == "__main__":
-    # return 0 to indicate success if True
-    # return 1 to indicate failure if False
-    status = check_version()
-    if status == 0:
+    version_check_success = check_version()
+
+    # Need to convert version check to int to use as exit code. In Python, True = 1 and
+    # False = 0, so we need to reverse the boolean value to get the correct exit code (0
+    # for success, 1 for failure).
+    print("\nReturn:")
+    if version_check_success:
         print("Success!")
-    elif status == 1:
+        status = 0  #  exit code 0 for success
+    else:
         print("ERROR: 'check_nb_versions.py' Failed, please investigate")
+        status = 1  # exit code 1 for failure
 
     sys.exit(status)

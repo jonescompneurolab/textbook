@@ -18,15 +18,10 @@ We found that we could reproduce evoked responses that accurately reflected the 
 
 In our model, the exogenous driving inputs were simulated as predefined trains of action potentials (pre-synaptic spikes) that activated excitatory synapses in the local cortical circuit in proximal and distal projection patterns (i.e. feedforward, and feedback, respectively, as shown schematically in Figure 1 right, and in the HNN GUI Model Schematics). The number, timing and strength (post-synaptic conductance) of the driving spikes were manually adjusted in the model until a close representation of the data was found (all other model parameters were tuned and fixed based on the morphology, physiology and connectivity within layered neocortical circuits) [@jones_neural_2007]. Note, a scaling factor was applied to net dipole output to match to the magnitude of the recorded ERP data and used to predict the number of neurons contributing to the recorded ERP (purple circle, Figure 1, right panel). The dipole units were in nAm, with a one-to-one comparison between data and model output due to the biophysical detail in our model.
 
-<div style="display:block; width:100%; margin: 0 auto;">
-
-![Figure 1](images/erp_fig_01.png)
-
+<div class="stylefig">
+### Figure 1
+![Adapted from [@jones_neural_2007]. Comparison of SI evoked response in experiment and neural model simulation. Left: MEG data showing tactile evoked response (ERP) source localized to the hand area of SI (Fig 3 B of the paper). Red: suprathreshold stimulation; Blue: Threshold stimulation (average of n=100 trials). Right: Neural model simulation depicting proximal/distal inputs needed to replicate the ERP waveform (average of n=25 trials) (Fig 5 A of the paper)](images/erp_fig_01.png)
 </div>
-
-<p style="text-align:justify; display: block; margin: 0 auto;width: 90%; font-size: 1em;"> 
-Adapted from Jones et al. 2007 [@jones_neural_2007]. Comparison of SI evoked response in experiment and neural model simulation. Left: MEG data showing tactile evoked response (ERP) source localized to the hand area of SI. Red: suprathreshold stimulation; Blue: Threshold stimulation (avg. n=100 trials). Right: Neural model simulation depicting proximal/distal inputs needed to replicate the ERP waveform (avg. n=25 trials) 
-</p>
 
 In summary, to simulate the SI evoked response, a sequence of exogenous excitatory synaptic drive was simulated (by creating presynaptic spikes that activate layer specific synapses in the neocortical network) consisting of proximal drive at ~25 ms, followed by distal drive at ~60 ms, followed by a second proximal drive at ~122 ms. Given this background information, we can now walk you through the steps of simulating a similar ERP, using a subset of the data shown in Figure 1.
 
@@ -36,7 +31,7 @@ In addition to the written tutorial below, we also provide a video walkthrough o
 
 <div
   id="video-container"
-  style="text-align: center;"
+  class="text-align: center;"
   data-src="https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview"
 ></div>
 
@@ -66,12 +61,9 @@ If you have cloned the hnn-data repository, navigate to hnn-data folder on your 
 
 Alternatively, if you have not cloned the hnn-data repository, you can download the file directly by clicking <a href="https://github.com/jonescompneurolab/hnn/blob/master/data/MEG_detection_data/yes_trial_S1_ERP_all_avg.txt">here</a>.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 2
-
-![](images/erp_fig_02.gif)
-
+![Animated screenshot of the GUI showing how to load ERP data file through the `Load data` button](images/erp_fig_02.gif)
 </div>
 
 Note, the software can be used without loading data. If you wish to play with simulations without data, proceed to Step 2 first.
@@ -82,12 +74,9 @@ Note, the software can be used without loading data. If you wish to play with si
 
 An initial parameter set that will simulate the evoked drives that generate an evoked response in close agreement with the SI data described in Step 1 is distributed in the hnn-data repository.  Click on the `External drives` tab at the top of the GUI and then click the `Load external drives` button. Navigate to the `hnn-data/network-configurations` folder on your computer and select `ERPYes100Trials.json`, or <a href="https://github.com/jonescompneurolab/hnn/tree/master/param">download the parameter file</a> and load it into the GUI. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 3
-
-![](images/erp_fig_03.gif)
-
+![Animated screenshot of the GUI showing how to load an external drives parameter file from the `External Drives` tab](images/erp_fig_03.gif)
 </div>
 
 The template cortical column networks structure for this simulation is described in the <a href="https://hnn.brown.edu/under-the-hood/">"HNN Template Model" page</a> on the hnn.brown.edu website. Several of the network parameter can be adjusted via the HNN GUI (e.g., local excitatory and inhibitory connection strengths) under the `Network connectivity` tab, but we will leave them fixed for this tutorial and only adjust the inputs that “activate” the network.
@@ -96,12 +85,9 @@ The values of the parameters that you loaded to “activate” the network in a 
 
 To see the detailed parameter values defining each of these drives click on the dropdown button next to the name of each drive.  Note: additional evoked proximal or distal inputs can be added to your simulation for your hypothesis testing goals by using the `Add drive` button and specifying the drive as "Evoked" and the location as either "proximal" or "distal". Other types of drives can also be defined including poisson, rhythmic, and tonic, as detailed in other tutorials.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 4
-
-![](images/erp_fig_04.png)
-
+![GUI Screenshot showing the `External drives` tab with `evprox1`, `evdist1`, and `evprox2` drives configured with their timing and conductance parameters](images/erp_fig_04.png)
 </div>
 
 <!-- <div class="stylefig">
@@ -109,14 +95,14 @@ To see the detailed parameter values defining each of these drives click on the 
 <h3>Figure 4</h3>
 <tr>
 <td>
-<div style="max-width:500px;">
+<div class="max-width:500px;">
 
 ![Figure 4a](images/erp_fig_04_01.png)
 
 </div>
 </td>
 <td>
-<div style="max-width:500px;">
+<div class="max-width:500px;">
 
 ![Figure 4a](images/erp_fig_04_02.png)
 
@@ -140,12 +126,9 @@ Before running the simulation, we’ll first change the simulation name (i.e., t
 
 Hit the `Run` button to run the simulation. A simulation log is shown under the Run button that will tell you the status of your simulaion. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 5
-
-![](images/erp_fig_05.png)
-
+![GUI Screenshot of `Simulation` tab showing the run configuration for a simulation with 3 trials named `ERPyes-3trials`](images/erp_fig_05.png)
 </div>
 
 Once complete, a new Figure 2 window will appear showing the output of the simulation as in the figure below. The thin blue traces are net current dipole signals from individual trials while the thick blue trace is the average ERP, with histograms of the proximal and distal driving spikes shown above. 
@@ -158,24 +141,18 @@ Next, select ax0, set the `Type` to `input histogram`, and click `Add plot`.
 
 Note you can change what is shown in either of these subplots by selecting `clear axis`, picking the `Type` of data from the pulldown menu, and clicking `Add plot`.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 6
-
-![](images/erp_fig_06.gif)
-
+![Animated screenshot of the GUI showing how to use the `Visualization` tab to create drive input histograms and dipole comparisons to data](images/erp_fig_06.gif)
 </div> 
 
 Importantly, note that a scaling factor of 3000.00 was multiplied by the net dipole produced by the model, as seen on the y-axis scale in the figure above. This scaling factor can be adjusted to match the magnitude of the recorded data; the value of 3000 is the default value for the loaded parameter set. In this case, since the template model contains 200 pyramidal neurons (PNs), the simulation predicts that the number of cells that contribute to the signal is 600,000 (200 x 3000) PNs.
 
 Also note that in the ERP simulation shown, the raw dipole signal was smoothed using a Hamming filter using a window size of 30 milliseconds, in order to reduce noise in the ERP signal generated by this reduced network model. The level of smoothing can be adjusted by changing the value of the Dipole Smooth Window (ms). The longer the window, the more smoothing will occur. To turn off smoothing entirely, set the window size to 0. Below, we provide an example of the same simulation with smoothing turned off entirely. Note the higher-frequency content compared to the ERP simulation with smoothing turned on.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 7
-
-![](images/erp_fig_07.png)
-
+![GUI screenshot with dipole plot, illustrating that the ERP simulation output without smoothing displays higher-frequency content and noise compared to the smoothed version](images/erp_fig_07.png)
 </div>
 
 ## 4. A closer look inside the simulations: contribution of layers and cell types
@@ -189,12 +166,9 @@ One of the main advantages of simulating neocortical activity is that we can div
 
 From the `Visualization` tab, select "Dipole Layers (3x1)" from the `Layout template` dropdown menu. From the `Dataset` dropdown, select the simulation data you would like to visualize. Next, click `Make figure` to generate a new figure. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 8
-
-![](images/erp_fig_08.png)
-
+![GUI screenshot showing layer-specific dipole visualizations, which shows separate contributions from Layer 2/3, Layer 5, and aggregate  (combined L2/3 and L5) dipole signals](images/erp_fig_08.png)
 </div>
 
 The new figure shows the dipole contributions from Layer 2/3 (top), Layer 5 (middle), and the aggregate (bottom). Note the different features in Layer 2/3 vs Layer 5 dipole signals, allowing you to tease apart how the different cortical layers contribute to different net waveform features. In this figure, the light blue traces are from individual trials (n=2), and the dark blue trace is the average across trials. The same dipole scaling factor (3000.0) is applied.
@@ -203,12 +177,9 @@ The new figure shows the dipole contributions from Layer 2/3 (top), Layer 5 (mid
 
 From the `Visualization` tab, select "Drive-Spikes (2x1)" from the `Layout template` dropdown menu. From the `Dataset` dropdown, select the simulation data you would like to visualize. Next, click `Make figure` to generate a new figure. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 9
-
-![](images/erp_fig_09.png)
-
+![GUI screenshot of simulation results, showing drive input histograms above and a rastergram of spiking activity below, across different neuronal populations color-coded by cell type and layer](images/erp_fig_09.png)
 </div>
 
 This window shows the spiking activity produced in each population in response to the evoked inputs. The top two panels show histograms of distal evoked inputs (green) and proximal evoked inputs (red) provided to the neurons. The large third panel shows a raster plot of the spiking activity generated by the individual neurons, with different populations in different colors as labeled (x-axis: time in ms; y-axis: neuron identifier). The neuron identifiers are arranged vertically by layer, with top representing supragranular layers and the bottom representing the infragranular layers. Individual neuron types are drawn in the different colors shown in the legend. The dotted lines in the bottom panel show a time-series of summed activity per population (these use the same color code as the individual spikes; you can turn these lines off or on by selecting View> Toggle Histograms). The initial view shows the aggregate spiking activity across trials. To see spiking activity generated by a single trial, select the trial number using the combination box at the bottom of the window. This spike viewer window also provides the standard save/navigation functionality through the matplotlib control at the top.
@@ -217,12 +188,9 @@ This window shows the spiking activity produced in each population in response t
 
 HNN also allows you to generate a time-frequency representation of ERP dipole signals.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 10 spectrogram
-
-![](images/erp_fig_10.png)
-
+![GUI screenshot showing a time-frequency spectrogram representation of the ERP dipole signal, which shows frequency content evolution over time](images/erp_fig_10.png)
 </div>
 
 ## 5. Comparing model output and recorded data
@@ -233,12 +201,9 @@ Let's run a simulation with 10 trials and see how the RMSE changes.
 
 Notice that when we simulated more trials, the RMSE between the data and the simulated average ERP changed to 5.59. Depending on the number of trials you run and what adjustments you make to the parameter values, you may be able to reduce the RMSE.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 11 
-
-![](images/erp_fig_11.png)
-
+![Left: GUI screenshot showing a comparison of the 3-trial simulation to experimental data, exhibiting an RMSE of 5.51. Right: GUI screenshot showing a comparison of a new 10-trial simulation to experimental data, exhibiting improved fit with RMSE of 5.59](images/erp_fig_11.png)
 </div>
 
 ## 6. Adjusting parameters
@@ -253,23 +218,16 @@ To change the evoked inputs to contact the cells in network synchronously, first
 
 Then, to provide synchronous exogenous drives to all cells in the network, go to `External drives` and set the `Std dev time` for all drives to 0. 
 
-
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 12 
-
-![](images/erp_fig_12.png)
-
+![GUI screenshot showing `External drives` tab parameters with all `Std dev time` values set to 0, enabling "synchronous" stimulation with no variability in input timing](images/erp_fig_12.png)
 </div>
 
 After the simulation has completed, you’ll see the following output. Although the model replicates some gross features of the experimental data, the fit to the data is now substantially worse (RMSE = 14.15). Notice also that there is significantly lower variability of the input times in the histograms at the top of the figure (compare to evoked response inputs shown in Step 5), predicting (in this case) the evoked responses are more likely to be non-synchronous. Remember, however, that this simulation is only based on two trials.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 13
-
-![](images/erp_fig_13.png)
-
+![GUI screenshot showing output from a simulation with synchronous stimulation, exhibiting worse fit to data with an RMSE of 14.15 and less variable input timing histograms](images/erp_fig_13.png)
 </div>
 
 
@@ -291,12 +249,9 @@ Notice that the timing and magnitude of the peaks in this new data set are quite
 
 HNN will automatically recalculate the model fit to the data (i.e, the RMSE between the average model response and the loaded data) based on the prior simulations (Step 6.1), showing that the previously used parameter set gave a poor fit to the new data (RMSE = 30.83).
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 14  
-
-![](images/erp_fig_14.png)
-
+![Plot showing threshold-level parameter set applied to non-detected trial data with poor fit and RMSE of 30.83](images/erp_fig_14.png)
 </div>
 
 Notice that the magnitudes of the peaks in the model are larger than the data, and the timing of the peaks is faster.
@@ -311,12 +266,9 @@ To test these hypotheses, we’ll adjust the parameters as described. For simpli
 
 You should see the new values in the dropdowns.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 15 
-
-![](images/erp_fig_15.png)
-
+![Screenshot showing External drives parameters loaded from ERPNo100Trials.json with adjusted timing and conductance values for non-detected trials](images/erp_fig_15.png)
 </div>
 
 Let's take a closer look at what parameters we changed. 
@@ -325,22 +277,16 @@ Notice that in a given layer, weights (post-synaptic conductances) of the evoked
 
 Also, notice that the mean input times are larger for all inputs, and the variances has increased for the Proximal 2 input. This means that we are overall delaying the input arrival times to the network, thereby testing the second part of our hypothesis. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 16 new param values vs. old param values. Highlight the old para values and compare them side-by-side
-
-![](images/erp_fig_16.png)
-
+![Side-by-side comparison of parameter values showing decreased pyramidal weights and delayed timing for non-detected trial simulation](images/erp_fig_16.png)
 </div>
 
 Let’s reduce the number of trials to 2 for speed, change the simulation name, and run the simulation! This simulation should tell us how well our adjusted parameters fit the new non-detected data. 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
+<div class="stylefig">
 ### Figure 17 simulation result (joyce: the simulation doesn't seem to fit very well?)
-
-![](images/erp_fig_17_no_trials_simulation.png)
-
+![Simulation output for non-detected trials showing fit to experimental data with adjusted parameters for weaker delayed inputs](images/erp_fig_17_no_trials_simulation.png)
 </div>
 
 With our new parameter set, the simulation is now a better fit to the experimental data (RMSE = ___). We can interprete these results as supporting our hypothesis that on non-detected trials, the feedback (distal 1) and late-feedforward (proximal 2) inputs to the network are more delayed, less synchronous, and overall weaker than on detected trials. -->
@@ -352,12 +298,10 @@ For this part of the tutorial, we’ll load a different experimental data set in
 
 First, let's load the data from the supra-threshold detected trials `S1_SupraT.txt` and the data from the threshold-level detected trials `yes_trial_S1_ERP_all_avg`.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
-### Figure 18 
-
-![](images/erp_fig_18.png)
-
+<div class="stylefig">
+<!-- ### Figure 18 --> 
+### Figure 14 
+![GUI screenshot showing a comparison of threshold-level and supra-threshold experimental data waveforms, which exhibit differences in timing, amplitude, and peak sharpness](images/erp_fig_18.png)
 </div>
 
 Notice that the two waveforms displayed have very different features, including altered timing, amplitude, and sharpness of the peaks in this new data set.
@@ -365,12 +309,10 @@ Notice that the two waveforms displayed have very different features, including 
 If we also load in the previous simulation of threshold-level detected trials, `ERP_yes_3trials`, we can see that HNN automatically calculate the model fit to both datasets loaded (i.e, the RMSE between the average model response and the loaded data) based on the threshold-level simulation, showing that `ERPYes100Trials.json` gives a poor fit to the supra-threshold data (RMSE = 30.31).
 
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
-### Figure 19
-
-![](images/erp_fig_19.png)
-
+<div class="stylefig">
+<!-- ### Figure 19 -->
+### Figure 15
+![GUI screenshot showing the poor fit of threshold-level simulation to supra-threshold experimental data with RMSE of 30.31](images/erp_fig_19.png)
 </div>
 
 What might account for these differences between our simulation and the data for the supra-threshold detected trials? We can formulate some hypotheses and use HNN to test it. 
@@ -385,12 +327,10 @@ You should see the new values in the dropdowns.
 
 Next, let's run the simulation using the `Run` button.
 
-<div style="display:block; width:90%; margin: 0 auto;">
-
-### Figure 20 
-
-![](images/erp_fig_20.png)
-
+<div class="stylefig">
+<!-- ### Figure 20 --> 
+### Figure 16 
+![GUI screenshot showing the improved fit of supra-threshold simulation output supra-threshold data with RMSE of 24.39 and stronger earlier inputs](images/erp_fig_20.png)
 </div>
 
 Let’s take a look at the output. First, note that the previous threshold-level simulation was not removed to allow comparison to the new supra-threshold simulation. For the new suprathreshold detection parameter set, there is now a better fit to the experimental data (RMSE = 24.39), with all major waveform features in the experiment and simulation in agreement. One interpretation of these results is that on supra-threshold detected trials, both the feedforward and feedback inputs are stronger, and both early and late feedforward inputs arrive earlier. These trials have overall stronger inputs, which then promotes tactile detection.
@@ -412,6 +352,6 @@ All parameter files for this tutorial can be found by clicking here or by visiti
 
 
 **8.2 Video walkthrough**
-A video walkthrough of an abridged version of the tutorial can be found by clicking here.
+A video walkthrough of an abridged version of the tutorial can be found by [clicking here](https://drive.google.com/file/d/162INH5diRFg8ULczxvp5P_Oh6Tok5hVV/preview).
 
 ## References

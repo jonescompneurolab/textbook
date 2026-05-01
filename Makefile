@@ -1,5 +1,5 @@
 
-.PHONY: all build clean create-textbook-stable-build create-textbook-dev-build
+.PHONY: all build clean create-textbook-stable-env create-textbook-dev-env
 
 HNN_VERSION := 0.5.0
 OS := $(shell uname -s)
@@ -71,22 +71,22 @@ clean:
 	rm -rf dev/*.html
 	rm -rf dev/*/*.html
 
-create-textbook-stable-build:
-	$(call create-and-configure-env,textbook-stable-build,false)
-	conda run -n textbook-stable-build pip install 'hnn_core[dev]==$(HNN_VERSION)'
-	conda run -n textbook-stable-build pip install --force-reinstall 'pooch==1.8.2'
-	@echo "Conda environment 'textbook-stable-build' successfully created."
-	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-build'"
+create-textbook-stable-env:
+	$(call create-and-configure-env,textbook-stable-env,false)
+	conda run -n textbook-stable-env pip install 'hnn_core[dev]==$(HNN_VERSION)'
+	conda run -n textbook-stable-env pip install --force-reinstall 'pooch==1.8.2'
+	@echo "Conda environment 'textbook-stable-env' successfully created."
+	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-env'"
 
-create-textbook-dev-build:
-	$(call create-and-configure-env,textbook-dev-build,true)
+create-textbook-dev-env:
+	$(call create-and-configure-env,textbook-dev-env,true)
 
 	@# Get the latest commit hash of hnn-core master branch
 	LATEST_HASH=$$(git ls-remote https://github.com/jonescompneurolab/hnn-core.git master | cut -f1);
 	@# Install hnn-core in developer mode, forcing reinstall without cache
-	conda run -n textbook-dev-build pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"
-	conda run -n textbook-dev-build pip install --force-reinstall 'pooch==1.8.2'
+	conda run -n textbook-dev-env pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"
+	conda run -n textbook-dev-env pip install --force-reinstall 'pooch==1.8.2'
 
-	@echo "Conda environment 'textbook-dev-build' successfully created."
-	@echo -e "\n\nActivate your environment with 'conda activate textbook-dev-build'"
+	@echo "Conda environment 'textbook-dev-env' successfully created."
+	@echo -e "\n\nActivate your environment with 'conda activate textbook-dev-env'"
 

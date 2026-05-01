@@ -13,10 +13,10 @@
 <table style="border:none">
   <tr>
     <td style="border:none" width=>
-    ![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/synaptic-connectivity.png)
+    ![ Schematic of our cortical column model with red arrows down the vertical dendrites, indicating intracellular electrical currents. Neurons are connected to eachother and external inputs.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/synaptic-connectivity.png)
     </td>
     <td style="border:none; vertical-align:middle;">
-    ![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/3d-column-model.png)
+    ![3D representation of our cortical column model with the aggregate current dipole indicated by a red arrow parallel to the dendrite.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/3d-column-model.png)
     </td>
   </tr>
   <tr>
@@ -37,19 +37,20 @@ Neurons in the model are arranged in three dimensions. The XY plane is used to a
 
 
 <div style="display:block; width:100%; margin: 0 auto;">
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/colored-column-model.png)
+![3D visualization of the default cortical column model. Green layer 2/3 pyramidal neurons are shorter and closer to the cortical surface than red layer 5 pyramidal neurons](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/colored-column-model.png)
 </div>
 
 The illustration below shows a schematic of local network connectivity. The blue cells are pyramidal cells, while the orange circles represent the interneurons. The lines between neurons represent local synaptic connections. Lines ending with a circle are excitatory (AMPA/NMDA) synapses, while lines ending with a line are inhibitory (GABAA/GABAB) synapses. Note that within a cortical layer there is recurrent connectivity between neurons of a given type (Pyramidal neuron to Pyramidal neuron, interneuron to interneuron), Pyramidal neuron to interneuron connectivity, and synaptic inhibition from interneurons onto pyramidal neurons. The following synaptic connections are present across cortical layers: layer 2/3 pyramidal neurons to layer 5 pyramidal neurons, layer 2/3 interneurons to layer 5 pyramidal neurons, layer 2/3 pyramidal neurons to layer 5 interneurons. Note that although not shown in the figure, there are also inhibitory synaptic connections between interneurons within a layer. The connectivity details are based on the neocortical microcircuit wiring patterns determined in experiments.
 
 <div style="display:block; width:50%; margin: 0 auto;">
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png)
+![Detailed connectivity diagram of the template cortical column model, showing synaptic connections among L2/3 and L5 pyramidal neurons and inhibitory basket neurons.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png)
 </div>
 
 Note that in the default model, within a layer, there is all-to-all connectivity between pyramidal neurons. The synaptic weights between neurons are scaled inversely by the distance in the XY plane (arbitrary units) between the neurons (d) using exponential fall-off following $e^{-d^2 / \lambda^2}$, and space constant $\lambda$. The synaptic delays are scaled in proportion to the XY plane distance (d) between the neurons following $1 / e^{-d^2 / \lambda^2}$ to account for the larger propagation. This scaling is illustrated in the figure below, with a $\lambda$ of 3. The figure below represents one neuron located at the center (x=0, y=0), with other neurons positioned relative to that neuron (neuron positions indicated with black dots). As shown, with increasing distance from the center, the synaptic weights decay, while the synaptic delays increase.
 
 <div style="display:block; width:100%; margin: 0 auto;">
-![](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/weight-scaling.png)
+![Synaptic weight decreases and synaptic delay increases with distance from a central neuron on a two-dimensional grid, illustrated for a space constant of lambda equals 3.](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/weight-scaling.png)
+
 </div>
 
 In future versions of HNN, we will allow adjustments to the local circuit architecture and connection profiles. For more details of the default model see [@jones_quantitative_2009].
