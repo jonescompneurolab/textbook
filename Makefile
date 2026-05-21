@@ -1,7 +1,7 @@
 
 .PHONY: all build clean create-textbook-stable-env create-textbook-dev-env
 
-HNN_VERSION := 0.5.0
+HNN_VERSION := 0.6.1
 OS := $(shell uname -s)
 
 # Function to create and configure a conda environment with library paths
@@ -74,7 +74,6 @@ clean:
 create-textbook-stable-env:
 	$(call create-and-configure-env,textbook-stable-env,false)
 	conda run -n textbook-stable-env pip install 'hnn_core[dev]==$(HNN_VERSION)'
-	conda run -n textbook-stable-env pip install --force-reinstall 'pooch==1.8.2'
 	@echo "Conda environment 'textbook-stable-env' successfully created."
 	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-env'"
 
@@ -85,7 +84,6 @@ create-textbook-dev-env:
 	LATEST_HASH=$$(git ls-remote https://github.com/jonescompneurolab/hnn-core.git master | cut -f1);
 	@# Install hnn-core in developer mode, forcing reinstall without cache
 	conda run -n textbook-dev-env pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"
-	conda run -n textbook-dev-env pip install --force-reinstall 'pooch==1.8.2'
 
 	@echo "Conda environment 'textbook-dev-env' successfully created."
 	@echo -e "\n\nActivate your environment with 'conda activate textbook-dev-env'"
