@@ -281,83 +281,29 @@
 -->
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/01_cortical-column-structure/01_cortical-column-structure -->
 <h1>2.1 Cortical Column Structure</h1>
-<p>Neocortical circuits are organized with remarkably similar features
-across areas and species. These features include a common laminar
-structure with generalizable cell classes as well as similar local
-connectivity and input and output connectivity patterns. We have
-harnessed this generalization into HNN’s foundational neural model that
-is provided as a template circuit to work with.</p>
+<p>Neocortical circuits are organized with remarkably similar features across areas and species. These features include a common laminar structure with generalizable cell classes as well as similar local connectivity and input and output connectivity patterns. We have harnessed this generalization into HNN’s foundational neural model that is provided as a template circuit to work with.</p>
 <div style="display:block; width:50%; margin: 0 auto;">
 <figure>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/netpyne-schematic-tilted-colored.png"
-alt="3D representation of our cortical model. Abstracted multi-compartment pyramidal neurons are aligned in a 10-by-10 grid in layer 2 and layer 5. Interneurons are shown as red point neurons near the pyramidal cell somas." />
-<figcaption aria-hidden="true">3D representation of our cortical model.
-Abstracted multi-compartment pyramidal neurons are aligned in a 10-by-10
-grid in layer 2 and layer 5. Interneurons are shown as red point neurons
-near the pyramidal cell somas.</figcaption>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/netpyne-schematic-tilted-colored.png" alt="3D representation of our cortical model. Abstracted multi-compartment pyramidal neurons are aligned in a 10-by-10 grid in layer 2 and layer 5. Interneurons are shown as red point neurons near the pyramidal cell somas." />
+<figcaption aria-hidden="true">3D representation of our cortical model. Abstracted multi-compartment pyramidal neurons are aligned in a 10-by-10 grid in layer 2 and layer 5. Interneurons are shown as red point neurons near the pyramidal cell somas.</figcaption>
 </figure>
 </div>
 <p style="text-align:justify; display: block; margin: 0 auto;width: 90%; font-size: 1em;">
-<strong>Figure 1</strong>: Most importantly, our model contains
-multi-compartment pyramidal neurons (PN) in supragranular and
-infragranular layers (layers 2/3 and 5, respectively), whose apical
-dendrites are spatially aligned and span the cortical layers as shown in
-the 3D visualization above. The primary electrical current signals
-simulated in HNN are derived from the intracellular current flow in the
-PN dendrites (see <a href="./primary_electric_currents.html">2.2 Primary
-Electrical Currents</a> for details). In the figure above, the green
-neurons represent the layer 2/3 PN and the blue the the layer 5 PN. Note
-that in both layers, the PN have two basal, one oblique, and one apical
-dendrite branch, and the layer 2/3 PN have shorter apical dendrites
-compared to the layer 5 PN.
+<strong>Figure 1</strong>: Most importantly, our model contains multi-compartment pyramidal neurons (PN) in supragranular and infragranular layers (layers 2/3 and 5, respectively), whose apical dendrites are spatially aligned and span the cortical layers as shown in the 3D visualization above. The primary electrical current signals simulated in HNN are derived from the intracellular current flow in the PN dendrites (see <a href="./primary_electric_currents.html">2.2 Primary Electrical Currents</a> for details). In the figure above, the green neurons represent the layer 2/3 PN and the blue the the layer 5 PN. Note that in both layers, the PN have two basal, one oblique, and one apical dendrite branch, and the layer 2/3 PN have shorter apical dendrites compared to the layer 5 PN.
 </p>
-<p>The PN are synaptically coupled to each other and to a subset of
-inhibitory neurons in each layer in a 3/1 PN-to-interneuron ratio. The
-inhibitory neurons are simulated with single compartments and represent
-fast spiking basket cells, and are shown in red in the figure above.
-Details of the cells and synaptic connectivity structure are given under
-<a href="./neurons_morphology_and_physiology.html">2.3 Neurons:
-Morphology and Physiology</a> and <a
-href="./synaptic_connectivity.html">2.4 Synaptic Connectivity</a>,
-respectively.</p>
-<p>There are several ways to activate the local cortical column with
-layer specific synaptic (thalamo-cortical, and/or cortical-cortical) and
-tonic drive, as detailed in both <a
-href="./evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic
-Driving Inputs</a> and <a
-href="./tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving
-Inputs</a>.</p>
-<p>The list below provides an overview of key features of the template
-model provided, further details are outlined in other pages under <a
-href="../01_getting_started/template_model.html">1.2 Template
-Model</a></p>
+<p>The PN are synaptically coupled to each other and to a subset of inhibitory neurons in each layer in a 3/1 PN-to-interneuron ratio. The inhibitory neurons are simulated with single compartments and represent fast spiking basket cells, and are shown in red in the figure above. Details of the cells and synaptic connectivity structure are given under <a href="./neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a> and <a href="./synaptic_connectivity.html">2.4 Synaptic Connectivity</a>, respectively.</p>
+<p>There are several ways to activate the local cortical column with layer specific synaptic (thalamo-cortical, and/or cortical-cortical) and tonic drive, as detailed in both <a href="./evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a> and <a href="./tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>.</p>
+<p>The list below provides an overview of key features of the template model provided, further details are outlined in other pages under <a href="../01_getting_started/template_model.html">1.2 Template Model</a></p>
 <ol type="1">
-<li>Supragranular layer (layer 2/3) with multi-compartment pyramidal and
-single compartment inhibitory neurons</li>
-<li>Infragranular layer (layer 5) with multi-compartment pyramidal and
-single compartment inhibitory neurons</li>
-<li>A scalable number of neurons per layer with 3/1 PN-to-interneuron
-ratio (default network contains 100 PN per layer)</li>
-<li>Gabaergic (GABAA/GABAB) &amp; Glutamatergic (AMPA/NMDA) synaptic
-connectivity between local cortical column cells</li>
-<li>Membrane voltages simulated with Hodgkin-Huxley type dynamics, with
-active ionic currents in somatic and dendritic compartments</li>
-<li>Layer specific exogenous driving inputs (synaptic and
-tonic/noisy)</li>
-<li>Primary current dipole calculated as net intracellular current flow
-in PN dendrites (Units: nano-Ampere-meters (nAm))</li>
+<li>Supragranular layer (layer 2/3) with multi-compartment pyramidal and single compartment inhibitory neurons</li>
+<li>Infragranular layer (layer 5) with multi-compartment pyramidal and single compartment inhibitory neurons</li>
+<li>A scalable number of neurons per layer with 3/1 PN-to-interneuron ratio (default network contains 100 PN per layer)</li>
+<li>Gabaergic (GABAA/GABAB) &amp; Glutamatergic (AMPA/NMDA) synaptic connectivity between local cortical column cells</li>
+<li>Membrane voltages simulated with Hodgkin-Huxley type dynamics, with active ionic currents in somatic and dendritic compartments</li>
+<li>Layer specific exogenous driving inputs (synaptic and tonic/noisy)</li>
+<li>Primary current dipole calculated as net intracellular current flow in PN dendrites (Units: nano-Ampere-meters (nAm))</li>
 </ol>
-<p>Of note, the <strong>granular layer is not explicitly included in the
-template circuit</strong>. This initial design choice was based on the
-fact that macroscale current dipoles are dominated by PN activity in
-supragranular, and intragranular layers. Thalamic input to granular
-layers is presumed to propagate directly to basal and oblique dendrites
-of PN in layer 2/3 and 5 (see <a
-href="./evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic
-Driving Inputs</a> for details). As the use of our open-source software
-grows, we hope that other cells and network configurations will be made
-available as template models to work with.</p>
+<p>Of note, the <strong>granular layer is not explicitly included in the template circuit</strong>. This initial design choice was based on the fact that macroscale current dipoles are dominated by PN activity in supragranular, and intragranular layers. Thalamic input to granular layers is presumed to propagate directly to basal and oblique dendrites of PN in layer 2/3 and 5 (see <a href="./evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a> for details). As the use of our open-source software grows, we hope that other cells and network configurations will be made available as template models to work with.</p>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

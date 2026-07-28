@@ -1,18 +1,22 @@
-from copy import deepcopy
-from pathlib import Path
 import re
 import textwrap
+from copy import deepcopy
+from pathlib import Path
 
 import pypandoc
 
+from .create_indices import create_flat_index, create_hier_index
 from .create_sidebar_html import create_sidebar_html
-from .create_indices import create_hier_index, create_flat_index
-from .execute_and_convert_nbs import load_nb_json_output
+from .execute_and_convert_nbs import (
+    _get_section_outputs,
+    load_nb_json_output,
+)
 
 
 def _read_nb_json_output_html_contents(
     nb_path,
     nb_json_output_dir,
+    section_header=None,
 ):
     """
     Get the HTML output from the JSON output file of a notebook.
@@ -34,18 +38,30 @@ def _read_nb_json_output_html_contents(
     # Has content if the file is found, otherwise returns None
     nb_outputs_if_any = load_nb_json_output(nb_path, nb_json_output_dir)
     if nb_outputs_if_any:
-        nb_outputs = nb_outputs_if_any.get(nb_path.name, {})
+        full_nb_outputs = nb_outputs_if_any.get(nb_path.name, {})
         agg_html = ""
+        if section_header is not None:
+            section_nb_outputs = _get_section_outputs(
+                full_nb_outputs,
+                section_header,
+            )
+            nb_outputs = section_nb_outputs
+        else:
+            nb_outputs = full_nb_outputs
         for section, content in nb_outputs.items():
             if isinstance(content, dict) and "html" in content:
                 agg_html += content["html"]
         return agg_html
+
     else:
+        # bugfix nb_path -> nb_json_output_dir
+        # otherwise, the error when the json is not found will point to the
+        # content directory when doing a dev build, which is misleadig
         raise FileNotFoundError(
-            f"The notebook at '{nb_path}' does not appear to have a corresponding "
-            "JSON output file. Please restart the build process with one of the "
-            "execution types enabled, in order to execute the notebook. Exiting build "
-            "process."
+            f"The notebook at '{nb_json_output_dir}' does not appear to have a "
+            "corresponding JSON output file. Please restart the build process with one "
+            "of the execution types enabled, in order to execute the notebook. Exiting "
+            "build process."
         )
 
 
@@ -181,6 +197,7 @@ def _add_nb_to_html(
     # a single closing bracket, as additional parameters may be
     # included in the notebook specification line
     nb_match_pattern = re.compile(r"\[\[(.+?\.ipynb)\]")
+
     # notebook specifications with additional arguments will
     # match the exact pattern ".ipynb][" as defined below
     nb_arguments_pattern = ".ipynb]["
@@ -217,18 +234,27 @@ def _add_nb_to_html(
         nb_button_indent,
     )
 
+    # track if the notebook download button has been added
+    # notes:
+    #   prevents adding the button multiple times in the case
+    #   that multiple notebook slices are added to a single page
+    #   we currently only support have a download button for a
+    #   *single* notebook, but this could be expanded
+    nb_download_btn_added = False
+
     output_lines = []
     for line in converted_html.splitlines():
         match = nb_match_pattern.search(line)
         args = nb_arguments_pattern in line
 
-        if match and args:
-            nb_name = match.group(1)
-            nb_path = input_dir_path / nb_name
-            print(f"nb with args found: {line}")
-            print("Argument handling will be added in a future update")
-            output_lines.append(line)
-        elif match:
+        if args is not False:
+            # match the rest of the line after ".ipynb["
+            arg_match_pattern = re.compile(r"\[\[[^\]]+\]\[([^\]]+)\]\]")
+            section = arg_match_pattern.search(line).group(1)
+        else:
+            section = None
+
+        if match:
             nb_name = match.group(1)
             nb_path = input_dir_path / nb_name
 
@@ -237,12 +263,14 @@ def _add_nb_to_html(
                 "notebook_name",
                 nb_name,
             )
-            output_lines.append(
-                nb_button,
-            )
+
+            if not nb_download_btn_added:
+                output_lines = [nb_button] + output_lines
+                nb_download_btn_added = True
+
             # generate and append the nb html output
             # --------------------------------------
-            # Ugh, if we're doing a "dev" build, then we need to load the "dev" version
+            # if we're doing a "dev" build, then we need to load the "dev" version
             # of the notebook's JSON output file. For this, we need to reconstruct that
             # location:
             if is_dev_build:
@@ -251,7 +279,11 @@ def _add_nb_to_html(
             else:
                 nb_json_output_dir = nb_path.parents[0]
 
-            nb_html = _read_nb_json_output_html_contents(nb_path, nb_json_output_dir)
+            nb_html = _read_nb_json_output_html_contents(
+                nb_path,
+                nb_json_output_dir,
+                section,
+            )
             output_lines.append(nb_html)
         else:
             # This line is very important! This is where most of the md-page content
@@ -453,6 +485,7 @@ def generate_page_html(
             format="md",
             to="html",
             extra_args=[
+                "--wrap=none",
                 "--bibliography=textbook-bibliography.bib",
                 "--citeproc",
                 "--mathml",

@@ -281,55 +281,37 @@
 -->
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/02_morphology-physiology/02_morphology-physiology -->
 <h1>2.3 Neurons: Morphology and Physiology</h1>
-<p>The template cortical column model contains the following types of
-neurons:</p>
+<p>The template cortical column model contains the following types of neurons:</p>
 <ol type="1">
 <li>L2/3 multi-compartment pyramidal neurons (PN)</li>
 <li>L2/3 single compartment inhibitory neurons</li>
 <li>L5 multi-compartment pyramidal neurons</li>
 <li>L5 single compartment inhibitory neurons</li>
 </ol>
-<p>Membrane voltages in each simulated compartment are calculated using
-the standard Hodgkin-Huxley parallel conductance equations. Current flow
-between compartments are calculated using properties of the cable
-equation <span class="citation" data-cites="dayan_theoretical_2001">(<a
-href="#ref-dayan_theoretical_2001" role="doc-biblioref">Dayan and Abbott
-2001</a>)</span>.</p>
+<p>Membrane voltages in each simulated compartment are calculated using the standard Hodgkin-Huxley parallel conductance equations. Current flow between compartments are calculated using properties of the cable equation <span class="citation" data-cites="dayan_theoretical_2001">(<a href="#ref-dayan_theoretical_2001" role="doc-biblioref">Dayan and Abbott 2001</a>)</span>.</p>
 <h3>Morphology</h3>
 <ul>
 <li>Layer 2/3:
 <ul>
-<li>PN: 7 compartments including 3 apical dendrites, 3 basal dendrites,
-1 soma</li>
+<li>PN: 7 compartments including 3 apical dendrites, 3 basal dendrites, 1 soma</li>
 <li>Inhibitory basket neurons: single compartment (soma)</li>
 </ul></li>
 <li>Layer 5:
 <ul>
-<li>PN: 9 compartments including 5 apical dendrites, 3 basal dendrites,
-1 soma.</li>
-<li>As shown below, L5 PNs have longer dendrites than L2/3 PNs. L5 PN
-somas based in L5 with long apical dendrites reaching into L2/3.</li>
+<li>PN: 9 compartments including 5 apical dendrites, 3 basal dendrites, 1 soma.</li>
+<li>As shown below, L5 PNs have longer dendrites than L2/3 PNs. L5 PN somas based in L5 with long apical dendrites reaching into L2/3.</li>
 <li>Inhibitory Basket neurons: single compartment (soma).</li>
-<li>L2/3 and L5 basket interneurons are identical but their synaptic
-parameters and local circuit connectivity differs.</li>
+<li>L2/3 and L5 basket interneurons are identical but their synaptic parameters and local circuit connectivity differs.</li>
 </ul></li>
 </ul>
 <div style="display:block; width:50%; margin: 0 auto;">
 <figure>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png"
-alt="Detailed connectivity diagram of the template cortical column model, showing synaptic connections among L2/3 and L5 pyramidal neurons and inhibitory basket neurons." />
-<figcaption aria-hidden="true">Detailed connectivity diagram of the
-template cortical column model, showing synaptic connections among L2/3
-and L5 pyramidal neurons and inhibitory basket neurons.</figcaption>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/detailed-connectivity.png" alt="Detailed connectivity diagram of the template cortical column model, showing synaptic connections among L2/3 and L5 pyramidal neurons and inhibitory basket neurons." />
+<figcaption aria-hidden="true">Detailed connectivity diagram of the template cortical column model, showing synaptic connections among L2/3 and L5 pyramidal neurons and inhibitory basket neurons.</figcaption>
 </figure>
 </div>
 <h3>Physiology</h3>
-<p>The following table displays the ion channels and mechanisms in each
-cell type in the model (✅ indicates the presence of the
-channel/mechanism in the cell type; for advanced modelers: to see the
-NEURON simulator equations used in the channel/mechanism, click on the
-links in the table).</p>
+<p>The following table displays the ion channels and mechanisms in each cell type in the model (✅ indicates the presence of the channel/mechanism in the cell type; for advanced modelers: to see the NEURON simulator equations used in the channel/mechanism, click on the links in the table).</p>
 <div class="md_table md-equal-cols">
 <table>
 <thead>
@@ -404,44 +386,14 @@ links in the table).</p>
 </tbody>
 </table>
 </div>
-<p>In the table above, Na (fast) / K (fast) are the fast sodium and
-potassium channels responsible for generating action potentials. Km is
-the muscarine sensitive potassium channel, with a relatively slow
-time-constant and KCa is the calcium-dependent potassium channel, which
-contributes to hyperpolarization after calcium influx into the cell. The
-L- and T-type calcium (Ca) channels represent the high-threshold and
-low-threshold activated calcium channels which together with the
-hyperpolarization-activated cyclic nucleotide gated channel (HCN)
-contribute to bursting. Ca decay represents the calcium extrusion pump,
-which causes intracellular calcium to decay towards a baseline level.
-Leak represents the passive channel, with constant conductance. Dipole
-represents the mechanism that takes into account the primary axial
-current flow within pyramidal neuron dendrites, responsible for the
-generation of simulated signals comparable to MEG/EEG recordings. For
-more details see <span class="citation"
-data-cites="jones_quantitative_2009">(<a
-href="#ref-jones_quantitative_2009" role="doc-biblioref">Jones et al.
-2009</a>)</span>.</p>
+<p>In the table above, Na (fast) / K (fast) are the fast sodium and potassium channels responsible for generating action potentials. Km is the muscarine sensitive potassium channel, with a relatively slow time-constant and KCa is the calcium-dependent potassium channel, which contributes to hyperpolarization after calcium influx into the cell. The L- and T-type calcium (Ca) channels represent the high-threshold and low-threshold activated calcium channels which together with the hyperpolarization-activated cyclic nucleotide gated channel (HCN) contribute to bursting. Ca decay represents the calcium extrusion pump, which causes intracellular calcium to decay towards a baseline level. Leak represents the passive channel, with constant conductance. Dipole represents the mechanism that takes into account the primary axial current flow within pyramidal neuron dendrites, responsible for the generation of simulated signals comparable to MEG/EEG recordings. For more details see <span class="citation" data-cites="jones_quantitative_2009">(<a href="#ref-jones_quantitative_2009" role="doc-biblioref">Jones et al. 2009</a>)</span>.</p>
 <h2 class="unnumbered">Tutorial References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent"
-data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-dayan_theoretical_2001" class="csl-entry" role="listitem">
-Dayan, Peter, and Laurence F. Abbott. 2001. <em>Theoretical
-Neuroscience: Computational and Mathematical Modeling of Neural
-Systems</em>. Computational Neuroscience. Cambridge (Mass.) London: MIT
-Press. <a
-href="https://mitpress.mit.edu/9780262041997/theoretical-neuroscience/">https://mitpress.mit.edu/9780262041997/theoretical-neuroscience/</a>.
+Dayan, Peter, and Laurence F. Abbott. 2001. <em>Theoretical Neuroscience: Computational and Mathematical Modeling of Neural Systems</em>. Computational Neuroscience. Cambridge (Mass.) London: MIT Press. <a href="https://mitpress.mit.edu/9780262041997/theoretical-neuroscience/">https://mitpress.mit.edu/9780262041997/theoretical-neuroscience/</a>.
 </div>
 <div id="ref-jones_quantitative_2009" class="csl-entry" role="listitem">
-Jones, Stephanie R., Dominique L. Pritchett, Michael A. Sikora, Steven
-M. Stufflebeam, Matti Hämäläinen, and Christopher I. Moore. 2009.
-<span>“Quantitative <span>Analysis</span> and <span>Biophysically</span>
-<span>Realistic</span> <span>Neural</span> <span>Modeling</span> of the
-<span>MEG</span> <span>Mu</span> <span>Rhythm</span>:
-<span>Rhythmogenesis</span> and <span>Modulation</span> of
-<span>Sensory</span>-<span>Evoked</span> <span>Responses</span>.”</span>
-<em>Journal of Neurophysiology</em> 102 (6): 3554–72. <a
-href="https://doi.org/10.1152/jn.00535.2009">https://doi.org/10.1152/jn.00535.2009</a>.
+Jones, Stephanie R., Dominique L. Pritchett, Michael A. Sikora, Steven M. Stufflebeam, Matti Hämäläinen, and Christopher I. Moore. 2009. <span>“Quantitative <span>Analysis</span> and <span>Biophysically</span> <span>Realistic</span> <span>Neural</span> <span>Modeling</span> of the <span>MEG</span> <span>Mu</span> <span>Rhythm</span>: <span>Rhythmogenesis</span> and <span>Modulation</span> of <span>Sensory</span>-<span>Evoked</span> <span>Responses</span>.”</span> <em>Journal of Neurophysiology</em> 102 (6): 3554–72. <a href="https://doi.org/10.1152/jn.00535.2009">https://doi.org/10.1152/jn.00535.2009</a>.
 </div>
 </div>
         <!-- footer area -->

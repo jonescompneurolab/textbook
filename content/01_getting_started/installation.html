@@ -284,182 +284,72 @@
 <h1>1.3 Installation</h1>
 <h2>Running HNN in the cloud</h2>
 <h3>Google CoLab</h3>
-<p>As an alternative to installing HNN locally, we provide Google CoLab
-notebooks that allow you to run HNN out of your browser, with access to
-your local filesystem.</p>
+<p>As an alternative to installing HNN locally, we provide Google CoLab notebooks that allow you to run HNN out of your browser, with access to your local filesystem.</p>
 <ul>
-<li><a
-href="https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing">GUI
-Colab Notebook</a></li>
-<li><a
-href="https://colab.research.google.com/drive/1FcNhHatsuxl-pACIFn7V6H5J4GPfZ1t8">API
-Colab Notebook</a></li>
+<li><a href="https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing">GUI Colab Notebook</a></li>
+<li><a href="https://colab.research.google.com/drive/1FcNhHatsuxl-pACIFn7V6H5J4GPfZ1t8">API Colab Notebook</a></li>
 </ul>
-<p>This is the quickest way to get up and running with HNN, though it
-does require a Google account. If you do not have a Google account, you
-can create one for free to run the notebooks. There is no charge
-associated with using Google CoLab.</p>
+<p>This is the quickest way to get up and running with HNN, though it does require a Google account. If you do not have a Google account, you can create one for free to run the notebooks. There is no charge associated with using Google CoLab.</p>
 <h3>Neuroscience Gateway Portal</h3>
-<p>HNN is available for free, public use on the <a
-href="https://www.nsgportal.org/">Neuroscience Gateway Portal (NSG)</a>.
-You can find instructions for using HNN on NSG <a
-href="https://users.sdsc.edu/~kenneth/hnn/index.html">at this page
-here</a>.</p>
+<p>HNN is available for free, public use on the <a href="https://www.nsgportal.org/">Neuroscience Gateway Portal (NSG)</a>. You can find instructions for using HNN on NSG <a href="https://users.sdsc.edu/~kenneth/hnn/index.html">at this page here</a>.</p>
 <h2>Using the Textbook</h2>
-<p>To follow along with the examples in the textbook, you’ll need to
-clone or download the <a
-href="https://github.com/jonescompneurolab/hnn-data">hnn-data
-repository</a>. The hnn-data repository includes both source-localized
-data used in our lab’s published research as well as network
-configurations that have been tuned for simulating different types of
-signals. Note that this is <em>not</em> the same as installing HNN –
-these are only files that you will use as you go through our textbook
-examples.</p>
-<p>You can directly <a
-href="https://github.com/jonescompneurolab/hnn-data/archive/refs/heads/main.zip">download
-the hnn-data folder by clicking here</a>. Alternatively, you can clone
-the repository using the following command:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jonescompneurolab/hnn-data.git</span></code></pre></div>
+<p>To follow along with the examples in the textbook, you’ll need to clone or download the <a href="https://github.com/jonescompneurolab/hnn-data">hnn-data repository</a>. The hnn-data repository includes both source-localized data used in our lab’s published research as well as network configurations that have been tuned for simulating different types of signals. Note that this is <em>not</em> the same as installing HNN – these are only files that you will use as you go through our textbook examples.</p>
+<p>You can directly <a href="https://github.com/jonescompneurolab/hnn-data/archive/refs/heads/main.zip">download the hnn-data folder by clicking here</a>. Alternatively, you can clone the repository using the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jonescompneurolab/hnn-data.git</span></code></pre></div>
 <h2>Local Installation</h2>
-<p>We <strong>strongly</strong> recommend that you install HNN from our
-<strong><code>conda</code> package</strong> instead of from
-<code>pip</code>. This <code>conda</code> package is “batteries
-included” and contains ALL features of HNN: the HNN API, the HNN GUI,
-Optimization, Joblib Parallelism, and MPI Parallelism. This is
-<em>significantly</em> easier to install than using
-<code>pip</code>.</p>
-<p>However, there are some cases where you should <strong>not</strong>
-use the <code>conda</code> installation:</p>
+<p>We <strong>strongly</strong> recommend that you install HNN from our <strong><code>conda</code> package</strong> instead of from <code>pip</code>. This <code>conda</code> package is “batteries included” and contains ALL features of HNN: the HNN API, the HNN GUI, Optimization, Joblib Parallelism, and MPI Parallelism. This is <em>significantly</em> easier to install than using <code>pip</code>.</p>
+<p>However, there are some cases where you should <strong>not</strong> use the <code>conda</code> installation:</p>
 <ul>
-<li><strong>If you want to co-install HNN alongside MNE:</strong> In
-this case, we strongly recommend that you install MNE <em>first</em> <a
-href="https://mne.tools/stable/install/index.html">(MNE install guides
-here)</a>. If you installed MNE using its <code>pip</code> or
-<code>conda</code> methods, then afterwards, you should install HNN
-using our <strong><code>pip</code> Package Installation</strong> method
-below, but <em>in the same Python environment</em> that you installed
-MNE into.</li>
-<li><strong>If you are using your institution’s High-Performance
-Computing (HPC) environment</strong> (also called a “computing cluster”
-or supercomputer): The <code>conda</code> installation may work on your
-HPC, but if you want to use your HPC’s custom MPI libraries, you should
-try using our <strong><code>pip</code> Package Installation</strong>
-below. Your HPC usually has documentation on how they want you to load
-OpenMPI (which is not a Python package) and possibly <code>mpi4py</code>
-(which is a Python package). You can always ask us for help at <a
-href="https://github.com/jonescompneurolab/hnn-core/discussions">our
-Github Discussions page</a>.</li>
-<li><strong>If you are at Brown University and want to use HNN on the
-OSCAR system:</strong> We have made custom instructions for you, which
-<a href="https://github.com/jonescompneurolab/oscar-install">can be
-found here at this other page</a>.</li>
-<li><strong>If you want to use a “custom” version of HNN’s source
-code:</strong> This includes if you need to use your own “Github fork”,
-someone else’s fork, or <strong>if you want to contribute to HNN’s
-development</strong>. In this case, you should follow our
-<strong><code>pip</code> Source Installation</strong> guide below.</li>
+<li><strong>If you want to co-install HNN alongside MNE:</strong> In this case, we strongly recommend that you install MNE <em>first</em> <a href="https://mne.tools/stable/install/index.html">(MNE install guides here)</a>. If you installed MNE using its <code>pip</code> or <code>conda</code> methods, then afterwards, you should install HNN using our <strong><code>pip</code> Package Installation</strong> method below, but <em>in the same Python environment</em> that you installed MNE into.</li>
+<li><strong>If you are using your institution’s High-Performance Computing (HPC) environment</strong> (also called a “computing cluster” or supercomputer): The <code>conda</code> installation may work on your HPC, but if you want to use your HPC’s custom MPI libraries, you should try using our <strong><code>pip</code> Package Installation</strong> below. Your HPC usually has documentation on how they want you to load OpenMPI (which is not a Python package) and possibly <code>mpi4py</code> (which is a Python package). You can always ask us for help at <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>.</li>
+<li><strong>If you are at Brown University and want to use HNN on the OSCAR system:</strong> We have made custom instructions for you, which <a href="https://github.com/jonescompneurolab/oscar-install">can be found here at this other page</a>.</li>
+<li><strong>If you want to use a “custom” version of HNN’s source code:</strong> This includes if you need to use your own “Github fork”, someone else’s fork, or <strong>if you want to contribute to HNN’s development</strong>. In this case, you should follow our <strong><code>pip</code> Source Installation</strong> guide below.</li>
 </ul>
-<p>The terms HNN, <code>hnn-core</code>, and <code>hnn_core</code> are
-effectively equivalent, as they are all different names for the same
-codebase. <code>hnn-core</code> or <code>hnn_core</code> are often used
-during the installation process or when you are using the API.</p>
-<p>After you have installed HNN, we recommend you follow the
-<strong>Testing Your Installation</strong> section below to make sure it
-is installed correctly.</p>
-<p><strong>If you have any questions or problems</strong> while
-installing HNN, feel free to ask for help on <a
-href="https://github.com/jonescompneurolab/hnn-core/discussions">our
-GitHub Discussions page</a>!</p>
+<p>The terms HNN, <code>hnn-core</code>, and <code>hnn_core</code> are effectively equivalent, as they are all different names for the same codebase. <code>hnn-core</code> or <code>hnn_core</code> are often used during the installation process or when you are using the API.</p>
+<p>After you have installed HNN, we recommend you follow the <strong>Testing Your Installation</strong> section below to make sure it is installed correctly.</p>
+<p><strong>If you have any questions or problems</strong> while installing HNN, feel free to ask for help on <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our GitHub Discussions page</a>!</p>
 <div class="collapsible-section">
 <h5 class="collapsible-header">
 <code>conda</code> Package Installation
 </h5>
 <div class="collapsible-content">
 <p><a id="conda-package-installation"></a></p>
-<p>Note: If you want a minimal install of only the API using
-<code>conda</code>, then follow the instructions below, but replace the
-package name <code>hnn-core-all</code> with <code>hnn-core</code>.</p>
+<p>Note: If you want a minimal install of only the API using <code>conda</code>, then follow the instructions below, but replace the package name <code>hnn-core-all</code> with <code>hnn-core</code>.</p>
 <h2><code>conda</code> on MacOS or Linux</h2>
 <ol type="1">
-<li><p>Install the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a>. If you are unfamiliar with using Anaconda/Conda
-virtual environments, <a
-href="https://www.anaconda.com/docs/getting-started/getting-started">you
-can find resources here</a>.</p></li>
-<li><p>Open a Terminal, then create and activate a new Python 3.12 Conda
-environment by running the following commands:</p>
+<li><p>Install the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a>. If you are unfamiliar with using Anaconda/Conda virtual environments, <a href="https://www.anaconda.com/docs/getting-started/getting-started">you can find resources here</a>.</p></li>
+<li><p>Open a Terminal, then create and activate a new Python 3.12 Conda environment by running the following commands:</p>
 <pre><code>conda create -y -q -n hnn-core-env python=3.12
 conda activate hnn-core-env</code></pre>
-<p>Feel free to change the environment name <code>hnn-core-env</code>.
-<strong>You must use Python 3.12 for our <code>conda</code>
-packages.</strong></p></li>
+<p>Feel free to change the environment name <code>hnn-core-env</code>. <strong>You must use Python 3.12 for our <code>conda</code> packages.</strong></p></li>
 <li><p>Install our package using the following command:</p>
 <pre><code>conda install hnn-core-all -c jonescompneurolab -c conda-forge</code></pre></li>
-<li><p>(Optional) Run the following command, and write down the number
-that is output. You can use this number as the number of CPU “Cores”,
-which will <em>greatly</em> speed up your simulations.</p>
+<li><p>(Optional) Run the following command, and write down the number that is output. You can use this number as the number of CPU “Cores”, which will <em>greatly</em> speed up your simulations.</p>
 <pre><code>python -c &quot;import psutil ; print(psutil.cpu_count(logical=False)-1)&quot;</code></pre></li>
-<li><p>That’s it! HNN should now be installed. Proceed to the rest of <a
-href="../preface.html">our HNN Textbook</a> to get started.</p></li>
-<li><p>Note: The next time you need to re-enter the Conda Environment,
-all you need to do is run
-<code>conda activate hnn-core-env</code>.</p></li>
+<li><p>That’s it! HNN should now be installed. Proceed to the rest of <a href="../preface.html">our HNN Textbook</a> to get started.</p></li>
+<li><p>Note: The next time you need to re-enter the Conda Environment, all you need to do is run <code>conda activate hnn-core-env</code>.</p></li>
 </ol>
 <h2><code>conda</code> on Windows</h2>
-<p>For Windows users, there are some extra steps since you need to
-install HNN through “Windows Subsystem for Linux” (WSL).</p>
+<p>For Windows users, there are some extra steps since you need to install HNN through “Windows Subsystem for Linux” (WSL).</p>
 <ol type="1">
-<li><p>Install WSL: Open the “PowerShell” or “Windows Command Prompt”
-programs in administrator mode by right-clicking the program icon and
-selecting “Run as administrator”. Then, in the window, run the following
-command:</p>
+<li><p>Install WSL: Open the “PowerShell” or “Windows Command Prompt” programs in administrator mode by right-clicking the program icon and selecting “Run as administrator”. Then, in the window, run the following command:</p>
 <pre><code>wsl --install</code></pre>
-<p>Follow the default options for your install. For more information,
-see <a href="https://learn.microsoft.com/en-us/windows/wsl/install"
-class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a>.</p></li>
+<p>Follow the default options for your install. For more information, see <a href="https://learn.microsoft.com/en-us/windows/wsl/install" class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a>.</p></li>
 <li><p>Close the PowerShell or Command Prompt window.</p></li>
-<li><p>You will now have a new App available from the Start Menu called
-<code>Ubuntu</code>. Run that app.</p></li>
-<li><p>The first time you start Ubuntu, it will prompt you to
-<code>Create a default Unix user account</code> and ask for a password.
-If you provide a password, write it down.</p></li>
-<li><p>You should now see a prompt and a blinking cursor similar to
-PowerShell/Command Prompt. Copy and paste the following commands. If you
-entered a password in Step 4, enter that when it prompts you for your
-password.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<li><p>You will now have a new App available from the Start Menu called <code>Ubuntu</code>. Run that app.</p></li>
+<li><p>The first time you start Ubuntu, it will prompt you to <code>Create a default Unix user account</code> and ask for a password. If you provide a password, write it down.</p></li>
+<li><p>You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 4, enter that when it prompts you for your password.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
-<li><p>In the same window, copy and paste the following commands, then
-follow the prompts. We strongly recommend that when you are asked
-<code>Do you wish to update your shell profile to automatically initialize conda?</code>
-you enter <code>yes</code>. If you do not, then you will have to
-manually activate Conda whenever you open your Ubuntu app using the
-command this program provides at the end.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<li><p>In the same window, copy and paste the following commands, then follow the prompts. We strongly recommend that when you are asked <code>Do you wish to update your shell profile to automatically initialize conda?</code> you enter <code>yes</code>. If you do not, then you will have to manually activate Conda whenever you open your Ubuntu app using the command this program provides at the end.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
-<p>If you see output similar to
-<code>WARNING: Your machine hardware does not appear to be x86_64</code>,
-then please contact us via <a
-href="https://github.com/jonescompneurolab/hnn-core/discussions">our
-Github Discussions page</a>. You may be able to install by using <a
-href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh"
-class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a>
-instead.</p></li>
-<li><p>Close the Ubuntu window, then open a new one. Your prompt should
-now show <code>(base)</code> at the beginning.</p></li>
-<li><p>Inside this window, follow all the steps above in the <a
-href="#conda-macos-or-linux"><code>conda</code> MacOS or Linux</a>
-section, then return here.</p></li>
+<p>If you see output similar to <code>WARNING: Your machine hardware does not appear to be x86_64</code>, then please contact us via <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>. You may be able to install by using <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh" class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a> instead.</p></li>
+<li><p>Close the Ubuntu window, then open a new one. Your prompt should now show <code>(base)</code> at the beginning.</p></li>
+<li><p>Inside this window, follow all the steps above in the <a href="#conda-macos-or-linux"><code>conda</code> MacOS or Linux</a> section, then return here.</p></li>
 <li><p>HNN should now be installed!</p></li>
-<li><p>Note: On Windows, every time you start the GUI, you will need to
-navigate to <a href="http://localhost:8866"
-class="uri">http://localhost:8866</a> in your browser (or refresh if you
-are already on the page).</p></li>
+<li><p>Note: On Windows, every time you start the GUI, you will need to navigate to <a href="http://localhost:8866" class="uri">http://localhost:8866</a> in your browser (or refresh if you are already on the page).</p></li>
 </ol>
 </div>
 </div>
@@ -470,229 +360,89 @@ are already on the page).</p></li>
 </h5>
 <div class="collapsible-content">
 <p><a id="pip-package-installation"></a></p>
-<p>Please follow the instructions in Steps 1, 2, and 3, <em>in that
-order</em>. This installation method for HNN currently supports Python
-3.9 through 3.13, inclusively.</p>
-<p>Note that the <code>pip</code> installation methods do <em>not</em>
-include all features by default, only the API. If you want to install a
-specific set of features, you must include all of them in your
-<code>pip</code> install command. For example, if you want HNN GUI
-support and Optimization support, but not Parallel support, then you
-would replace the final command in Step 3 with</p>
+<p>Please follow the instructions in Steps 1, 2, and 3, <em>in that order</em>. This installation method for HNN currently supports Python 3.9 through 3.13, inclusively.</p>
+<p>Note that the <code>pip</code> installation methods do <em>not</em> include all features by default, only the API. If you want to install a specific set of features, you must include all of them in your <code>pip</code> install command. For example, if you want HNN GUI support and Optimization support, but not Parallel support, then you would replace the final command in Step 3 with</p>
 <pre><code>pip install &quot;hnn_core[gui,opt]&quot;</code></pre>
 <h2>Step 1. <code>pip</code> Python Environment</h2>
-<p>We strongly recommend that you install HNN inside a “virtual
-environment” using software like the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a> or Python’s builtin <a
-href="https://docs.python.org/3/library/venv.html"><code>venv</code>
-module</a>. If you are new to Python or data science in Python, we
-recommend you review the resources here: <a
-href="https://docs.anaconda.com/getting-started/"
-class="uri">https://docs.anaconda.com/getting-started/</a>.</p>
-<p>If you use a virtual environment, you must first create the
-environment, and then separately <em>activate</em> the environment (see
-<a
-href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment">Conda
-guidance here</a> and <a
-href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments"><code>venv</code>
-guidance here</a>) before running any of the commands below. <strong>All
-of the installation commands below assume you have already activated
-your environment</strong>. You may need to re-activate your environment
-every time you restart your computer or open a new terminal, depending
-on how you installed your virtual environment software.</p>
+<p>We strongly recommend that you install HNN inside a “virtual environment” using software like the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> or Python’s builtin <a href="https://docs.python.org/3/library/venv.html"><code>venv</code> module</a>. If you are new to Python or data science in Python, we recommend you review the resources here: <a href="https://docs.anaconda.com/getting-started/" class="uri">https://docs.anaconda.com/getting-started/</a>.</p>
+<p>If you use a virtual environment, you must first create the environment, and then separately <em>activate</em> the environment (see <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment">Conda guidance here</a> and <a href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments"><code>venv</code> guidance here</a>) before running any of the commands below. <strong>All of the installation commands below assume you have already activated your environment</strong>. You may need to re-activate your environment every time you restart your computer or open a new terminal, depending on how you installed your virtual environment software.</p>
 <h2>Step 2. <code>pip</code> Platform-specific requirements</h2>
 <h3><code>pip</code> on MacOS</h3>
 <ul>
-<li><p>If you already installed the <a
-href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using
-its traditional installer package, you must <strong>remove it</strong>
-first. We will be installing NEURON using its <code>pip</code>
-package.</p></li>
-<li><p>Before you install HNN, you must install “Xcode Command-Line
-Tools”. This can be done easily by opening a Terminal, running the
-following command, and then clicking through the prompts in the window
-that will pop up. Note that you <strong>must restart your
-computer</strong> after Xcode Command-Line Tools has finished
-installing!</p>
+<li><p>If you already installed the <a href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using its traditional installer package, you must <strong>remove it</strong> first. We will be installing NEURON using its <code>pip</code> package.</p></li>
+<li><p>Before you install HNN, you must install “Xcode Command-Line Tools”. This can be done easily by opening a Terminal, running the following command, and then clicking through the prompts in the window that will pop up. Note that you <strong>must restart your computer</strong> after Xcode Command-Line Tools has finished installing!</p>
 <pre><code>xcode-select --install</code></pre>
-<p>If you run the above command and see output that resembles
-<code>xcode-select: note:   Command line tools are already installed.</code>,
-then you already have it installed, do not need to restart your
-computer, and can proceed to the next step. Finally, note that you do
-<em>not</em> need to install Xcode in its entirety; only the above is
-required.</p></li>
+<p>If you run the above command and see output that resembles <code>xcode-select: note:   Command line tools are already installed.</code>, then you already have it installed, do not need to restart your computer, and can proceed to the next step. Finally, note that you do <em>not</em> need to install Xcode in its entirety; only the above is required.</p></li>
 </ul>
 <h3><code>pip</code> on Linux</h3>
 <ul>
-<li>If you already installed the <a
-href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using
-its traditional installer package, you must <strong>remove it</strong>
-first. We will be installing NEURON using its <code>pip</code>
-package.</li>
+<li>If you already installed the <a href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using its traditional installer package, you must <strong>remove it</strong> first. We will be installing NEURON using its <code>pip</code> package.</li>
 </ul>
 <h3><code>pip</code> on Windows (native, not WSL)</h3>
 <ul>
-<li><p>Before you install HNN, it is important that you
-<strong>install</strong> the <a
-href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using
-its <a
-href="https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows">Windows-specific
-binaries</a>. You can test that NEURON was installed correctly by
-opening a Command Prompt (or similar) via your Anaconda install (or
-virtual environment), and running the following command:</p>
+<li><p>Before you install HNN, it is important that you <strong>install</strong> the <a href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using its <a href="https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows">Windows-specific binaries</a>. You can test that NEURON was installed correctly by opening a Command Prompt (or similar) via your Anaconda install (or virtual environment), and running the following command:</p>
 <pre><code>python -c &quot;import neuron&quot;</code></pre></li>
-<li><p>Note that MPI use is <strong>not</strong> supported on native
-Windows, but is supported on Windows using WSL (see below).</p></li>
+<li><p>Note that MPI use is <strong>not</strong> supported on native Windows, but is supported on Windows using WSL (see below).</p></li>
 </ul>
 <h3><code>pip</code> on Windows (WSL)</h3>
-<p>The following include instructions on how to install both “Windows
-Subsystem for Linux” (WSL) and the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a> inside WSL.</p>
+<p>The following include instructions on how to install both “Windows Subsystem for Linux” (WSL) and the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> inside WSL.</p>
 <ol type="1">
-<li><p>Install WSL: Open the “PowerShell” or “Windows Command Prompt”
-programs in administrator mode by right-clicking the program icon and
-selecting “Run as administrator”. Then, in the window, run the following
-command:</p>
+<li><p>Install WSL: Open the “PowerShell” or “Windows Command Prompt” programs in administrator mode by right-clicking the program icon and selecting “Run as administrator”. Then, in the window, run the following command:</p>
 <pre><code>wsl --install</code></pre>
-<p>Follow the default options for your install. For more information,
-see <a href="https://learn.microsoft.com/en-us/windows/wsl/install"
-class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a>.</p></li>
+<p>Follow the default options for your install. For more information, see <a href="https://learn.microsoft.com/en-us/windows/wsl/install" class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a>.</p></li>
 <li><p>Close the PowerShell or Command Prompt window.</p></li>
-<li><p>You will now have a new App available from the Start Menu called
-<code>Ubuntu</code>. Run that app.</p></li>
-<li><p>The first time you start Ubuntu, it will prompt you to
-<code>Create a default Unix user account</code> and ask for a password.
-If you provide a password, write it down.</p></li>
-<li><p>You should now see a prompt and a blinking cursor similar to
-PowerShell/Command Prompt. Copy and paste the following commands. If you
-entered a password in Step 4, enter that when it prompts you for your
-password.</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<li><p>You will now have a new App available from the Start Menu called <code>Ubuntu</code>. Run that app.</p></li>
+<li><p>The first time you start Ubuntu, it will prompt you to <code>Create a default Unix user account</code> and ask for a password. If you provide a password, write it down.</p></li>
+<li><p>You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 4, enter that when it prompts you for your password.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
-<li><p>In the same window, copy and paste the following commands, then
-follow the prompts. We strongly recommend that when you are asked
-<code>Do you wish to update your shell profile to automatically initialize conda?</code>
-you enter <code>yes</code>. If you do not, then you will have to
-manually activate Conda whenever you open your Ubuntu app using the
-command this program provides at the end.</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<li><p>In the same window, copy and paste the following commands, then follow the prompts. We strongly recommend that when you are asked <code>Do you wish to update your shell profile to automatically initialize conda?</code> you enter <code>yes</code>. If you do not, then you will have to manually activate Conda whenever you open your Ubuntu app using the command this program provides at the end.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
-<p>If you see output similar to
-<code>WARNING: Your machine hardware does not appear to be x86_64</code>,
-then please contact us via <a
-href="https://github.com/jonescompneurolab/hnn-core/discussions">our
-Github Discussions page</a>. You may be able to install by using <a
-href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh"
-class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a>
-instead.</p></li>
-<li><p>Close the Ubuntu window, then open a new one. Your prompt should
-now show <code>(base)</code> at the beginning.</p></li>
-<li><p>Inside this window, follow all the steps below for your preferred
-<code>pip</code> package installation type <strong>as if you are
-installing for Linux</strong>, then return here.</p></li>
+<p>If you see output similar to <code>WARNING: Your machine hardware does not appear to be x86_64</code>, then please contact us via <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>. You may be able to install by using <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh" class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a> instead.</p></li>
+<li><p>Close the Ubuntu window, then open a new one. Your prompt should now show <code>(base)</code> at the beginning.</p></li>
+<li><p>Inside this window, follow all the steps below for your preferred <code>pip</code> package installation type <strong>as if you are installing for Linux</strong>, then return here.</p></li>
 <li><p>HNN should now be installed!</p></li>
-<li><p>Note: On Windows, if you installed the GUI, then every time you
-start the GUI, you will need to navigate to <a
-href="http://localhost:8866" class="uri">http://localhost:8866</a> in
-your browser (or refresh if you are already on the page).</p></li>
+<li><p>Note: On Windows, if you installed the GUI, then every time you start the GUI, you will need to navigate to <a href="http://localhost:8866" class="uri">http://localhost:8866</a> in your browser (or refresh if you are already on the page).</p></li>
 </ol>
 <h2>Step 3. <code>pip</code> installation types</h2>
-<p>The instructions shown below are for installing each set of HNN
-features <strong>separately</strong>, meaning you need to follow the
-instructions for the features you want. The HNN API is the only feature
-included in <strong>all install types</strong>. You can easily install
-multiple sets of HNN features below by combining them like the
-following:</p>
+<p>The instructions shown below are for installing each set of HNN features <strong>separately</strong>, meaning you need to follow the instructions for the features you want. The HNN API is the only feature included in <strong>all install types</strong>. You can easily install multiple sets of HNN features below by combining them like the following:</p>
 <pre><code>pip install &quot;hnn_core[gui,parallel]&quot;</code></pre>
 <h3><code>pip</code> Basic (API-only) Installation</h3>
-<p>To install only the HNN API, open a Terminal or Command Prompt using
-a fresh virtual environment, and enter:</p>
+<p>To install only the HNN API, open a Terminal or Command Prompt using a fresh virtual environment, and enter:</p>
 <pre><code>pip install hnn_core</code></pre>
-<p>This will install only the HNN API along with its required
-dependencies, which include: <a href="https://numpy.org/">NumPy</a>, <a
-href="https://scipy.org/">SciPy</a>, <a
-href="https://matplotlib.org/">Matplotlib</a>, <a
-href="https://nrn.readthedocs.io/">NEURON</a> (&gt;=7.7), and <a
-href="https://github.com/h5io/h5io">h5io</a>.</p>
-<p>For guidance on using the API, see our “Using the HNN API” notebooks
-in the sidebar such as <a
-href="../08_using_hnn_api/plot_firing_pattern.html">here</a>, or
-in-depth examples like our <a href="../05_erps/hnn_core.html">API
-tutorial of ERPs</a>.</p>
+<p>This will install only the HNN API along with its required dependencies, which include: <a href="https://numpy.org/">NumPy</a>, <a href="https://scipy.org/">SciPy</a>, <a href="https://matplotlib.org/">Matplotlib</a>, <a href="https://nrn.readthedocs.io/">NEURON</a> (&gt;=7.7), and <a href="https://github.com/h5io/h5io">h5io</a>.</p>
+<p>For guidance on using the API, see our “Using the HNN API” notebooks in the sidebar such as <a href="../08_using_hnn_api/plot_firing_pattern.html">here</a>, or in-depth examples like our <a href="../05_erps/hnn_core.html">API tutorial of ERPs</a>.</p>
 <h3><code>pip</code> Graphical User Interface (GUI) Installation</h3>
-<p>To install HNN with both its API and GUI support, run the following
-command (make sure to include the “quotes”):</p>
+<p>To install HNN with both its API and GUI support, run the following command (make sure to include the “quotes”):</p>
 <pre><code>pip install &quot;hnn_core[gui]&quot;</code></pre>
-<p>This automatically installs the following dependencies: <a
-href="https://ipykernel.readthedocs.io/en/stable/">ipykernel</a>, <a
-href="https://matplotlib.org/ipympl/">ipympl</a>, <a
-href="https://github.com/jupyter-widgets/ipywidgets">ipywidgets</a>
-&gt;=8.0.0, and <a
-href="https://github.com/voila-dashboards/voila">voila</a>.</p>
-<p>For guidance on using the GUI, see <a
-href="../04_using_hnn_gui/gui_quickstart.html">our quickstart guide
-here</a>, or in-depth examples like our <a
-href="../05_erps/erps_in_gui.html">GUI tutorial of ERPs</a>.</p>
+<p>This automatically installs the following dependencies: <a href="https://ipykernel.readthedocs.io/en/stable/">ipykernel</a>, <a href="https://matplotlib.org/ipympl/">ipympl</a>, <a href="https://github.com/jupyter-widgets/ipywidgets">ipywidgets</a> &gt;=8.0.0, and <a href="https://github.com/voila-dashboards/voila">voila</a>.</p>
+<p>For guidance on using the GUI, see <a href="../04_using_hnn_gui/gui_quickstart.html">our quickstart guide here</a>, or in-depth examples like our <a href="../05_erps/erps_in_gui.html">GUI tutorial of ERPs</a>.</p>
 <h3><code>pip</code> Optimization Installation</h3>
-<p>To install HNN with both its API and Optimization support, run the
-following command (make sure to include the “quotes”):</p>
+<p>To install HNN with both its API and Optimization support, run the following command (make sure to include the “quotes”):</p>
 <pre><code>pip install &quot;hnn_core[opt]&quot;</code></pre>
-<p>This automatically installs the following dependencies: <a
-href="https://scikit-learn.org/stable/index.html"><code>scikit-learn</code></a>.</p>
-<p>If you are using Optimization, it is recommended to also install
-Joblib support (see below).</p>
-<p>For guidance on using Optimization, see our “Using the HNN API”
-notebooks in the sidebar such as <a
-href="../08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">here</a>
-and <a
-href="../08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">here</a>.</p>
+<p>This automatically installs the following dependencies: <a href="https://scikit-learn.org/stable/index.html"><code>scikit-learn</code></a>.</p>
+<p>If you are using Optimization, it is recommended to also install Joblib support (see below).</p>
+<p>For guidance on using Optimization, see our “Using the HNN API” notebooks in the sidebar such as <a href="../08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">here</a> and <a href="../08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">here</a>.</p>
 <h3><code>pip</code> Joblib Installation</h3>
-<p>To install HNN with both its API and Joblib support, run the
-following command (make sure to include the “quotes”):</p>
+<p>To install HNN with both its API and Joblib support, run the following command (make sure to include the “quotes”):</p>
 <pre><code>pip install &quot;hnn_core[parallel]&quot;</code></pre>
-<p>This automatically installs the following dependencies: <a
-href="https://joblib.readthedocs.io/en/stable/">Joblib</a> and <a
-href="https://github.com/giampaolo/psutil">psutil</a>.</p>
-<p>Many of the examples in our Textbook make use of Joblib support, and
-we provide an explicit <a
-href="../08_using_hnn_api/parallelism_joblib.html">tutorial for it
-here</a>.</p>
+<p>This automatically installs the following dependencies: <a href="https://joblib.readthedocs.io/en/stable/">Joblib</a> and <a href="https://github.com/giampaolo/psutil">psutil</a>.</p>
+<p>Many of the examples in our Textbook make use of Joblib support, and we provide an explicit <a href="../08_using_hnn_api/parallelism_joblib.html">tutorial for it here</a>.</p>
 <h3><code>pip</code> MPI Installation</h3>
-<p>MPI installation is the most difficult installation type. If you want
-to use <a href="https://www.open-mpi.org/">MPI</a>, we recommend you
-first try to install our <code>conda</code> package detailed above.
-Otherwise, we <strong>strongly</strong> recommend you use a virtual
-environment created using the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a> specifically, since Anaconda is the easiest way to
-download <a href="https://anaconda.org/conda-forge/openmpi">MPI
-binaries</a>, which are <em>not</em> Python packages.</p>
-<p>To install HNN with its MPI dependencies using the <code>pip</code>
-method, follow the below instructions for your operating system.</p>
+<p>MPI installation is the most difficult installation type. If you want to use <a href="https://www.open-mpi.org/">MPI</a>, we recommend you first try to install our <code>conda</code> package detailed above. Otherwise, we <strong>strongly</strong> recommend you use a virtual environment created using the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> specifically, since Anaconda is the easiest way to download <a href="https://anaconda.org/conda-forge/openmpi">MPI binaries</a>, which are <em>not</em> Python packages.</p>
+<p>To install HNN with its MPI dependencies using the <code>pip</code> method, follow the below instructions for your operating system.</p>
 <h4><code>pip</code> MPI: Windows (native)</h4>
-<p>Unfortunately, we do not officially support MPI usage on native
-Windows due to the complexity required. However, we do support MPI
-through “Windows Subsystem for Linux” (WSL); see below.</p>
+<p>Unfortunately, we do not officially support MPI usage on native Windows due to the complexity required. However, we do support MPI through “Windows Subsystem for Linux” (WSL); see below.</p>
 <h4><code>pip</code> MPI: MacOS, Linux, or Windows (WSL)</h4>
 <ol type="1">
-<li><p>Install the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a>. (If you have followed instructions in Step 2 for
-Windows WSL above, you can skip this.)</p></li>
-<li><p>Create and activate a new <code>conda</code> environment using
-commands like the following:</p>
+<li><p>Install the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a>. (If you have followed instructions in Step 2 for Windows WSL above, you can skip this.)</p></li>
+<li><p>Create and activate a new <code>conda</code> environment using commands like the following:</p>
 <pre><code>conda create -y -q -n hnn-core-env python=3.12
 conda activate hnn-core-env</code></pre>
-<p>You can change the environment name <code>hnn-core-env</code> to
-whatever you wish. Compatible Python versions currently include 3.9 to
-3.13, inclusively.</p></li>
-<li><p>(MacOS only) Copy, paste, and run the following commands to set
-some environment variables for your <code>conda</code> environment:</p>
+<p>You can change the environment name <code>hnn-core-env</code> to whatever you wish. Compatible Python versions currently include 3.9 to 3.13, inclusively.</p></li>
+<li><p>(MacOS only) Copy, paste, and run the following commands to set some environment variables for your <code>conda</code> environment:</p>
 <pre><code>mkdir -p $CONDA_PREFIX/etc/conda/activate.d $CONDA_PREFIX/etc/conda/deactivate.d
 echo &quot;export OLD_DYLD_FALLBACK_LIBRARY_PATH=\$DYLD_FALLBACK_LIBRARY_PATH&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 echo &quot;export DYLD_FALLBACK_LIBRARY_PATH=\$DYLD_FALLBACK_LIBRARY_PATH:\${CONDA_PREFIX}/lib&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
@@ -700,9 +450,7 @@ echo &quot;export DYLD_FALLBACK_LIBRARY_PATH=\$OLD_DYLD_FALLBACK_LIBRARY_PATH&qu
 echo &quot;unset OLD_DYLD_FALLBACK_LIBRARY_PATH&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/deactivate.d/env_vars.sh
 export OLD_DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH
 export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:${CONDA_PREFIX}/lib</code></pre></li>
-<li><p>(Linux or Windows (WSL) only) Copy, paste, and run the following
-commands to set some environment variables for your <code>conda</code>
-environment:</p>
+<li><p>(Linux or Windows (WSL) only) Copy, paste, and run the following commands to set some environment variables for your <code>conda</code> environment:</p>
 <pre><code>mkdir -p $CONDA_PREFIX/etc/conda/activate.d $CONDA_PREFIX/etc/conda/deactivate.d
 echo &quot;export OLD_LD_LIBRARY_PATH=\$LD_LIBRARY_PATH&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 echo &quot;export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\${CONDA_PREFIX}/lib&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
@@ -712,20 +460,15 @@ export OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${CONDA_PREFIX}/lib</code></pre></li>
 <li><p>Run the following command to install your MPI dependencies:</p>
 <pre><code>conda install -y -q &quot;openmpi&gt;5&quot; mpi4py -c conda-forge</code></pre></li>
-<li><p>Finally, install the <code>pip</code> package of
-<code>hnn_core</code> using the following command (make sure to include
-the “quotes”):</p>
+<li><p>Finally, install the <code>pip</code> package of <code>hnn_core</code> using the following command (make sure to include the “quotes”):</p>
 <pre><code>pip install &quot;hnn_core[parallel]&quot;</code></pre></li>
-<li><p>Let’s test that the install worked. Run the following
-command:</p>
+<li><p>Let’s test that the install worked. Run the following command:</p>
 <pre><code>python -c &quot;
 from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
 with MPIBackend():
     simulate_dipole(jones_2009_model(), tstop=20)
 &quot;</code></pre>
-<p>You should see output the looks somewhat similar to the following;
-this verifies that MPI, HNN, NEURON, and Python are all working
-together.</p>
+<p>You should see output the looks somewhat similar to the following; this verifies that MPI, HNN, NEURON, and Python are all working together.</p>
 <pre><code>/opt/anaconda3/envs/hnn-core-env/lib/python3.12/site-packages/hnn_core/dipole.py:85: UserWarning: No external drives or biases loaded
   warnings.warn(&quot;No external drives or biases loaded&quot;, UserWarning)
 MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
@@ -745,9 +488,7 @@ Loading custom mechanism files from /opt/anaconda3/envs/hnn-core-env/lib/python3
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...</code></pre></li>
-<li><p>For guidance on using MPI, see our “Using the HNN API” notebook
-in the sidebar <a
-href="../08_using_hnn_api/parallelism_mpi.html">here</a>.</p></li>
+<li><p>For guidance on using MPI, see our “Using the HNN API” notebook in the sidebar <a href="../08_using_hnn_api/parallelism_mpi.html">here</a>.</p></li>
 </ol>
 </div>
 </div>
@@ -758,166 +499,64 @@ href="../08_using_hnn_api/parallelism_mpi.html">here</a>.</p></li>
 </h5>
 <div class="collapsible-content">
 <p><a id="pip-source-installation"></a></p>
-<p>This method should only be used if you need to install a custom
-version of HNN from Github, need to edit the code yourself, or want to
-contribute to HNN development. Otherwise, please use the
-<strong><code>conda</code> Package Installation</strong> method
-above.</p>
-<p>Please follow the instructions in Steps 1 through 5, <em>in that
-order</em>. This installation method for HNN currently supports Python
-3.9 through 3.13, inclusively.</p>
+<p>This method should only be used if you need to install a custom version of HNN from Github, need to edit the code yourself, or want to contribute to HNN development. Otherwise, please use the <strong><code>conda</code> Package Installation</strong> method above.</p>
+<p>Please follow the instructions in Steps 1 through 5, <em>in that order</em>. This installation method for HNN currently supports Python 3.9 through 3.13, inclusively.</p>
 <h2>Step 1. <code>pip</code> Python Environment</h2>
-<p>We strongly recommend that you install HNN inside a “virtual
-environment” using software like the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a> or Python’s builtin <a
-href="https://docs.python.org/3/library/venv.html"><code>venv</code>
-module</a>. If you are new to Python or data science in Python, we
-recommend you review the resources here: <a
-href="https://docs.anaconda.com/getting-started/"
-class="uri">https://docs.anaconda.com/getting-started/</a>.</p>
-<p>If you use a virtual environment, you must first create the
-environment, and then separately <em>activate</em> the environment (see
-<a
-href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment">Conda
-guidance here</a> and <a
-href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments"><code>venv</code>
-guidance here</a>) before running any of the commands below. <strong>All
-of the installation commands below assume you have already activated
-your environment</strong>. You may need to re-activate your environment
-every time you restart your computer or open a new terminal, depending
-on how you installed your virtual environment software.</p>
+<p>We strongly recommend that you install HNN inside a “virtual environment” using software like the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> or Python’s builtin <a href="https://docs.python.org/3/library/venv.html"><code>venv</code> module</a>. If you are new to Python or data science in Python, we recommend you review the resources here: <a href="https://docs.anaconda.com/getting-started/" class="uri">https://docs.anaconda.com/getting-started/</a>.</p>
+<p>If you use a virtual environment, you must first create the environment, and then separately <em>activate</em> the environment (see <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment">Conda guidance here</a> and <a href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments"><code>venv</code> guidance here</a>) before running any of the commands below. <strong>All of the installation commands below assume you have already activated your environment</strong>. You may need to re-activate your environment every time you restart your computer or open a new terminal, depending on how you installed your virtual environment software.</p>
 <h2>Step 2. <code>pip</code> Platform-specific requirements</h2>
 <h3><code>pip</code> on MacOS</h3>
 <ul>
-<li><p>If you already installed the <a
-href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using
-its traditional installer package, you must <strong>remove it</strong>
-first. We will be installing NEURON using its <code>pip</code>
-package.</p></li>
-<li><p>Before you install HNN, you must install “Xcode Command-Line
-Tools”. This can be done easily by opening a Terminal, running the
-following command, and then clicking through the prompts in the window
-that will pop up. Note that you <strong>must restart your
-computer</strong> after Xcode Command-Line Tools has finished
-installing!</p>
+<li><p>If you already installed the <a href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using its traditional installer package, you must <strong>remove it</strong> first. We will be installing NEURON using its <code>pip</code> package.</p></li>
+<li><p>Before you install HNN, you must install “Xcode Command-Line Tools”. This can be done easily by opening a Terminal, running the following command, and then clicking through the prompts in the window that will pop up. Note that you <strong>must restart your computer</strong> after Xcode Command-Line Tools has finished installing!</p>
 <pre><code>xcode-select --install</code></pre>
-<p>If you run the above command and see output that resembles
-<code>xcode-select: note: Command   line tools are already installed.</code>,
-then you already have it installed, do not need to restart your
-computer, and can proceed to the next step. Finally, note that you do
-<em>not</em> need to install Xcode in its entirety; only the above is
-required.</p></li>
+<p>If you run the above command and see output that resembles <code>xcode-select: note: Command   line tools are already installed.</code>, then you already have it installed, do not need to restart your computer, and can proceed to the next step. Finally, note that you do <em>not</em> need to install Xcode in its entirety; only the above is required.</p></li>
 </ul>
 <h3><code>pip</code> on Linux</h3>
 <ul>
-<li>If you already installed the <a
-href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using
-its traditional installer package, you must <strong>remove it</strong>
-first. We will be installing NEURON using its <code>pip</code>
-package.</li>
+<li>If you already installed the <a href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using its traditional installer package, you must <strong>remove it</strong> first. We will be installing NEURON using its <code>pip</code> package.</li>
 </ul>
 <h3><code>pip</code> on Windows (native, not WSL)</h3>
 <ul>
-<li><p>Before you install HNN, it is important that you
-<strong>install</strong> the <a
-href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using
-its <a
-href="https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows">Windows-specific
-binaries</a>. You can test that NEURON was installed correctly by
-opening a Command Prompt (or similar) via your Anaconda install (or
-virtual environment), and running the following command:</p>
+<li><p>Before you install HNN, it is important that you <strong>install</strong> the <a href="https://nrn.readthedocs.io/">NEURON</a> software system-wide using its <a href="https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows">Windows-specific binaries</a>. You can test that NEURON was installed correctly by opening a Command Prompt (or similar) via your Anaconda install (or virtual environment), and running the following command:</p>
 <pre><code>python -c &quot;import neuron&quot;</code></pre></li>
-<li><p>Note that MPI use is <strong>not</strong> supported on native
-Windows, but is supported on Windows using WSL (see below).</p></li>
-<li><p>If you want to contribute to HNN development, then native Windows
-is <strong>not</strong> recommended, and instead we recommend using WSL
-(see below).</p></li>
+<li><p>Note that MPI use is <strong>not</strong> supported on native Windows, but is supported on Windows using WSL (see below).</p></li>
+<li><p>If you want to contribute to HNN development, then native Windows is <strong>not</strong> recommended, and instead we recommend using WSL (see below).</p></li>
 </ul>
 <h3><code>pip</code> on Windows (WSL)</h3>
-<p>The following includes instructions on how to install both “Windows
-Subsystem for Linux” (WSL) and the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a> inside WSL.</p>
+<p>The following includes instructions on how to install both “Windows Subsystem for Linux” (WSL) and the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> inside WSL.</p>
 <ol type="1">
-<li><p>Install WSL: Open the “PowerShell” or “Windows Command Prompt”
-programs in administrator mode by right-clicking the program icon and
-selecting “Run as administrator”. Then, in the window, run the following
-command:</p>
+<li><p>Install WSL: Open the “PowerShell” or “Windows Command Prompt” programs in administrator mode by right-clicking the program icon and selecting “Run as administrator”. Then, in the window, run the following command:</p>
 <pre><code>wsl --install</code></pre>
-<p>Follow the default options for your install. For more information,
-see <a href="https://learn.microsoft.com/en-us/windows/wsl/install"
-class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a>.</p></li>
+<p>Follow the default options for your install. For more information, see <a href="https://learn.microsoft.com/en-us/windows/wsl/install" class="uri">https://learn.microsoft.com/en-us/windows/wsl/install</a>.</p></li>
 <li><p>Close the PowerShell or Command Prompt window.</p></li>
-<li><p>You will now have a new App available from the Start Menu called
-<code>Ubuntu</code>. Run that app.</p></li>
-<li><p>The first time you start Ubuntu, it will prompt you to
-<code>Create a default Unix user account</code> and ask for a password.
-If you provide a password, write it down.</p></li>
-<li><p>You should now see a prompt and a blinking cursor similar to
-PowerShell/Command Prompt. Copy and paste the following commands. If you
-entered a password in Step 4, enter that when it prompts you for your
-password.</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<li><p>You will now have a new App available from the Start Menu called <code>Ubuntu</code>. Run that app.</p></li>
+<li><p>The first time you start Ubuntu, it will prompt you to <code>Create a default Unix user account</code> and ask for a password. If you provide a password, write it down.</p></li>
+<li><p>You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 4, enter that when it prompts you for your password.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
-<li><p>In the same window, copy and paste the following commands, then
-follow the prompts. We strongly recommend that when you are asked
-<code>Do you wish to update your shell profile to automatically initialize conda?</code>
-you enter <code>yes</code>. If you do not, then you will have to
-manually activate Conda whenever you open your Ubuntu app using the
-command this program provides at the end.</p>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<li><p>In the same window, copy and paste the following commands, then follow the prompts. We strongly recommend that when you are asked <code>Do you wish to update your shell profile to automatically initialize conda?</code> you enter <code>yes</code>. If you do not, then you will have to manually activate Conda whenever you open your Ubuntu app using the command this program provides at the end.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
-<p>If you see output similar to
-<code>WARNING: Your machine hardware does not appear to be x86_64</code>,
-then please contact us via <a
-href="https://github.com/jonescompneurolab/hnn-core/discussions">our
-Github Discussions page</a>. You may be able to install by using <a
-href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh"
-class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a>
-instead.</p></li>
-<li><p>Close the Ubuntu window, then open a new one. Your prompt should
-now show <code>(base)</code> at the beginning.</p></li>
-<li><p>Inside this window, follow all the steps below for your preferred
-<code>pip</code> package installation type <strong>as if you are
-installing for Linux</strong>, then return here.</p></li>
+<p>If you see output similar to <code>WARNING: Your machine hardware does not appear to be x86_64</code>, then please contact us via <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>. You may be able to install by using <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh" class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a> instead.</p></li>
+<li><p>Close the Ubuntu window, then open a new one. Your prompt should now show <code>(base)</code> at the beginning.</p></li>
+<li><p>Inside this window, follow all the steps below for your preferred <code>pip</code> package installation type <strong>as if you are installing for Linux</strong>, then return here.</p></li>
 <li><p>HNN should now be installed!</p></li>
-<li><p>Note: On Windows, if you installed the GUI, then every time you
-start the GUI, you will need to navigate to <a
-href="http://localhost:8866" class="uri">http://localhost:8866</a> in
-your browser (or refresh if you are already on the page).</p></li>
+<li><p>Note: On Windows, if you installed the GUI, then every time you start the GUI, you will need to navigate to <a href="http://localhost:8866" class="uri">http://localhost:8866</a> in your browser (or refresh if you are already on the page).</p></li>
 </ol>
 <h2>Step 3. (Optional) MPI installation</h2>
-<p><a href="https://www.open-mpi.org/">MPI</a> installation is the most
-difficult installation type, but it is strongly recommended,
-<em>especially</em> if you want to contribute to development. Our
-instructions below <strong>assume</strong> you are using a virtual
-environment created using the <a
-href="https://www.anaconda.com/download/success">Anaconda Python
-Distribution</a> <strong>specifically</strong>, since Anaconda is the
-easiest way to download <a
-href="https://anaconda.org/conda-forge/openmpi">MPI binaries</a>, which
-are <em>not</em> Python packages.</p>
-<p>To install MPI and its dependencies, follow the below instructions
-for your platform.</p>
+<p><a href="https://www.open-mpi.org/">MPI</a> installation is the most difficult installation type, but it is strongly recommended, <em>especially</em> if you want to contribute to development. Our instructions below <strong>assume</strong> you are using a virtual environment created using the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> <strong>specifically</strong>, since Anaconda is the easiest way to download <a href="https://anaconda.org/conda-forge/openmpi">MPI binaries</a>, which are <em>not</em> Python packages.</p>
+<p>To install MPI and its dependencies, follow the below instructions for your platform.</p>
 <h3><code>pip</code> MPI: Windows (native)</h3>
-<p>Unfortunately, we do not officially support MPI usage on native
-Windows due to the complexity required. However, we do support MPI
-through “Windows Subsystem for Linux” (WSL); see below.</p>
+<p>Unfortunately, we do not officially support MPI usage on native Windows due to the complexity required. However, we do support MPI through “Windows Subsystem for Linux” (WSL); see below.</p>
 <h3><code>pip</code> MPI: MacOS, Linux, or Windows (WSL)</h3>
 <ol type="1">
-<li><p>Create and activate a new <code>conda</code> environment using
-commands like the following:</p>
+<li><p>Create and activate a new <code>conda</code> environment using commands like the following:</p>
 <pre><code>conda create -y -q -n hnn-core-env python=3.12
 conda activate hnn-core-env</code></pre>
-<p>You can change the environment name <code>hnn-core-env</code> to
-whatever you wish. Compatible Python versions currently include 3.9 to
-3.13, inclusively.</p></li>
-<li><p>(MacOS only) Copy, paste, and run the following commands to set
-some environment variables for your <code>conda</code> environment:</p>
+<p>You can change the environment name <code>hnn-core-env</code> to whatever you wish. Compatible Python versions currently include 3.9 to 3.13, inclusively.</p></li>
+<li><p>(MacOS only) Copy, paste, and run the following commands to set some environment variables for your <code>conda</code> environment:</p>
 <pre><code>mkdir -p $CONDA_PREFIX/etc/conda/activate.d $CONDA_PREFIX/etc/conda/deactivate.d
 echo &quot;export OLD_DYLD_FALLBACK_LIBRARY_PATH=\$DYLD_FALLBACK_LIBRARY_PATH&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 echo &quot;export DYLD_FALLBACK_LIBRARY_PATH=\$DYLD_FALLBACK_LIBRARY_PATH:\${CONDA_PREFIX}/lib&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
@@ -925,9 +564,7 @@ echo &quot;export DYLD_FALLBACK_LIBRARY_PATH=\$OLD_DYLD_FALLBACK_LIBRARY_PATH&qu
 echo &quot;unset OLD_DYLD_FALLBACK_LIBRARY_PATH&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/deactivate.d/env_vars.sh
 export OLD_DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH
 export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:${CONDA_PREFIX}/lib</code></pre></li>
-<li><p>(Linux or Windows (WSL) only) Copy, paste, and run the following
-commands to set some environment variables for your <code>conda</code>
-environment:</p>
+<li><p>(Linux or Windows (WSL) only) Copy, paste, and run the following commands to set some environment variables for your <code>conda</code> environment:</p>
 <pre><code>mkdir -p $CONDA_PREFIX/etc/conda/activate.d $CONDA_PREFIX/etc/conda/deactivate.d
 echo &quot;export OLD_LD_LIBRARY_PATH=\$LD_LIBRARY_PATH&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 echo &quot;export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\${CONDA_PREFIX}/lib&quot; &gt;&gt; $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
@@ -939,52 +576,23 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${CONDA_PREFIX}/lib</code></pre></li>
 <pre><code>conda install -y -q &quot;openmpi&gt;5&quot; mpi4py -c conda-forge</code></pre></li>
 </ol>
 <h2>Step 4. Install <code>git</code></h2>
-<p><a
-href="https://docs.github.com/en/get-started/git-basics/set-up-git">Setup
-<code>git</code> using the instructions here</a>. Note that you need to
-do two steps:</p>
+<p><a href="https://docs.github.com/en/get-started/git-basics/set-up-git">Setup <code>git</code> using the instructions here</a>. Note that you need to do two steps:</p>
 <ol type="1">
-<li><p>Make sure that <code>git</code> is installed <a
-href="https://docs.github.com/en/get-started/git-basics/set-up-git#setting-up-git">using
-these steps</a> <strong>and</strong></p></li>
-<li><p>Make sure that your <code>git</code> program has authenticated to
-Github <a
-href="https://docs.github.com/en/get-started/git-basics/set-up-git#authenticating-with-github-from-git">using
-these steps</a>.</p></li>
+<li><p>Make sure that <code>git</code> is installed <a href="https://docs.github.com/en/get-started/git-basics/set-up-git#setting-up-git">using these steps</a> <strong>and</strong></p></li>
+<li><p>Make sure that your <code>git</code> program has authenticated to Github <a href="https://docs.github.com/en/get-started/git-basics/set-up-git#authenticating-with-github-from-git">using these steps</a>.</p></li>
 </ol>
 <h2>Step 5. Download and install HNN-Core source code</h2>
 <ol type="1">
-<li><p>It’s finally time to download the source code. You should do a
-<code>git clone &lt;fork URL&gt;</code> of the fork you are interested
-in, which will download the source code to a new directory. If you want
-to contribute to development, you should use your own personal fork.
-(You can create your own fork by going to our <a
-href="https://github.com/jonescompneurolab/hnn-core">code repository
-here</a> and clicking the “Fork” button in the top right.) As an
-example, if you wanted to download <code>asoplata</code>’s fork, you
-could run the following command:</p>
+<li><p>It’s finally time to download the source code. You should do a <code>git clone &lt;fork URL&gt;</code> of the fork you are interested in, which will download the source code to a new directory. If you want to contribute to development, you should use your own personal fork. (You can create your own fork by going to our <a href="https://github.com/jonescompneurolab/hnn-core">code repository here</a> and clicking the “Fork” button in the top right.) As an example, if you wanted to download <code>asoplata</code>’s fork, you could run the following command:</p>
 <pre><code>git clone https://github.com/asoplata/hnn-core.git</code></pre></li>
-<li><p>Enter the directory that you just downloaded, using the command
-<code>cd hnn-core</code>.</p></li>
-<li><p>Use <code>pip</code> to install an “editable” version of the
-local source code with the features you want to use. If, for example,
-you want to install the GUI, Optimization, and Parallel features, you
-can use the following command:</p>
+<li><p>Enter the directory that you just downloaded, using the command <code>cd hnn-core</code>.</p></li>
+<li><p>Use <code>pip</code> to install an “editable” version of the local source code with the features you want to use. If, for example, you want to install the GUI, Optimization, and Parallel features, you can use the following command:</p>
 <pre><code>pip install --editable &quot;.[gui,opt,parallel]&quot;</code></pre>
-<p>If you <strong>want to contribute to development</strong> or simply
-want to install all features, then you should instead use the following
-command, which installs all features including <strong>special</strong>
-features used in development:</p>
+<p>If you <strong>want to contribute to development</strong> or simply want to install all features, then you should instead use the following command, which installs all features including <strong>special</strong> features used in development:</p>
 <pre><code>pip install --editable &quot;.[dev]&quot;</code></pre>
-<p>For guidance on how to only install different subsets of features,
-see the previous section <strong><code>pip</code> Package
-Installation</strong>.</p>
-<p>If you want to contribute to development, then once you have
-installed HNN this way, please see our <a
-href="https://jonescompneurolab.github.io/hnn-core/stable/contributing.html">Contributing
-Guide here</a>.</p></li>
-<li><p>Test your installation by following the below <strong>Testing
-Your Installation</strong> section.</p></li>
+<p>For guidance on how to only install different subsets of features, see the previous section <strong><code>pip</code> Package Installation</strong>.</p>
+<p>If you want to contribute to development, then once you have installed HNN this way, please see our <a href="https://jonescompneurolab.github.io/hnn-core/stable/contributing.html">Contributing Guide here</a>.</p></li>
+<li><p>Test your installation by following the below <strong>Testing Your Installation</strong> section.</p></li>
 </ol>
 </div>
 </div>
@@ -995,25 +603,17 @@ Testing Your Installation
 </h5>
 <div class="collapsible-content">
 <p><a id="testing-your-installation"></a></p>
-<p>To check whether HNN was installed correctly, you can run the
-following command:</p>
+<p>To check whether HNN was installed correctly, you can run the following command:</p>
 <pre><code>python -c &quot;from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20) ; print(&#39;--&gt; SUCCESS: The test worked&#39;)&quot;</code></pre>
-<p>This will run a very short test simulation, and should not give any
-Error messages (Warning messages are okay).</p>
-<p>If you installed MPI, it is <strong>strongly recommended</strong> to
-test your install. You can test that HNN, NEURON, and MPI were all
-installed correctly and can talk to each other by running the following
-command:</p>
+<p>This will run a very short test simulation, and should not give any Error messages (Warning messages are okay).</p>
+<p>If you installed MPI, it is <strong>strongly recommended</strong> to test your install. You can test that HNN, NEURON, and MPI were all installed correctly and can talk to each other by running the following command:</p>
 <pre><code>python -c &quot;
 from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
 with MPIBackend():
     simulate_dipole(jones_2009_model(), tstop=20)
 print(&#39;--&gt; SUCCESS: The test worked&#39;)
 &quot;</code></pre>
-<p>If either of the above commands run into Errors (Warnings are okay),
-then feel free to ask for help on <a
-href="https://github.com/jonescompneurolab/hnn-core/discussions">our
-GitHub Discussions page</a>.</p>
+<p>If either of the above commands run into Errors (Warnings are okay), then feel free to ask for help on <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our GitHub Discussions page</a>.</p>
 </div>
 </div>
         <!-- footer area -->

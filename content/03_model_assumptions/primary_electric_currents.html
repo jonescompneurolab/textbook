@@ -281,49 +281,12 @@
 -->
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/06_primary-electrical-currents/06_primary-electrical-currents -->
 <h1>2.2 Primary Electrical Currents</h1>
-<p>Axial current flow between any two neighboring model compartments i,j
-is defined as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo>−</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><msub><mi>r</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">i_{axial} = (v_i - v_j) / r_{axial}</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">r_{axial}</annotation></semantics></math>
-are the voltages in compartment i, j, and the resistance between the
-compartments, respectively. In order to convert this axial current into
-a dipole signal, we apply a length scaling where the axial current is
-scaled by the inter-compartment distance along the vertical axis. The
-length scaling means that for the longer apical dendrites of layer 5
-pyramidal neurons, the contribution will be larger than from the shorter
-layer 2/3 pyramidal neuron apical dendrites. Note that the orientation
-of the dendrites relative to the vertical axis also influences the
-contribution to the dipole signal. For example, the
-horizontally-oriented oblique dendrites which do not have any vertical
-length component, do not contribute to the dipole signal, whereas for
-basal dendrites oriented at 45 degrees from the vertical axis, the
-scaling is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msqrt><mn>2</mn></msqrt><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">-\sqrt{2}/2</annotation></semantics></math>
-(note the negative sign is because these dendrites are pointing
-downward). The contribution from all neighboring compartments within a
-neuron is integrated and then added to a value across the set of all
-pyramidal neurons. As a result of the multiplication between axial
-current and length, the model dipole output signal has the same units of
-measure as the experimental data (in units of nano-Ampere-meters) and we
-are then able to directly compare the two signals, as well as precisely
-tune model parameters to match characteristics of recorded signals <span
-class="citation" data-cites="okada_genesis_1997">(<a
-href="#ref-okada_genesis_1997" role="doc-biblioref">Okada, Wu, and
-Kyuhou 1997</a>)</span>.</p>
+<p>Axial current flow between any two neighboring model compartments i,j is defined as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo>−</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><msub><mi>r</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">i_{axial} = (v_i - v_j) / r_{axial}</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">r_{axial}</annotation></semantics></math> are the voltages in compartment i, j, and the resistance between the compartments, respectively. In order to convert this axial current into a dipole signal, we apply a length scaling where the axial current is scaled by the inter-compartment distance along the vertical axis. The length scaling means that for the longer apical dendrites of layer 5 pyramidal neurons, the contribution will be larger than from the shorter layer 2/3 pyramidal neuron apical dendrites. Note that the orientation of the dendrites relative to the vertical axis also influences the contribution to the dipole signal. For example, the horizontally-oriented oblique dendrites which do not have any vertical length component, do not contribute to the dipole signal, whereas for basal dendrites oriented at 45 degrees from the vertical axis, the scaling is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msqrt><mn>2</mn></msqrt><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">-\sqrt{2}/2</annotation></semantics></math> (note the negative sign is because these dendrites are pointing downward). The contribution from all neighboring compartments within a neuron is integrated and then added to a value across the set of all pyramidal neurons. As a result of the multiplication between axial current and length, the model dipole output signal has the same units of measure as the experimental data (in units of nano-Ampere-meters) and we are then able to directly compare the two signals, as well as precisely tune model parameters to match characteristics of recorded signals <span class="citation" data-cites="okada_genesis_1997">(<a href="#ref-okada_genesis_1997" role="doc-biblioref">Okada, Wu, and Kyuhou 1997</a>)</span>.</p>
 <h2>References</h2>
 <!-- Any Bibtex bibliographic references are automatically generated, so we don't need to add anything other than a section title. -->
-<div id="refs" class="references csl-bib-body hanging-indent"
-data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-okada_genesis_1997" class="csl-entry" role="listitem">
-Okada, Yoshio C., Jie Wu, and Shinichi Kyuhou. 1997. <span>“Genesis of
-<span>MEG</span> Signals in a Mammalian <span>CNS</span>
-Structure.”</span> <em>Electroencephalography and Clinical
-Neurophysiology</em> 103 (4): 474–85. <a
-href="https://doi.org/10.1016/S0013-4694(97)00043-6">https://doi.org/10.1016/S0013-4694(97)00043-6</a>.
+Okada, Yoshio C., Jie Wu, and Shinichi Kyuhou. 1997. <span>“Genesis of <span>MEG</span> Signals in a Mammalian <span>CNS</span> Structure.”</span> <em>Electroencephalography and Clinical Neurophysiology</em> 103 (4): 474–85. <a href="https://doi.org/10.1016/S0013-4694(97)00043-6">https://doi.org/10.1016/S0013-4694(97)00043-6</a>.
 </div>
 </div>
         <!-- footer area -->

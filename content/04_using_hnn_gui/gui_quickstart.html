@@ -280,136 +280,54 @@
     # Austin Soplata
 -->
 <h1>3.1 HNN GUI Quickstart</h1>
-<p>This tutorial is meant to illustrate the bare minimum usage of the
-GUI. For more in-depth guidance on using the HNN GUI, see our tutorials
-in later sections, such as our <a href="../05_erps/erps_in_gui.html">GUI
-ERP Tutorial here</a>, <a href="../06_alpha_beta/gui.html">GUI
-Alpha/Beta Tutorial here</a>, or <a
-href="../07_gamma/gamma_in_gui.html">GUI Gamma Tutorial here</a> (also
-accessible via the sidebar).</p>
+<p>This tutorial is meant to illustrate the bare minimum usage of the GUI. For more in-depth guidance on using the HNN GUI, see our tutorials in later sections, such as our <a href="../05_erps/erps_in_gui.html">GUI ERP Tutorial here</a>, <a href="../06_alpha_beta/gui.html">GUI Alpha/Beta Tutorial here</a>, or <a href="../07_gamma/gamma_in_gui.html">GUI Gamma Tutorial here</a> (also accessible via the sidebar).</p>
 <h2>Setup</h2>
-<p>Make sure you have followed our <a
-href="../01_getting_started/installation.html">Installation section
-here</a>, and are either using HNN in the cloud, using the
-<code>conda</code> package, or installing GUI support using
-<code>pip</code>.</p>
-<p>If you are running HNN “in the cloud”, follow the instructions in the
-method you have chosen until you can access a webpage that resembles <a
-href="#figure-1">Figure 1</a>.</p>
-<p>If you are using a local installation of HNN, then activate your
-Python environment (see our <a
-href="../01_getting_started/installation.html#local-installation">Local
-Installation Guide</a> for details), and run the following command in
-your terminal:</p>
+<p>Make sure you have followed our <a href="../01_getting_started/installation.html">Installation section here</a>, and are either using HNN in the cloud, using the <code>conda</code> package, or installing GUI support using <code>pip</code>.</p>
+<p>If you are running HNN “in the cloud”, follow the instructions in the method you have chosen until you can access a webpage that resembles <a href="#figure-1">Figure 1</a>.</p>
+<p>If you are using a local installation of HNN, then activate your Python environment (see our <a href="../01_getting_started/installation.html#local-installation">Local Installation Guide</a> for details), and run the following command in your terminal:</p>
 <pre><code>hnn-gui</code></pre>
-<p>On Linux, Mac, or native Windows, the above command should open a new
-tab in your browser which contains the HNN GUI and resembles <a
-href="#figure-1">Figure 1</a>.</p>
-<p>Note that if you are on Windows and installed HNN through “Windows
-Subsystem for Linux”, then after running the above command, you need to
-manually navigate in your browser to the URL that is shown
-after<code>[Voila] Voilà is running at:</code>, which is probably <a
-href="http://localhost:8866" class="uri">http://localhost:8866</a>.</p>
+<p>On Linux, Mac, or native Windows, the above command should open a new tab in your browser which contains the HNN GUI and resembles <a href="#figure-1">Figure 1</a>.</p>
+<p>Note that if you are on Windows and installed HNN through “Windows Subsystem for Linux”, then after running the above command, you need to manually navigate in your browser to the URL that is shown after<code>[Voila] Voilà is running at:</code>, which is probably <a href="http://localhost:8866" class="uri">http://localhost:8866</a>.</p>
 <section class="stylefig">
 <h3>Figure 1</h3>
 <figure>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_01_blank_gui.png"
-alt="Screenshot of the HNN GUI interface after launching, showing the default empty state with tabs for Simulation, Network, External drives, and Visualization." />
-<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after
-launching, showing the default empty state with tabs for Simulation,
-Network, External drives, and Visualization.</figcaption>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_01_blank_gui.png" alt="Screenshot of the HNN GUI interface after launching, showing the default empty state with tabs for Simulation, Network, External drives, and Visualization." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after launching, showing the default empty state with tabs for Simulation, Network, External drives, and Visualization.</figcaption>
 </figure>
 </section>
 <h2>Changing parameters</h2>
-<p>Click on the tab inside the GUI that says
-<code>External drives</code>, then click the box that says
-<code>evdist1 (distal)</code>. This will expand the box (illustrated in
-<a href="#figure-2">Figure 2</a>) to show the various parameters that
-encompass the external drive to the network called <code>evdist1</code>.
-You can use these fields to change parameters of the drive, if you want.
-Note that you must scroll down inside the box to see other parameters or
-other drives. You can also click the title of the drive again (where it
-says <code>evdist1 (distal)</code>) to close the box and see other
-drives.</p>
-<p>Note that you can always refresh the tab to reset the GUI to its
-original state: this will clear all parameter changes you have made, but
-<em>will also delete the GUI data of any simulations you have run in the
-GUI, unless you previously downloaded the data as a file</em>!</p>
-<p>You can also change the parameters of the network itself, as opposed
-to the external drives, by clicking on the <code>Network</code> tab and
-then clicking on the box of the connection type you want to change,
-similar to you accessed the <code>evdist1</code> drive previously.</p>
+<p>Click on the tab inside the GUI that says <code>External drives</code>, then click the box that says <code>evdist1 (distal)</code>. This will expand the box (illustrated in <a href="#figure-2">Figure 2</a>) to show the various parameters that encompass the external drive to the network called <code>evdist1</code>. You can use these fields to change parameters of the drive, if you want. Note that you must scroll down inside the box to see other parameters or other drives. You can also click the title of the drive again (where it says <code>evdist1 (distal)</code>) to close the box and see other drives.</p>
+<p>Note that you can always refresh the tab to reset the GUI to its original state: this will clear all parameter changes you have made, but <em>will also delete the GUI data of any simulations you have run in the GUI, unless you previously downloaded the data as a file</em>!</p>
+<p>You can also change the parameters of the network itself, as opposed to the external drives, by clicking on the <code>Network</code> tab and then clicking on the box of the connection type you want to change, similar to you accessed the <code>evdist1</code> drive previously.</p>
 <section class="stylefig">
 <h3>Figure 2</h3>
 <figure>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_02_evdist_box.png"
-alt="The GUI with expanded evdist1 parameter box on the left showing various configurable parameters for the distal external drive, including timing, location, and synaptic weight settings." />
-<figcaption aria-hidden="true">The GUI with expanded
-<code>evdist1</code> parameter box on the left showing various
-configurable parameters for the distal external drive, including timing,
-location, and synaptic weight settings.</figcaption>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_02_evdist_box.png" alt="The GUI with expanded evdist1 parameter box on the left showing various configurable parameters for the distal external drive, including timing, location, and synaptic weight settings." />
+<figcaption aria-hidden="true">The GUI with expanded <code>evdist1</code> parameter box on the left showing various configurable parameters for the distal external drive, including timing, location, and synaptic weight settings.</figcaption>
 </figure>
 </section>
 <h2>Running a simulation</h2>
-<p>Return to the <code>Simulation</code> tab by clicking the tab. Change
-the name of the simulation from <code>default</code> to anything else.
-Note that for each <em>new</em> simulation, you must manually change the
-name of the simulation, otherwise you will get an error. You can change
-the length of time of the simulation using <code>tstop (ms)</code>.</p>
-<p>Finally, click the purple <code>Run</code> button to run your
-simulation! After a minute or two, you should see output resembling <a
-href="#figure-3">Figure 3</a>. This figure shows the 3 external drives
-in the top subplot and the total current dipole moment in the
-bottom.</p>
+<p>Return to the <code>Simulation</code> tab by clicking the tab. Change the name of the simulation from <code>default</code> to anything else. Note that for each <em>new</em> simulation, you must manually change the name of the simulation, otherwise you will get an error. You can change the length of time of the simulation using <code>tstop (ms)</code>.</p>
+<p>Finally, click the purple <code>Run</code> button to run your simulation! After a minute or two, you should see output resembling <a href="#figure-3">Figure 3</a>. This figure shows the 3 external drives in the top subplot and the total current dipole moment in the bottom.</p>
 <section class="stylefig">
 <h3>Figure 3</h3>
 <figure>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_03_run_first.png"
-alt="The GUI after successful simulation output. On the right are output figures with the top subplot showing the three default external drives (evprox1 in red, then evdist1 in green, then evprox2 in red) and the bottom subplot showing the resulting current dipole moment over time." />
-<figcaption aria-hidden="true">The GUI after successful simulation
-output. On the right are output figures with the top subplot showing the
-three default external drives (<code>evprox1</code> in red, then
-<code>evdist1</code> in green, then <code>evprox2</code> in red) and the
-bottom subplot showing the resulting current dipole moment over
-time.</figcaption>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_03_run_first.png" alt="The GUI after successful simulation output. On the right are output figures with the top subplot showing the three default external drives (evprox1 in red, then evdist1 in green, then evprox2 in red) and the bottom subplot showing the resulting current dipole moment over time." />
+<figcaption aria-hidden="true">The GUI after successful simulation output. On the right are output figures with the top subplot showing the three default external drives (<code>evprox1</code> in red, then <code>evdist1</code> in green, then <code>evprox2</code> in red) and the bottom subplot showing the resulting current dipole moment over time.</figcaption>
 </figure>
 </section>
 <h2>Creating more visualizations</h2>
-<p>Click the <code>Visualization</code> tab. Then, in the
-<code>Layout template</code> drop-down, select
-<code>Drive-spikes (2x1)</code>. Then, click <code>Make figure</code>.
-This will create a new figure on the right, and your screen should
-resemble <a href="#figure-4">Figure 4</a>. This new figure illustrates
-the same drives in the top subplot but a spike rastergram of all
-celltypes in the bottom.</p>
-<p>Note that for the default simulation, because we are modeling such a
-short signal, we cannot generate a spectrogram plot with our default
-parameters. If you wish, you can run an additional simulation with a
-longer time (a higher <code>tstop</code> value) and then generate an
-additional spectrogram plot.</p>
+<p>Click the <code>Visualization</code> tab. Then, in the <code>Layout template</code> drop-down, select <code>Drive-spikes (2x1)</code>. Then, click <code>Make figure</code>. This will create a new figure on the right, and your screen should resemble <a href="#figure-4">Figure 4</a>. This new figure illustrates the same drives in the top subplot but a spike rastergram of all celltypes in the bottom.</p>
+<p>Note that for the default simulation, because we are modeling such a short signal, we cannot generate a spectrogram plot with our default parameters. If you wish, you can run an additional simulation with a longer time (a higher <code>tstop</code> value) and then generate an additional spectrogram plot.</p>
 <section class="stylefig">
 <h3>Figure 4</h3>
 <figure>
-<img
-src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_04_viz.png"
-alt="Another visualization of the simulation output from Figure 3. On the right top subplot, this shows external drives, and in the right bottom subplot, this shows a spike rastergram of all cell types (each cell type is color-coded) displaying individual neuron firing patterns over time." />
-<figcaption aria-hidden="true">Another visualization of the simulation
-output from Figure 3. On the right top subplot, this shows external
-drives, and in the right bottom subplot, this shows a spike rastergram
-of all cell types (each cell type is color-coded) displaying individual
-neuron firing patterns over time.</figcaption>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/images/fig_04_viz.png" alt="Another visualization of the simulation output from Figure 3. On the right top subplot, this shows external drives, and in the right bottom subplot, this shows a spike rastergram of all cell types (each cell type is color-coded) displaying individual neuron firing patterns over time." />
+<figcaption aria-hidden="true">Another visualization of the simulation output from Figure 3. On the right top subplot, this shows external drives, and in the right bottom subplot, this shows a spike rastergram of all cell types (each cell type is color-coded) displaying individual neuron firing patterns over time.</figcaption>
 </figure>
 </section>
 <h2>Continue on to other tutorials</h2>
-<p>Congratulations on running your first simulation, and generating some
-visualizations of it! We recommend you proceed onto the more detailed <a
-href="../05_erps/erps_in_gui.html">GUI ERP Tutorial here</a>, or
-alternatively the <a href="../06_alpha_beta/gui.html">GUI Alpha/Beta
-Tutorial here</a> or <a href="../07_gamma/gamma_in_gui.html">GUI Gamma
-Tutorial here</a> depending on your scientific interest.</p>
+<p>Congratulations on running your first simulation, and generating some visualizations of it! We recommend you proceed onto the more detailed <a href="../05_erps/erps_in_gui.html">GUI ERP Tutorial here</a>, or alternatively the <a href="../06_alpha_beta/gui.html">GUI Alpha/Beta Tutorial here</a> or <a href="../07_gamma/gamma_in_gui.html">GUI Gamma Tutorial here</a> depending on your scientific interest.</p>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

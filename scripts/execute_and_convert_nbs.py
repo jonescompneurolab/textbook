@@ -146,78 +146,90 @@ def _convert_nb_html_to_json(
 
     return contents
 
+def _get_section_outputs(nb_outputs, section_header):
+    items = list(nb_outputs.items())
+
+    # locate target section
+    start_idx = None
+    for i, (title, data) in enumerate(items):
+        if title == section_header:
+            start_idx = i
+            break
+
+    if start_idx is None:
+        raise KeyError(f"Section not found: {section_header}")
+
+    start_level = items[start_idx][1]["level"]
+
+    # collect until boundary
+    result = {}
+
+    for title, data in items[start_idx:]:
+        level = data["level"]
+
+        # stop if we hit a new section that is same-or-higher level
+        if title != section_header and level <= start_level:
+            break
+
+        result[title] = data
+
+    return result
 
 def _structure_json(contents):
     """
-    (Unused) Determine the hierarchy of sections based on levels without adding content.
+    Build hierarchical structure of sections from a flat section dict.
 
-    Returns a list of sections in order of their hierarchy.
-
-    TODO This is currently unused and will be expanded in future updates.
+    contents format:
+        {
+            section_title: {"level": int, "html": str},
+            ...
+        }
     """
+
+    # IMPORTANT: dict order matters for hierarchy
+    items = list(contents.items())
+
     hierarchy = {}
+    parent_stack = []
 
-    for filename, sections in contents.items():
-        hierarchy[filename] = {}
+    for section_title, section_data in items:
+        level = section_data["level"]
+        html_contents = section_data["html"]
 
-        # list to track parent sections for potential nesting
-        parent_stack = []
+        section_info = {
+            "title": section_title,
+            "level": level,
+            "html": html_contents,
+            "sub-sections": [],
+        }
 
-        for section_title, section_data in sections.items():
-            level = section_data["level"]
-            html_contents = section_data["html"]
+        # find correct parent based on level
+        while parent_stack and parent_stack[-1]["level"] >= level:
+            parent_stack.pop()
 
-            # Create a section dict with 'title', 'level', and 'sub-sections'
-            section_info = {
-                "title": section_title,
-                "level": level,
-                "html": html_contents,
-                "sub-sections": [],
-            }
+        if parent_stack:
+            parent_stack[-1]["sub-sections"].append(section_info)
+        else:
+            hierarchy[section_title] = section_info
 
-            # Ensure only sections with a level greater than the current
-            # section remain in the stack as potential parents
-            while parent_stack and parent_stack[-1]["level"] >= level:
-                parent_stack.pop()
+        parent_stack.append(section_info)
 
-            if parent_stack:
-                # Add the section as a child of the last parent
-                parent_stack[-1]["sub-sections"].append(section_info)
-            else:
-                # Add the section as a top-level section
-                hierarchy[filename][section_title] = section_info
+    def remove_blank_subsections(section):
+        if isinstance(section, dict):
+            subs = section.get("sub-sections")
 
-            # Add the current section to the parent stack for future nesting
-            parent_stack.append(section_info)
-
-    def remove_blank_subsections(sections):
-        seek = "sub-sections"
-
-        for k, v in list(sections.items()):
-            if isinstance(v, dict):
-                # check for 'sub-sections' key in dict
-                if seek in v:
-                    # delete empty sub-sections
-                    if v[seek] == []:
-                        del v[seek]
-
-                    # Recursively check all sub-sections
-                    else:
-                        for sub_section in v[seek]:
-                            remove_blank_subsections(sub_section)
-
-            elif isinstance(v, list):
-                # if v is an empty list, delete it
-                if v == []:
-                    del sections[k]
-                # if v is a list of dicts, iterate through the dicts
+            if subs is not None:
+                if not subs:
+                    del section["sub-sections"]
                 else:
-                    for dictionary in v:
-                        remove_blank_subsections(dictionary)
+                    for sub in subs:
+                        remove_blank_subsections(sub)
 
-        return sections
+        elif isinstance(section, list):
+            for item in section:
+                remove_blank_subsections(item)
 
-    hierarchy[filename] = remove_blank_subsections(hierarchy[filename])
+    remove_blank_subsections(hierarchy)
 
     return hierarchy
 
@@ -1356,8 +1368,14 @@ def execute_and_convert_nbs_to_json(
     """
     # Setup
     # ----------------------------------------------------------------------------------
-    # Get all notebook file paths
-    all_nb_paths = sorted(content_path.glob("**/*.ipynb"))
+    # #################### [BUGFIX] DSD ####################
+    # Get all notebook file paths, excluding .ipynb checkpoint files
+    all_nb_paths = sorted(
+        path
+        for path in content_path.glob("**/*.ipynb")
+        if ".ipynb_checkpoints" not in path.parts
+    )
+    # #################### [END BUGFIX] ####################
 
     # get nb hashes from json
     nb_hashes = _load_nb_hashes(nb_hashes_path)
