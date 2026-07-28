@@ -412,19 +412,7 @@ with MPIBackend(n_procs=4, mpi_cmd='mpiexec'):
 
         MPI will run 1 trial(s) sequentially by distributing network neurons over 4 processes.
 
-        [runnervmvrwv9:08625] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervmvrwv9:08624] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervmvrwv9:08626] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervmvrwv9:08623] pml_ucx.c:319  Error: Failed to create UCP worker
-[1785251691.443960] [runnervmvrwv9:8625 :0]        ib_iface.c:1316 UCX  ERROR mana_0: iface 0x32890670 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
-[1785251691.444027] [runnervmvrwv9:8624 :0]        ib_iface.c:1316 UCX  ERROR mana_0: iface 0x1dfcd240 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
-[1785251691.444340] [runnervmvrwv9:8625 :0]      ucp_worker.c:1415 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
-[1785251691.444401] [runnervmvrwv9:8624 :0]      ucp_worker.c:1415 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
-[1785251691.445317] [runnervmvrwv9:8626 :0]        ib_iface.c:1316 UCX  ERROR mana_0: iface 0x3595c670 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
-[1785251691.445370] [runnervmvrwv9:8623 :0]        ib_iface.c:1316 UCX  ERROR mana_0: iface 0x384b8240 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
-[1785251691.445988] [runnervmvrwv9:8626 :0]      ucp_worker.c:1415 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
-[1785251691.446272] [runnervmvrwv9:8623 :0]      ucp_worker.c:1415 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
-numprocs=4
+        numprocs=4
 
         Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
