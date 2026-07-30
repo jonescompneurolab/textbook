@@ -71,10 +71,10 @@ h6 {
 }
 
 /*
-    Element: h1::after, h2::after
-    Description: block-level pseudo-elements for h1 and h2
+    Element: h1::after
+    Description: block-level pseudo-elements for h1
 */
-h1::after, h2::after {
+h1::after {
     content: "";
     display: block; 
     height: 2px;
@@ -1062,7 +1062,6 @@ body.dark-mode .dropdown-content::before {
 .callout {
     background-color: #f5f5f5;
     border-radius: 5px;
-    border-radius: 5px;
     padding: 10px;
     margin: 1.2em 0;
 }
@@ -1072,6 +1071,7 @@ body.dark-mode .callout {
     border-radius: 5px;
     padding: 10px;
     margin: 1.2em 0;
+    color: white;
 }
 
 .callout-note {
@@ -1091,7 +1091,6 @@ body.dark-mode .callout {
     Description: Style for exclamation icon
 */
 .exclamation-icon {
-    margin-top: 5px;
     fill: var(--gentle-red);
     width: 22px;
     height: 22px;
@@ -1102,14 +1101,60 @@ body.dark-mode .callout {
     Description: Style for lightbulb icon
 */
 .lightbulb-icon{
-    margin-top: 5px;
     fill: var(--hnn-yellow);
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
 }
 
 body.dark-mode .exclamation-icon {
     fill: var(--gentle-red);
+}
+
+.callout-header {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+body.dark-mode .callout .callout-header {
+    color: var(--hnn-yellow);
+}
+
+.callout-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.callout-title {
+    margin-left: 12px ;
+}
+
+.callout-body {
+    margin-left: 42px;
+    margin-top: 0px;
+}
+
+.callout-body > ol:first-child {
+    margin-top: 0;
+}
+
+.callout-body > ol > li {
+    font-size: 1.1em;
+}
+
+body.dark-mode .callout-body > ol > li {
+    color: var(--hnn-yellow)
+}
+
+.callout-body > ol > li > ul > li {
+    font-size: 0.8em;
+}
+
+body.dark-mode .callout-body > ol > li > ul > li {
+    color: white;
 }
 
 /* 
@@ -1118,7 +1163,7 @@ body.dark-mode .exclamation-icon {
     Notes: 
         'border-collapse: collapse;' used to prevent double borders
 */
-.callout-table {
+/* .callout-table {
     width: 100%; 
     border-collapse: collapse;
     margin: 0;
@@ -1126,7 +1171,7 @@ body.dark-mode .exclamation-icon {
 
 .emoji-cell {
     width: 5px; 
-    vertical-align: top !important; 
+    vertical-align: baseline !important; 
     text-align: justify !important;
     padding-left: 10px;
     padding-right: 20px;
@@ -1136,7 +1181,7 @@ body.dark-mode .exclamation-icon {
     vertical-align: top !important;
     text-align: justify !important;
 
-}  
+}   */
 
 /* 
 # ------------------------------------------------------------
@@ -1387,7 +1432,7 @@ body.dark-mode .output-cell:has(> .output-label) {
     overflow-x: hidden;
     max-height: calc(1em * 10);
     flex-grow: 1; 
-    white-space: pre-line;
+    white-space: pre-wrap;
     color: var(--text-light) !important;
     margin: 0px 0px 0px 10px;
     margin-top: 0px;
@@ -1396,9 +1441,6 @@ body.dark-mode .output-cell:has(> .output-label) {
     scrollbar-gutter: stable;
 }
 
-.output-code::-webkit-scrollbar {
-    display: always; 
-}
 
 body.dark-mode .output-code {
     color: #fff !important;
@@ -1411,6 +1453,55 @@ body.dark-mode .output-code {
     border-radius: 5px;
     padding: 10px;
 
+}
+
+/*
+# Scrollbar styling for non-Firefox browsers (most modern browsers) 
+# ------------------------------------------------------------ 
+*/
+
+/*  
+    setting a width forces the browser to use a custom scrollbar
+    instead of relying on the OS defaults. this allows us to 
+    prevent macOS from hiding the scrollbar automatically due to
+    the default OS settings
+*/
+.output-code::-webkit-scrollbar {
+    width: 8px;
+}
+
+.output-code::-webkit-scrollbar-track {
+    background: var(--lighter-gray) !important;
+}
+
+body.dark-mode .output-code::-webkit-scrollbar-track {
+    background: var(--terminal-gray) !important;
+}
+
+.output-code::-webkit-scrollbar-thumb {
+    background: var(--gentle-red) !important;
+    border-radius: 4px;
+}
+
+/* 
+    Description: scrollbar styling for Firefox (which doesn't support webkit scrollbar) 
+    Notes:
+        "@-moz-document url-prefix()" allows us to target Firefox specifically such
+            that these rules don't unintentionally affect browsers that also support
+            scrollbar-color/scrollbar-width
+        Most modern browsers support these properties as well, but Safari support is
+            more limited, so webkit-scrollbar is used as the primary implementation
+            and this Firefox-specific exception is provided below.
+*/
+@-moz-document url-prefix() {
+    .output-code {
+        scrollbar-width: thin;
+        scrollbar-color: var(--gentle-red) var(--lighter-gray);
+    }
+
+    body.dark-mode .output-code {
+        scrollbar-color: var(--gentle-red) var(--terminal-gray);
+    }
 }
 
 /*
@@ -1440,6 +1531,121 @@ body.dark-mode .code-cell code .token.operator {
 
 body.dark-mode .code-cell code .token.punctuation {
     color: var(--light-purple);
+}
+
+/*
+# Command line code blocks
+# ------------------------------------------------------------ 
+*/
+
+/* command line outer container */
+div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+) {
+    position: relative;
+    margin: 1.25em auto;
+    border: 2px solid var(--terminal-gray);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    width: 75%;
+    box-sizing: border-box;
+}
+
+/* command line header text */
+div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+)::before {
+    content: "Command Line";
+    display: block;
+
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+
+    color: white;
+    background: var(--terminal-gray);
+
+    /* padding: 6px 18px */
+    padding: 6px 18px 6px 76px;
+}
+
+/* command line header buttons */
+div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+)::before {
+    background:
+        radial-gradient(circle at 16px 50%, white 5px, transparent 4.5px),
+        radial-gradient(circle at 34px 50%, white 5px, transparent 4.5px),
+        radial-gradient(circle at 52px 50%, white 5px, transparent 4.5px),
+        /* radial-gradient(circle at 16px 50%, #FF5F57 6px, transparent 4.5px), */
+        /* radial-gradient(circle at 34px 50%, #FFBD2E 6px, transparent 4.5px), */
+        /* radial-gradient(circle at 52px 50%, #28C840 6px, transparent 4.5px), */
+        var(--terminal-gray);
+}
+
+/* command line code block contents */
+div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+) pre {
+    margin: 0;
+}
+
+div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+) code {
+    display: block;
+    padding: 14px 18px;
+
+    border: none;
+    background: transparent;
+
+    color: var(--text-light);
+    font-size: 0.82em;
+    font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+/* command line dark mode style */
+body.dark-mode div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+) {
+    background: var(--sidebar-gray);
+    border-color: var(--light-gray);
+}
+
+body.dark-mode div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+) code {
+    color: white;
+}
+
+/* command line dark mode header buttons */
+body.dark-mode div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+)::before {
+    background:
+        radial-gradient(circle at 16px 50%, white 5px, transparent 4.5px),
+        radial-gradient(circle at 34px 50%, white 5px, transparent 4.5px),
+        radial-gradient(circle at 52px 50%, white 5px, transparent 4.5px),
+        var(--tooltip-gray);
+    border-bottom: 2px solid var(--light-gray);
 }
 
 /* 
@@ -1751,10 +1957,10 @@ body.dark-mode code.workshop-button:hover {
     --text-light: #333; 
     --icon-base: #bababa;
     --icon-hover: #444;
+    --terminal-gray: #777;
     --sidebar-purple: #88548c;
     --sidebar-gray: #313438;
     --content-gray: #14181e;
     --tooltip-gray: #555;
     --lighter-gray: #e1e4e8;
 }
-

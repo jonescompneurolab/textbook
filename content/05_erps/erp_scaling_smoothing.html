@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNN Textbook</title>
+    <!-- <base href="/textbook/"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="../../templates/scripts.js" defer></script>
+</head>
+<body>
+<svg style="display: none;">
+        <symbol id="lightbulb" viewBox="0 0 24 24">
+            <path d="M12 2.75C8.27208 2.75 5.25 5.77208 5.25 9.5C5.25 11.4985 6.11758 13.2934 7.49907 14.5304L7.50342 14.5343C8.06008 15.0328 8.48295 15.4114 8.78527 15.6886C9.06989 15.9495 9.29537 16.1628 9.41353 16.3086L9.42636 16.3244C9.64763 16.5974 9.84045 16.8353 9.9676 17.1199C10.0948 17.4044 10.1434 17.7067 10.1992 18.0537L10.2024 18.0738C10.231 18.2517 10.2425 18.4701 10.247 18.75H13.753C13.7575 18.4701 13.769 18.2517 13.7976 18.0738L13.8008 18.0537C13.8566 17.7067 13.9052 17.4044 14.0324 17.1199C14.1596 16.8353 14.3524 16.5974 14.5736 16.3244L14.5865 16.3086C14.7046 16.1628 14.9301 15.9495 15.2147 15.6886C15.5171 15.4114 15.94 15.0327 16.4966 14.5343L16.5009 14.5304C17.8824 13.2934 18.75 11.4985 18.75 9.5C18.75 5.77208 15.7279 2.75 12 2.75ZM13.7436 20.25H10.2564C10.2597 20.3542 10.2646 20.4453 10.2721 20.5273C10.2925 20.7524 10.3269 20.8341 10.3505 20.875C10.4163 20.989 10.511 21.0837 10.625 21.1495C10.6659 21.1731 10.7476 21.2075 10.9727 21.2279C11.2082 21.2493 11.5189 21.25 12 21.25C12.4811 21.25 12.7918 21.2493 13.0273 21.2279C13.2524 21.2075 13.3341 21.1731 13.375 21.1495C13.489 21.0837 13.5837 20.989 13.6495 20.875C13.6731 20.8341 13.7075 20.7524 13.7279 20.5273C13.7354 20.4453 13.7403 20.3542 13.7436 20.25ZM3.75 9.5C3.75 4.94365 7.44365 1.25 12 1.25C16.5563 1.25 20.25 4.94365 20.25 9.5C20.25 11.9428 19.1874 14.1384 17.5016 15.6479C16.9397 16.151 16.5234 16.5238 16.2284 16.7942C16.0809 16.9295 15.9681 17.0351 15.8849 17.1162C15.8434 17.1566 15.8117 17.1886 15.788 17.2134C15.7763 17.2256 15.7675 17.2352 15.7611 17.2423C15.7546 17.2496 15.7518 17.253 15.7519 17.2529C15.4917 17.574 15.4354 17.6568 15.4019 17.7319C15.3683 17.8069 15.3442 17.9041 15.2786 18.3121C15.2527 18.4732 15.25 18.7491 15.25 19.5V19.5322C15.25 19.972 15.25 20.3514 15.2218 20.6627C15.192 20.9918 15.1259 21.3178 14.9486 21.625C14.7511 21.967 14.467 22.2511 14.125 22.4486C13.8178 22.6259 13.4918 22.692 13.1627 22.7218C12.8514 22.75 12.472 22.75 12.0322 22.75H11.9678C11.528 22.75 11.1486 22.75 10.8374 22.7218C10.5082 22.692 10.1822 22.6259 9.875 22.4486C9.53296 22.2511 9.24892 21.967 9.05144 21.625C8.87407 21.3178 8.80802 20.9918 8.77818 20.6627C8.74997 20.3514 8.74998 19.972 8.75 19.5322L8.75 19.5C8.75 18.7491 8.74735 18.4732 8.72144 18.3121C8.6558 17.9041 8.63166 17.8069 8.59812 17.7319C8.56459 17.6568 8.50828 17.574 8.24812 17.2529C8.24792 17.2527 8.24514 17.2493 8.23888 17.2423C8.23249 17.2352 8.22369 17.2256 8.21199 17.2134C8.18835 17.1886 8.15661 17.1566 8.11513 17.1162C8.03189 17.0351 7.91912 16.9295 7.77161 16.7942C7.4766 16.5238 7.06034 16.151 6.49845 15.6479C4.81263 14.1384 3.75 11.9428 3.75 9.5ZM9.89202 13.3508C10.2506 13.1434 10.7094 13.2659 10.9168 13.6245C11.134 14 11.5383 14.25 12 14.25C12.4617 14.25 12.866 14 13.0832 13.6245C13.2906 13.2659 13.7494 13.1434 14.108 13.3508C14.4665 13.5582 14.589 14.017 14.3816 14.3755C14.0284 14.9862 13.4454 15.4496 12.75 15.6464V17C12.75 17.4142 12.4142 17.75 12 17.75C11.5858 17.75 11.25 17.4142 11.25 17V15.6464C10.5546 15.4496 9.97163 14.9862 9.61836 14.3755C9.41095 14.017 9.53347 13.5582 9.89202 13.3508Z"/>
+        </symbol>
+    </svg>
+    <svg style="display: none;">
+        <symbol id="popup-symbol" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" 
+                fill="var(--fill-color, transparent)" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" />
+            <path d="M9 9L15 15M15 9L9 15" 
+                stroke="var(--stroke-color, currentColor)" 
+                stroke-width="2" 
+                stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+
+	<div id="mySidebar" class="sidebar">
+	    <div class="sidebar-close">
+	        <svg class="popup-symbol" viewBox="0 0 24 24">
+	            <use href="#popup-symbol" />
+	        </svg>
+	    </div>
+	    <div class="sidebar-header">
+	        <div class="title-row">
+	            <a>
+	                Human Neocortical Neurosolver
+	            </a>
+	            <br>
+	                <svg class="collapse-icon" viewBox="0 0 16 16"
+	                    xmlns="http://www.w3.org/2000/svg">
+	                    <path d="M9 9H4v1h5V9z"/>
+	                    <path fill-rule="evenodd" clip-rule="evenodd"
+	                        d="M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1
+	                            2h4l1 1v4h2V3H6v2zm4 1H3v7h7V6z"/>
+	                </svg>
+	        </div>
+	        <div class="install-row">
+	            <a class="download-icon-link" aria-label="Installation">
+	                <svg class="download-icon" viewBox="0 0 24 24" fill="none"
+	                    xmlns="http://www.w3.org/2000/svg">
+	                <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1
+	                    14C1 11.3501 3.06139 9.18169 5.66806 9.01084C6.78942
+	                    6.64027 9.20316 5 12 5C15.5268 5 18.4445 7.60822 18.9293
+	                    11.001L19 11C21.2091 11 23 12.7909 23 15C23 17.1422 21.316
+	                    18.8911 19.1996 18.9951L17 19M12 10V18M12 18L15 15M12 18L9
+	                    15"
+	                   stroke-width="2" stroke-linecap="round"
+	                   stroke-linejoin="round"/>
+	                </svg>
+	            </a>
+	            <a>
+	                Installation
+	            </a>
+	        </div>
+	    </div>
+
+		<a href="/textbook/content/preface.html">Preface</a>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        1. Getting Started
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
+				<a href="/textbook/content/01_getting_started/template_model.html">1.2 Template Model</a>
+				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        2. Model Assumptions
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/03_model_assumptions/cortical_column_structure.html">2.1 Cortical Column Structure</a>
+				<a href="/textbook/content/03_model_assumptions/primary_electric_currents.html">2.2 Primary Electrical Currents</a>
+				<a href="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a>
+				<a href="/textbook/content/03_model_assumptions/synaptic_connectivity.html">2.4 Synaptic Connectivity</a>
+				<a href="/textbook/content/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a>
+				<a href="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        3. Using the HNN GUI
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/04_using_hnn_gui/gui_quickstart.html">3.1 GUI Quickstart</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        4. Simulating ERPs
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/05_erps/erp_overview.html">4.1 Intro and Overview Lecture</a>
+				<a href="/textbook/content/05_erps/erp_following_along.html">4.2 Following Along</a>
+				<a href="/textbook/content/05_erps/erp_getting_started.html">4.3 Getting Started</a>
+				<a href="/textbook/content/05_erps/erp_simulation_workflow.html">4.4 Simulation Workflow</a>
+				<a href="/textbook/content/05_erps/erp_initial_simulation.html">4.5 Simulate the Default Network</a>
+				<a href="/textbook/content/05_erps/erp_scaling_smoothing.html">4.6 Simulation Scaling and Smoothing</a>
+				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_01.html">4.7.1 Multiscale Interpretation Part I</a>
+				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_02.html">4.7.2 Multiscale Interpretation Part II</a>
+				<a href="/textbook/content/05_erps/erp_adjust_evoked_drives.html">4.8 Adjusting Evoked Drives</a>
+				<a href="/textbook/content/05_erps/erp_adjusting_network_parameters.html">4.9 Adjusting Network Parameters And Testing Hypotheses</a>
+				<a href="/textbook/content/05_erps/erp_hypotheses_to_validation.html">4.10 From Hypotheses to Validation Targets</a>
+				<a href="/textbook/content/05_erps/erp_conclusion.html">4.11 Concluding Remarks</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        5. Simulating Alpha/Beta Rhythms
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/06_alpha_beta/gui.html">5.1 GUI Tutorial of Alpha/Beta Rhythms</a>
+				<a href="/textbook/content/06_alpha_beta/api.html">5.2 API Tutorial of Alpha/Beta Rhythms</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        6. Simulating Gamma Rhythms
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/07_gamma/gamma_in_gui.html">6.1 GUI Tutorial of Gamma Rhythms</a>
+				<a href="/textbook/content/07_gamma/gamma_in_api.html">6.2 API Tutorial of Gamma Rhythms</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        7. Using the HNN API
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/08_using_hnn_api/plot_firing_pattern.html">7.1 Plot Firing Pattern</a>
+				<a href="/textbook/content/08_using_hnn_api/record_and_plot_extracellular_potentials.html">7.2 Record & Plot Extracellular Potentials</a>
+				<a href="/textbook/content/08_using_hnn_api/modifying_local_connectivity.html">7.3 Modifying Local Connectivity</a>
+				<a href="/textbook/content/08_using_hnn_api/animating_hnn_simulations.html">7.4 Animating HNN Simulations</a>
+				<a href="/textbook/content/08_using_hnn_api/batch_simulation.html">7.5 Batch Simulation</a>
+				<a href="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-modulated ERP</a>
+				<a href="/textbook/content/08_using_hnn_api/parallelism_joblib.html">7.7 Parallelism: Joblib</a>
+				<a href="/textbook/content/08_using_hnn_api/parallelism_mpi.html">7.8 Parallelism: MPI</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+			</div>
+		</div>
+		<div class="sidebar-list">
+		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
+		        <span class="toggle-icon">+</span>
+		        8. From Data to Simulation
+		    </a>
+		    <div class="submenu">
+
+				<a href="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG sensor-space data to HNN simulation</a>
+			</div>
+		</div>
+	    <div style='height: 30px;'></div>
+	</div>
+
+
+
+    <div class="topbar">
+        
+        <!-- Topbar menu -->
+        <div class="menu-container">
+            <div class="menu-icons">
+                <button class="openbtn" onclick="toggleNav()">
+                    ☰
+                </button>
+                <a href="https://hnn.brown.edu" class="home-link" aria-label="HNN homepage">
+                    <div class="home-icon-container">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24" 
+                            height="24"
+                            viewBox="0 0 24 24" 
+                            class="home-icon">
+                            <path
+                                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+                            />
+                        </svg>
+                    </div>
+                </a>
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown">
+                    <button 
+                        id="dropdownButton" 
+                        class="dropdown-button">
+                            <img
+                                src="/textbook/content/assets/icons/fontsize.png"
+                                alt="fontsize"
+                            />
+                    </button>
+                    <div class="dropdown-content">
+                        <button 
+                            class="fontsize-btn" 
+                            onclick="decreaseFontSize()">
+                            <img
+                                src="/textbook/content/assets/icons/fontminus.png"
+                                alt="fontminus"
+                            />
+                        </button>
+                        <button 
+                            class="fontsize-btn" 
+                            onclick="increaseFontSize()">
+                            <img
+                                src="/textbook/content/assets/icons/fontplus.png"
+                                alt="fontplus"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topbar image -->
+        <div class="topbar-logo-container">
+            <img 
+                id="topbar-logo"
+                src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/frontpage/logos/logo-hnn-medium.png"
+                alt="HNN Logo"
+            />
+        </div>
+
+        <!-- Right side of topbar -->
+        <div class="socials-container">
+            <div class="social-icons">
+                <a 
+                    href="https://github.com/jonescompneurolab/hnn-core" 
+                    target="_blank" 
+                    aria-label="GitHub">
+                    <img 
+                        src="/textbook/content/assets/icons/github.png"
+                        alt="GitHub">
+                </a>
+                <a 
+                    href="https://bsky.app/profile/hnnsolver.bsky.social" 
+                    target="_blank"
+                    aria-label="BlueSky">
+                    <img 
+                        src="/textbook/content/assets/icons/bluesky.png"
+                        alt="BlueSky">
+                </a>
+                <a 
+                    href="https://www.linkedin.com/company/human-neocortical-neurosolver/" 
+                    target="_blank"
+                    aria-label="LinkedIn">
+                    <img 
+                        src="/textbook/content/assets/icons/linkedin.png"
+                        alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+    <div id="content-wrapper">
+    <div id="content">
+
+
+		<div class="notebook-download-wrapper">
+		    <a href='erp_api_walkthrough.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
+<!--
+# Title: 4.6 Simulation Scaling and Smoothing
+# Updated: 2026-07-15
+#
+# Contributors:
+    # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
+-->
+<h1>4.6 Simulation Scaling and Smoothing</h1>
+<div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1vAF7of4CMAslYKzGsGinX2ez_XmyaJRJ/preview" style="padding: 10px 0px 30px 0px;">
+
+</div>
+<div class='markdown-cell'>
+    <h2>Simulation Scaling and Smoothing in the API</h2>
+
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Since we'll be plotting multiple figures in this section, let's
+define a color dictionary so that we can reuse colors without needing to
+manually specify the hexicecimal code every time we plot something.
+We'll try to use colors that mimic what is used in the HNN GUI video
+(above), though note that the GUI is more restrictive than the API and
+so there will be some discrepancies.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        gui_colors = {
+    "orange": "#ff7f0e",
+    "blue": "#1f77b4",
+}
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>In the previous section, we ended with a plot of the raw simulated
+dipole and the loaded experimental dipole, which were different in both
+their shapes and magnitudes.</p>
+<p>These discrepancies are related to <strong>Step 3</strong> of our
+experimental workflow:</p>
+<ol start="3" type="1">
+<li><strong>Adjust the scaling (and smoothing) of your simulated dipole
+signal</strong></li>
+</ol>
+<p>With HNN, we simulate a network comprised of two 10 x 10 grids of
+pyramidal neurons, in two distinct cortical layers, for a total of 200
+pyramidal neurons that contribute directly to the simulated dipole
+signal. (There are also 35 interneurons per layer, but these do not
+contribute <em>directly</em> to the dipole signal.)</p>
+<p>The human cortex, however, contains <em>many</em> more pyramidal
+neurons than in our reduced network, and source-localized MEG signals
+typically represent the synchronous activity of tens of thousands of
+pyramidal neurons.</p>
+<p>Rather than explicitly simulate thousands of neurons, we can leverage
+the fact that the neocortex has a highly stereotyped, canonical circuit
+architecture. As such, the activity generated by a relatively small
+cortical column can be viewed as representative of the
+<em>synchronous</em> activity in a larger patch of cortex, and it is
+precisely this synchronous activity that we observe in our
+source-localized, experimental ERP data.</p>
+<p>In the model, we represent this synchrony by multiplying our
+simulated dipole signal by a <strong>uniform scaling factor</strong>,
+which effectively captures the synchronous activity of a larger
+population of similarly-active neurons</p>
+<p>We do this in <code>hnn-core</code> by using the
+<code>.scale()</code> method of the <code>Dipole</code> object.</p>
+<p>Remember that the <code>simulate_dipole()</code> function returns a
+list of dipole objects, one for each trial. We need to first select an
+individual trial to apply the dipole scaling factor.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # get the first (in this case, only) trial from the
+# list of dipole objects
+dipole_01 = dipoles_list[0]
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Keep in mind that the scaling factor is applies to the object
+<strong>in place</strong> (in otherwords, the new dipole with the
+scaling applied will "overwrite" the raw, unscaled dipole)</p>
+<p>Let's make a copy of the dipole object before we apply the scaling
+factor so we can plot both dipoles</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # we use copy() to ensure we have a new copy of the dipole
+# that is seprate from the original
+dipole_01_scaled = dipole_01.copy()
+
+# set scaling factor and apply it to the copy only
+scaling_factor = 3000
+dipole_01_scaled.scale(scaling_factor);
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Note that we multiply the simulated dipole by a
+<strong>uniform</strong> scaling factor at each time point such that we
+are not altering the underlying shape of the signal, <em>only</em> the
+magnitude of the peaks and troughs. This ensure we are not overfitting
+to the experimental data, as fitting the scaling factor to any one peak
+<em>necessarily</em> changes the value every other time point.</p>
+<p>We can see that this is the case when plotting the unscaled and
+scaled dipoles side by side. Note that the y axes (highlighted in red)
+are different, but the underlying waveform shapes (relative peaks and
+troughs) remain the same</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # plot the dipoles side by side
+# --------------------------------------------------
+fig, axes = plt.subplots(
+    nrows=1,
+    ncols=2,
+    figsize=(10, 5),
+    constrained_layout=True,
+)
+
+_ = dipole_01.plot(
+    ax=axes[0],
+    show=False,
+)
+axes[0].lines[0].set_label("Unscaled Simulation Dipole")
+
+_ = dipole_01_scaled.plot(
+    ax=axes[1],
+    show=False,
+)
+axes[1].lines[0].set_label("Scaled Simulation Dipole")
+
+# style subplots
+# --------------------------------------------------
+for subplot in axes:
+    # highlight y axes in red
+    subplot.spines["left"].set_color("red")
+    subplot.tick_params(
+        axis="y",
+        colors="red",
+    )
+
+    # change line colors
+    subplot.lines[0].set_color(gui_colors["blue"])
+
+    # show legends
+    subplot.legend()
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 1000x500 with 2 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_05.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We can add the experimental data to these plots to compare the order
+of magnitude and see if our scaling factor was appropriate</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # conditionally add experimental data to our figure
+# --------------------------------------------------
+for subplot in axes:
+    # if there's only one line on the plot, we still
+    # need to add the experimental data
+    if len(subplot.lines) == 1:
+        # add experimental data
+        _ = threshold_experimental_dpl.plot(ax=subplot, color="black")
+
+        # change presentation
+        subplot.lines[1].set_color(gui_colors["orange"])
+        subplot.lines[1].set_label("Experimental data")
+        subplot.legend()
+
+# force y axes to be equal and reset their colors
+# --------------------------------------------------
+ymin = min(ax.get_ylim()[0] for ax in axes)
+ymax = max(ax.get_ylim()[1] for ax in axes)
+
+for subplot in axes:
+    # apply the ymin and ymax
+    subplot.set_ylim(ymin=ymin, ymax=ymax)
+
+    # reset axis color
+    subplot.spines["left"].set_color("black")
+    subplot.tick_params(axis="y", colors="black")
+
+fig
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 1000x500 with 2 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_06.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>While the scaled simulation dipole is much closer to the order of
+magnitude of the experimental dipole, the signals themselves still
+differ substantially in their waveform shapes.</p>
+<p>This is because source-localized signals reflect the aggregate
+activity of a very large population of neurons. When a large number of
+neurons contribute synchronously to the measured signal, small
+differences in their individual spike timing tend to be averaged out,
+producing a "smoother" dipole signal than we obtain from our smaller
+simulated network.</p>
+<p>To approximate this effect, we can use the <code>.smooth()</code>
+method of the <code>Dipole</code> object, which applies a
+Hamming-windowed convolution to the simulated dipole. The width of this
+convolution window is specified in milliseconds, allowing you to control
+the amount of smoothing applied to the signal.</p>
+<p>Note that the <code>.smooth()</code> method also updates the dipole
+<em>in place</em>, so we will first make a copy of the object before the
+transformation. Below, we will plot updated dipoles using two different
+window widths for comparison.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig, ax = plt.subplots(
+    figsize=(8, 6),
+    constrained_layout=True,
+)
+
+# plot scaled dipole with 15ms window
+# --------------------------------------------------
+dipole_15ms = dipole_01_scaled.copy().smooth(15)
+
+_ = plot_dipole(
+    dipole_15ms,
+    ax=ax,
+    show=False,
+)
+
+# pro tip: "[-1]" here targets the newly-added line
+ax.lines[-1].set_color(gui_colors["blue"])
+ax.lines[-1].set_alpha(0.4)  # reduce the opacity to 40%
+ax.lines[-1].set_label("Scaled simulation: 15ms smoothing")
+
+# plot scaled dipole with 30ms window
+# --------------------------------------------------
+dipole_30ms = dipole_01_scaled.copy().smooth(30)
+
+_ = plot_dipole(
+    dipole_30ms,
+    ax=ax,
+    show=False,
+)
+
+ax.lines[-1].set_color(gui_colors["blue"])
+ax.lines[-1].set_label("Scaled simulation: 30ms smoothing")
+
+# plot experimental data
+# --------------------------------------------------
+_ = threshold_experimental_dpl.plot(
+    ax=ax,
+    show=False,
+)
+
+ax.lines[-1].set_label("Experimental data")
+ax.lines[-1].set_color(gui_colors["orange"])
+
+plt.legend()
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;matplotlib.legend.Legend at 0x7f7b02ae7a70&gt;
+        &lt;Figure size 800x600 with 1 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_07.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We can see that the fit is considerably improved after applying the
+smoothing to the simulation.</p>
+<p>Lastly, it is important to note that the scaling factor also gives us
+an estimate of the number of synchronous neurons that contributed to our
+experimental dipole signal.</p>
+<p>For example, if the M70 peak in our our experimental data is
+approximately -60 nAm, and the raw simulated dipole signal is
+approximately -0.02 nAm, then we would need to multiply the simulated
+dipole by 3,000 to bring the signals into the same order of magnitude.
+In this case, we would estimate that approximately 3,000 x 200 = 600,000
+pyramidal neurons are contributing to the signal in the
+<em>experimental</em> data.</p>
+<p>While we've found that a scaling factor of 3,000 and a smoothing
+window of 30 work well for the experimental MEG data in Jones et
+al. 2007, there is no guarantee that these will be appropriate for your
+experimental data. In fact, it is very likely that you will need to try
+different scaling factors and smoothing windows to bring your simulation
+and your data into the same order of magnitude.</p>
+
+                </div>
+
+
+<!-- markdown cell -->
+        <!-- footer area -->
+        <!----------------->
+        <div class="footer-area">
+            <div class="previous-area" data-link="/textbook/content/05_erps/erp_initial_simulation.html">
+                <div class="previous-icon">
+                    <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="arrow-path" d="M15 5L9 12L15 19" />
+                    </svg>
+                </div>
+                <div class="previous-text">
+                    <p>Previous</p>
+                    <a>4.5 Simulate the Default Network</a>
+                </div>
+            </div>
+            <div class="next-area" data-link="/textbook/content/05_erps/erp_multiscale_interpretation_01.html">
+                <div class="next-text">
+                    <p>Next</p>
+                    <a>4.7.1 Multiscale Interpretation Part I</a>
+                </div>
+                <div class="next-icon">
+                    <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="arrow-path" d="M15 5L9 12L15 19" />
+                    </svg>
+                </div>
+            </div>
+        </div> <!-- close footer -->
+    </div> <!-- close content -->
+    </div> <!-- close content wrapper -->
+</div> <!-- close main --><!------------------------ #
+# Code syntax highlighting #
+# ------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+
+</body>
+</html>
