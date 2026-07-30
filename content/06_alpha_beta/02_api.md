@@ -10,4 +10,4 @@
     # Christopher Bailey <cjb@cfin.au.dk>
 -->
 
-[[api_alpha_beta_short.ipynb]]
+[[api_alpha_beta.ipynb]]

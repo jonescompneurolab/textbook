@@ -13,7 +13,7 @@
 
 ## Video Walkthrough
 
-In addition to the written tutorial below, we also provide a video walkthrough of simulating alpha/beta oscillations in the GUI from one of our recent online workshop. Note that the video tutorial is not a 1-1 match to the workflows described below, and it is meant as a supplementary tool to give you more expose to simulating alpha/beta oscillations in the GUI. 
+In addition to the written tutorial below, we also provide a video walkthrough of simulating alpha/beta oscillations in the GUI from one of our recent online workshop. Note that the video tutorial is not a 1-1 match to the workflows described below, and it is meant as a supplementary tool to give you more expose to simulating alpha/beta oscillations in the GUI.
 
 <div
   id="video-container"
@@ -87,7 +87,7 @@ We will begin by simulating only rhythmic proximal 10 Hz inputs ([Section 4](#to
 
 ## 2. Downloading HNN Parameter Set Files
 
-Throughout this tutorial, we will be using several different HNN parameter set files. These files are not included in the HNN installation, but instead must be downloaded separately, similar to the files you downloaded in the Morning session of the workshop. The easiest way to get them is to [click this link, which will download a ZIP file that contains the four files we need](https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Fjonescompneurolab%2Fhnn-data%2Ftree%2Fmain%2Fworkshops%2Falpha_beta_gui_walkthrough). Alternatively, you can download (or `git clone`) this Github repository: [hnn-data](https://github.com/jonescompneurolab/hnn-data) and then access the files in the `workshops/alpha_beta_gui_walkthrough` directory. These four files are named `OnlyRhythmicProx.json`, `OnlyRhythmicDist.json`, `AlphaAndBeta.json`, and `AlphaAndBetaJitter50.json`.
+Throughout this tutorial, we will be using several different HNN parameter set files. These files are not included in the HNN installation, but instead must be downloaded separately, similar to the files you downloaded in the Morning session of the workshop. You can download the files by going to this Github repository [hnn-data](https://github.com/jonescompneurolab/hnn-data), click the green `Code` button, then either cloning the repository using the provided instructions or downloading a ZIP of the entire repository. The four files we need are in the `workshops/2025-04-09-HNN-online_workshop/alpha_beta_gui_walkthrough` subdirectory. These four files are named `OnlyRhythmicProx.json`, `OnlyRhythmicDist.json`, `AlphaAndBeta.json`, and `AlphaAndBetaJitter50.json`.
 
 Begin by starting the HNN GUI. If you are using [Google Colab notebook](https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing), follow the instructions there for starting and accessing the GUI. If you are using a local install of HNN, run the following command from a terminal:
 
