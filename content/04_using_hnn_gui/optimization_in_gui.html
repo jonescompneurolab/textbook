@@ -289,41 +289,125 @@
     <div id="content">
 
 <!--
-# Title: 2.1 Cortical Column Structure
-# Updated: 2024-11-14
+# Title: 3.2 Optimization in the GUI
+# Updated: 2026-07-28
 #
 # Contributors:
-    # Dylan Daniels
+    # Nicholas Tolley
+    # Austin E. Soplata
 -->
-<!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/01_cortical-column-structure/01_cortical-column-structure -->
-<h1>2.1 Cortical Column Structure</h1>
-<p>Neocortical circuits are organized with remarkably similar features across areas and species. These features include a common laminar structure with generalizable cell classes as well as similar local connectivity and input and output connectivity patterns. We have harnessed this generalization into HNN’s foundational neural model that is provided as a template circuit to work with.</p>
-<div style="display:block; width:50%; margin: 0 auto;">
-<figure>
-<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/netpyne-schematic-tilted-colored.png" alt="3D representation of our cortical model. Abstracted multi-compartment pyramidal neurons are aligned in a 10-by-10 grid in layer 2 and layer 5. Interneurons are shown as red point neurons near the pyramidal cell somas." />
-<figcaption aria-hidden="true">3D representation of our cortical model. Abstracted multi-compartment pyramidal neurons are aligned in a 10-by-10 grid in layer 2 and layer 5. Interneurons are shown as red point neurons near the pyramidal cell somas.</figcaption>
-</figure>
-</div>
-<p style="text-align:justify; display: block; margin: 0 auto;width: 90%; font-size: 1em;">
-<strong>Figure 1</strong>: Most importantly, our model contains multi-compartment pyramidal neurons (PN) in supragranular and infragranular layers (layers 2/3 and 5, respectively), whose apical dendrites are spatially aligned and span the cortical layers as shown in the 3D visualization above. The primary electrical current signals simulated in HNN are derived from the intracellular current flow in the PN dendrites (see <a href="./primary_electric_currents.html">2.2 Primary Electrical Currents</a> for details). In the figure above, the green neurons represent the layer 2/3 PN and the blue the the layer 5 PN. Note that in both layers, the PN have two basal, one oblique, and one apical dendrite branch, and the layer 2/3 PN have shorter apical dendrites compared to the layer 5 PN.
-</p>
-<p>The PN are synaptically coupled to each other and to a subset of inhibitory neurons in each layer in a 3/1 PN-to-interneuron ratio. The inhibitory neurons are simulated with single compartments and represent fast spiking basket cells, and are shown in red in the figure above. Details of the cells and synaptic connectivity structure are given under <a href="./neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a> and <a href="./synaptic_connectivity.html">2.4 Synaptic Connectivity</a>, respectively.</p>
-<p>There are several ways to activate the local cortical column with layer specific synaptic (thalamo-cortical, and/or cortical-cortical) and tonic drive, as detailed in both <a href="./evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a> and <a href="./tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>.</p>
-<p>The list below provides an overview of key features of the template model provided, further details are outlined in other pages under <a href="../01_getting_started/template_model.html">1.2 Template Model</a></p>
+<h1>3.2 Optimization in the GUI</h1>
+<p>This tutorial walks through how to use the Optimization feature of HNN through the GUI. Make sure you have at least gone through <a href="../04_using_hnn_gui/gui_quickstart.html">3.1 HNN GUI Quickstart</a> first, so that you understand how to start and use the GUI in general.</p>
+<p>For a more in-depth approach that covers similar functionality (and much more), see <a href="https://doi.org/10.3791/70618">(Tolley et al., 2026)</a>. For tutorials on how to use optimization via the API, see <a href="../08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">here</a> and <a href="../08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">here</a>.</p>
+<h2>1. First simulation</h2>
+<p>First, let’s load some representative example data that we to compare a simulation agains. Go to our data repository here and <a href="https://github.com/jonescompneurolab/hnn-data/blob/main/workshops/2025-04-09-HNN-online_workshop/erp_gui_walkthrough/experimental_S1_Threshold.txt">download this file</a>; on the right side of the page, near where it says <code>Raw</code>, you should see a download symbol. Click that, or feel free to <code>git clone</code> the <code>hnn-data</code> repository as a whole.</p>
 <ol type="1">
-<li>Supragranular layer (layer 2/3) with multi-compartment pyramidal and single compartment inhibitory neurons</li>
-<li>Infragranular layer (layer 5) with multi-compartment pyramidal and single compartment inhibitory neurons</li>
-<li>A scalable number of neurons per layer with 3/1 PN-to-interneuron ratio (default network contains 100 PN per layer)</li>
-<li>Gabaergic (GABAA/GABAB) &amp; Glutamatergic (AMPA/NMDA) synaptic connectivity between local cortical column cells</li>
-<li>Membrane voltages simulated with Hodgkin-Huxley type dynamics, with active ionic currents in somatic and dendritic compartments</li>
-<li>Layer specific exogenous driving inputs (synaptic and tonic/noisy)</li>
-<li>Primary current dipole calculated as net intracellular current flow in PN dendrites (Units: nano-Ampere-meters (nAm))</li>
+<li>Start the GUI (see <a href="../04_using_hnn_gui/gui_quickstart.html">3.1 HNN GUI Quickstart</a> if you do not know how to do that).</li>
+<li>Click the <code>Load data</code> button (in the <code>Simulation</code> tab) and load the <code>experimental_S1_Threshold.txt</code> file you just downloaded. A plot showing the data should appear on the right, similar to the figure below:</li>
 </ol>
-<p>Of note, the <strong>granular layer is not explicitly included in the template circuit</strong>. This initial design choice was based on the fact that macroscale current dipoles are dominated by PN activity in supragranular, and intragranular layers. Thalamic input to granular layers is presumed to propagate directly to basal and oblique dendrites of PN in layer 2/3 and 5 (see <a href="./evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a> for details). As the use of our open-source software grows, we hope that other cells and network configurations will be made available as template models to work with.</p>
+<section class="stylefig">
+<h3>Figure 1</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_01.png" alt="Screenshot of the HNN GUI interface after loading the experimental data file." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after loading the experimental data file.</figcaption>
+</figure>
+</section>
+<ol start="3" type="1">
+<li>Next to <code>Cores</code> (under <code>Simulation Parameters</code>), increase the number until it increases no further.</li>
+<li>Click the <code>Run Simulation</code> button to run the default simulation.</li>
+<li>Once the simulation has completed, you should see its results on the right, similar to the figure below:</li>
+</ol>
+<section class="stylefig">
+<h3>Figure 2</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_02.png" alt="Screenshot of the HNN GUI interface after running the default simulation." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after running the default simulation.</figcaption>
+</figure>
+</section>
+<ol start="6" type="1">
+<li>Click the <code>Visualization</code> tab.</li>
+<li>We want to display the simulation versus the experimental data. Click on the entry for <code>Data to Compare</code>, and select the name of the file that you loaded, <code>experimental_S1_Threshold</code>.</li>
+<li>Next, click the <code>Clear axis</code> button at the bottom (you may have to scroll), and then click <code>Add plot</code>.</li>
+<li>You should now see a plot on the right that displays both the simulation (<code>default</code>) and the experimental loaded data, in addition to their root-mean-square-error (around <code>6.9827</code>) and correlation measures (around <code>0.9918</code>), similar to this figure:</li>
+</ol>
+<section class="stylefig">
+<h3>Figure 3</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_03.png" alt="Screenshot of the HNN GUI interface after visualizing both the experimental data and default simulation." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after visualizing both the experimental data and default simulation.</figcaption>
+</figure>
+</section>
+<h2>2. Hand-tuning</h2>
+<p>Let’s try “hand-tuning” a parameter of one of our drive inputs to see if we can get the simulation to match the experimental data better.</p>
+<ol start="10" type="1">
+<li>Click on the <code>External drives</code> tab.</li>
+<li>Click the box for the first and only distal drive, <code>evdist1</code>.</li>
+<li>Let’s try changing the mean time of when the distal drive spikes, in the hopes that it will improve how our simulation matches the experiment. Edit the value in the <code>Mean time</code> box to be <code>64.00</code>. Scientifically, this is analogous to us hypothesizing “What if, in our experiment, the distal input arriving from cortico-cortical and non-lemniscal thalamic sources is arriving slightly later?” Your screen should resemble the following:</li>
+</ol>
+<section class="stylefig">
+<h3>Figure 4</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_04.png" alt="Screenshot of the HNN GUI interface after hand-tuning a drive parameter." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after hand-tuning a drive parameter.</figcaption>
+</figure>
+</section>
+<ol start="13" type="1">
+<li>Click back to the <code>Simulation</code> tab. We are going to run a new simulation.</li>
+<li>In the <code>Name</code> box, change the simulation name to be something like <code>default-handtune-evdist1</code> (or whatever you prefer).</li>
+<li>Click <code>Run Simulation</code> again, after which a new figure will appear on the right.</li>
+<li>Similar to before, click the <code>Visualization</code> tab, then under <code>Data to Compare</code>, select <code>experimental_S1_Threshold</code>. Next, click the <code>Clear axis</code> button (you may have to scroll down) then the <code>Add plot</code> button. You should see something like the following:</li>
+</ol>
+<section class="stylefig">
+<h3>Figure 5</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_05.png" alt="Screenshot of the HNN GUI interface after simulating and visualizing the hand-tuned simulation." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after simulating and visualizing the hand-tuned simulation.</figcaption>
+</figure>
+</section>
+<p>As it turns out, our change made things <strong>worse</strong>, since now the RMSE has increased to around <code>7.8567</code>, and our corrrelation has decreased.</p>
+<h2>3. Optimization</h2>
+<p>Instead of using manual “hand-tuning” to try to see how changing parameters affects our simulation in relation to some experimental data, we can also use “optimization”. This will run <em>several</em> simulations where one or more parameters have their values changed automatically, and at each step, the computer will run try to get the simulation closer to the “objective” of being similar to the experimental data values. Again, see <a href="https://doi.org/10.3791/70618">(Tolley et al., 2026)</a> for more details.</p>
+<ol start="17" type="1">
+<li><p>Click the <code>Optimization</code> tab.</p></li>
+<li><p>We need to make several changes in this tab:</p>
+<ol type="1">
+<li>Decrease <code>Max Iterations</code> to <code>3</code>.</li>
+<li>Change <code>Solver</code> to <code>cma</code>.</li>
+<li>For <code>Target Data</code>, select your loaded experimental data (<code>experimental_S1_Threshold</code>)</li>
+<li>Click the box for <code>evdist1</code> to expand it.</li>
+<li>Inside the <code>evdist1</code> box, in the <code>Optimize against?</code> column of checkboxes, check the checkbox for <code>Mean time</code>.</li>
+<li>Your GUI should now resemble the following:</li>
+</ol></li>
+</ol>
+<section class="stylefig">
+<h3>Figure 6</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_06.png" alt="Screenshot of the HNN GUI interface after setting up the configuration for optimization." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after setting up the configuration for optimization.</figcaption>
+</figure>
+</section>
+<ol start="19" type="1">
+<li>Click the <code>Run Optimization</code> tab. Note that depending on your computer speed, this could <strong>take up to several minutes</strong>.</li>
+<li>Finally, depending on randomness, you will probably see that the optimization has resulted in an <strong>improved fit</strong> to your experimental data, in which case the screen will resemble the following:</li>
+</ol>
+<section class="stylefig">
+<h3>Figure 7</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/04_using_hnn_gui/4-2-optimization/images/fig_07.png" alt="Screenshot of the HNN GUI interface after running the optimization." />
+<figcaption aria-hidden="true">Screenshot of the HNN GUI interface after running the optimization.</figcaption>
+</figure>
+</section>
+<ol start="21" type="1">
+<li><p>Before we look at the results, click the <code>Save Optimization History</code> button. This will prompt you for where to save a raw text file that includes the history of all the parameters you optimized against, so that you can see what the parameters were both before and after optimization, including their final (optimized) values, and how much they changed.</p></li>
+<li><p>Since we used the default <code>dipole_rmse</code> object, the RMSE value was used during the optimization, and in the example shown above, it has decreased to <code>6.8615</code>. This is not just a better RMSE value than what we found by hand-tuning (<code>7.8567</code>, viewable by selecting <code>Figure 3</code> on the right), but in fact slightly better than the default simulation’s as well (<code>6.9827</code>, viewable by selecting <code>Figure 2</code> on the right).</p></li>
+<li><p>However, note that in our optimized simulation (<code>Figure 4</code> in the GUI on the right), while some portions of the dipole time series are closer to the experimental data, other portions are farther away from it. This is an important point: a better quantitative fit does not necessarily mean that the scientific validity is better! You must always use your scientific judgment to evaluate if such a parameter change <em>makes sense</em> in the biological system you’re investigating.</p></li>
+<li><p>In HNN, you can optimize against multiple parameters and as many parameters as you want. However, be aware that increasing the number of parameters you optimize against greatly increases the computational cost of the simulations that it needs to run. Additionally, if you want to run many simulations or iterations of the optimization, we <strong>strongly</strong> recommend that you switch to the API, since the GUI consumes more memory to run simulations than the API.</p></li>
+</ol>
+<p>For tutorials on how to use optimization via the API, see <a href="../08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">here</a> and <a href="../08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">here</a>.</p>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
-            <div class="previous-area" data-link="/textbook/content/01_getting_started/installation.html">
+            <div class="previous-area" data-link="/textbook/content/04_using_hnn_gui/gui_quickstart.html">
                 <div class="previous-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="arrow-path" d="M15 5L9 12L15 19" />
@@ -331,13 +415,13 @@
                 </div>
                 <div class="previous-text">
                     <p>Previous</p>
-                    <a>1.3 Installation</a>
+                    <a>3.1 GUI Quickstart</a>
                 </div>
             </div>
-            <div class="next-area" data-link="/textbook/content/03_model_assumptions/primary_electric_currents.html">
+            <div class="next-area" data-link="/textbook/content/05_erps/erp_overview.html">
                 <div class="next-text">
                     <p>Next</p>
-                    <a>2.2 Primary Electrical Currents</a>
+                    <a>4.1 Intro and Overview Lecture</a>
                 </div>
                 <div class="next-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
