@@ -15,9 +15,9 @@ For a more in-depth approach that covers similar functionality (and much more), 
 
 ## 1. First simulation
 
-First, let's load some representative example data that we to compare a simulation agains. Go to our data repository here and [download this file](https://github.com/jonescompneurolab/hnn-data/blob/main/workshops/2025-04-09-HNN-online_workshop/erp_gui_walkthrough/experimental_S1_Threshold.txt); on the right side of the page, near where it says `Raw`, you should see a download symbol. Click that, or feel free to `git clone` the `hnn-data` repository as a whole.
+First, let's load some representative example data that we want to compare a simulation against. Go to our [`hnn-data` repository here](https://github.com/jonescompneurolab/hnn-data) (separate from installing HNN) and [download this file](https://github.com/jonescompneurolab/hnn-data/blob/main/workshops/2025-04-09-HNN-online_workshop/erp_gui_walkthrough/experimental_S1_Threshold.txt); on the right side of the page, near where it says `Raw`, you should see a download symbol. Click that, or feel free to `git clone` the `hnn-data` repository as a whole.
 
-1. Start the GUI (see [3.1 HNN GUI Quickstart](../04_using_hnn_gui/gui_quickstart.html) if you do not know how to do that).
+1. Start the GUI (see [3.1 HNN GUI Quickstart](../04_using_hnn_gui/gui_quickstart.html) for how).
 2. Click the `Load data` button (in the `Simulation` tab) and load the `experimental_S1_Threshold.txt` file you just downloaded. A plot showing the data should appear on the right, similar to the figure below:
 
 <div class="stylefig">
