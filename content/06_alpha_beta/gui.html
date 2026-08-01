@@ -361,6 +361,9 @@
 <pre><code>hnn-gui</code></pre>
 <p><a id="toc-3"></a></p>
 <h2>3. Setting Initial Simulation and Visualization Parameters</h2>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/1-gVNIAW-oo3EIIRXv73loWpyplQQavbA/preview">
+
+</div>
 <p><strong>Before</strong> running any simulations, we need to change some default parameters of both the simulations and visualizations. The parameters we need to change in the <code>Simulation</code> tab are shown in <a href="#figure-4">Figure 4</a> below, and are also listed below. Please note that if you refresh the browser tab or restart HNN, you will have to re-enter all of these parameter changes.</p>
 <!-- 3. Change `Smoothing` to `0`. Without doing this, much of alpha- and beta-frequency content of our signal will be "smoothed out" and not viewable. -->
 <ol type="1">
@@ -471,6 +474,9 @@
 <p><a id="toc-5"></a></p>
 <h2>5. Simulation Rhythmic Distal Inputs: Alpha only</h2>
 <h3>5.1 Load/view parameters to define the network structure &amp; to “activate” the network</h3>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/14ZHjfAHg43xWKN4cvRrP742XsteVWvwA/preview">
+
+</div>
 <p>We will next use a param file that generates bursts of only <strong>distal</strong> inputs provided at the alpha frequency (10 Hz), file <code>OnlyRhythmicDist.json</code>. Do the folowing steps:</p>
 <ol type="1">
 <li>Click back to the <code>Simulation</code> tab.</li>
@@ -528,6 +534,9 @@
 <h2>6. Simulating Combined Rhythmic Proximal and Distal Inputs: Alpha/Beta Complex</h2>
 <p><a id="toc-6-1"></a></p>
 <h3>6.1 Load/view parameters to define the network structure &amp; to “activate” the network.</h3>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/1tje3uSlJtaPm5Zl_Ip6Pv16wstLQpN1V/preview">
+
+</div>
 <p>In this example, we provide a parameter set file <code>AlphaAndBeta.json</code> that produces many of the waveform and spectral features observed in our SI data (<a href="#figure-2">Figure 2</a>).</p>
 <ol type="1">
 <li>Click back to the <code>Simulation</code> tab.</li>
@@ -589,6 +598,9 @@
 </section>
 <p>In this window, the rhythmic distal (green/top) and proximal (red/middle) input-burst-histograms are shown above the spiking activity in each population of cells (bottom panel). In this case, the alpha and beta events are indeed produced through subthreshold processes, and <em>there is no spiking produced in any cell in the network</em> (i.e. there are no dots present in the bottom raster plot)!</p>
 <h3>6.4 Simulating and averaging multiple trials with jittered start times creates the impression of continuous oscillations</h3>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/1EZatF4QKUTetbJ40T9ZHIFKqpYXl8kVu/preview">
+
+</div>
 <p>As described in <a href="#toc-1">Section 1. Background</a> above, our simulation goal was to study the mechanisms that reproduce features of spontaneous alpha and beta rhythms observed in un-averaged data. These features include the fact that alpha and beta components are transient and intermittent (<a href="#figure-1">Figure 1</a>, right panel). Each tutorial section up to this point was based on simulating un-averaged data.</p>
 <p>Here, we will show that, depending on the stochastic nature of the proximal and distal rhythmic inputs, alpha and beta activity on different simulation “trial” may be jittered, creating the impression of continuous oscillations. We will describe how to run and average multiple simulation “trials” (700 ms epochs of spontaneous activity), and change the stochasticity by changing the standard deviation of the start times of the drives (<code>Start time dev (ms)</code>). This is akin to simulating induced rhythms rather than time-locked evoked rhythms. In the averaged spectrogram across trials, the alpha and beta events will accumulate without cancellation (due to the fact that spectrogram values are purely positive), creating the impression of a continuous oscillation, such as in <a href="#figure-1">Figure 1</a>.</p>
 <ol type="1">
@@ -666,6 +678,9 @@
 <!-- ### 9.1 Changing the strength (post-synaptic conductance) and synchrony of the distal drive increases beta activity -->
 <!-- ### 8.1 Changing the strength (post-synaptic conductance) and synchrony of the distal drive increases beta activity -->
 <h3>7.1 Changing the strength (post-synaptic conductance) and synchrony of the distal drive increases beta activity</h3>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/1av6ycyCeiUjHJda4aKCmWUW7F3926FBq/preview">
+
+</div>
 <p>We described above (<a href="#toc-6-2">Section 6.2</a>) how the timing of proximal and distal inputs can lead to either alpha events (when the bursts arrive to the local network out of phase) or beta events (when the bursts arrive in phase).</p>
 <p>We have also found that another factor that contributes to the prevalence of beta activity is the strengthened synchrony of the distal inputs. Beta activity is increased with stronger and more synchronous subthreshold drive, where the beta frequency is set by the duration of the driving bursts (~50ms) (<span class="citation" data-cites="jones_quantitative_2009">(<a href="#ref-jones_quantitative_2009" role="doc-biblioref">Stephanie R. Jones et al. 2009</a>)</span> and <span class="citation" data-cites="sherman_neural_2016">(<a href="#ref-sherman_neural_2016" role="doc-biblioref">Sherman et al. 2016</a>)</span>). The strength is controlled by the postsynaptic conductance, and the synchrony is controlled by the <code>Burst std dev (Hz)</code>. We will demonstrate this here. Do the following:</p>
 <ol type="1">
@@ -713,6 +728,9 @@
 <!-- ### 9.2 Increasing the delay between the proximal and distal inputs to anti-phase (50 ms delay) creates continuous alpha oscillations without beta activity -->
 <!-- ### 8.2 Increasing the delay between the proximal and distal inputs to anti-phase (50 ms delay) creates continuous alpha oscillations without beta activity -->
 <h3>7.2 Increasing the delay between the proximal and distal inputs to anti-phase creates continuous alpha oscillations without beta activity</h3>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/1_7wxX12sF8YO08s-MqADZMAMLhPYWQwF/preview">
+
+</div>
 <p>We mentioned above that, in addition to parameters controlling the strength and synchrony of the distal drive, the relative timing of proximal and distal inputs is an important factor in determining relative alpha and beta expression in the model. Here we will demonstrate that out-of-phase, 10 Hz burst inputs can produce continuous alpha activity <em>without</em> any beta events. Do the following:</p>
 <ol type="1">
 <li>Click back to the <code>Simulation</code> tab.</li>
@@ -751,6 +769,9 @@
 <!-- ### 9.3 Increasing the strength (post-synaptic conductance) of the distal drive further creates high frequency responses due to induced spiking activity -->
 <!-- ### 8.3 Increasing the strength (post-synaptic conductance) of the distal drive further creates high frequency responses due to induced spiking activity -->
 <h3>7.3 Increasing the strength of the distal drive further creates high-frequency responses due to induced spiking activity</h3>
+<div id="video-container" style="text-align: center;" data-src="https://drive.google.com/file/d/16HR0ktQDvofVsMNmlHrGHcxBb1dbmTP7/preview">
+
+</div>
 <p>Recall that in the above simulations, the strength of the rhythmic proximal and distal inputs were chosen so that the simulated cells remained subthreshold (no spiking). We will now demonstrate what happens if we increase the strength of the inputs far enough to induce spikes. Instead of simulating subthreshold alpha/beta events, we will see that the dipole signals become dominated by higher-frequency events created by spiking activity. We note that the produced waveforms of activity are, to our knowledge, <strong>not typically observed in MEG or EEG data</strong>, supporting the notion that alpha/beta rhythms are created through subthreshold processes. Do the following:</p>
 <ol type="1">
 <li>Click back to the <code>Simulation</code> tab.</li>

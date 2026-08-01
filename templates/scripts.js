@@ -29,18 +29,21 @@ function initMainContent() {
 }
 
 function injectIframe() {
-    const container = document.getElementById("video-container");
-    if (container && container.dataset.src && !container.querySelector("iframe")) {
-        const iframe = document.createElement("iframe");
-        iframe.src = container.dataset.src;
-        iframe.width = "640";
-        iframe.height = "480";
-        iframe.style.border = "none";
-        iframe.style.display = "block";
-        iframe.style.margin = "0 auto";
-        iframe.allowFullscreen = true;
-        container.appendChild(iframe);
-    }
+    // Note: pages may contain multiple video containers, so this must use
+    // querySelectorAll and not getElementById (which only returns the first)
+    document.querySelectorAll('[id="video-container"]').forEach(container => {
+        if (container.dataset.src && !container.querySelector("iframe")) {
+            const iframe = document.createElement("iframe");
+            iframe.src = container.dataset.src;
+            iframe.width = "640";
+            iframe.height = "480";
+            iframe.style.border = "none";
+            iframe.style.display = "block";
+            iframe.style.margin = "0 auto";
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+        }
+    });
 }
 
 function hideIframes() {

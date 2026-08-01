@@ -99,6 +99,12 @@ hnn-gui
 
 ## 3. Setting Initial Simulation and Visualization Parameters
 
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/1-gVNIAW-oo3EIIRXv73loWpyplQQavbA/preview"
+></div>
+
 **Before** running any simulations, we need to change some default parameters of both the simulations and visualizations. The parameters we need to change in the `Simulation` tab are shown in [Figure 4](#figure-4) below, and are also listed below. Please note that if you refresh the browser tab or restart HNN, you will have to re-enter all of these parameter changes.
 
 <!-- 3. Change `Smoothing` to `0`. Without doing this, much of alpha- and beta-frequency content of our signal will be "smoothed out" and not viewable. -->
@@ -227,6 +233,12 @@ This exploration with a proximal drive is only useful in understanding how subth
 
 ### 5.1 Load/view parameters to define the network structure & to "activate" the network
 
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/14ZHjfAHg43xWKN4cvRrP742XsteVWvwA/preview"
+></div>
+
 We will next use a param file that generates bursts of only **distal** inputs provided at the alpha frequency (10 Hz), file `OnlyRhythmicDist.json`. Do the folowing steps:
 
 1. Click back to the `Simulation` tab.
@@ -292,6 +304,12 @@ While instructional, this simulation also does not produce waveform and spectral
 <a id="toc-6-1"></a>
 
 ### 6.1 Load/view parameters to define the network structure & to "activate" the network.
+
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/1tje3uSlJtaPm5Zl_Ip6Pv16wstLQpN1V/preview"
+></div>
 
 In this example, we provide a parameter set file `AlphaAndBeta.json` that produces many of the waveform and spectral features observed in our SI data ([Figure 2](#figure-2)).
 
@@ -363,6 +381,12 @@ Importantly, in all the simulations of this tutorial so far, the strength of the
 In this window, the rhythmic distal (green/top) and proximal (red/middle) input-burst-histograms are shown above the spiking activity in each population of cells (bottom panel). In this case, the alpha and beta events are indeed produced through subthreshold processes, and *there is no spiking produced in any cell in the network* (i.e. there are no dots present in the bottom raster plot)!
 
 ### 6.4 Simulating and averaging multiple trials with jittered start times creates the impression of continuous oscillations
+
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/1EZatF4QKUTetbJ40T9ZHIFKqpYXl8kVu/preview"
+></div>
 
 As described in [Section 1. Background](#toc-1) above, our simulation goal was to study the mechanisms that reproduce features of spontaneous alpha and beta rhythms observed in un-averaged data. These features include the fact that alpha and beta components are transient and intermittent ([Figure 1](#figure-1), right panel). Each tutorial section up to this point was based on simulating un-averaged data.
 
@@ -463,6 +487,12 @@ Here, we’ll walk through examples of how to adjust several "Rhythmic Proximal/
 <!-- ### 8.1 Changing the strength (post-synaptic conductance) and synchrony of the distal drive increases beta activity -->
 ### 7.1 Changing the strength (post-synaptic conductance) and synchrony of the distal drive increases beta activity
 
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/1av6ycyCeiUjHJda4aKCmWUW7F3926FBq/preview"
+></div>
+
 We described above ([Section 6.2](#toc-6-2)) how the timing of proximal and distal inputs can lead to either alpha events (when the bursts arrive to the local network out of phase) or beta events (when the bursts arrive in phase).
 
 We have also found that another factor that contributes to the prevalence of beta activity is the strengthened synchrony of the distal inputs. Beta activity is increased with stronger and more synchronous subthreshold drive, where the beta frequency is set by the duration of the driving bursts (~50ms) ([@jones_quantitative_2009] and [@sherman_neural_2016]). The strength is controlled by the postsynaptic conductance, and the synchrony is controlled by the `Burst std dev (Hz)`. We will demonstrate this here. Do the following:
@@ -510,6 +540,12 @@ Try changing the frequency of the rhythmic distal drive from 10 Hz to 20 Hz. Try
 <!-- ### 8.2 Increasing the delay between the proximal and distal inputs to anti-phase (50 ms delay) creates continuous alpha oscillations without beta activity -->
 ### 7.2 Increasing the delay between the proximal and distal inputs to anti-phase creates continuous alpha oscillations without beta activity
 
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/1_7wxX12sF8YO08s-MqADZMAMLhPYWQwF/preview"
+></div>
+
 We mentioned above that, in addition to parameters controlling the strength and synchrony of the distal drive, the relative timing of proximal and distal inputs is an important factor in determining relative alpha and beta expression in the model. Here we will demonstrate that out-of-phase, 10 Hz burst inputs can produce continuous alpha activity *without* any beta events. Do the following:
 
 1. Click back to the `Simulation` tab.
@@ -549,6 +585,12 @@ Can you create a simulation where other frequencies are expressed? How is it cre
 <!-- ### 9.3 Increasing the strength (post-synaptic conductance) of the distal drive further creates high frequency responses due to induced spiking activity -->
 <!-- ### 8.3 Increasing the strength (post-synaptic conductance) of the distal drive further creates high frequency responses due to induced spiking activity -->
 ### 7.3 Increasing the strength of the distal drive further creates high-frequency responses due to induced spiking activity
+
+<div
+  id="video-container"
+  style="text-align: center;"
+  data-src="https://drive.google.com/file/d/16HR0ktQDvofVsMNmlHrGHcxBb1dbmTP7/preview"
+></div>
 
 Recall that in the above simulations, the strength of the rhythmic proximal and distal inputs were chosen so that the simulated cells remained subthreshold (no spiking). We will now demonstrate what happens if we increase the strength of the inputs far enough to induce spikes. Instead of simulating subthreshold alpha/beta events, we will see that the dipole signals become dominated by higher-frequency events created by spiking activity. We note that the produced waveforms of activity are, to our knowledge, **not typically observed in MEG or EEG data**, supporting the notion that alpha/beta rhythms are created through subthreshold processes. Do the following:
 
