@@ -148,7 +148,7 @@ Please follow the instructions in Steps 1, 2, and 3, *in that order*. This insta
 Note that the `pip` installation methods do *not* include all features by default, only the API. If you want to install a specific set of features, you must include all of them in your `pip` install command. For example, if you want HNN GUI support and Optimization support, but not Parallel support, then you would replace the final command in Step 3 with
 
 ```
-pip install "hnn_core[gui,opt]"
+pip install "hnn_core[all]"
 ```
 
 ## Step 1. `pip` Python Environment
