@@ -315,30 +315,33 @@ Specify whether to build the website output files in the 'content' or 'dev' dire
             "no-check",
         ],
         help=textwrap.dedent("""
-Specify which version of HNN-core you want to use for building the textbook. The default is
-'stable'. This validates whether you have the correct version installed in your local environment
-environment unless you choose 'no-check' which simply uses the installed version without checking
-anything. The four options are:
+Specify which version of HNN-core you want to use for building the textbook.
 
-- 'stable': This builds the textbook using the latest stable version of HNN-Core. This
-    version is validated based on a request to PyPI, checking if your version is using the latest
-    stable. This produces a 'content' build, meaning it creates the output HTML files in the
-    '<textbook-root>/content' folder (unless you also pass '--build-directory=dev').
+This validates whether you have the correct version installed in your local environment
+environment unless you choose 'no-check' which simply uses the installed version without
+checking anything. The four options are:
+
+- 'stable' (default): This builds the textbook using the latest stable version of
+    HNN-Core. This version is validated based on a request to PyPI, checking if your
+    version is using the latest stable. This produces a 'content' build, meaning it
+    creates the output HTML files in the '<textbook-root>/content' folder (unless you
+    also pass '--build-directory=dev').
 - 'master': This builds the textbook using the latest development version of
-    HNN-Core. This version is validated based on a request to Github, checking if your version is
-    using the latest commit on the 'master' branch. This produces a 'dev' build, meaning it creates
-    the output HTML files in the '<textbook-root>/dev' folder (unless you also pass
-    '--build-directory=content').
+    HNN-Core. This version is validated based on a request to Github, checking if your
+    version is using the latest commit on the 'master' branch. This produces a 'dev'
+    build, meaning it creates the output HTML files in the '<textbook-root>/dev' folder
+    (unless you also pass '--build-directory=content').
 - 'custom': This builds the textbook using a custom commit and, optionally, a custom
     repository-owner's version of HNN-Core. If using this option, you must provide the
-    repository-owner and/or commit you want using the '--custom-repo-commit' argument. This version
-    is validated based on a request to Github, checking for the existence of the commit you have
-    provided. This produces a 'dev' build, meaning it creates the output HTML files in the
-    '<textbook-root>/dev' folder (unless you also pass '--build-directory=content').
+    repository-owner and/or commit you want using the '--custom-repo-commit' argument.
+    This version is validated based on a request to Github, checking for the existence
+    of the commit you have provided. This produces a 'dev' build, meaning it creates the
+    output HTML files in the '<textbook-root>/dev' folder (unless you also pass
+    '--build-directory=content').
 - 'no-check': This builds the textbook using whatever is the current installed commit of
-    HNN-Core. This does not check anything about the version you have currently installed. This
-    produces a 'dev' build, meaning it creates the output HTML files in the '<textbook-root>/dev'
-    folder (unless you also pass '--build-directory=content').
+    HNN-Core. This does not check anything about the version you have currently
+    installed. This produces a 'dev' build, meaning it creates the output HTML files in
+    the '<textbook-root>/dev' folder (unless you also pass '--build-directory=content').
 """),
     )
     parser.add_argument(
@@ -353,11 +356,12 @@ anything. The four options are:
         ],
         help=textwrap.dedent("""
 Specify different criteria for which notebooks you want to execute before converting
-them to HTML. The default is 'no-execution'. The four options are below, in order of
-more execution:
+them to HTML.
 
-- 'no-execution': This will not execute any notebooks. You may receive warnings if
-    specific notebooks should be executed.
+The four options are below, in order of more execution:
+
+- 'no-execution' (default): This will not execute any notebooks. You may receive
+    warnings if specific notebooks should be executed.
 - 'updated-unskipped-notebooks': Execute only notebooks which have been
     updated/changed or are new, excluding notebooks flagged for skipping.
 - 'all-unskipped-notebooks': Execute all notebooks except those flagged for
