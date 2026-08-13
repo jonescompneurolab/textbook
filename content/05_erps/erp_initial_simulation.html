@@ -841,6 +841,9 @@ page.</p>
 # the simulation speeds
 use_MPI = True
 
+# note that `chosen_backend` here is a *pointer* variable,
+# meaning it simply *points* to the backend that we assign
+# in the if-else block below
 if use_MPI is False:
     chosen_backend = JoblibBackend
 else:
@@ -848,10 +851,36 @@ else:
 
 # when calling our `chosen_backend` below, we can
 # explicitly set the number of cores to use
-#
-# in general, more cores = faster simulations
-ncores = 4
+manual_ncores = 4
+
+# alternatively, we can use `psutil.cpu_count()` to
+# automatically determine the number of available cores
+import psutil  # noqa
+
+auto_ncores = psutil.cpu_count(logical=False) - 1
+
+# note that, in general, more cores = faster simulations
+# however, there are diminishing returns. We'll use the
+# lower number of cores since we we're not running
+# computationally-demanding simulations in these tutorials
+ncores = min(manual_ncores, auto_ncores)
+print(
+    f"Using {ncores} of {auto_ncores} available cores",
+)
                     </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Using 1 of 1 available cores
+
+                    </div>
                 </div>
 
 
@@ -886,11 +915,13 @@ list of <code>Dipole</code> objects (one per each trial).</p>
                 <div class='code-cell'>
                     <code class='language-python'>
                         # set additional simulation parameters
+# --------------------------------------------------
 tstop = 170.0  # length of the simulation
 dt = 0.025  # integration timestep
 n_trials = 1  # number of trials
 
 # run the simulation
+# --------------------------------------------------
 with chosen_backend(ncores):
     dipoles_list = simulate_dipole(
         net=net_default,
@@ -910,50 +941,35 @@ with chosen_backend(ncores):
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 4 processes.
-
-        numprocs=4
-
-        Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+        MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
+Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 
         [Done]
 Trial 1: 0.03 ms...
 
         Trial 1: 10.0 ms...
-
-        Trial 1: 20.0 ms...
-
-        Trial 1: 30.0 ms...
+Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
 
         Trial 1: 40.0 ms...
-
-        Trial 1: 50.0 ms...
+Trial 1: 50.0 ms...
 
         Trial 1: 60.0 ms...
-
-        Trial 1: 70.0 ms...
+Trial 1: 70.0 ms...
 
         Trial 1: 80.0 ms...
-
-        Trial 1: 90.0 ms...
-
-        Trial 1: 100.0 ms...
+Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
 
         Trial 1: 110.0 ms...
-
-        Trial 1: 120.0 ms...
-
-        Trial 1: 130.0 ms...
-
-        Trial 1: 140.0 ms...
+Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
 
         Trial 1: 150.0 ms...
-
-        Trial 1: 160.0 ms...
+Trial 1: 160.0 ms...
 
                     </div>
                 </div>

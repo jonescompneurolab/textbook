@@ -288,6 +288,30 @@
     <div id="content-wrapper">
     <div id="content">
 
+
+		<div class="notebook-download-wrapper">
+		    <a href='erp_api_walkthrough.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
 <!--
 # Title: 4.9 Adjusting Network Parameters And Testing Hypotheses
 # Updated: 2026-07-26
@@ -299,7 +323,708 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1H0rhgltr6Mh77XOBS7jEEKybqoZuKDJY/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
-<p>API walkthrough coming soon!</p>
+<div class='markdown-cell'>
+    <h2>Hand Tuning Drive Parameters</h2>
+
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>In the previous section, we focused on adjusting evoked drive
+parameters to develop hypotheses about differences between our model and
+experimental data.</p>
+<p>In this section, we'll explore hand tuning parameters of the local
+network.</p>
+<p>As we discussed in the previous section, we generally recommend
+starting by hand-tuning the evoked drives of one of our default networks
+when working with experimental ERP data. Changing the local network
+should generally be motivated by a specific scientific hypothesis about
+differences in the population being studied.</p>
+
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Let's first look at the properties of the individual cell types in
+the network.</p>
+<p>These are stored in the <code>cell_types</code> attribute of the
+network object. For example, we can inspect the available cell types by
+printing the keys in the <code>cell_types</code> data dictionary.</p>
+
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        print(list(net_default_gui.cell_types.keys()))
+    </code>
+</div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x27;, &#x27;L5_pyramidal&#x27;]
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Each cell type is essentially a dictionary that contains a
+<code>Cell</code> object as well as metadata describing the cell
+type.</p>
+<p>Below, we examine a subset of the <code>Cell</code> object's
+parameters.</p>
+<ul>
+<li><p><code>sect_loc</code> will show which sections make up the
+"proximal" and "distal" connection points</p></li>
+<li><p><code>sections</code> provides the detailed geometry for each
+section of the celltype</p></li>
+<li><p><code>synapses</code> defines reversal potential, rise time, and
+decay time for each synapse type</p></li>
+</ul>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        l5_pyr_celltype = net_default_gui.cell_types["L5_pyramidal"]
+l5_pyr_object = l5_pyr_celltype["cell_object"]
+
+print(
+    l5_pyr_object.sect_loc,
+    l5_pyr_object.sections,
+    l5_pyr_object.synapses,
+    sep="\n\n"
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        {&#x27;proximal&#x27;: [&#x27;apical_oblique&#x27;, &#x27;basal_2&#x27;, &#x27;basal_3&#x27;], &#x27;distal&#x27;: [&#x27;apical_tuft&#x27;]}
+
+{&#x27;apical_trunk&#x27;: L=102.0, diam=10.2, cm=0.85, Ra=200.0, v0=-72, &#x27;apical_1&#x27;: L=680.0, diam=7.48, cm=0.85, Ra=200.0, v0=-71.32, &#x27;apical_2&#x27;: L=680.0, diam=4.93, cm=0.85, Ra=200.0, v0=-69.08, &#x27;apical_tuft&#x27;: L=425.0, diam=3.4, cm=0.85, Ra=200.0, v0=-67.3, &#x27;apical_oblique&#x27;: L=255.0, diam=5.1, cm=0.85, Ra=200.0, v0=-72, &#x27;basal_1&#x27;: L=85.0, diam=6.8, cm=0.85, Ra=200.0, v0=-72, &#x27;basal_2&#x27;: L=255.0, diam=8.5, cm=0.85, Ra=200.0, v0=-72, &#x27;basal_3&#x27;: L=255.0, diam=8.5, cm=0.85, Ra=200.0, v0=-72, &#x27;soma&#x27;: L=39.0, diam=28.9, cm=0.85, Ra=200.0, v0=-72.0}
+
+{&#x27;ampa&#x27;: {&#x27;e&#x27;: 0.0, &#x27;tau1&#x27;: 0.5, &#x27;tau2&#x27;: 5.0}, &#x27;nmda&#x27;: {&#x27;e&#x27;: 0.0, &#x27;tau1&#x27;: 1.0, &#x27;tau2&#x27;: 20.0}, &#x27;gabaa&#x27;: {&#x27;e&#x27;: -80.0, &#x27;tau1&#x27;: 0.5, &#x27;tau2&#x27;: 5.0}, &#x27;gabab&#x27;: {&#x27;e&#x27;: -80.0, &#x27;tau1&#x27;: 1.0, &#x27;tau2&#x27;: 20.0}}
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>If we look at any <em>particular</em> section, we can see that there
+are additional attributes (some public, some private) that aren't
+explicitly displayed when we print the <code>Section</code> object
+above. We can inspect them using the object's <code>__dict__</code></p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        l5_pyr_soma = l5_pyr_object.sections["soma"]
+
+print(
+    'Printout for sections["soma"]:',
+    f"    {l5_pyr_soma}",
+    '\nAttributes for sections["soma"]:',
+    f"    {list(l5_pyr_soma.__dict__.keys())}",
+    sep="\n",
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Printout for sections[&quot;soma&quot;]:
+    L=39.0, diam=28.9, cm=0.85, Ra=200.0, v0=-72.0
+
+Attributes for sections[&quot;soma&quot;]:
+    [&#x27;_L&#x27;, &#x27;_diam&#x27;, &#x27;_Ra&#x27;, &#x27;_cm&#x27;, &#x27;_v0&#x27;, &#x27;_end_pts&#x27;, &#x27;mechs&#x27;, &#x27;syns&#x27;, &#x27;nseg&#x27;]
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>While the keys above correspond to attributes of the
+<code>Section</code> object, they are not displayed when printing the
+value for any particular section, as they are not part of the
+<code>Section</code> object's public-facing representation.</p>
+<p>This means we can only access them by using attribute syntax, as
+opposed to dictionary syntax. For example, we can inspect the mechanisms
+for the <code>soma</code> with:</p>
+
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        l5_pyr_object.sections["soma"].mechs
+    </code>
+</div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        {&#x27;hh2&#x27;: {&#x27;gkbar_hh2&#x27;: 0.01,
+  &#x27;gnabar_hh2&#x27;: 0.16,
+  &#x27;el_hh2&#x27;: -65.0,
+  &#x27;gl_hh2&#x27;: 4.26e-05},
+ &#x27;ca&#x27;: {&#x27;gbar_ca&#x27;: 60.0},
+ &#x27;cad&#x27;: {&#x27;taur_cad&#x27;: 20.0},
+ &#x27;kca&#x27;: {&#x27;gbar_kca&#x27;: 0.0002},
+ &#x27;km&#x27;: {&#x27;gbar_km&#x27;: 200.0},
+ &#x27;cat&#x27;: {&#x27;gbar_cat&#x27;: 0.0002},
+ &#x27;ar&#x27;: {&#x27;gbar_ar&#x27;: 1e-06}}
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We could also use the <code>to_dict()</code> method of the
+<code>Cell</code> object to store all of the cell parameters as a
+dictionary. However, we <em>cannot</em> use the output to
+<em>update</em> parameters, only to inspect them.</p>
+<p>Since the dictionary is quite large, we do not print the output of
+<code>to_dict()</code> below, but if you would like to see it, you can
+un-comment the cell and rerun it.</p>
+
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        # l5_pyr_object.to_dict()
+    </code>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>While it's important to understand how to access and update the cell
+parameters, the rest of this section will focus on making changes to the
+weights (strengths) of the connections in the local network. We'll once
+again use the default network as our starting point for hand-tuning
+parameters.</p>
+<p>For this example below, imagine that the default simulation
+represents a neurotypical population performing the threshold-level
+tactile-detection task, and the experimental data represents an autism
+spectrum disorder (ASD) population performing the <em>same</em> tactile
+detection task.</p>
+<p>In this hypothetical setup, the task is the same, but the
+<em>populations</em> differ. (Note that we will still use the
+suprathreshold experimental data, but we are imagining that it
+represents our ASD population rather than a different experimental
+condition).</p>
+<p>We'll start, once again, from the figure below.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig = plot_initial_gui_figure(
+    net_default_gui,
+    processed_dipole,
+    suprathreshold_dpl,
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_22.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Note that, in this setup, we are starting with an existing model for
+the neurotypical population. We will use this model as a starting point
+to develop a new model for our ASD population.</p>
+<p>Let's say we know the specific ASD population we’re studying has
+sensory hypersensitivity, which we think is responsible for the observed
+differences in the ERP signals. Specifically, we think differences in
+E-I balance in the local cortical column are responsible.</p>
+<p>Let's consider some hypotheses for the observed differences between
+the populations.</p>
+<ol type="1">
+<li><p>One possibility is that there's increased amplification of our
+sensory inputs in this local cortical circuit. In this case, we would
+expect stronger excitatory connections between cells in the
+network.</p></li>
+<li><p>A second possibility is that there is reduced inhibitory
+regulation of the pyramidal neurons. In this case, we would expect
+weaker inhibitory connections onto the pyramidal neurons.</p></li>
+</ol>
+<p>We can test each hypothesis in turn by changing the weights of the
+corresponding connections in the model and examining how those changes
+affect the simulated ERP.</p>
+<p>The connections and their associated parameters are found in the
+<code>connectivity</code> attribute of the <code>Network</code> object.
+Since the connectivity object returns a list of connections, we can
+print the first entry to examine its properties</p>
+
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        net_default_gui.connectivity[0]
+    </code>
+</div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        L2_pyramidal -&gt; L2_pyramidal
+cell counts: 100 srcs, 100 targets
+connection probability: 1.0 
+loc: &#x27;proximal&#x27;; receptor: &#x27;nmda&#x27;
+weight: 0.0005; delay: 1.0; lamtha: 3.0threshold: 0.0gain: 1.0
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>This particular entry in the connectivity list shows the parameters
+that specify the connections between L2 pyramidal neurons.</p>
+<p>The <code>cell counts</code>, <code>connection probability</code>,
+and <code>loc</code> describe how many cells are connected and the
+connection location, while <code>lamtha</code> determines how the
+connection probability varies with the distance between cells.
+<code>delay</code> specifies the latency between a presynaptic spike and
+postsynaptic response, while <code>threshold</code> specifies the
+voltage threshold for detecting a presynaptic spike.</p>
+<p>To test our first hypothesis, let's adjust the weight of all
+excitatory connections in the local network. This includes the recurrent
+connections between pyramidal neurons, and the connections from
+pyramidal neurons onto interneurons.</p>
+<p>First, let's create a new <code>Network</code> object by "deep
+copying" the default network. We'll call this network
+<code>net_02</code></p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        from copy import deepcopy  # noqa
+
+# net_02 = deepcopy(net_default_gui)
+net_02 = read_network_configuration("gui_default.json")
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now, rather than individually adjusting the weight for each
+connection type, we can use the <code>set_global_synaptic_gains()</code>
+method of the <code>Network</code> object to adjust entire
+<em>classes</em> of connections at once.</p>
+<p>This method accepts arguments that correspond to one of four classes
+of connections</p>
+<ul>
+<li><p>excitatory to excitatory (<code>e_e</code>)</p></li>
+<li><p>excitatory to inhibitory (<code>e_i</code>)</p></li>
+<li><p>inhibitory to inhibitory (<code>i_i</code>)</p></li>
+<li><p>inhibitory to excitatory (<code>i_e</code>)</p></li>
+</ul>
+<p>To test our first hypothesis, let's try doubling the <code>e_e</code>
+and <code>e_i</code> gains to represent the increased amplification of
+sensory inputs. We can then print the global gain values using the
+<code>get_global_synaptic_gains()</code> method to ensure that the gains
+were correctly updated.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net_02.set_global_synaptic_gains(
+    e_e=2,
+    e_i=2,
+)
+
+print(net_02.get_global_synaptic_gains())
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        {&#x27;e_e&#x27;: 2, &#x27;e_i&#x27;: 2, &#x27;i_e&#x27;: 1.0, &#x27;i_i&#x27;: 1.0}
+
+                    </div>
+                </div>
+
+
+<!-- markdown cell -->
+<div class='markdown-cell'>
+    <p>We can then simulate the network with the updated gains</p>
+
+</div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        with chosen_backend(ncores):
+    dipoles_list = simulate_dipole(
+        net=net_02,
+        tstop=170.0,
+        n_trials=1,
+        dt=0.025,
+    )
+
+net_02_dpl_01 = dipoles_list[0].copy()
+net_02_dpl_01.smooth(30).scale(3000)
+# mod_shrink_output
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
+
+Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Building the NEURON model
+
+        [Done]
+Trial 1: 0.03 ms...
+Trial 1: 10.0 ms...
+Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
+Trial 1: 40.0 ms...
+
+        Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
+
+        Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+Trial 1: 110.0 ms...
+
+        Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
+
+        Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
+
+        &lt;hnn_core.dipole.Dipole at 0x7f56db9751c0&gt;
+                    </div>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # plot the data using our custom function
+fig = plot_initial_gui_figure(
+    net_02,
+    net_02_dpl_01,
+    suprathreshold_dpl,
+    "`net_02` Sim 01",
+)
+
+fig.axes[1].plot(
+    processed_dipole.times,
+    processed_dipole.data["agg"],
+    label="Default Simulation",
+    color="#D3D3D3",
+)
+
+fig.axes[1].legend();
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_23.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Compared to our default simulation, the root mean squared error is
+actually worse. However, there are parts of the simulation that look
+more representative of the data.</p>
+<p>Around the second proximal drive, the amplitude of the signal is
+higher and more closely matches the two-peak shape of the data. The fit
+around the first proximal drive also looks somewhat better, specifically
+near the peak around 50ms.</p>
+<p>In this hypothetical scenario, this could be a reasonable starting
+point for further exploration and hand tuning. From here, we could
+experiment with different gain values, or we could keep the updated
+global gains and further hand tune the evoked drives to see if we can
+improve the simulation further.</p>
+<p>Rather than continuing to refine this simulation, let's test our
+second hypothesis that the differences in the signals are due to reduced
+inhibitory regulation of the pyramidal neurons.</p>
+<p>To test this hypothesis, we'll reset the excitatory global gains to
+their default values and instead reduce the <code>i_e</code> global
+gain, which controls the strength of inhibitory connections onto
+excitatory cells.</p>
+<p>Let's try reducing this gain by 50% and see how this change affects
+the simulated ERP. In this case, we predict that less inhibition of the
+pyramidal neurons will yield an overall stronger response.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        net_02.set_global_synaptic_gains(
+    e_e=1,
+    e_i=1,
+    i_e=0.5,  # i.e., 50%
+)
+
+print(net_02.get_global_synaptic_gains())
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        {&#x27;e_e&#x27;: 1, &#x27;e_i&#x27;: 1, &#x27;i_e&#x27;: 0.5, &#x27;i_i&#x27;: 1.0}
+
+                    </div>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        with chosen_backend(ncores):
+    dipoles_list = simulate_dipole(
+        net=net_02,
+        tstop=170.0,
+        n_trials=1,
+        dt=0.025,
+    )
+
+net_02_dpl_02 = dipoles_list[0].copy()
+net_02_dpl_02.smooth(30).scale(3000)
+# mod_shrink_output
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
+Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Building the NEURON model
+
+        [Done]
+Trial 1: 0.03 ms...
+
+        Trial 1: 10.0 ms...
+Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
+Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+
+        Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+
+        Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+Trial 1: 110.0 ms...
+
+        Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
+
+        &lt;hnn_core.dipole.Dipole at 0x7f56e8515790&gt;
+                    </div>
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # plot the data using our custom function
+fig = plot_initial_gui_figure(
+    net_02,
+    net_02_dpl_02,
+    suprathreshold_dpl,
+    "`net_02` Sim 02",
+)
+
+fig.axes[1].plot(
+    net_02_dpl_01.times,
+    net_02_dpl_01.data["agg"],
+    label="`net_02` Sim 01",
+    color="#C8DAF9"
+)
+
+fig.axes[1].plot(
+    processed_dipole.times,
+    processed_dipole.data["agg"],
+    label="Default Simulation",
+    color="#D3D3D3",
+)
+
+fig.axes[1].legend();
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_24.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>In this case, the new simulation looks notably worse than the
+previous simulation. This suggests that perhaps our proposed mechanism
+(decreasing the strength of the <code>i_e</code> connections) isn't
+sufficient to account for the differences in these populations' dipole
+signals, at least not on its own.</p>
+<p>But the point here isn't that our parameter changes have given us a
+definite answer either way. The point is that we start with observed
+differences between our simulation and the data, and we propose testable
+parameter changes based on our hypotheses about the underlying
+differences in the signal generators. The model allows us to test our
+predictions through simulations.</p>
+<p>In this case, it looks like reducing inhibitory connections did not
+produce a better match between the simulation and the data. Between
+these two new simulations, our first simulation appears to be a more
+promising direction to explore. It suggests that, in the context of this
+exercise, increased excitatory recruitment in the local network could be
+a plausible explanation for <em>some</em> of the observed differences in
+the dipoles.</p>
+<p>However, it's important to emphasize that the aggregate dipole alone
+does <strong><em>not</em></strong> give us the full picture of what's
+happening in the model. We can't tell from this figure why the fit
+improved, or whether the underlying activity is biologically
+plausible.</p>
+<p>In the next section, we will examine the underlying circuit dynamics
+to better understand what changed in the model <em>between</em> the two
+simulations. We will also give an example of how to identify potential
+targets for validation in follow-up experiments</p>
+
+                </div>
+
+
+<!-- markdown cell -->
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

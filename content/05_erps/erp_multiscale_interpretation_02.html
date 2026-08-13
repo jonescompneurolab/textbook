@@ -288,6 +288,30 @@
     <div id="content-wrapper">
     <div id="content">
 
+
+		<div class="notebook-download-wrapper">
+		    <a href='erp_api_walkthrough.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
 <!--
 # Title: 4.7.2 Multiscale Interpretation Part II
 # Updated: 2026-07-15
@@ -299,7 +323,387 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1Kog80FF6LNL_fQJhWeTEJifztElon_PM/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
-<p>API walkthrough coming soon!</p>
+<div class='markdown-cell'>
+    <h2>First Proximal Drive (Contd…)</h2>
+
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Continuing from where we left off in the previous section, we had
+just generated a new figure that shows the histogram of spikes for the
+external drives, the cell-specific spiking in the network, and the
+layer-specific dipoles without any smoothing.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig = plot_combined_raster_hist(
+    dipole=unsmoothed_dipole,
+    net=net_default_gui,
+)
+
+for ax in fig.axes:
+    add_outline_to_subplot(
+        ax,
+        show_origin_line=False,
+    )
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 1000x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_14.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>From this figure, we can begin to unpack why the aggregate dipole
+shows a net <em>inward</em> current, despite our previous assertion that
+proximals drives generally cause <em>outward</em> current.</p>
+<p>We previously established from the layer-specific dipoles that the
+net <em>inward</em> current is largely dominated by Layer 5. Looking at
+the spiking for Layer 5, we see that the overall effect of this drive is
+that there is far more interneuron spiking than pyramidal neuron
+spiking.</p>
+<p>In the Figure below, we see that one of the causes of Inward Currents
+is somatic hyperpolarization, which is caused by inhibitory connectionson the pyramidal neurons from the interneurons.</p>
+<h5>Figure 7.2.A: Inward and Outward Currents</h5>
+<figure>
+<img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/refs/heads/master/images/textbook/content/05_erps/inward_outward_currents.png"
+alt="Template Model Figure" />
+<figcaption aria-hidden="true">Template Model Figure</figcaption>
+</figure>
+<p>Our spiking raster plot suggests that the somatic hyperpolarization
+from the Layer 5 interneurons onto the pyramidal neurons is the dominant
+effect.</p>
+<p>We do see that each pyramidal neuron spike is accompanied by a small
+positive deflection in the dipole. These positive deflections are a
+result of the <strong><em>backpropagating action
+potentials</em></strong> that occur when these neurons spike, and are
+one of our causes of <em>outward</em> currents.</p>
+<p>All in all, this figure suggests that our proximal drive to Layer 5
+is activating the interneurons much more strongly than the pyramidal
+neurons. We can examine the network parameters to see if this
+presumption holds true.</p>
+<p>As we did previously, let's examine the drive object, this time
+looking at <code>evprox1</code>. We'll once again print the "keys" for
+the object so we can view all of its attributes.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # create a pointer variable for "evprox1"
+evprox1 = net_default.external_drives["evprox1"]
+
+# print the keys
+print(
+    "# Drive Object Keys",
+    "# " + "-" * 40,
+    list(evprox1.keys()),
+    sep="\n",
+)
+
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        # Drive Object Keys
+# ----------------------------------------
+[&#x27;type&#x27;, &#x27;location&#x27;, &#x27;n_drive_cells&#x27;, &#x27;event_seed&#x27;, &#x27;conn_seed&#x27;, &#x27;dynamics&#x27;, &#x27;events&#x27;, &#x27;weights_ampa&#x27;, &#x27;weights_nmda&#x27;, &#x27;synaptic_delays&#x27;, &#x27;probability&#x27;, &#x27;name&#x27;, &#x27;target_types&#x27;, &#x27;cell_specific&#x27;]
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The attributes of interest to our question are
+<code>weights_ampa</code> and <code>weights_nmda</code>, which represent
+the excitatory synaptic connections (either AMPA or NMDA) between the
+proximal drive and the network. These attributes are data dictionaries
+with keys that correspond to the target celltype in the local network,
+and values that are the numerical weights for those connections.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # below, we set up a loop to print the keys and values
+# for each of synapse types
+
+synapse_types = ["weights_ampa", "weights_nmda"]
+
+for synapse_weights in synapse_types:
+    print(
+        f"# {synapse_weights}",
+        "# " + "-" * 40,
+        sep="\n",
+    )
+    # check if the connections exist before trying to
+    # loop through the data dictionary
+    if evprox1[synapse_weights] is not None:
+        # print the celltype and weight for each connection
+        for celltype, weight in evprox1[synapse_weights].items():
+            print(f"Celltype: {celltype}", f"    Weight: {weight}", "", sep="\n")
+    # if the connection does not exist, print the value
+    # of the data attribute, which will be None
+    else:
+        print(
+            evprox1["weights_nmda"],
+        )
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        # weights_ampa
+# ----------------------------------------
+Celltype: L2_basket
+    Weight: 0.08831
+
+Celltype: L2_pyramidal
+    Weight: 0.01525
+
+Celltype: L5_basket
+    Weight: 0.19934
+
+Celltype: L5_pyramidal
+    Weight: 0.00865
+
+# weights_nmda
+# ----------------------------------------
+None
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We can see in the output above that there are no NMDA connections
+defined for this particular drive. Therefore, we need only examine the
+AMPA weights.</p>
+<p>Focusing on Layer 5, we see that the strength of the inputs to the
+interneurons (<code>L5_basket</code>) are over 20 times stronger than
+the strength of the weights to the pyramidal neurons
+(<code>L5_pyramidal</code>).</p>
+<p>This supports our presumption above that this particular proximal
+drive to Layer 5 is activating the interneurons much more strongly than
+it is activating the pyramidal neurons.</p>
+
+                </div>
+
+
+<!-- markdown cell -->
+<div class='markdown-cell'>
+    <h2>First Distal Drive</h2>
+
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Next, we will examine the first distal drive using the same figures
+for interpretation. However, we'll change the outline to map onto the
+correct time window for the distal drive. We'll use the window from just
+before the distal drive's first spike arrives at the network to just
+before the <em>second</em> proximal drive's first spike arrives at the
+network. Let's first use our custom plotting function
+<code>plot_initial_gui_figure</code> to re-generate the figure showing
+the aggregate dipole plotted against the experimental data.</p>
+<p>It's important to note that the time window around the distal drive
+differs from the first proximal drive in that the network is
+<em>not</em> at its "resting state" when the distal drive first arrives
+at the network. Therefore, we cannot isolate changes in the simulated
+signal <em>exclusively</em> to the impact of the distal drive arriving
+at the network.</p>
+<p>Nevertheless, we can see that there is a strong net <em>inward</em>
+current, which gradually weakens after the mean arrival time of the
+distal drive.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig = plot_initial_gui_figure(
+    net_default_gui,
+    processed_dipole,
+    threshold_experimental_dpl,
+)
+
+# note that, for each subplot, we manually set the time
+# window used to draw the outline
+add_outline_to_subplot(
+    fig.axes[0],
+    x_bounds=[54, 110],
+    show_origin_line=False,
+)
+add_outline_to_subplot(
+    fig.axes[1],
+    x_bounds=[54, 110],
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_15.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>It's also noteworthy that the direction of the net current flow
+shifts to be <em>outward</em> (positive in absolute value) even
+<em>before</em> the second proximal drive's first spike arrives at the
+network. Let's look at our custom raster plot to investigate this
+observation further.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        fig = plot_combined_raster_hist(
+    dipole=unsmoothed_dipole,
+    net=net_default_gui,
+)
+
+# as with the figure above, we manually specify
+# the time window for the outline
+for ax in fig.axes:
+    add_outline_to_subplot(
+        ax,
+        x_bounds=[54, 110],
+        show_origin_line=False,
+    )
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 1000x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_16.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We see some different dynamics at play during this time window. We'll
+again focus our attention on Layer 5, since there's comparatively less
+happening in Layer 2/3 dipole around the distal drive.</p>
+<p>First of all, note that the initial and strong <em>inward</em>
+current in Layer 5 occurs during a period with comparatively few
+interneuron spikes. We can see in Figure A (above) that the distal drive
+depolarizes the most superficial apical dendrites of the pyramidal
+neurons. This distal depolarization is one of our causes of <em>inward
+currents</em>, and is driving the initial downward deflection seen in
+the Layer 5 dipole.</p>
+<p>By 60ms, we begin to observe some pyramidal neuron spiking. We can be
+reasonably confident that the pyramidal neuron spiking is not due to
+lingering effects of the first proximal drive, but rather to the
+activation of the <em>local</em> network.</p>
+<p>When the distal drive creates a strong inward current, that current
+travels down the apical dendrites until it eventually reaches the soma.
+If the current at the soma is strong enough, it will cause the pyramidal
+neurons to spike, and the backpropagating action potentials create
+outward currents that compete against the inward currents from the
+distal depolarization.</p>
+<p>You can clearly see the competition between the inward and outward
+currents in the rapid positive and negative deflection in the dipole
+around the first plateau after the distal drive.</p>
+<p>However, the number of pyramidal neurons spiking continues to
+increase over time, and eventually the outward currents begin to
+dominate, leading to a fairly sharp rise in the dipole around 70ms. This
+continues until we see a highly synchronous bout of interneuron spiking.
+Given that the distal drive does <em>not</em> target the Layer 5
+interneurons directly (as shown in the Template Figure), we can be
+reasonably sure that the interneuron spiking is mediated by the coupling
+in the local network between the pyramidal neurons and the
+interneurons.</p>
+<p>This recurrent inhibition in the local network not only prevents the
+pyramidal neurons from spiking for a time, briefly shutting down the
+outward currents from backpropagating action potentials, but also
+reinforces the inward currents from the distal drive by hyperpolarizing
+the pyramidal neuron somas.</p>
+<p>After the pyramidal neurons are released from inhibition, they begin
+spiking again, and the same pattern repeats.</p>
+<p>Whereas the smooth dipole creates the illusion of a steady decline
+and subsequent rise the signal, the unsmoothed dipole clearly
+illustrates the recurrent "push-and-pull" dynamics between the pyramidal
+neurons and interneurons in the local network, as they work against each
+other to push current up and down the apical dendrites.</p>
+
+                </div>
+
+
+<!-- markdown cell -->
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

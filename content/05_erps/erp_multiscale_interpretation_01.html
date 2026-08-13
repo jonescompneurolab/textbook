@@ -288,6 +288,30 @@
     <div id="content-wrapper">
     <div id="content">
 
+
+		<div class="notebook-download-wrapper">
+		    <a href='erp_api_walkthrough.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
 <!--
 # Title: 4.7.1 Multiscale Interpretation Part I
 # Updated: 2026-07-15
@@ -299,7 +323,852 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1Cf9lar437rtTZHPoopNsm9XwkNLdTFN4/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
-<p>API walkthrough coming soon!</p>
+<div class='markdown-cell'>
+    <h2>Multiscale Interpretation, Part 1</h2>
+
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>The next step in our experimental workflow is <strong>Step
+4</strong>: hand tune the model parameters to improve the fit between
+your experimental data and your simulations</p>
+<p>However, rather than immediately jump into the hand-tuning process,
+we will first examine how the <code>External Drives</code> interact with
+the local network in our simulations. The goal of these exercises is to
+help you build critical analysis skills that provide the foundation for
+interpreting and eventually tuning simulations to your own experimental
+data.</p>
+<p>Thus far, we have only compared the loaded experimental data to the
+aggregate dipole from our simulation. But in order to better understand
+the <strong><em>generators</em></strong> of our data, we need to
+consider more than just the aggregate dipole. We need to examine the
+cell and circuit activity that <strong><em>underlies</em></strong> our
+signals.</p>
+<p>The power of the HNN model is that it allows us to "peek inside" the
+simulated network and examine the cell- and circuit-level activity, such
+as the layer-specific dipoles, cell-specific spiking, local field
+potentials, and more. These are data that are often not readily
+accessible to researchers using standard MEG/EEG experimental paradigms
+with human subjects, unless the MEG/EEG recordings are accompanied by an
+invasive recording modality.</p>
+<p>In this page (Part 1), we will focus on multiscale interpretation of
+the underlying network activity around the time of the first
+<em>proximal</em> drive. In the next page (Part 2), we will repeat the
+same exercise for the time around the first <em>distal</em> drive.</p>
+<p>We will begin by making a new figure that more closely matches the
+standard GUI output, so that the
+<strong><em>interpretation</em></strong> of the figures matches what is
+said in the accompanying video. We will generate a figure that
+shows:</p>
+<ol type="1">
+<li><p>A histogram of spikes from the
+<code>External Drives</code></p></li>
+<li><p>The scaled and smoothed dipole from the <code>default</code>
+simulation</p></li>
+<li><p>The loaded experimental data</p></li>
+</ol>
+<p>In order to get a 1-to-1 match with the standard GUI output, we will
+also need to re-simulate the default network. The reason for this is
+that the GUI and the Python API initialize the <code>default</code>
+evoked drives with different <code>seed</code> (a.k.a. random number
+generator) values.</p>
+<p>Since we want to match the GUI outputs <strong><em>as closely as
+possible</em></strong>, we need to use the same <code>seed</code>
+values.</p>
+<p>Previously, we loaded the Evoked Drives using the
+<code>add_erp_drives_to_jones_model()</code> function. For this example,
+we will apply the drives from the exact <code>.json</code> configuration
+file used by the GUI. The <strong><em>only</em></strong> parameters that
+differ are the "event_seed" for each drive.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        gui_default_url = (
+    "https://raw.githubusercontent.com/jonescompneurolab/hnn-data/refs/heads/main/tutorial_networks/gui_defaults.json"
+)
+urlretrieve(
+    gui_default_url,
+    "gui_default.json",
+);
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We can then use the <code>read_network_configuration</code> function
+to load the file. Note that you can also save the network configuration
+file directly from the GUI to your local machine, and you can load the
+drives directly from your machine using the same function.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        from hnn_core import read_network_configuration  # noqa
+
+net_default_gui = read_network_configuration("gui_default.json")
+# net_default_gui = read_network_configuration("gui_defaults_updated.json")
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We will then "re-simulate" the network, and apply the smoothing and
+scaling factors exactly as we did in the previous section.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # Remember that you need to select a backend and set the number
+# of cores that is appropriate for your machine, as we did
+# above in the "Simulate Default Network" section
+
+# check the backend/number of cores we selected above
+# --------------------------------------------------
+print(
+    f"Selected backend: {chosen_backend}",
+    f" Number of cores: {ncores}",
+    "\n" + "-" * 50 + "\n",
+    sep="\n",
+)
+
+# re-run the simulation with the updated seed values
+# --------------------------------------------------
+with chosen_backend(ncores):
+    gui_dipoles_list = simulate_dipole(
+        net=net_default_gui,
+        tstop=tstop,
+        n_trials=n_trials,
+        dt=dt,
+    )
+
+# apply the same scaling/smoothing that we used above
+# --------------------------------------------------
+processed_dipole = gui_dipoles_list[0].copy()
+processed_dipole.scale(3000).smooth(30);
+
+# mod_shrink_output
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Selected backend: &lt;class &#x27;hnn_core.parallel_backends.MPIBackend&#x27;&gt;
+ Number of cores: 1
+
+--------------------------------------------------
+
+
+        MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
+Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Building the NEURON model
+
+        [Done]
+Trial 1: 0.03 ms...
+Trial 1: 10.0 ms...
+
+        Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
+Trial 1: 40.0 ms...
+
+        Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+
+        Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+
+        Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Next, we will create our new, combined figure that matches the
+initial GUI output. Since we will be re-generating this plot numerous
+times throughout the rest of the ERP walkthrough, we will create a
+plotting function called <code>plot_initial_gui_figure</code> that
+accepts three arguments:</p>
+<ol type="1">
+<li><p>The network object</p></li>
+<li><p>The processed simulation dipole</p></li>
+<li><p>The experimental dipole</p></li>
+</ol>
+<p>Writing a function to generate this plot will allow us to re-use this
+same code later with different arguments, which will reduce the amount
+of code we need to repeat later.</p>
+<p>The first subplot in our figure will show the histogram of spikes
+from the <code>External Drives</code>. Remember that we model the
+<code>External Drives</code> as multiple series of exogenous spikes
+arriving as inputs to either the proximal or distal locations in thenetwork, as shown in the diagrams below:</p>
+<h5>Figure 7.1.A: Template Network Model</h5>
+<p><img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/refs/heads/master/images/textbook/content/05_erps/full_network_model.png" /></p>
+<p>Spikes for <em>all</em> cell types can be found in the
+<code>net.cell_response.spike_times_by_type</code> data dictionary, with
+the dictionary's keys corresponding to either the unique
+<code>cell_types</code> name or the unique <code>external_drives</code>
+name.</p>
+<p>For example, in the code block below, we print the first and last
+spike from each drive</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        trial = 0
+
+# we can get the drives programatically, but in an *unordered*
+# list, with the line below
+all_drives = list(net_default_gui.external_drives.keys())
+
+# instead, I'll specify them manually by order of arrival time
+all_drives = ["evprox1", "evdist1", "evprox2"]
+
+# the object below includes *all* cell spikes, not just for drives
+all_spike_types = net_default_gui.cell_response.spike_times_by_type
+
+# print the first and last spike to arrive at the network for
+# each external drive
+for drive in all_drives:
+    first_spike = round(min(all_spike_types[drive][trial]), 3)
+    last_spike = round(max(all_spike_types[drive][trial]), 3)
+    print(f'Drive = "{drive}":')
+    print(
+        f"    First spike arrival time: {first_spike} ms",
+        f"     Last spike arrival time: {last_spike} ms",
+        "",
+        sep="\n",
+    )
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Drive = &quot;evprox1&quot;:
+    First spike arrival time: 19.214 ms
+     Last spike arrival time: 34.407 ms
+
+Drive = &quot;evdist1&quot;:
+    First spike arrival time: 54.571 ms
+     Last spike arrival time: 75.721 ms
+
+Drive = &quot;evprox2&quot;:
+    First spike arrival time: 110.021 ms
+     Last spike arrival time: 158.814 ms
+
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>To visualize the spike arrival times for all of the
+<code>External drives</code>, we can use the built-in
+<code>plot_spikes_hist()</code> method in the network's
+<code>CellResponse</code> object. This method will generate a histogram
+of the arrival times of the spikes at the network, which we will use to
+examine the relationship between the driving inputs and the simulated
+response.</p>
+<p>Note that, in the code below, we "wrap" <code>plot_spikes_hist</code>
+in a custom function called <code>custom_drive_hist</code>. The reason
+we do this is to create a version of the template
+<code>plot_spikes_hist</code> figure with <em>pre-configured
+arguments</em>, allowing us to easily generate a custom version of the
+plot later on without repeating the same code.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # initialize the figure
+fig, ax = plt.subplots(figsize=(8, 4))
+
+
+# define a function to customize the input histogram
+def custom_drive_hist(
+    net,
+    ax,
+):
+    _ = net.cell_response.plot_spikes_hist(
+        ax=ax,
+        invert_spike_types=["evdist1"],  # "flip" the y axis
+        color={
+            "evprox1": "r",
+            "evdist1": "g",
+            "evprox2": "r",
+        },
+        show=False,
+    )
+    ax.set_title("External Drive Spike Arrival Times")
+
+    return
+
+
+# plot the histogram using our custom function
+custom_drive_hist(
+    net=net_default_gui,
+    ax=ax,
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x400 with 2 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_08.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Note that the distal drive ("evdist1") is plotted on the secondary
+(right-most) y axis, which is <em>inverted</em>. We do this to emphasize
+the scientific point that distal depolarization is one of the drivers of
+what we call <strong>Inward Currents</strong> (see the Figure B below),
+meaning current that flows "<strong><em>down</em></strong>" the long,
+apical dendrites of the pyramidal neurons (i.e.,
+<strong><em>down</em></strong> towards the<strong><em>infragranular</em></strong> layers of the cortex).</p>
+<h5>Figure 7.1.B: Inward and Outward Currents</h5>
+<p><img
+src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/refs/heads/master/images/textbook/content/05_erps/inward_outward_currents.png" /></p>
+<p>To replicate the initial GUI figure, we will need to combine the
+histogram with a plot of the simulated and experimental dipoles. Let's
+create another "wrapper" function that generates a custom implementation
+of the template dipole plot.</p>
+<p>The code within the function below largely overlaps with our
+previously-used plotting code. The only new addition is the inclusion of
+the Root Mean Squared Error ("RMSE") in the dipole plot, which relies on
+the <code>_rmse</code> helper function from
+<code>hnn_core.dipole</code></p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        def plot_sim_exp_dipoles(
+    ax,
+    processed_dipole,
+    experimental_dpl,
+    sim_name=None,
+):
+    from hnn_core.dipole import _rmse  # noqa
+
+    # plot simulation and data in the bottom subplot
+    # --------------------------------------------------
+    _ = plot_dipole(
+        processed_dipole,
+        ax=ax,
+        show=False,
+    )
+    ax.lines[-1].set_color(gui_colors["blue"])
+    if sim_name is None:
+        sim_name = "Simulation"
+    ax.lines[-1].set_label(sim_name)
+
+    # plot experimental data in the bottom subplot
+    # --------------------------------------------------
+    _ = experimental_dpl.plot(
+        ax=ax,
+        show=False,
+    )
+    ax.lines[-1].set_label("Experimental data")
+    ax.lines[-1].set_color(gui_colors["orange"])
+
+    # add RMSE to the figure
+    # --------------------------------------------------
+    t0 = 0.0
+    tstop = processed_dipole.times[-1]
+    rmse = _rmse(
+        processed_dipole,
+        experimental_dpl,
+        t0,
+        tstop,
+    )
+
+    ax.annotate(
+        f"RMSE: {rmse:.4f}",
+        xy=(0.95, 0.05),
+        xycoords="axes fraction",
+        ha="right",
+        va="bottom",
+        fontsize=12,
+    )
+
+    ax.legend()
+
+    return
+
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Lastly, we will create a function
+<code>plot_initial_gui_figure</code>, that
+<strong><em>combines</em></strong> our two plotting functions to
+generate our combined GUI figure.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        def plot_initial_gui_figure(
+    net,
+    processed_dipole,
+    experimental_dpl,
+    sim_name=None,
+):
+    fig, axes = plt.subplots(
+        nrows=2,
+        figsize=(8, 8),
+        gridspec_kw={"height_ratios": [1, 3]},  # sets subplot dimensions
+        constrained_layout=True,
+    )
+
+    # plot the input histogram in the top subplot
+    # --------------------------------------------------
+    custom_drive_hist(
+        net=net,
+        ax=axes[0],
+    )
+
+    # plot the dipoles in the bottom subplot
+    # --------------------------------------------------
+    plot_sim_exp_dipoles(
+        axes[1],
+        processed_dipole,
+        experimental_dpl,
+        sim_name,
+    )
+
+    return fig
+
+
+_ = plot_initial_gui_figure(
+    net_default_gui,
+    processed_dipole,
+    threshold_experimental_dpl,
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_09.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now that we have replicated the initial GUI output, we can move on to
+interpretation. In this Python API tutorial, we will briefly highlight
+some key insights, but please watch the accompanying GUI video tutorial
+for a more detailed walkthrough.</p>
+<p>As a reminder, here we will focus on unpacking the dynamics that are
+responsible for generating our aggregate, simulated signal around the
+time of the first proximal drive.</p>
+<p>We know from our outputs above that the first spike from the first
+proximal drive ("evprox1") arrives at the network just after 19ms, and
+the first spike from the first distal drive ("evdist1) arrives just
+after 54ms.</p>
+<p>Given that the network is initially at rest and no other inputs
+arrive during this time period, any changes in the simulation output
+between those two timepoints can be isolated to the impact of the first
+proximal drive on the network.</p>
+<p>We've previously told you that proximal drives generally cause what
+we refer to as <strong>"Outward Currents"</strong> (see the Figure B),
+i.e. current that flows towards the <em>supragranular</em> layers of the
+cortex in the long, apical dendrites of our pyramidal neurons.</p>
+<p>However, if we examine the time period of interest, we see that this
+assertion does not hold true for the default network. While there is an
+initial positive deflection in the simulation dipole (blue line), the
+signal actually reverses direction and drops <em>below</em> zero,
+indicating net current flow towards the <em>infragranular</em>
+layers.</p>
+<p>To highlight this observation, the code below adds an outline to the
+time window of interest and also a dashed line at <code>y = 0</code>. We
+will once again implement this feature as a function so that we can
+re-use it later on. (It is not important to understand how this function
+works.)</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # create a function to add an outline around a time window
+# --------------------------------------------------
+def add_outline_to_subplot(
+    ax,
+    x_bounds=[19, 54],
+    show_origin_line=True,
+):
+    from matplotlib.patches import Rectangle  # noqa
+
+    # set x and y boundaries for the outline/rectangle
+    xmin, xmax = x_bounds[0], x_bounds[1]
+    ymin, ymax = ax.get_ylim()
+
+    # add a rectangle to each subplot
+    ax.add_patch(
+        Rectangle(
+            xy=(xmin, ymin),  # start position
+            width=xmax - xmin,
+            height=ymax - ymin,
+            fill=False,
+        )
+    )
+
+    # optionally add dashed horizontal line at the origin
+    if show_origin_line:
+        ax.axhline(
+            linestyle="--",
+            color="black",
+        )
+    return
+
+
+# re-generate and update figure with the outlines
+# --------------------------------------------------
+fig = plot_initial_gui_figure(
+    net_default_gui,
+    processed_dipole,
+    threshold_experimental_dpl,
+)
+add_outline_to_subplot(
+    fig.axes[0],
+    show_origin_line=False,
+)
+add_outline_to_subplot(fig.axes[1])
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_10.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>So, why might it be the case that the net current flow during this
+time window is <em>inward</em>? To begin to unpack this, we need to look
+at what's happening in the underlying circuits.</p>
+<p>We can start by looking at the layer-specific dipoles, as done in the
+code below.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # initialize figure and plot layer-specific dipoles
+# --------------------------------------------------
+fig, axes = plt.subplots(
+    nrows=2,
+    ncols=1,
+    sharex=True,
+    figsize=(6, 8),
+    constrained_layout=True,
+    sharey=True,
+)
+
+for idx, layer in enumerate(["L2", "L5"]):
+    plot_dipole(
+        processed_dipole,
+        ax=axes[idx],
+        layer=layer,
+        show=False,
+    )
+
+# add outline around first proximal drive
+# --------------------------------------------------
+for ax in fig.axes:
+    add_outline_to_subplot(ax)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 600x800 with 2 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_11.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>These figures clearly indicate that the net <em>inward</em> current
+in the aggregate dipole (which is simply the sum of the Layer 2/3 and
+Layer 5 dipoles) in this time window is being driven by Layer 5.</p>
+<p>Next, let's examine the spiking in the local network, paying
+particular attention to what is happening in Layer 5 that may explain
+the effect.</p>
+<p>We can use the <code>plot_spikes_raster()</code> method of the
+<code>CellResponse</code> object to generate a raster plot that shows
+not only the cell-type-specific spiking, but also overlays the
+layer-specific dipoles over the corresponding pyramidal neurons that
+contribute to those signals. (Note that the layer-specific dipoles are
+shifted along the y-axis to overlay the appropriate spiking cells, but
+their scaling remains unchanged from the figure above.)</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # initialize the figure and generate the raster plot
+# --------------------------------------------------
+fig, axes = plt.subplots(figsize=(8, 6))
+
+
+def custom_spikes_raster(
+    processed_dipole,
+    ax,
+):
+    _ = net_default_gui.cell_response.plot_spikes_raster(
+        ax=ax,
+        dpl=processed_dipole,
+        overlay_dipoles=True,
+        show=False,
+    )
+    ax.set_title("Spike Raster With Layer-Specific Dipoles")
+
+    # move legend outside figure to not overlap plot
+    # --------------------------------------------------
+    legend = ax.get_legend()
+    ax.artists[-1].remove()
+    legend.set_bbox_to_anchor((1.01, 0.85))
+    legend.set_loc("center left")
+
+    return
+
+
+custom_spikes_raster(
+    processed_dipole=processed_dipole,
+    ax=axes,
+)
+
+# add outline around first proximal drive
+# --------------------------------------------------
+add_outline_to_subplot(
+    axes,
+    show_origin_line=False,
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 800x600 with 1 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_12.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>With this figure, we could begin to relate the cell-specific spiking
+to the layer-specific dipoles.</p>
+<p>However, the smoothed dipole we plot in the figure above obscures the
+dynamic relationship between the cell spiking and the dipole. Typically,
+when doing this type of multi-scale interpretation, we want to look at
+the <em>unsmoothed</em> dipole in relation to the spiking</p>
+<p>Below, we will re-copy the raw dipole, and apply <em>only</em> the
+scaling factor. We will then re-plot the spike raster with the
+unsmoothed dipole.</p>
+<p>We can also add the drives histogram as an additional subplot, so we
+can view several of the key data we need for interpretation in one
+single figure.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        unsmoothed_dipole = gui_dipoles_list[0].copy()
+unsmoothed_dipole.scale(3000)
+
+
+def plot_combined_raster_hist(
+    dipole,
+    net,
+):
+    fig, axes = plt.subplots(
+        nrows=2,
+        figsize=(10, 8),
+        gridspec_kw={"height_ratios": [1, 3]},  # sets subplot dimensions
+        constrained_layout=True,
+    )
+
+    # plot the input histogram in the top subplot
+    # --------------------------------------------------
+    custom_drive_hist(
+        net,
+        axes[0],
+    )
+
+    # plot the spike raster in the bottom subplot
+    # --------------------------------------------------
+    custom_spikes_raster(
+        processed_dipole=dipole,
+        ax=axes[1],
+    )
+
+    return fig
+
+
+fig = plot_combined_raster_hist(
+    dipole=unsmoothed_dipole,
+    net=net_default_gui,
+)
+
+for ax in fig.axes:
+    add_outline_to_subplot(
+        ax,
+        show_origin_line=False,
+    )
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 1000x800 with 3 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_13.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now we have all of the information we need to relate the
+cell-specific spiking to the layer-specific dipoles in a single
+plot.</p>
+<p>We will pick up from this point in the subsequent page, Part 2.</p>
+
+                </div>
+
+
+<!-- markdown cell -->
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
