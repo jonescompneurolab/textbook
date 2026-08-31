@@ -1,4 +1,6 @@
 {
+    "last_execution_successful": false,
+    "last_hnn_version_used": "NA",
     "full_executed": true,
     "hnn_version": "0.5.0",
     "plot_simulate_evoked.ipynb": {
