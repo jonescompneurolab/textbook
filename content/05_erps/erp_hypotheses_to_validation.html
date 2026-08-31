@@ -288,6 +288,30 @@
     <div id="content-wrapper">
     <div id="content">
 
+
+		<div class="notebook-download-wrapper">
+		    <a href='erp_api_walkthrough.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
 <!--
 # Title: 4.10 From Hypotheses to Validation Targets
 # Updated: 2026-07-26
@@ -299,7 +323,211 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/12yO9Rgm1l7nhyy1NaZbWrbfv1Y4AR4o8/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
-<p>API walkthrough coming soon!</p>
+<div class='markdown-cell'>
+    <h2>From Hypotheses to Validation Targets</h2>
+
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>In the previous section, we set up a hypothetical example in which
+the default simulation represented a neurotypical population performing
+the threshold-level tactile-detection task, while the experimental data
+represented an ASD population with sensory hypersensitivity performing
+the <em>same</em> task.</p>
+<p>We then proposed two hypotheses for the observed differences in the
+dipole signals: 1. Increased amplification of sensory inputs via
+stronger local excitatory connections 2. Reduced inhibitory regulation
+of pyramidal neurons</p>
+<p>After testing both hypotheses, we concluded that the simulation with
+stronger excitatory "E-E" and "E-I" connections yielded the more
+promising fit to the experimental data, suggesting that increased
+excitatory recruitment in the local network <em>could</em> contribute to
+<em>some</em> of the observed differences in the dipole signals.</p>
+<p>However, it's important to emphasize that the aggregate dipole alone
+does <strong><em>not</em></strong> give us the full picture of what's
+happening in the model. We can't tell from our initial dipole plot why
+the fit improved, or whether the underlying activity is biologically
+plausible.</p>
+<p>To develop more specific predictions about the mechanisms underlying
+the observed differences, we can examine the underlying cell and circuit
+activity in the model.</p>
+<p>There are many ways to investigate the underlying activity, such as
+observing the layer-specific dipoles, spiking activity, or local field
+potentials. We encourage you to explore
+<code>Section 7: Using the API</code>, which contains advanced tutorials
+covering several API-specific features, such as recording extracellular
+potentials.</p>
+<p>In the current section, we'll compare spike raster plots to explore
+how the simulation outputs can be used to identify targets for
+experimental validation. This is meant to be an illustrative example,
+not a comprehensive one, and is functionally similar to the more
+comprehensive analysis exercise we covered in
+<code>Section 4.7: Multiscale Interpretation</code>.</p>
+<p>Before diving into the interpretation exercise, let's briefly refresh
+on how simulation output data are represented in HNN.</p>
+<p>As a reminder, the simulated dipole data are stored
+<em>separately</em> from the network and are returned by the
+<code>simulate_dipole()</code> function. Other simulation data, such as
+the celltype-specific spiking, are stored <em>with</em> the network in
+the <code>CellResponse</code> attribute.</p>
+<p>Let's examine the public attributes of <code>CellResponse</code></p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # initialize empty list to store attributes
+public_attributes = []
+
+for attribute in dir(net_default_gui.cell_response):
+    # ignore private attributes (those that start with "_")
+    if not attribute.startswith("_"):
+        public_attributes.append(attribute)
+
+# print the public attribues
+print(public_attributes)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        [&#x27;ca&#x27;, &#x27;cell_types&#x27;, &#x27;isec&#x27;, &#x27;mean_rates&#x27;, &#x27;plot_spikes_hist&#x27;, &#x27;plot_spikes_raster&#x27;, &#x27;spike_gids&#x27;, &#x27;spike_times&#x27;, &#x27;spike_times_by_type&#x27;, &#x27;spike_types&#x27;, &#x27;times&#x27;, &#x27;to_dict&#x27;, &#x27;update_types&#x27;, &#x27;vsec&#x27;, &#x27;write&#x27;]
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Note that the CellResponse object has various attributes related to
+spiking data. We've already made use of the methods
+<code>plot_spikes_hist</code> and <code>plot_spikes_raster</code>.
+Should you need to access the underlying data for your own analysis, the
+raw spike data are available under the <code>spike_times</code>,
+<code>spike_gids</code>, <code>spike_types</code>, and
+<code>spike_times_by_type</code> data attributes.</p>
+<p>There are also additional output data stored with the
+<code>CellResponse</code> object. For example, the <code>isec</code> and
+<code>ca</code> data attributes contain the (optionally-recorded)
+synaptic currents and calcium concentration, respectively.</p>
+<p>In previous sections, we defined custom functions that call
+<code>plot_spikes_hist()</code> and <code>plot_spikes_raster()</code>
+with pre-specified arguments. For the analysis below, we'll reuse these
+functions to create a new figure that shows: 1. The input histogram
+(which is identical for the two simulations) 2. The spike raster for the
+default simulation, and 3. The spike raster for our <em>updated</em>
+simulation (testing the "local amplification" hypothesis)</p>
+<p>Since we made a copy of <code>net_02</code> after changing parameters
+to test the increased amplification hypothesis, we already have the
+<code>CellResponse</code> data we need to create our new figure.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        # get the unsmoothed dipole for the updated simulation
+scaled_dipole_02_01 = net_02_dpl_01[0].scale(3000)
+
+fig, axes = plt.subplots(
+    nrows=3,
+    ncols=1,
+    figsize=(10, 10),
+    gridspec_kw={"height_ratios": [1, 3, 3]},
+    constrained_layout=True,
+)
+
+# plot the input histogram in the top subplot
+custom_drive_hist(
+    ax=axes[0],
+    net=net_default,
+)
+# plot the spike rasters in the bottom subplots
+custom_spikes_raster(
+    ax=axes[1],
+    net=net_default_gui,
+    processed_dipole=unsmoothed_dipole,
+)
+axes[1].set_title("Default Simulation")
+
+custom_spikes_raster(
+    ax=axes[2],
+    net=net_02_checkpoint_01,
+    processed_dipole=scaled_dipole_02_01,
+)
+axes[2].set_title('Local Amplification ("E-E"x2 and "E-I"x2)');
+
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        &lt;Figure size 1000x1000 with 4 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_erp_api_walkthrough/fig_25.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>We can see in the figure above that the two simulations have several
+differences in their underlying spiking activity. For the purpose of
+this exercise, let's identify three differences in the spiking activity
+in Layer 5 between the two simulations:</p>
+<ol type="1">
+<li><p>Around the time of the first proximal drive, there appears to be
+greater recruitment of pyramidal neurons in the "local amplification"
+simulation compared to the default simulation.</p></li>
+<li><p>The timing of pyramidal neuron and interneuron spiking appears to
+be shifted earlier in the "local amplification" simulation.</p></li>
+<li><p>There appears to be stronger, more synchronous interneuron
+spiking in the "local amplification" simulation around the second
+proximal drive.</p></li>
+</ol>
+<p>These observed differences highlight specific features of the circuit
+activity that we can investigate further. In particular, they give us
+<em>predictions</em> about which cell populations may be more strongly
+recruited, and how the timing of the activity may differ, between the
+neurotypical population (represented by the default simulation) and the
+ASD population (represented by the "local amplification"
+simulation).</p>
+<p>We can then use these observations to identify targets for validation
+in follow-up experiments. For example, we could look for increased
+recruitment of pyramidal neurons during the early sensory response, or
+investigate whether the latency of the Layer 5 response differs for the
+ASD population. We could also examine whether inhibitory neurons show
+stronger or more synchronous activity during the corresponding
+response.</p>
+<p>These are just a few examples of how model simulations can guide
+experimental validation. Rather than only comparing the aggregate
+dipoles between the model and the data, we can use the differences in
+underlying circuit activity to develop more specific predictions that
+can be tested with imaging, in vivo recordings, or other experimental
+modalities.</p>
+
+                </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

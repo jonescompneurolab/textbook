@@ -670,7 +670,6 @@ copying" the default network. We'll call this network
                     <code class='language-python'>
                         from copy import deepcopy  # noqa
 
-# net_02 = deepcopy(net_default_gui)
 net_02 = read_network_configuration("gui_default.json")
                     </code>
                 </div>
@@ -736,15 +735,15 @@ print(net_02.get_global_synaptic_gains())
                 <div class='code-cell'>
                     <code class='language-python'>
                         with chosen_backend(ncores):
-    dipoles_list = simulate_dipole(
+    net_02_dpl_01 = simulate_dipole(
         net=net_02,
         tstop=170.0,
         n_trials=1,
         dt=0.025,
     )
 
-net_02_dpl_01 = dipoles_list[0].copy()
-net_02_dpl_01.smooth(30).scale(3000)
+processed_dpl_02_01 = net_02_dpl_01[0].copy()
+processed_dpl_02_01.smooth(30).scale(3000)
 # mod_shrink_output
                     </code>
                 </div>
@@ -758,34 +757,33 @@ net_02_dpl_01.smooth(30).scale(3000)
                     <div class='output-code'>
 
         MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
-
 Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
 Building the NEURON model
 
         [Done]
 Trial 1: 0.03 ms...
-Trial 1: 10.0 ms...
+
+        Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
 
         Trial 1: 50.0 ms...
 Trial 1: 60.0 ms...
-
-        Trial 1: 70.0 ms...
+Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
 
-        Trial 1: 120.0 ms...
-Trial 1: 130.0 ms...
+        Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
 
-        Trial 1: 150.0 ms...
-Trial 1: 160.0 ms...
+        Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f56db9751c0&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f9b648966c0&gt;
                     </div>
                 </div>
 
@@ -796,7 +794,7 @@ Trial 1: 160.0 ms...
                         # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_02,
-    net_02_dpl_01,
+    processed_dpl_02_01,
     suprathreshold_dpl,
     "`net_02` Sim 01",
 )
@@ -845,9 +843,61 @@ point for further exploration and hand tuning. From here, we could
 experiment with different gain values, or we could keep the updated
 global gains and further hand tune the evoked drives to see if we can
 improve the simulation further.</p>
-<p>Rather than continuing to refine this simulation, let's test our
-second hypothesis that the differences in the signals are due to reduced
-inhibitory regulation of the pyramidal neurons.</p>
+<p>In the previous examples, we've re-simulated the same
+<code>Network</code> object after changing parameters, while separately
+saving the dipole object for each simulation.</p>
+<p>Note, however, that re-simulating the <em>same</em> network object
+overwrites both the network parameters <em>and</em> any data associated
+with the network simulation, such as the spiking data in
+<code>CellResponse</code></p>
+<p>Before moving on, let's create a copy of the network in case we want
+to view the <code>CellResponse</code> data at a later time. This also
+enables us to continue hand-tuning the network from the point we left
+off, without needing to re-simulate it later. We'll call the copy
+<code>net_02_checkpoint_01</code></p>
+
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        net_02_checkpoint_01 = deepcopy(net_02)
+    </code>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Note that you can also save a copy of the updated network file to
+your local machine with the <code>write_network_configuration()</code>
+method, and you can then load it at a later time with the same
+<code>read_network_configuration()</code> method used above.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        from hnn_core import write_network_configuration
+
+save_to_disk = False
+
+if save_to_disk:
+    write_network_configuration(
+        net_02_checkpoint_01,
+        "net_02_checkpoint_01.json",
+    )
+                    </code>
+                </div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Rather than continuing to refine the first simulation at this time,
+let's test our second hypothesis that the differences in the signals are
+due to reduced inhibitory regulation of the pyramidal neurons.</p>
 <p>To test this hypothesis, we'll reset the excitatory global gains to
 their default values and instead reduce the <code>i_e</code> global
 gain, which controls the strength of inhibitory connections onto
@@ -890,15 +940,15 @@ print(net_02.get_global_synaptic_gains())
                 <div class='code-cell'>
                     <code class='language-python'>
                         with chosen_backend(ncores):
-    dipoles_list = simulate_dipole(
+    net_02_dpl_02 = simulate_dipole(
         net=net_02,
         tstop=170.0,
         n_trials=1,
         dt=0.025,
     )
 
-net_02_dpl_02 = dipoles_list[0].copy()
-net_02_dpl_02.smooth(30).scale(3000)
+processed_dpl_02_02 = net_02_dpl_02[0].copy()
+processed_dpl_02_02.smooth(30).scale(3000)
 # mod_shrink_output
                     </code>
                 </div>
@@ -921,24 +971,23 @@ Trial 1: 0.03 ms...
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
-Trial 1: 50.0 ms...
 
-        Trial 1: 60.0 ms...
+        Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
-
-        Trial 1: 90.0 ms...
+Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
 
-        Trial 1: 120.0 ms...
-Trial 1: 130.0 ms...
+        Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f56e8515790&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f9b65c9c5c0&gt;
                     </div>
                 </div>
 
@@ -949,14 +998,14 @@ Trial 1: 160.0 ms...
                         # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_02,
-    net_02_dpl_02,
+    processed_dpl_02_02,
     suprathreshold_dpl,
     "`net_02` Sim 02",
 )
 
 fig.axes[1].plot(
-    net_02_dpl_01.times,
-    net_02_dpl_01.data["agg"],
+    processed_dpl_02_01.times,
+    processed_dpl_02_01.data["agg"],
     label="`net_02` Sim 01",
     color="#C8DAF9"
 )

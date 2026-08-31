@@ -416,7 +416,6 @@ drives directly from your machine using the same function.</p>
                         from hnn_core import read_network_configuration  # noqa
 
 net_default_gui = read_network_configuration("gui_default.json")
-# net_default_gui = read_network_configuration("gui_defaults_updated.json")
                     </code>
                 </div>
 
@@ -477,25 +476,23 @@ processed_dipole.scale(3000).smooth(30);
 
 --------------------------------------------------
 
-
-        MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
+MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
 Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
 Building the NEURON model
 
         [Done]
 Trial 1: 0.03 ms...
-Trial 1: 10.0 ms...
 
-        Trial 1: 20.0 ms...
+        Trial 1: 10.0 ms...
+Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
 
-        Trial 1: 50.0 ms...
+        Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
 Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
-
-        Trial 1: 90.0 ms...
+Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
 
         Trial 1: 110.0 ms...
@@ -503,7 +500,8 @@ Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
-Trial 1: 160.0 ms...
+
+        Trial 1: 160.0 ms...
 
                     </div>
                 </div>
@@ -625,8 +623,8 @@ fig, ax = plt.subplots(figsize=(8, 4))
 
 # define a function to customize the input histogram
 def custom_drive_hist(
-    net,
     ax,
+    net,
 ):
     _ = net.cell_response.plot_spikes_hist(
         ax=ax,
@@ -645,8 +643,8 @@ def custom_drive_hist(
 
 # plot the histogram using our custom function
 custom_drive_hist(
-    net=net_default_gui,
     ax=ax,
+    net=net_default_gui,
 )
                     </code>
                 </div>
@@ -784,8 +782,8 @@ generate our combined GUI figure.</p>
     # plot the input histogram in the top subplot
     # --------------------------------------------------
     custom_drive_hist(
-        net=net,
         ax=axes[0],
+        net=net,
     )
 
     # plot the dipoles in the bottom subplot
@@ -1019,10 +1017,11 @@ fig, axes = plt.subplots(figsize=(8, 6))
 
 
 def custom_spikes_raster(
-    processed_dipole,
     ax,
+    net,
+    processed_dipole,
 ):
-    _ = net_default_gui.cell_response.plot_spikes_raster(
+    _ = net.cell_response.plot_spikes_raster(
         ax=ax,
         dpl=processed_dipole,
         overlay_dipoles=True,
@@ -1041,8 +1040,9 @@ def custom_spikes_raster(
 
 
 custom_spikes_raster(
-    processed_dipole=processed_dipole,
     ax=axes,
+    net=net_default_gui,
+    processed_dipole=processed_dipole,
 )
 
 # add outline around first proximal drive
@@ -1099,8 +1099,8 @@ unsmoothed_dipole.scale(3000)
 
 
 def plot_combined_raster_hist(
-    dipole,
     net,
+    dipole,
 ):
     fig, axes = plt.subplots(
         nrows=2,
@@ -1112,15 +1112,16 @@ def plot_combined_raster_hist(
     # plot the input histogram in the top subplot
     # --------------------------------------------------
     custom_drive_hist(
-        net,
-        axes[0],
+        ax=axes[0],
+        net=net,
     )
 
     # plot the spike raster in the bottom subplot
     # --------------------------------------------------
     custom_spikes_raster(
-        processed_dipole=dipole,
         ax=axes[1],
+        net=net,
+        processed_dipole=dipole,
     )
 
     return fig
