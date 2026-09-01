@@ -312,6 +312,79 @@ def _extract_html_from_nb(
         return ""
 
     def _process_cell_source(cell_source):
+        """Extract pre-specified CSS classes from Python comments in notebook cells
+
+        The body of a cell is stored under "source" in the hierarchical notebook
+        structure (e.g., nb["cells"][i]["source"], where i is the cell index)
+
+        Keywords representing pre-specified CSS classes can be included in the body
+        of a cell as Python comments. The present function searches the cell source
+        for the keywords defined in the `all_celltype_flags` dictionary below.
+
+        When a match is identified, the corresponding comment (in the format
+        `# keyword`) is removed from the cell source, and the boolean flag
+        associated with the keyword in `all_celltype_flags` is updated to `True`
+
+        The True value indicates that the corresponding flag was found and is
+        subsequently used by `_build_class_string()` to construct the corresponding
+        CSS class, which is added to the appropriate HTML output element
+
+        Instances of `# noqa` are also removed, but do not have a corresponding flag
+
+        Parameters
+        ----------
+        cell_source : str
+            Source text from a notebook cell. May be a code, output, or
+            markdown cell
+
+        Returns
+        -------
+        cell_source : str
+            Cell source with pre-specified flags and `# noqa` removed
+        all_celltype_flags : dict
+            Dictionary indicating which pre-specified flags were found
+            for each notebook cell type
+
+        Example
+        -------
+        A user can add a pre-specified CSS flag to a code cell to control the
+        appearance of its output.
+
+        The function initializes the `all_celltype_flags` dictionary with all
+        pre-defined flags set to `False`:
+            >>> all_celltype_flags
+            {
+                "code_cell": {},
+                "output_cell": {"mod_shrink_output": False},
+                "markdown_cell": {},
+            }
+
+        Including the keyword comment in the cell source then changes the
+        corresponding value to `True` and removes the keyword comment from the cell:
+            >>> cell_source = "# mod_shrink_output\nprint(simulation_output)"
+            >>> cell_source, all_celltype_flags = _process_cell_source(cell_source)
+            >>> cell_source
+            'print(simulation_output)'
+            >>> all_celltype_flags
+            {
+                "code_cell": {},
+                "output_cell": {"mod_shrink_output": True},
+                "markdown_cell": {},
+            }
+
+        The updated `True` flag indicates that the output cell should receive the
+        `mod_shrink_output` CSS class when the notebook is converted to HTML
+
+        The CSS associated with the class then controls how the output is
+        displayed. For example, `content/assets/styles.css` may define:
+
+            .mod_shrink_output {
+                max-height: calc(1em * 10);
+            }
+
+        This limits the displayed height of the output of the cell that
+        originally contained the `# mod_shrink_output` keyword
+        """
         all_celltype_flags = {
             "code_cell": {},
             "output_cell": {
@@ -1502,13 +1575,6 @@ def execute_and_convert_nbs_to_json(
         updated_hashes,
         nb_hashes_path,
     )
-
-
-# %%
-
-
-# # AES TODO
-# # %%
 
 # run_test = False
 
