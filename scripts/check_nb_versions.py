@@ -34,7 +34,7 @@ def check_version(enable_debug=False, root_path=None):
         - If not, warn user
     7. Print all notebooks and versions used for execution in the format:
         {
-            'plot_simulate_evoked.json': {'hnn_version': '0.4.2'},
+            'api_alpha_beta.json': {'hnn_version': '0.4.2'},
             'plot_simulate_gamma.json': {'hnn_version': '0.4.1'},
             ...
         }

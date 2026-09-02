@@ -255,7 +255,7 @@ pip install hnn_core
 
 This will install only the HNN API along with its required dependencies, which include: [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [Matplotlib](https://matplotlib.org/), [NEURON][] (>=7.7), and [h5io](https://github.com/h5io/h5io).
 
-For guidance on using the API, see our "Using the HNN API" notebooks in the sidebar such as [here](../08_using_hnn_api/plot_firing_pattern.html), or in-depth examples like our [API tutorial of ERPs](../05_erps/hnn_core.html).
+For guidance on using the API, see our "Using the HNN API" notebooks in the sidebar such as [here](../08_using_hnn_api/plot_firing_pattern.html), or in-depth examples like our [tutorial of ERPs](../05_erps/erp_overview.html).
 
 ### `pip` Graphical User Interface (GUI) Installation
 
@@ -268,7 +268,7 @@ pip install "hnn_core[gui]"
 This automatically installs the following dependencies:
 [ipykernel](https://ipykernel.readthedocs.io/en/stable/), [ipympl](https://matplotlib.org/ipympl/), [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) >=8.0.0, and [voila](https://github.com/voila-dashboards/voila).
 
-For guidance on using the GUI, see [our quickstart guide here](../04_using_hnn_gui/gui_quickstart.html), or in-depth examples like our [GUI tutorial of ERPs](../05_erps/erps_in_gui.html).
+For guidance on using the GUI, see [our quickstart guide here](../04_using_hnn_gui/gui_quickstart.html), or in-depth examples like our [ERP tutorial](../05_erps/erp_overview.html).
 
 ### `pip` Optimization Installation
 

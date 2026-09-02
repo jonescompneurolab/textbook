@@ -741,6 +741,6 @@ Due to the higher variability in synaptic input timing, there is now more variab
 
 ## 11. Have Fun Exploring your Own Data!
 
-We have **not** observed strong gamma activity in our primary somatosensory cortex dipole data, and as such have not provided an example data set to compare simulation results to. However, simulation results can be compared to recorded data, as described in the [ERP Tutorial](../05_erps/erps_in_gui.html) and [Alpha/Beta Tutorial](../06_alpha_beta/gui.html). Follow the steps above using your data and make parameter adjustments based on your own hypotheses.
+We have **not** observed strong gamma activity in our primary somatosensory cortex dipole data, and as such have not provided an example data set to compare simulation results to. However, simulation results can be compared to recorded data, as described in the [ERP Tutorial](../05_erps/erp_overview.html) and [Alpha/Beta Tutorial](../06_alpha_beta/gui.html). Follow the steps above using your data and make parameter adjustments based on your own hypotheses.
 
 ## References

@@ -130,7 +130,7 @@ def create_flat_index(
         file corresponding to this markdown page. This is the path that is relative to
         what the website itself will consider the "root directory", where "/textbook"
         is the highest-order directory. As an example, this will be something like
-        "/textbook/content/05_erps/erps_in_gui.html".
+        "/textbook/content/05_erps/erp_overview.html".
     - "title": The title string extracted from the markdown file, meant for display on
         the webpage. This is identical to the page's title as in the
         hierarchical-index.

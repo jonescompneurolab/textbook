@@ -69,12 +69,13 @@ content/
 │   └── 03_installation.md          ← third page
 ├── 05_erps/
 │   ├── README.md
-│   ├── 01_erps_in_gui.md
-│   ├── 02_hnn_core.md
+│   ├── 01_erp_overview.md
+│   ├── 02_erp_following_along.md
+│   ├── ...
 │   ├── images/                     ← images used by pages in this section
 │   │   ├── erp_fig_01.png
 │   │   └── ...
-│   └── plot_simulate_evoked.ipynb  ← a Jupyter notebook
+│   └── erp_api_walkthrough.ipynb  ← a Jupyter notebook
 └── ...
 ```
 
@@ -232,23 +233,30 @@ notebook. A minimal companion page looks like this:
 
 ```markdown
 <!--
-# Title: 4.2 API Tutorial of ERPs Simulation
-# Updated: 2025-01-29
+# Title: 7.1 Plot Firing Pattern
+# Updated: 2025-02-04
 #
 # Contributors:
-    # Your Name
+    # Dylan Daniels
 -->
 
-[[plot_simulate_evoked.ipynb]]
+[[plot_firing_pattern_notebook.ipynb]]
 ```
 
 The `[[name.ipynb]]` line is all that is needed — the build system will execute the
-notebook and insert its full rendered output into the page.
+notebook and insert its full rendered output into the page. You can also insert only a
+named *section* of a notebook by instead adding something like
+
+```
+[[erp_api_walkthrough.ipynb][Set Up Your HNN Environment]]
+```
+
+as can be seen in `content/05_erps/02_erp_following_along.md`.
 
 ### Notebook Tips
 
 - Notebook filenames do **not** need a numeric prefix.
-- Give notebooks descriptive names, e.g. `plot_simulate_evoked.ipynb` or
+- Give notebooks descriptive names, e.g. `erp_api_walkthrough.ipynb` or
 `batch_simulation_notebook.ipynb`.
 - The build system tracks whether notebooks have changed and only re-executes
 them when needed.

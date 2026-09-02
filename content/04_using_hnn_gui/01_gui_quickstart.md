@@ -8,7 +8,7 @@
 
 # 3.1 HNN GUI Quickstart
 
-This tutorial is meant to illustrate the bare minimum usage of the GUI. For more in-depth guidance on using the HNN GUI, see our tutorials in later sections, such as our 	[GUI ERP Tutorial here](../05_erps/erps_in_gui.html), [GUI Alpha/Beta Tutorial here](../06_alpha_beta/gui.html), or [GUI Gamma Tutorial here](../07_gamma/gamma_in_gui.html) (also accessible via the sidebar).
+This tutorial is meant to illustrate the bare minimum usage of the GUI. For more in-depth guidance on using the HNN GUI, see our tutorials in later sections, such as our 	[ERP Tutorial here](../05_erps/erp_overview.html), [GUI Alpha/Beta Tutorial here](../06_alpha_beta/gui.html), or [GUI Gamma Tutorial here](../07_gamma/gamma_in_gui.html) (also accessible via the sidebar).
 
 ## Setup
 
@@ -68,4 +68,4 @@ Note that for the default simulation, because we are modeling such a short signa
 
 ## Continue on to other tutorials
 
-Congratulations on running your first simulation, and generating some visualizations of it! We recommend you proceed onto the more detailed [GUI ERP Tutorial here](../05_erps/erps_in_gui.html), or alternatively the [GUI Alpha/Beta Tutorial here](../06_alpha_beta/gui.html) or [GUI Gamma Tutorial here](../07_gamma/gamma_in_gui.html) depending on your scientific interest.
+Congratulations on running your first simulation, and generating some visualizations of it! We recommend you proceed onto the more detailed [ERP Tutorial here](../05_erps/erp_overview.html), or alternatively the [GUI Alpha/Beta Tutorial here](../06_alpha_beta/gui.html) or [GUI Gamma Tutorial here](../07_gamma/gamma_in_gui.html) depending on your scientific interest.

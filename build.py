@@ -48,12 +48,12 @@ Synopsis:
     Python notebooks, and local images in an 'images/' subdirectory.
 
     Markdown page files should follow this naming scheme: '<2-digit number>_<name>.md',
-    for example '<textbook-root>/content/05_erps/02_hnn_core.md'. Each markdown page
-    file will eventually be built into an output HTML file where the numerical prefix is
-    removed, and the filetype is HTML; continuing our example,
-        'textbook/content/05_erps/02_hnn_core.md'
+    for example '<textbook-root>/content/05_erps/02_erp_following_along.md'. Each
+    markdown page file will eventually be built into an output HTML file where the
+    numerical prefix is removed, and the filetype is HTML; continuing our example,
+        'textbook/content/05_erps/02_erp_following_along.md'
     will become
-        'textbook/content/05_erps/hnn_core.html'
+        'textbook/content/05_erps/erp_following_along.html'
     The numerical prefix in the filename is what is used to decide the ordering of the
     different webpages, both within any sections and across the website overall.
 
@@ -62,10 +62,14 @@ Synopsis:
     Instead, to insert the contents of a notebook (including existing cells and possible
     future output cells), you must insert the name of the notebook somewhere in a
     markdown page file. For example, the markdown page file
-    'textbook/content/05_erps/02_hnn_core.md' includes the following content:
-        [[plot_simulate_evoked.ipynb]]
-    which determines on which page and where on that page to insert the notebook's
-    contents.
+    'textbook/content/05_erps/02_erp_following_along.md' includes the following content:
+        [[erp_api_walkthrough.ipynb][Set Up Your HNN Environment]]
+    Including mention of the notebook in this way will cause the build system to insert
+    the contents of the notebook 'erp_api_walkthrough.ipynb' into the webpage generated
+    from this markdown file, including if you only want to insert a particular section
+    of the notebook (in this case, the section titled "Set Up Your HNN Environment"). If
+    you want to insert the entire notebook, you can simply use
+        [[erp_api_walkthrough.ipynb]]
 
     Finally, '<textbook-root>/content/' should also contain an 'assets/' subdirectory
     which contains your CSS (filename 'styles.css') and static icon assets.
@@ -92,9 +96,9 @@ Synopsis:
                      00_preface.md
                      01_erps/
                              README.md
-                             01_erps_in_gui.md
-                             02_erps_in_api.md
-                             simulate_erps_api.ipynb
+                             01_erp_overview.md
+                             02_erp_following_along.md
+                             erp_api_walkthrough.ipynb
                              images/
                                     erp_fig_01.png
                                     erp_fig_02.gif
