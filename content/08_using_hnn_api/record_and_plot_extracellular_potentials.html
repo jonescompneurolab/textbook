@@ -169,6 +169,7 @@
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -334,14 +335,22 @@ and around the HNN network model.</p>
                 </div>
 
 
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Authors:</p>
+<ul>
+<li>Christopher Bailey ( cjb@cfin.au.dk )</li>
+<li>Mainak Jas ( mainakjas@gmail.com )</li>
+<li>Nick Tolley ( nicholas_tolley@brown.edu )</li>
+</ul>
+
+                </div>
+
+
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        # Authors: Christopher Bailey <cjb@cfin.au.dk>
-#          Mainak Jas <mainakjas@gmail.com>
-#          Nick Tolley <nicholas_tolley@brown.edu>
-
-import matplotlib.pyplot as plt
+                        import matplotlib.pyplot as plt
 
 from hnn_core import jones_2009_model, simulate_dipole
 from hnn_core.network_models import add_erp_drives_to_jones_model
@@ -448,7 +457,7 @@ objects that are now attached to the network and will be recorded during
 the simulation. Note that calculating the extracellular potentials
 requires additional computational resources and will thus slightly slow
 down the simulation. <a
-href="https://jonescompneurolab.github.io/textbook/content/09_feature_demos/use_mpi_backend_for_parallelization.html">Using
+href="https://jonescompneurolab.github.io/textbook/content/08_using_hnn_api/parallelism_mpi.html">Using
 MPI</a> will speed up computation considerably.</p>
 
                 </div>
@@ -494,8 +503,7 @@ dpl = simulate_dipole(net, tstop=170)
                     <div class='output-code'>
 
         Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-
-        Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
 
         [Done]
@@ -566,8 +574,8 @@ electrode_data = net.rec_arrays['shank1'][trial_idx].smooth(window_len=window_le
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        fig, axs = plt.subplots(4, 1, 
-                        sharex=True, 
+                        fig, axs = plt.subplots(4, 1,
+                        sharex=True,
                         figsize=(6, 8),
                         gridspec_kw={'height_ratios': [1, 2, 2, 2]})
 
@@ -632,14 +640,6 @@ href="https://doi.org/10.1016/j.neuron.2011.09.029">https://doi.org/10.1016/j.ne
 </ul>
 
                 </div>
-
-
-<!-- code cell -->
-<div class='code-cell'>
-    <code class='language-python'>
-
-    </code>
-</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

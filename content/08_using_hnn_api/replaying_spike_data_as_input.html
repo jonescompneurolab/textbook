@@ -289,51 +289,384 @@
     <div id="content-wrapper">
     <div id="content">
 
+
+		<div class="notebook-download-wrapper">
+		    <a href='replaying_spike_data_as_input_notebook.ipynb' download>
+		        <button class="notebook-download">
+		            <svg xmlns="http://www.w3.org/2000/svg"
+		                width="20"
+		                height="20"
+		                viewBox="0 0 24 24"
+		                fill="none"
+		                stroke="currentColor"
+		                stroke-width="2"
+		                stroke-linecap="round"
+		                stroke-linejoin="round">
+		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+		                <polyline points="7 10 12 15 17 10"/>
+		                <line x1="12" y1="15" x2="12" y2="3"/>
+		            </svg>
+		            <span style="width: 8px"></span>
+		            <span>Download Notebook</span>
+		        </button>
+		    </a>
+		</div>
+
+
 <!--
-# Title: 2.5 Evoked and Rhythmic Driving Inputs
-# Updated: 2024-01-16
+# Title: 7.12 Replaying Spike Data as Input
+# Updated: 2025-02-04
 #
 # Contributors:
-    # Dylan Daniels
+    # Maira Usman
 -->
-<!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/04_evoked-rhythmic-inputs/04_evoked-rhythmic-inputs -->
-<h1>2.5 Evoked and Rhythmic Driving Inputs</h1>
-<h3>Proximal vs. Distal Inputs</h3>
-<p>At rest, the default model does not generate activity. Instead, we use exogenous inputs to drive network dynamics. We use the terms proximal and distal to refer both to the origin of the inputs as well as the laminar target within the neocortical microcircuit. Proximal inputs refers to inputs arriving from lemniscal thalamus, which primarily target the granular and infragranular layers while distal inputs arrive from non-lemniscal thalamus and cortico-cortical feedback, which primarily target the supragranular layers. These differences are illustrated below.</p>
-<table style="border:none">
-<tr>
-<td style="border:none; width=50%">
-<figure>
-<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/prox-drive.png" alt="Schematic with red lines as proximal inputs targeting basal dendrites of layer 2/3 and layer 5 pyramidal neurons. Red arrows run up through the vertical apical dendrites, indicating upward current flow towards supragranular layers" />
-<figcaption aria-hidden="true">Schematic with red lines as proximal inputs targeting basal dendrites of layer 2/3 and layer 5 pyramidal neurons. Red arrows run up through the vertical apical dendrites, indicating upward current flow towards supragranular layers</figcaption>
-</figure>
-</td>
-<td style="border:none; width=50%; vertical-align:middle;">
-<figure>
-<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/dist-drive.png" alt="Schematic with green lines as distal inputs targeting distal apical dendrites of layer 5 and layer 2/3 pyramidal neurons. Green arrows run down through the vertical apical dendrites, indicating downward current flow towards infragranular layers" />
-<figcaption aria-hidden="true">Schematic with green lines as distal inputs targeting distal apical dendrites of layer 5 and layer 2/3 pyramidal neurons. Green arrows run down through the vertical apical dendrites, indicating downward current flow towards infragranular layers</figcaption>
-</figure>
-</td>
-</tr>
-</table>
-<p>The left schematic here shows proximal inputs which target basal dendrites of layer 2/3 and layer 5 pyramidal neurons, and somata of layer 2/3 and layer 5 interneurons. The red arrows indicate that these proximal inputs push the current flow up the dendrites towards supragranular layers. The right schematic shows distal inputs which target the distal apical dendrites of layer 5 and layer 2/3 pyramidal neurons and the somata of layer 2/3 interneurons. The green arrows indicate that these distal inputs push the current flow down towards the infragranular layers.</p>
-<h3>Exogenous Driving Inputs: Evoked</h3>
-<p>Evoked response inputs are synaptic inputs that are used to model event related potentials (ERPs). These inputs are typically super-threshold, meaning they cause neurons to fire action potentials. See Tour of the GUI for the full set of parameters modulating evoked inputs.</p>
-<h3>Exogenous Driving Inputs: Rhythmic</h3>
-<p>Rhythmic Inputs are synaptic inputs that are used to model ongoing rhythms, such as alpha, beta, and gamma (see illustration below and Tour of the GUI for full set of parameters).</p>
-<div class="stylefig">
-<figure>
-<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/03_assumptions/images/burst-desc.png" alt="Schematic illustration of 10 Hz burst drive through proximal and distal pathways, showing population bursts with burst units driving post-synaptic conductances at 100ms intervals" />
-<figcaption aria-hidden="true">Schematic illustration of 10 Hz burst drive through proximal and distal pathways, showing population bursts with burst units driving post-synaptic conductances at 100ms intervals</figcaption>
-</figure>
-<p style="text-align:justify;">
-Schematic illustration of exogenous 10 Hz burst drive through proximal and distal projection pathways. “Population bursts”, consisting of a set number of “burst units” (10, 2-spike bursts shown) drive post-synaptic conductances in the local network with a set frequency (100ms ISI) and mean delay between proximal and distal.
-</p>
+                <div class='markdown-cell'>
+                    <h1>7.12 Replaying Spike Data as Input</h1>
+<p>Welcome to this hands-on tutorial on simulating communication between
+two neocortical networks using HNN-Core! This notebook guides you
+through creating a source network (Network A), extracting its spike
+data, feeding it into a target network (Network B) using the
+<code>add_spike_train_drive</code> method, simulating both, and
+visualizing the results. Let's dive in!</p>
+
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        # Authors: Maira Usman <maira.usman5703@gmail.com>
+    </code>
 </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Step 1: Setting Up the Source Network (Network A)</h2>
+<p>Our journey begins with Network A, the source of neural activity.
+We'll use the <code>neymotin_2020_model</code> to create a realistic
+neocortical network and simulate it with an evoked drive to generate
+spike data. This step mimics how a network might produce activity in a
+real brain region, which we'll later transmit to another network.</p>
+<p>The simulation runs for 170 ms, and we'll save the spike data to a
+temporary file for efficient handling.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        import numpy as np
+import matplotlib.pyplot as plt
+from hnn_core import neymotin_2020_model, simulate_dipole, read_spikes
+import os.path as op
+import tempfile
+
+# Create and simulate Network A
+print("Creating and simulating Network A...")
+net_A = neymotin_2020_model()
+net_A._params.update({'tstop': 170.0})
+
+# Add a drive to generate activity
+print("Adding drive to Network A...")
+drive_params = {
+    'name': 'evdist1', 'mu': 63.5, 'sigma': 3.8, 'numspikes': 1,
+    'location': 'distal', 'event_seed': 274
+}
+weights = {
+    'ampa': {'L2_basket': 0.006, 'L2_pyramidal': 0.0005, 'L5_pyramidal': 0.14},
+    'nmda': {'L2_basket': 0.019, 'L2_pyramidal': 0.004, 'L5_pyramidal': 0.08}
+}
+delays = {'L2_basket': 0.1, 'L2_pyramidal': 0.1, 'L5_pyramidal': 0.1}
+net_A.add_evoked_drive(
+    **drive_params, weights_ampa=weights['ampa'], weights_nmda=weights['nmda'],
+    synaptic_delays=delays
+)
+
+# Simulate and save spike data
+print("Simulating Network A and saving spikes...")
+dpls_A = simulate_dipole(net_A, tstop=170.0, n_trials=1)
+with tempfile.TemporaryDirectory() as tmp_dir:
+    spike_file = op.join(tmp_dir, 'spk_%d.txt')
+    net_A.cell_response.write(spike_file)
+    cell_response = read_spikes(op.join(tmp_dir, 'spk_*.txt'))
+    print(f"Extracted {sum(len(t) for t in cell_response.spike_times)} spikes from Network A")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Creating and simulating Network A...
+Adding drive to Network A...
+Simulating Network A and saving spikes...
+
+        Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+Building the NEURON model
+
+        [Done]
+Trial 1: 0.03 ms...
+
+        Trial 1: 10.0 ms...
+Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
+Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+
+        Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+Trial 1: 90.0 ms...
+
+        Trial 1: 100.0 ms...
+Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
+
+        Writing file /tmp/tmp92y_kh9y/spk_0.txt
+Extracted 616 spikes from Network A
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Step 2: Configuring the Target Network (Network B)</h2>
+<p>Now, let's set up Network B, the target network that will receive
+spike data from Network A. We'll extract spikes from the first trial of
+Network A, filter for pyramidal cells, and format them into a dictionary
+compatible with <code>add_spike_train_drive</code>. This process is akin
+to distributing computed data across nodes in an MPI setup, where each
+node (here, Network B) processes a subset of the input.</p>
+<p>We'll also define connection properties to map Network A's pyramidal
+cells to Network B's layers, ensuring a realistic interaction.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        print("Creating and configuring Network B...")
+net_B = neymotin_2020_model()
+net_B._params.update({'tstop': 225.0})
+
+# Extract spike data from first trial and filter for pyramidal cells
+trial_idx = 0
+spike_times = cell_response.spike_times[trial_idx]
+spike_gids = cell_response.spike_gids[trial_idx]
+spike_types = cell_response.spike_types[trial_idx]
+pyramidal_mask = np.array([t in ['L2_pyramidal', 'L5_pyramidal'] for t in spike_types])
+filtered_times = np.array(spike_times)[pyramidal_mask]
+filtered_gids = np.array(spike_gids)[pyramidal_mask]
+filtered_types = np.array(spike_types)[pyramidal_mask]
+spike_data = {f"NetA_{t}_GID{g}": [] for t, g in zip(filtered_types, filtered_gids)}
+for t, g, time in zip(filtered_types, filtered_gids, filtered_times):
+    src_id = f"NetA_{t}_GID{g}"
+    spike_data[src_id].append(time)
+
+print(f"Number of valid pyramidal cells with spikes to be used for input: {len(spike_data)}")
+
+# Define target configuration
+conn_properties = {
+    'L5_pyramidal': {'location': 'distal', 'weights_ampa': 0.005, 'synaptic_delays': 1.5},
+    'L2_pyramidal': {'location': 'proximal', 'weights_ampa': 0.003, 'synaptic_delays': 1.0}
+}
+target_config = {}
+source_ids = list(spike_data.keys())
+for i, src_id in enumerate(source_ids):
+    target_type = 'L5_pyramidal' if i % 2 == 0 else 'L2_pyramidal'
+    props = conn_properties[target_type]
+    target_config[src_id] = {
+        'target_cell_types': [target_type],
+        'location': props['location'],
+        'weights_ampa': {target_type: props['weights_ampa']},
+        'synaptic_delays': {target_type: props['synaptic_delays']},
+        'probability': 0.7
+    }
+all_weights_ampa = {k: cfg['weights_ampa'][k] for cfg in target_config.values() for k in cfg['weights_ampa']}
+
+# Add spike train drive to Network B
+net_B.add_spike_train_drive(
+    name='drive_from_NetA',
+    spike_data=spike_data,
+    location='distal',
+    weights_ampa=all_weights_ampa,
+    weights_nmda=None,
+    synaptic_delays=0.1,
+    conn_seed=42
+)
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Creating and configuring Network B...
+Number of valid pyramidal cells with spikes to be used for input: 139
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Step 3: Simulating and Visualizing the Networks</h2>
+<p>With Network B configured, we'll simulate it for 225 ms to observe
+the effect of Network A's spikes. Visualization is key in neuroscience,
+so we'll create raster plots for both networks. This step lets you see
+how the input from Network A influences Network B's activity.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        print("Simulating Network B...")
+dpls_b = simulate_dipole(net_B, tstop=225.0, n_trials=1)
+
+# Visualize results
+fig, axes = plt.subplots(2, 1, figsize=(10, 12), sharex=True, constrained_layout=True)
+# 1. Network A: Spike raster
+net_A.cell_response.plot_spikes_raster(ax=axes[0], show=False)
+axes[0].set_title('Network A: Spike Raster')
+axes[0].set_ylabel('Cell ID')
+# 2. Network B: Spike raster
+net_B.cell_response.plot_spikes_raster(ax=axes[1], show=False)
+axes[1].set_title('Network B: Spike Raster')
+axes[1].set_ylabel('Cell ID')
+axes[1].set_xlabel('Time (ms)')
+plt.show()
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+        Simulating Network B...
+Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
+Building the NEURON model
+
+        [Done]
+Trial 1: 0.03 ms...
+
+        Trial 1: 10.0 ms...
+Trial 1: 20.0 ms...
+Trial 1: 30.0 ms...
+
+        Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+
+        Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+
+        Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
+Trial 1: 170.0 ms...
+
+        Trial 1: 180.0 ms...
+Trial 1: 190.0 ms...
+Trial 1: 200.0 ms...
+Trial 1: 210.0 ms...
+
+        Trial 1: 220.0 ms...
+
+        &lt;Figure size 1000x1200 with 2 Axes&gt;
+                    </div>
+                </div>
+
+
+<!-- code cell image -->
+<div class='output-cell'>
+    <img src='output_nb_replaying_spike_data_as_input_notebook/fig_01.png'/>
+</div>
+
+
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Now that the simulation is finished, let's verify the drive setup and
+ensure the connection was established correctly.</p>
+
+                </div>
+
+
+                <!-- code cell -->
+                <div class='code-cell'>
+                    <code class='language-python'>
+                        print("\nVerifying configuration:")
+drive_name = 'drive_from_NetA'
+if drive_name in net_B.external_drives:
+    drive = net_B.external_drives[drive_name]
+    print(f"  Drive '{drive_name}' created with {drive['n_drive_cells']} cells")
+    if drive_name in net_B.gid_ranges:
+        print(f"  GIDs assigned: {net_B.gid_ranges[drive_name]}")
+    drive_connections = sum(1 for conn in net_B.connectivity if conn['src_type'] == drive_name)
+    print(f"  Number of connections from drive: {drive_connections}")
+else:
+    print(f"  ERROR: Drive '{drive_name}' not found")
+                    </code>
+                </div>
+
+
+                <!-- code cell output -->
+                <div class='output-cell'>
+                    <div class='output-label'>
+                        Out:
+                    </div>
+                    <div class='output-code'>
+
+
+Verifying configuration:
+  Drive &#x27;drive_from_NetA&#x27; created with 139 cells
+  GIDs assigned: range(270, 409)
+  Number of connections from drive: 2
+
+                    </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>Conclusion</h2>
+<p>You've now successfully replayed spikes from one network into another
+network! The raster plots show how Network A's activity influences
+Network B, while the verification confirms the drive setup. This
+approach is scalable—similar to MPI's distributed computing—allowing you
+to experiment with multiple networks or adjust parameters like weights
+and delays to explore different dynamics. Try modifying the
+<code>weights_ampa</code> or <code>synaptic_delays</code> values in Step
+2 to see how they affect the results!</p>
+
+                </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
-            <div class="previous-area" data-link="/textbook/content/03_model_assumptions/synaptic_connectivity.html">
+            <div class="previous-area" data-link="/textbook/content/08_using_hnn_api/metadata_tutorial.html">
                 <div class="previous-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="arrow-path" d="M15 5L9 12L15 19" />
@@ -341,13 +674,13 @@ Schematic illustration of exogenous 10 Hz burst drive through proximal and dista
                 </div>
                 <div class="previous-text">
                     <p>Previous</p>
-                    <a>2.4 Synaptic Connectivity</a>
+                    <a>7.11 Cell Metadata Tutorial</a>
                 </div>
             </div>
-            <div class="next-area" data-link="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">
+            <div class="next-area" data-link="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">
                 <div class="next-text">
                     <p>Next</p>
-                    <a>2.6 Tonic and Noisy Driving Inputs</a>
+                    <a>8.1 From MEG sensor-space data to HNN simulation</a>
                 </div>
                 <div class="next-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

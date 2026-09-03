@@ -169,6 +169,7 @@
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -599,7 +600,7 @@ except ImportError:
                     </div>
                     <div class='output-code'>
 
-        Using MPIBackend with 7 processes
+        Using MPIBackend with 11 processes
 
                     </div>
                 </div>
@@ -875,7 +876,7 @@ Python variable.
 """
 backend = MPIBackend(n_procs=n_procs) if use_mpi else JoblibBackend(n_jobs=1)
 with backend:
-    # Since we are only running a single trial here, we can 
+    # Since we are only running a single trial here, we can
     # just return the first trial's dipole, which is at index 0 (`trial_idx`).
     dpl = simulate_dipole(net, tstop=tstop, n_trials=1)[trial_idx]
 return dpl.scale(scaling_factor)
@@ -933,9 +934,20 @@ plt.show()
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -1007,7 +1019,6 @@ Trial 1: 660.0 ms...
 Trial 1: 670.0 ms...
 Trial 1: 680.0 ms...
 Trial 1: 690.0 ms...
-
 
         &lt;Figure size 600x600 with 2 Axes&gt;
                     </div>
@@ -1286,9 +1297,20 @@ plot_dipole_and_spectrogram(dpl_distal_only, 'alpha_distal_only')
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -1360,7 +1382,6 @@ Trial 1: 660.0 ms...
 Trial 1: 670.0 ms...
 Trial 1: 680.0 ms...
 Trial 1: 690.0 ms...
-
 
         &lt;Figure size 600x600 with 3 Axes&gt;
                     </div>
@@ -1489,9 +1510,21 @@ plot_dipole_and_spectrogram(dpl_alpha_and_beta, 'alpha_and_beta')
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+[Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
@@ -1562,7 +1595,6 @@ Trial 1: 660.0 ms...
 Trial 1: 670.0 ms...
 Trial 1: 680.0 ms...
 Trial 1: 690.0 ms...
-
 
         &lt;Figure size 600x600 with 3 Axes&gt;
                     </div>
@@ -1774,8 +1806,8 @@ net_alpha_and_beta_jitter.external_drives
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        # This is a computationally expensive simulation of 10 trials. If you are 
-# not using the MPIBackend or have a slow computer, you may want to 
+                        # This is a computationally expensive simulation of 10 trials. If you are
+# not using the MPIBackend or have a slow computer, you may want to
 # reduce the number of trials to 2 or 3 for testing purposes.
 jitter_50_n_trials = 10
 
@@ -1797,9 +1829,20 @@ for idx, dpl in enumerate(dpls_jitter):
                     </div>
                     <div class='output-code'>
 
-        MPI will run 10 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 10 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -2520,7 +2563,6 @@ Trial 10: 670.0 ms...
 Trial 10: 680.0 ms...
 Trial 10: 690.0 ms...
 
-
                     </div>
                 </div>
 
@@ -2736,8 +2778,19 @@ plot_dipole_and_spectrogram(dpl_incr_beta, 'alpha_and_beta_incr_beta')
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
 [Done]
 Trial 1: 0.03 ms...
@@ -2810,7 +2863,6 @@ Trial 1: 660.0 ms...
 Trial 1: 670.0 ms...
 Trial 1: 680.0 ms...
 Trial 1: 690.0 ms...
-
 
         &lt;Figure size 600x600 with 3 Axes&gt;
                     </div>
@@ -2887,7 +2939,7 @@ net_alpha_only = read_network_configuration(
     )
 
 # ... then delay the proximal drive ('bursty1') only: tstart from 50 to
-# 100 ms, so that it arrives a half-cycle after the distal drive 
+# 100 ms, so that it arrives a half-cycle after the distal drive
 # ('bursty2'), which still starts at tstart=50 ms.
 net_alpha_only.external_drives['bursty1']['dynamics']['tstart'] = 100.0
 
@@ -2956,8 +3008,19 @@ plot_dipole_and_spectrogram(dpl_alpha_only, 'alpha_only')
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
 [Done]
 Trial 1: 0.03 ms...
@@ -3030,7 +3093,6 @@ Trial 1: 660.0 ms...
 Trial 1: 670.0 ms...
 Trial 1: 680.0 ms...
 Trial 1: 690.0 ms...
-
 
         &lt;Figure size 600x600 with 3 Axes&gt;
                     </div>
@@ -3123,31 +3185,6 @@ set_drive_ampa_weight(
                 </div>
 
 
-                <!-- code cell output -->
-                <div class='output-cell'>
-                    <div class='output-label'>
-                        Out:
-                    </div>
-                    <div class='output-code'>
-
-        &lt;External drive &#x27;bursty2&#x27;
-drive class: bursty
-target location: distal
-target cell types: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x27;, &#x27;L5_pyramidal&#x27;]
-number of drive cells: 10
-cell-specific: False
-dynamic parameters:
-    tstart: 50.0
-    tstart_std: 0.0
-    tstop: 710.0
-    burst_rate: 10.0
-    burst_std: 20.0
-    numspikes: 2
-    spike_isi: 10&gt;
-                    </div>
-                </div>
-
-
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
@@ -3172,9 +3209,20 @@ plot_dipole_and_spectrogram(dpl_high_freq, 'high_freq_spiking',
                     </div>
                     <div class='output-code'>
 
-        MPI will run 1 trial(s) sequentially by distributing network neurons over 7 processes.
-numprocs=7
+        MPI will run 1 trial(s) sequentially by distributing network neurons over 11 processes.
+numprocs=11
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -3246,7 +3294,6 @@ Trial 1: 660.0 ms...
 Trial 1: 670.0 ms...
 Trial 1: 680.0 ms...
 Trial 1: 690.0 ms...
-
 
         &lt;Figure size 600x600 with 3 Axes&gt;
                     </div>

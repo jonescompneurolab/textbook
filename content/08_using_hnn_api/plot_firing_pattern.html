@@ -169,6 +169,7 @@
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -327,29 +328,33 @@ in the HNN model.</p>
                 </div>
 
 
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        # Authors: Mainak Jas <mjas@harvard.mgh.edu>
-#          Nick Tolley <nick nicholas_tolley@brown.edu>
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Authors:</p>
+<ul>
+<li>Mainak Jas ( mjas@harvard.mgh.edu )</li>
+<li>Nick Tolley ( nicholas_tolley@brown.edu )</li>
+</ul>
 
-import os.path as op
-import tempfile
-                    </code>
                 </div>
 
 
-<!-- markdown cell -->
-<div class='markdown-cell'>
-    <p>Let us import <code>hnn_core</code>.</p>
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Let us import what we need from <code>hnn_core</code> and other
+libraries:</p>
 
-</div>
+                </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        import hnn_core
+                        import os.path as op
+import tempfile
+
+import matplotlib.pyplot as plt
+
 from hnn_core import read_spikes, jones_2009_model, simulate_dipole
                     </code>
                 </div>
@@ -365,14 +370,12 @@ example</a>.</p>
                 </div>
 
 
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        import matplotlib.pyplot as plt
-
-net = jones_2009_model()
-                    </code>
-                </div>
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        net = jones_2009_model()
+    </code>
+</div>
 
 
                 <!-- markdown cell -->
@@ -474,21 +477,21 @@ Trial 1: 0.03 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
-Trial 1: 50.0 ms...
 
-        Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
+        Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
 
-        Trial 1: 80.0 ms...
+        Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
 
-        Trial 1: 120.0 ms...
+        Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
 
-        Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
+        Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
                     </div>
@@ -501,7 +504,7 @@ Trial 1: 160.0 ms...
 can be used to better interpret the data. The cell IDs (gids) uniquely
 define neurons in the network and are stored in the <a
 href="https://jonescompneurolab.github.io/hnn-core/stable/generated/hnn_core.Network.html#hnn_core.Network">Network</a>
-object as a dictionary</p>
+object as a dictionary.</p>
 
                 </div>
 
@@ -565,7 +568,7 @@ print(vsec.keys())
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
                     <p>We can plot the firing pattern of individual cells by indexing with
-the gid</p>
+the gid.</p>
 
                 </div>
 
@@ -607,8 +610,9 @@ plt.show()
                     <p>Also, we can plot the spikes in the network and write them to text
 files. Note that we can use formatting syntax to specify the filename
 pattern with which each trial will be written
-<code>(&amp;#x27;spk_1.txt&amp;#x27;, &amp;#x27;spk_2.txt, ...)</code>.
-To read spikes back in, we can use wildcard expressions.</p>
+<code>(spk_1.txt, spk_2.txt, ...)</code>. To read spikes back in, we can
+use wildcard expressions. We plot both before the spikes are saved to
+file and after, ensuring that they look the same.</p>
 
                 </div>
 
@@ -633,7 +637,7 @@ plt.show()
                     </div>
                     <div class='output-code'>
 
-        Writing file /tmp/tmp7cb54j47/spk_0.txt
+        Writing file /tmp/tmpl042lhz8/spk_0.txt
 
         &lt;Figure size 640x480 with 1 Axes&gt;
                     </div>

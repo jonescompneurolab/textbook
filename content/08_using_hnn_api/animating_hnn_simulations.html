@@ -169,6 +169,7 @@
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -321,23 +322,23 @@
 -->
                 <div class='markdown-cell'>
                     <h1>7.4: Animating HNN simulations</h1>
-<p>This example demonstrates how to animate HNN simulations</p>
+<p>This example demonstrates how to animate HNN simulations.</p>
 
                 </div>
 
 
-<!-- code cell -->
-<div class='code-cell'>
-    <code class='language-python'>
-        # Author: Nick Tolley <nicholas_tolley@brown.edu>
-    </code>
+<!-- markdown cell -->
+<div class='markdown-cell'>
+    <p>Author: Nick Tolley ( nicholas_tolley@brown.edu )</p>
+
 </div>
 
 
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
-                    <p>First, we'll import the necessary modules for instantiating a network
-and running a simulation that we would like to animate.</p>
+                    <p>First, we'll import the necessary modules for instantiating a
+network, running a simulation that we would like to animate, and the
+class to use for creating the animation.</p>
 
                 </div>
 
@@ -345,13 +346,11 @@ and running a simulation that we would like to animate.</p>
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        import os.path as op
+                        import matplotlib.pyplot as plt  # Needed for display of plotter in Jupyter cells
 
-import matplotlib.pyplot as plt
-
-import hnn_core
-from hnn_core import jones_2009_model, simulate_dipole, read_params
+from hnn_core import jones_2009_model, simulate_dipole
 from hnn_core.network_models import add_erp_drives_to_jones_model
+from hnn_core.viz import NetworkPlotter
                     </code>
                 </div>
 
@@ -386,14 +385,12 @@ class can be used to visualize the 3D structure of the network.</p>
                 </div>
 
 
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        from hnn_core.viz import NetworkPlotter
-
-net_plot = NetworkPlotter(net)
-                    </code>
-                </div>
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        net_plot = NetworkPlotter(net)
+    </code>
+</div>
 
 
                 <!-- code cell output -->
@@ -456,8 +453,7 @@ net_plot.fig
 network and run the simulation (see the <a
 href="https://jonescompneurolab.github.io/textbook/content/05_erps/erp_overview.html">ERP
 simulation</a> for more details). To visualize the membrane potential of
-cells in the network, we need to pass
-<code>record_vsec=&amp;#x27;all&amp;#x27;</code> to
+cells in the network, we need to pass "record_vsec='all'" to
 <code>simulate_dipole(...)</code>, which turns on the recording of
 voltages in all sections of all cells in the network.</p>
 
@@ -492,20 +488,19 @@ Trial 1: 10.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
 
-        Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
+        Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
-
-        Trial 1: 120.0 ms...
+Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
-Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
 
-        Trial 1: 160.0 ms...
+        Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
 
         &lt;Figure size 640x480 with 2 Axes&gt;
                     </div>

@@ -169,6 +169,7 @@
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -329,9 +330,11 @@ how we came up with the sequence of evoked drives used in this example,
 rather, we only demonstrate its implementation. For those who want more
 background on the HNN model and the process used to articulate the
 proximal and distal drives needed to simulate evoked responses, see the
-<code>HNN ERP tutorial</code>. The sequence of evoked drives presented
-here is not part of a current publication but is motivated by prior
-studies [1], [2].</p>
+<a
+href="https://jonescompneurolab.github.io/textbook/content/05_erps/erp_overview.html">HNN
+ERP tutorial</a>. The sequence of evoked drives presented here is not
+part of a current publication but is motivated by prior studies (Jones
+et al., 2007), (Neymotin et al., 2020).</p>
 
                 </div>
 
@@ -341,8 +344,6 @@ studies [1], [2].</p>
                     <code class='language-python'>
                         # Authors: Mainak Jas <mainakjas@gmail.com>
 #          Ryan Thorpe <ryan_thorpe@brown.edu>
-
-# sphinx_gallery_thumbnail_number = 2
                     </code>
                 </div>
 
@@ -350,9 +351,9 @@ studies [1], [2].</p>
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
                     <p>Note: This specific notebook requires the installation of several
-other, non-HNN packages in order to run and plot MNE output properly. If
-you un-comment the next cell, it will install these packages into your
-Python environment automatically.</p>
+other, non-HNN packages in order to run and plot MNE output properly.
+<strong>If you un-comment the next cell, it will install these packages
+into your Python environment automatically.</strong></p>
 
                 </div>
 
@@ -417,7 +418,7 @@ from mne.minimum_norm import apply_inverse, make_inverse_operator
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
                     <p>Now we set the the path of the <code>somato</code> dataset for
-subject <code>&amp;#x27;01&amp;#x27;</code>.</p>
+subject <code>01</code>.</p>
 
                 </div>
 
@@ -617,7 +618,7 @@ dipole. At the moment, we do not offer explicit recommendations on which
 source reconstruction technique is best for HNN. However, we do want our
 users to note that the dipole currents simulated with HNN are assumed to
 be normal to the cortical surface. Hence, using the option
-<code>pick_ori=&amp;#x27;normal&amp;#x27;</code> is appropriate.</p>
+"pick_ori='normal'" is appropriate.</p>
 
                 </div>
 
@@ -777,15 +778,15 @@ alt="mne_activity_fig" />
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
                     <p>Now we extract the representative time course of dipole activation in
-our labeled brain region using
-<code>mode=&amp;#x27;pca_flip&amp;#x27;</code> (see
-<code>this MNE-python example</code>_ for more details). Note that the
-most prominent component of the median nerve response occurs in the
-posterior wall of the central sulcus at ~0.040 sec. Since the dipolar
-activity here is negative, we orient the extracted waveform so that the
-deflection at ~0.040 sec is pointed downwards. Thus, the ~0.040 sec
-deflection corresponds to current flow traveling from superficial to
-deep layers of cortex.</p>
+our labeled brain region using "mode='pca_flip'" (see <a
+href="https://mne.tools/stable/auto_examples/inverse/plot_label_source_activations.html">this
+MNE-python example</a> for more details). Note that the most prominent
+component of the median nerve response occurs in the posterior wall of
+the central sulcus at ~0.040 sec. Since the dipolar activity here is
+negative, we orient the extracted waveform so that the deflection at
+~0.040 sec is pointed downwards. Thus, the ~0.040 sec deflection
+corresponds to current flow traveling from superficial to deep layers of
+cortex.</p>
 
                 </div>
 
@@ -858,9 +859,11 @@ sequence of synchronous evoked drives: 1 proximal, 2 distal, and 1 final
 proximal drive. In order to understand the physiological implications of
 proximal and distal drive as well as the general process used to
 articulate a sequence of exogenous drive for simulating evoked
-responses, see the <code>HNN ERP tutorial</code>_. Note that setting
-<code>n_drive_cells=1</code> and <code>cell_specific=False</code>
-creates a drive with synchronous input across cells in the network.</p>
+responses, see the <a
+href="https://jonescompneurolab.github.io/textbook/content/05_erps/erp_overview.html">HNN
+ERP tutorial</a>. Note that setting <code>n_drive_cells=1</code> and
+<code>cell_specific=False</code> creates a drive with synchronous input
+across cells in the network.</p>
 
                 </div>
 
@@ -962,72 +965,71 @@ Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-en
 Building the NEURON model
 
         [Done]
-[Done]
 Trial 1: 0.03 ms...
+[Done]
 Trial 2: 0.03 ms...
 
-        Trial 2: 10.0 ms...
-Trial 1: 10.0 ms...
+        Trial 1: 10.0 ms...
 
-        Trial 2: 20.0 ms...
+        Trial 2: 10.0 ms...
 
         Trial 1: 20.0 ms...
 
-        Trial 2: 30.0 ms...
+        Trial 2: 20.0 ms...
 
         Trial 1: 30.0 ms...
 
-        Trial 2: 40.0 ms...
+        Trial 2: 30.0 ms...
 
         Trial 1: 40.0 ms...
 
-        Trial 2: 50.0 ms...
+        Trial 2: 40.0 ms...
 
         Trial 1: 50.0 ms...
 
-        Trial 2: 60.0 ms...
+        Trial 2: 50.0 ms...
 
         Trial 1: 60.0 ms...
 
-        Trial 2: 70.0 ms...
+        Trial 2: 60.0 ms...
 
         Trial 1: 70.0 ms...
 
-        Trial 2: 80.0 ms...
-
-        Trial 1: 80.0 ms...
-
-        Trial 2: 90.0 ms...
+        Trial 2: 70.0 ms...
+Trial 1: 80.0 ms...
 
         Trial 1: 90.0 ms...
 
-        Trial 2: 100.0 ms...
+        Trial 2: 80.0 ms...
 
         Trial 1: 100.0 ms...
 
-        Trial 2: 110.0 ms...
+        Trial 2: 90.0 ms...
 
         Trial 1: 110.0 ms...
 
-        Trial 2: 120.0 ms...
+        Trial 2: 100.0 ms...
 
         Trial 1: 120.0 ms...
 
-        Trial 2: 130.0 ms...
+        Trial 2: 110.0 ms...
 
         Trial 1: 130.0 ms...
 
-        Trial 2: 140.0 ms...
+        Trial 2: 120.0 ms...
 
         Trial 1: 140.0 ms...
 
-        Trial 2: 150.0 ms...
+        Trial 2: 130.0 ms...
 
         Trial 1: 150.0 ms...
 
-        Trial 2: 160.0 ms...
+        Trial 2: 140.0 ms...
+Trial 1: 160.0 ms...
 
-        Trial 1: 160.0 ms...
+        Trial 2: 150.0 ms...
+
+        Trial 2: 160.0 ms...
 
                     </div>
                 </div>
@@ -1041,8 +1043,8 @@ would be in the net activity from a larger network where these effects
 are averaged out, and the dipole amplitude is smaller than the recorded
 data. The post-processing steps of smoothing and scaling the simulated
 dipole response allow us to more accurately approximate the true signal
-responsible for the recorded macroscopic evoked response [1]<em>,
-[2]</em>.</p>
+responsible for the recorded macroscopic evoked response (Jones et al.,
+2009) (Neymotin et al., 2020).</p>
 
                 </div>
 
@@ -1080,7 +1082,8 @@ axes[1].plot(1e3 * stc.times, dipole_tc, 'r--')
 average_dipoles(dpls).plot(ax=axes[1], show=False)
 axes[1].legend(['MNE label average', 'HNN simulation'])
 axes[1].set_ylabel('Current Dipole (nAm)')
-net.cell_response.plot_spikes_raster(ax=axes[2])
+net.cell_response.plot_spikes_raster(ax=axes[2], show=False)
+plt.show()
                     </code>
                 </div>
 
@@ -1103,41 +1106,24 @@ net.cell_response.plot_spikes_raster(ax=axes[2])
 </div>
 
 
-                <!-- code cell output -->
-                <div class='output-cell'>
-                    <div class='output-label'>
-                        Out:
-                    </div>
-                    <div class='output-code'>
-
-        &lt;Figure size 600x600 with 3 Axes&gt;
-                    </div>
-                </div>
-
-
-<!-- code cell image -->
-<div class='output-cell'>
-    <img src='output_nb_from_meg_to_hnn_notebook/fig_03.png'/>
-</div>
-
-
                 <!-- markdown cell -->                <div class='markdown-cell'>
                     <h2>References</h2>
-<p>[1] Jones, S. R., Pritchett, D. L., Stufflebeam, S. M., Hämäläinen,
-M. &amp; Moore, C. I. Neural correlates of tactile detection: a combined
+<p>Jones, S. R., Pritchett, D. L., Stufflebeam, S. M., Hämäläinen, M.
+&amp; Moore, C. I. Neural correlates of tactile detection: a combined
 magnetoencephalography and biophysically based computational modeling
-study. J. Neurosci. 27, 10751–10764 (2007).</p>
-<p>[2] Neymotin SA, Daniels DS, Caldwell B, McDougal RA, Carnevale NT,
-Jas M, Moore CI, Hines ML, Hämäläinen M, Jones SR. Human Neocortical
+study. J. Neurosci. 27, 10751–10764 (2007). <a
+href="https://doi.org/10.1523/JNEUROSCI.0482-07.2007">https://doi.org/10.1523/JNEUROSCI.0482-07.2007</a></p>
+<p>Neymotin SA, Daniels DS, Caldwell B, McDougal RA, Carnevale NT, Jas
+M, Moore CI, Hines ML, Hämäläinen M, Jones SR. Human Neocortical
 Neurosolver (HNN), a new software tool for interpreting the cellular and
-network origin of human MEG/EEG data. eLife 9, e51214 (2020).
-https://doi.org/10.7554/eLife.51214</p>
+network origin of human MEG/EEG data. eLife 9, e51214 (2020). <a
+href="https://doi.org/10.7554/eLife.51214">https://doi.org/10.7554/eLife.51214</a></p>
 
                 </div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
-            <div class="previous-area" data-link="/textbook/content/08_using_hnn_api/metadata_tutorial.html">
+            <div class="previous-area" data-link="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">
                 <div class="previous-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="arrow-path" d="M15 5L9 12L15 19" />
@@ -1145,7 +1131,7 @@ https://doi.org/10.7554/eLife.51214</p>
                 </div>
                 <div class="previous-text">
                     <p>Previous</p>
-                    <a>7.11 Cell Metadata Tutorial</a>
+                    <a>7.12 Replaying Spike Data as Input</a>
                 </div>
             </div>
             <div class="next-area" data-link="None">

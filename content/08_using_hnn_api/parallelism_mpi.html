@@ -169,6 +169,7 @@
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
+				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -346,21 +347,71 @@ parallelism, which can be found here</a>.</p>
                 </div>
 
 
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>Authors:</p>
+<ul>
+<li>Mainak Jas ( mjas@mgh.harvard.edu )</li>
+<li>Blake Caldwell ( blake_caldwell@brown.edu )</li>
+<li>Austin Soplata ( austin_soplata@brown.edu )</li>
+</ul>
+
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>1. Import MPI dependencies</h2>
+<p><strong>Please note that in order to run this tutorial you MUST have
+installed HNN-Core with MPI support, which requires multiple steps.
+Normally, this is optional for general HNN-Core use, but it is required
+for this tutorial. In the next cell, we will check to make sure MPI
+support is installed, and if it is not, then please follow the
+directions provided.</strong></p>
+
+                </div>
+
+
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        # Authors: Mainak Jas <mjas@mgh.harvard.edu>
-#          Blake Caldwell <blake_caldwell@brown.edu>
-#          Austin Soplata <austin_soplata@brown.edu>
+                        try:
+    import mpi4py  # noqa: F401
+except ModuleNotFoundError:
+    raise ModuleNotFoundError(
+        "MPI parallelism for HNN-Core has not been installed correctly. "
+        "Please follow the directions for installing MPI support at \n" \
+        "\n" \
+        " https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html \n" \
+        "\n" \
+        "The easiest way to install HNN-Core with MPI support is to use the `conda Package Installation` method described in the link above."
+    ) from None
+
                     </code>
                 </div>
 
 
-<!-- markdown cell -->
-<div class='markdown-cell'>
-    <p>Let us import what we need from <code>hnn_core</code>:</p>
+                <!-- markdown cell -->
+                <div class='markdown-cell'>
+                    <p>After following the above instructions, we should be able to import
+<code>MPIBackend</code> with full parallelism support.</p>
 
+                </div>
+
+
+<!-- code cell -->
+<div class='code-cell'>
+    <code class='language-python'>
+        from hnn_core import MPIBackend
+    </code>
 </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>2. Import other dependencies</h2>
+<p>Let us import what else we need from <code>hnn_core</code> and
+<code>matplotlib</code>:</p>
+
+                </div>
 
 
                 <!-- code cell -->
@@ -374,9 +425,9 @@ from hnn_core.viz import plot_dipole
                 </div>
 
 
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>Following our <a
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>3. Setup our network</h2>
+<p>Following our <a
 href="https://jonescompneurolab.github.io/textbook/content/06_alpha_beta/api.html">Alpha
 example</a>, we will create our network and add a ~10 Hz "bursty"
 drive:</p>
@@ -398,9 +449,9 @@ net.add_bursty_drive(
                 </div>
 
 
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>Finally, we will simulate using the <a
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>4. Simulate using <code>MPIBackend</code></h2>
+<p>Finally, we will simulate using the <a
 href="https://jonescompneurolab.github.io/hnn-core/stable/generated/hnn_core.parallel_backends.MPIBackend.html#hnn_core.parallel_backends.MPIBackend"><code>MPIBackend</code>
 class</a>. This will start the simulation across the number of
 processors (cores) specified by <code>n_procs</code> using MPI.</p>
@@ -408,15 +459,13 @@ processors (cores) specified by <code>n_procs</code> using MPI.</p>
                 </div>
 
 
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <code class='language-python'>
-                        from hnn_core import MPIBackend
-
-with MPIBackend(n_procs=4, mpi_cmd='mpiexec'):
-    dpls = simulate_dipole(net, tstop=210., n_trials=1)
-                    </code>
-                </div>
+            <!-- code cell -->
+            <div class='code-cell'>
+                <code class='language-python'>
+                    with MPIBackend(n_procs=4, mpi_cmd='mpiexec'):
+dpls = simulate_dipole(net, tstop=210., n_trials=1)
+                </code>
+            </div>
 
 
                 <!-- code cell output -->
@@ -431,8 +480,8 @@ with MPIBackend(n_procs=4, mpi_cmd='mpiexec'):
         numprocs=4
 
         Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 
@@ -480,6 +529,15 @@ Trial 1: 0.03 ms...
         Trial 1: 200.0 ms...
 
                     </div>
+                </div>
+
+
+                <!-- markdown cell -->                <div class='markdown-cell'>
+                    <h2>5. Visualize our output</h2>
+<p>Having used <code>MPIBackend</code>, our simulation should have run
+considerably faster than it would using only a single core,
+approximately 4 times faster!</p>
+
                 </div>
 
 
