@@ -1430,7 +1430,7 @@ body.dark-mode .output-cell:has(> .output-label) {
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(1em * 30);
+    max-height: calc(1em * 10);
     flex-grow: 1; 
     white-space: pre-wrap;
     color: var(--text-light) !important;
@@ -1441,16 +1441,6 @@ body.dark-mode .output-cell:has(> .output-label) {
     scrollbar-gutter: stable;
 }
 
-.mod_shrink_output {
-    max-height: calc(1em * 10);
-    white-space: pre-line;
-}
-
-
-
-.output-code::-webkit-scrollbar {
-    display: always; 
-}
 
 body.dark-mode .output-code {
     color: #fff !important;
