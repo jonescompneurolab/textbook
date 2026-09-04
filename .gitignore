@@ -21,3 +21,9 @@ VENV/
 
 # all HTML files inside content/
 content/**/*.html
+
+
+# tutorial-specific files
+content/05_erps/S1_SupraT.txt
+content/05_erps/gui_default.json
+content/05_erps/yes_trial_S1_ERP_all_avg.txt

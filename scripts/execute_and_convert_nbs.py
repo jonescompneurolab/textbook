@@ -1,13 +1,13 @@
 # %%
-from copy import deepcopy
 import base64
 import hashlib
 import html
 import json
-from pathlib import Path
 import re
 import textwrap
 import warnings
+from copy import deepcopy
+from pathlib import Path
 
 import nbformat
 import pypandoc
@@ -146,6 +146,7 @@ def _convert_nb_html_to_json(
 
     return contents
 
+
 def _get_section_outputs(nb_outputs, section_header):
     items = list(nb_outputs.items())
 
@@ -174,6 +175,7 @@ def _get_section_outputs(nb_outputs, section_header):
         result[title] = data
 
     return result
+
 
 def _structure_json(contents):
     """
@@ -289,6 +291,7 @@ def _extract_html_from_nb(
     def _aggregate_outputs(
         html_output,
         accumulated_outputs,
+        additional_output_classes,
     ):
         """
         If there are accumulated outputs, append them to html_output and reset.
@@ -300,13 +303,146 @@ def _extract_html_from_nb(
                     <div class='output-label'>
                         Out:
                     </div>
-                    <div class='output-code'>
+                    <div class='output-code{additional_output_classes}'>
                         {accumulated_outputs}
                     </div>
                 </div>
             """)
             html_output.append(cell_output_html)
         return ""
+
+    def _process_cell_source(cell_source):
+        """Extract pre-specified CSS classes from Python comments in notebook cells
+
+        The body of a cell is stored under "source" in the hierarchical notebook
+        structure (e.g., nb["cells"][i]["source"], where i is the cell index)
+
+        The present function allows keywords representing pre-specified CSS classes
+        to be included in the body of cells as Python comments. For a given
+        `cell_source`, this function searches the body for any keywords defined in
+        the `all_celltype_flags` dictionary, which is instantiated at the top
+        of this function
+
+        `all_celltype_flags` is comprised of three primary `cell_type` keys. The
+        primary key indicates the ultimate destination of the CSS class (either
+        a code, output, or markdown <div>) in the output HTML.
+
+        The value for each primary key is a dictionary containing all possible keyword
+        matches for that cell type. The value for each keyword is initially set to
+        `False` before any matches have been identified.
+
+        For example, the structure of `all_celltype_flags` follows the form:
+            {
+                "code_cell": {"code_keyword_01": False, "code_keyword_02": False},
+                "output_cell": {"output_keyword": False},
+                "markdown_cell": {"md_keyword": False},
+            }
+
+        Keyword comments that target the HTML <div> for code cells and output cells
+        must be placed in the corresponding *code* cell of the source notebook, while
+        the primary key determines whether the CSS class is ultimately added to the
+        <div> for the code block or output block. Comments that target markdown HTML
+        <div> elements must be placed in the corresponding *markdown* cell. Each
+        keyword must be preceded by "# " to be identified in the cell source.
+        The intended workflow is illustrated in the table below:
+
+        | target HTML   | Comment location  | Comment example                       |
+        | ------------- | ----------------- | ------------------------------------- |
+        | code cell     | in code cells     | "# code_keyword_01 # code_keyword_02" |
+        | output cell   | in code cells     | "# output_keyword"                    |
+        | markdown cell | in markdown cells | "# md_keyword"                        |
+
+
+        When a keyword match is identified, the corresponding comment (in the format
+        `# keyword`) is removed from the cell source, and the boolean flag
+        associated with the keyword in `all_celltype_flags` is updated to `True`
+
+        The True value indicates that the corresponding flag was found, and is
+        subsequently used by `_get_additional_classes()` to construct the corresponding
+        CSS class, which is added to the appropriate HTML output element
+
+        Instances of `# noqa` are also removed, but do not have a corresponding flag
+
+        Parameters
+        ----------
+        cell_source : str
+            Source text from a notebook cell. May be a code, output, or
+            markdown cell
+
+        Returns
+        -------
+        cell_source : str
+            Cell source with pre-specified flags and `# noqa` removed
+        all_celltype_flags : dict
+            Dictionary indicating which pre-specified flags were found
+            for each notebook cell type
+
+        Example
+        -------
+        A user can add a pre-specified CSS flag to a code cell to control the
+        appearance of its output.
+
+
+
+        Including the keyword comment in the cell source then changes the
+        corresponding value to `True` and removes the keyword comment from the cell:
+            >>> cell_source = "# mod_shrink_output\nprint(simulation_output)"
+            >>> cell_source, all_celltype_flags = _process_cell_source(cell_source)
+            >>> cell_source
+            'print(simulation_output)'
+            >>> all_celltype_flags
+            {
+                "code_cell": {},
+                "output_cell": {"mod_shrink_output": True},
+                "markdown_cell": {},
+            }
+
+        The updated `True` flag indicates that the HTML <div> for the output cell
+        should receive the `mod_shrink_output` CSS class
+
+        The CSS associated with the class then controls how the output is
+        displayed. For example, `content/assets/styles.css` may define:
+
+            .mod_shrink_output {
+                max-height: calc(1em * 10);
+            }
+
+        This limits the displayed height of the output of the cell that
+        originally contained the `# mod_shrink_output` keyword
+        """
+        all_celltype_flags = {
+            "code_cell": {
+                "mod_code_cell": False,
+            },
+            "output_cell": {
+                "mod_shrink_output": False,
+                "mod_output_cell": False,
+            },
+            "markdown_cell": {
+                "mod_markdown_cell": False,
+            },
+        }
+
+        # "# noqa" is a ruff ignore command that we want to
+        # hide from our published notebooks
+        if "# noqa" in cell_source:
+            cell_source = cell_source.replace("# noqa", "")
+
+        for celltype, celltype_flags in all_celltype_flags.items():
+            for flag in celltype_flags.keys():
+                if f"# {flag}" in cell_source:
+                    cell_source = cell_source.replace(f"# {flag}", "")
+                    all_celltype_flags[celltype][flag] = True
+
+        return cell_source, all_celltype_flags
+
+    def _get_additional_classes(class_flags):
+        updated_css_classes = "".join(
+            f" {class_name}"
+            for class_name, indicator in class_flags.items()
+            if indicator is True
+        )
+        return updated_css_classes
 
     for cell in nb["cells"]:
         # ------------------------------
@@ -316,11 +452,22 @@ def _extract_html_from_nb(
             # ==============================
             # add code cell contents
             # ==============================
+            code_contents, flags = _process_cell_source(cell["source"])
+
+            code_cell_classes = _get_additional_classes(flags["code_cell"])
+            code_cell_classes = f"code-cell{code_cell_classes}"
+
+            # note that output cells are structured differently (in HTML) under
+            # different conditions, so we only initialize the added classes here
+            additional_output_cell_classes = _get_additional_classes(
+                flags["output_cell"]
+            )
+
             code_cell_html = textwrap.dedent(f"""
                 <!-- code cell -->
-                <div class='code-cell'>
+                <div class='{code_cell_classes}'>
                     <code class='language-python'>
-                        {cell["source"]}
+                        {code_contents}
                     </code>
                 </div>
             """)
@@ -363,6 +510,7 @@ def _extract_html_from_nb(
                     aggregated_output = _aggregate_outputs(
                         html_output,
                         aggregated_output,
+                        additional_output_cell_classes,
                     )
 
                     img_data = output["data"]["image/png"]
@@ -372,7 +520,7 @@ def _extract_html_from_nb(
                     if use_base64:
                         output_base64_html = textwrap.dedent(f"""
                             <!-- code cell image -->
-                            <div class='output-cell'>
+                            <div class='output-cell{additional_output_cell_classes}'>
                                 <img src='data:image/png;base64,{img_data}'/>
                             </div>
                         """)
@@ -389,7 +537,7 @@ def _extract_html_from_nb(
                         relative_img_path = img_path.relative_to(img_path.parents[1])
                         output_img_html = textwrap.dedent(f"""
                             <!-- code cell image -->
-                            <div class='output-cell'>
+                            <div class='output-cell{additional_output_cell_classes}'>
                                 <img src='{relative_img_path}'/>
                             </div>
                         """)
@@ -406,7 +554,7 @@ def _extract_html_from_nb(
                     )
                     output_error_html = textwrap.dedent(f"""
                         <!-- code cell error -->
-                        <div class='output-cell error'>
+                        <div class='output-cell{additional_output_cell_classes} error'>
                             <pre>
                                 {error_message}
                             </pre>
@@ -422,6 +570,7 @@ def _extract_html_from_nb(
             aggregated_output = _aggregate_outputs(
                 html_output,
                 aggregated_output,
+                additional_output_cell_classes,
             )
 
         # ------------------------------
@@ -430,6 +579,9 @@ def _extract_html_from_nb(
         elif cell["cell_type"] == "markdown":
             # escape < and > characters
             markdown_content = html.escape(cell["source"])
+            markdown_content, flags = _process_cell_source(markdown_content)
+            markdown_cell_classes = _get_additional_classes(flags["markdown_cell"])
+            markdown_cell_classes = f"markdown-cell{markdown_cell_classes}"
 
             html_content = pypandoc.convert_text(
                 markdown_content,
@@ -445,7 +597,7 @@ def _extract_html_from_nb(
             )
             markdown_html_output = textwrap.dedent(f"""
                 <!-- markdown cell -->
-                <div class='markdown-cell'>
+                <div class='{markdown_cell_classes}'>
                     {html_content}
                 </div>
             """)
@@ -1461,10 +1613,6 @@ def execute_and_convert_nbs_to_json(
         updated_hashes,
         nb_hashes_path,
     )
-
-
-# # AES TODO
-# # %%
 
 # run_test = False
 
