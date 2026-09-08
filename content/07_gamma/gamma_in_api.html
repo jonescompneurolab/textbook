@@ -865,8 +865,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Building the NEURON model
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Building the NEURON model
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
@@ -1228,8 +1228,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -1364,7 +1364,7 @@ the GUI, this means adding a <code>Tonic</code> drive in the
                     <code class='language-python'>
                         net_tonic_weak = read_network_configuration(
     local_gamma_network_files_directory / 'gamma_L5weak_only.json')
-net_tonic_weak.add_tonic_bias(cell_type='L5_pyramidal', amplitude=2.)
+net_tonic_weak.add_tonic_bias(amplitude={'L5_pyramidal' : 2.})
                     </code>
                 </div>
 
@@ -1427,8 +1427,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Building the NEURON model
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Building the NEURON model
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -1522,7 +1522,7 @@ to 6 nA.</p>
                     <code class='language-python'>
                         net_tonic_strong = read_network_configuration(
     local_gamma_network_files_directory / 'gamma_L5weak_only.json')
-net_tonic_strong.add_tonic_bias(cell_type='L5_pyramidal', amplitude=6.)
+net_tonic_strong.add_tonic_bias(amplitude={'L5_pyramidal': 6.})
                     </code>
                 </div>
 
@@ -1569,8 +1569,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -1673,7 +1673,7 @@ GUI, this is done in the <code>Connectivity</code> sub-tab of the
 # its `nc_dict` under the key `A_weight`.
 net_weak_conn = read_network_configuration(
     local_gamma_network_files_directory / 'gamma_L5weak_only.json')
-net_weak_conn.add_tonic_bias(cell_type='L5_pyramidal', amplitude=6.)
+net_weak_conn.add_tonic_bias(amplitude={'L5_pyramidal': 6.})
 
 conn_indices = pick_connection(net_weak_conn, src_gids='L5_pyramidal',
                                target_gids='L5_basket', receptor='ampa')
@@ -1748,10 +1748,10 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
-Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -2111,8 +2111,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Building the NEURON model
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Building the NEURON model
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...
@@ -2336,8 +2336,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 [Done]
 Trial 1: 0.03 ms...
@@ -2770,8 +2770,8 @@ Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
-Building the NEURON model
 Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
+Building the NEURON model
 [Done]
 Trial 1: 0.03 ms...
 Trial 1: 10.0 ms...

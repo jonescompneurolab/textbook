@@ -368,8 +368,8 @@ from hnn_core.viz import plot_dipole
 href="https://jonescompneurolab.github.io/textbook/content/05_erps/erp_simulation_workflow.html">Simulation
 Workflow</a> page, we will begin by importing some real experimental MEG
 data.</p>
-<p>As a reminder, the data we use in these tutorials are from the Jones
-et al. 2007 study, as detailed in the <a
+<p>As a reminder, the data we use in these tutorials are from (Jones et
+al. 2007), as detailed in the <a
 href="https://jonescompneurolab.github.io/textbook/content/05_erps/erp_overview.html">Introduction
 and ERP Overview</a> page.</p>
 <p>Using the code below, we can fetch the data for the treshold-level
@@ -575,8 +575,8 @@ of the Layer 2/3 and Layer 5 dipoles.</p>
                     <p>Remember that exogenous inputs (modelled as spike trains arriving at
 the proximal or distal locations in the network) are necessary to drive
 network activity.</p>
-<p>However, the <code>jones_2009_model()</code> does not have external
-driving inputs by default. We can verify this by confirming the
+<p>However, the <code>neymotin_2020_model()</code> does not have
+external driving inputs by default. We can verify this by confirming the
 <code>external drives</code> data attribute is empty</p>
 
                 </div>
@@ -585,11 +585,11 @@ driving inputs by default. We can verify this by confirming the
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        print("Check if the `jones_2009_model` includes external drives ...")
-if jones_2009_model().external_drives:
+                        print("Check if the `neymotin_2020_model` includes external drives ...")
+if neymotin_2020_model().external_drives:
     print("   Existing drives found!")
 else:
-    print("   No drives found; `jones_2009_model().external_drives` is empty")
+    print("   No drives found; `neymotin_2020_model().external_drives` is empty")
                     </code>
                 </div>
 
@@ -601,8 +601,8 @@ else:
                     </div>
                     <div class='output-code'>
 
-        Check if the `jones_2009_model` includes external drives ...
-   No drives found; `jones_2009_model().external_drives` is empty
+        Check if the `neymotin_2020_model` includes external drives ...
+   No drives found; `neymotin_2020_model().external_drives` is empty
 
                     </div>
                 </div>
@@ -953,10 +953,13 @@ Trial 1: 0.03 ms...
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
+
+        Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
+
+        Trial 1: 60.0 ms...
+
+        Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 
         Trial 1: 90.0 ms...
@@ -1061,7 +1064,7 @@ we will discuss these steps in the next section.</p>
                 </div>
 
 
-<!-- markdown cell -->
+                <!-- markdown cell -->
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

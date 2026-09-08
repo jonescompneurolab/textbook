@@ -347,8 +347,9 @@ ready to use HNN's Python API. The very first thing you'll want to do
 (after activating your environment) is to import the
 <code>hnn_core</code> package</p>
 <p>We'll also import one of the default models,
-<code>jones_2009_model</code>, which is the laminar SI model as
-originally presented in Jones et al., 2009.</p>
+<code>neymotin_2020_model</code>, which is the laminar SI model
+originally presented in (Jones et al., 2009) and using the
+implementation from (Neymotin et al., 2020).</p>
 
                 </div>
 
@@ -357,7 +358,7 @@ originally presented in Jones et al., 2009.</p>
                 <div class='code-cell'>
                     <code class='language-python'>
                         import hnn_core  # noqa
-from hnn_core import jones_2009_model
+from hnn_core import neymotin_2020_model
                     </code>
                 </div>
 
@@ -368,7 +369,7 @@ from hnn_core import jones_2009_model
 will interact with to set parameters, run simulations, view simulation
 outputs, and more.</p>
 <p>We can create an instance of the default
-<code>jones_2009_model</code> by assigning it to a variable, such as
+<code>neymotin_2020_model</code> by assigning it to a variable, such as
 net_default.</p>
 
                 </div>
@@ -377,7 +378,7 @@ net_default.</p>
 <!-- code cell -->
 <div class='code-cell'>
     <code class='language-python'>
-        net_default = jones_2009_model()
+        net_default = neymotin_2020_model()
     </code>
 </div>
 
@@ -709,7 +710,7 @@ _ = l5_pyr_celltype["cell_object"].plot_morphology()
 </div>
 
 
-<!-- markdown cell -->
+                <!-- markdown cell -->
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">

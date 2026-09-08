@@ -419,7 +419,7 @@ Board</a>.</p>
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from hnn_core import jones_2009_model, simulate_dipole, read_dipole
+from hnn_core import neymotin_2020_model, simulate_dipole, read_dipole
 from hnn_core.viz import plot_dipole
 
 # --- Parallel backend ---
@@ -524,7 +524,7 @@ optimization.</p>
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        net_initial = jones_2009_model()
+                        net_initial = neymotin_2020_model()
 
 n_drive_cells = 1
 cell_specific = False
@@ -821,7 +821,7 @@ default is 200.</p>
                 <!-- code cell -->
                 <div class='code-cell'>
                     <code class='language-python'>
-                        net = jones_2009_model()
+                        net = neymotin_2020_model()
 optim = Optimizer(net, tstop=tstop, constraints=constraints,
                   set_params=set_params, initial_params=initial_params, max_iter=50)
 with backend:

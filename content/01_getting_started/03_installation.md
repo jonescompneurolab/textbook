@@ -359,9 +359,9 @@ Unfortunately, we do not officially support MPI usage on native Windows due to t
 
     ```
     python -c "
-    from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
+    from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
     with MPIBackend():
-        simulate_dipole(jones_2009_model(), tstop=20)
+        simulate_dipole(neymotin_2020_model(), tstop=20)
     "
     ```
 
@@ -623,7 +623,7 @@ steps](https://docs.github.com/en/get-started/git-basics/set-up-git#authenticati
 To check whether HNN was installed correctly, you can run the following command:
 
 ```
-python -c "from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20) ; print('--> SUCCESS: The test worked')"
+python -c "from hnn_core import neymotin_2020_model, simulate_dipole ; simulate_dipole(neymotin_2020_model(), tstop=20) ; print('--> SUCCESS: The test worked')"
 ```
 
 This will run a very short test simulation, and should not give any Error messages (Warning messages are okay).
@@ -632,9 +632,9 @@ If you installed MPI, it is **strongly recommended** to test your install. You c
 
 ```
 python -c "
-from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
+from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
 with MPIBackend():
-    simulate_dipole(jones_2009_model(), tstop=20)
+    simulate_dipole(neymotin_2020_model(), tstop=20)
 print('--> SUCCESS: The test worked')
 "
 ```

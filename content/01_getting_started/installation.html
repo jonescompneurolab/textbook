@@ -481,9 +481,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${CONDA_PREFIX}/lib</code></pre></li>
 <pre><code>pip install &quot;hnn_core[parallel]&quot;</code></pre></li>
 <li><p>Let’s test that the install worked. Run the following command:</p>
 <pre><code>python -c &quot;
-from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
+from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
 with MPIBackend():
-    simulate_dipole(jones_2009_model(), tstop=20)
+    simulate_dipole(neymotin_2020_model(), tstop=20)
 &quot;</code></pre>
 <p>You should see output the looks somewhat similar to the following; this verifies that MPI, HNN, NEURON, and Python are all working together.</p>
 <pre><code>/opt/anaconda3/envs/hnn-core-env/lib/python3.12/site-packages/hnn_core/dipole.py:85: UserWarning: No external drives or biases loaded
@@ -621,13 +621,13 @@ Testing Your Installation
 <div class="collapsible-content">
 <p><a id="testing-your-installation"></a></p>
 <p>To check whether HNN was installed correctly, you can run the following command:</p>
-<pre><code>python -c &quot;from hnn_core import jones_2009_model, simulate_dipole ; simulate_dipole(jones_2009_model(), tstop=20) ; print(&#39;--&gt; SUCCESS: The test worked&#39;)&quot;</code></pre>
+<pre><code>python -c &quot;from hnn_core import neymotin_2020_model, simulate_dipole ; simulate_dipole(neymotin_2020_model(), tstop=20) ; print(&#39;--&gt; SUCCESS: The test worked&#39;)&quot;</code></pre>
 <p>This will run a very short test simulation, and should not give any Error messages (Warning messages are okay).</p>
 <p>If you installed MPI, it is <strong>strongly recommended</strong> to test your install. You can test that HNN, NEURON, and MPI were all installed correctly and can talk to each other by running the following command:</p>
 <pre><code>python -c &quot;
-from hnn_core import jones_2009_model, MPIBackend, simulate_dipole
+from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
 with MPIBackend():
-    simulate_dipole(jones_2009_model(), tstop=20)
+    simulate_dipole(neymotin_2020_model(), tstop=20)
 print(&#39;--&gt; SUCCESS: The test worked&#39;)
 &quot;</code></pre>
 <p>If either of the above commands run into Errors (Warnings are okay), then feel free to ask for help on <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our GitHub Discussions page</a>.</p>
