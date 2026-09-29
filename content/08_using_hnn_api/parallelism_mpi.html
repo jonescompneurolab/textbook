@@ -375,7 +375,7 @@ directions provided.</strong></p>
                 <div class='code-cell'>
                     <code class='language-python'>
                         try:
-    import mpi4py  # noqa: F401
+    import mpi4py  : F401
 except ModuleNotFoundError:
     raise ModuleNotFoundError(
         "MPI parallelism for HNN-Core has not been installed correctly. "
@@ -477,15 +477,7 @@ dpls = simulate_dipole(net, tstop=210., n_trials=1)
 
         MPI will run 1 trial(s) sequentially by distributing network neurons over 4 processes.
 
-        [runnervmejwal:12912] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervmejwal:12914] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervmejwal:12913] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervmejwal:12915] pml_ucx.c:319  Error: Failed to create UCP worker
-[1788876735.882561] [runnervmejwal:12912:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1788876735.884328] [runnervmejwal:12914:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1788876735.885320] [runnervmejwal:12913:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1788876735.885420] [runnervmejwal:12915:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-numprocs=4
+        numprocs=4
 
         Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model

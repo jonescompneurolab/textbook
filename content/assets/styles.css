@@ -1430,7 +1430,7 @@ body.dark-mode .output-cell:has(> .output-label) {
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(1em * 10);
+    max-height: calc(1em * 30);
     flex-grow: 1; 
     white-space: pre-wrap;
     color: var(--text-light) !important;
@@ -1441,6 +1441,9 @@ body.dark-mode .output-cell:has(> .output-label) {
     scrollbar-gutter: stable;
 }
 
+.output-code::-webkit-scrollbar {
+    display: always; 
+}
 
 body.dark-mode .output-code {
     color: #fff !important;
@@ -1777,6 +1780,63 @@ body.dark-mode .md-table-blur.left {
 
 body.dark-mode .md-table-blur.right {
     background: linear-gradient(to left, rgba(0, 0, 0, 0.6), transparent);
+}
+
+/* 
+# ------------------------------------------------------------
+# Jupyter notebook cell-specific HTML modifiers
+# ------------------------------------------------------------ 
+*/
+
+/*
+    Notes: the following generic classes can be used to target code cells, output
+    cells, or markdown cells by adding the keyword comment (e.g. `# mod_code_cell`)
+    to the appropriate cell in a jupyter notebook. See `execute_and_convert_nbs::
+    _process_cell_source` for more details
+    
+    Note that some target cells may requre an additional CSS class to uniquely
+    identify the nested <div> you want to adjust. E.g., to change the background color
+    of a code cell, you would need to include the `code.language-python` class after
+    `.mod_code_cell`, as shown in the example below:
+
+    .mod_code_cell code.language-python {
+        background-color: lightgray;
+    }
+    .mod_output_cell {
+        background-color: lightblue;
+    }
+    .mod_markdown_cell {
+        background-color: lightpink;
+    }
+
+    During development, you may use the .mod_code_cell, .mod_output_cell, and
+    .mod_markdown_cell classes below to test different notebook styling modifications 
+    you might need. In the event that you need to modify a cell for a particular
+    notebook page of the Textbook, notify the development team of your request and,
+    if approved, we will create a new CSS class that is specific to your need.
+    
+    For example, the `mod_shrink_output` class below was designed to be added to
+    *code* cells that include a simulation run. This class shrinks the size of the 
+    accompanying *output* cell so that the long, and not particularly useful,
+    simulation log takes up significantly less space on the final HTML page
+
+*/
+
+.mod_code_cell {
+    display: block;
+}
+
+.mod_output_cell {
+    display: block;
+}
+
+.mod_markdown_cell {
+    display: block;
+}
+
+.mod_shrink_output {
+    max-height: calc(1em * 10);
+    white-space: pre-line;
 }
 
 /* 
