@@ -1,5 +1,5 @@
 <!--
-# Title: 7.6 Simulate Beta-modulated ERP
+# Title: 8.6 Simulate Beta-modulated ERP
 # Updated: 2025-02-04
 #
 # Contributors:

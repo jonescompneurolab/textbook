@@ -1,5 +1,5 @@
 <!--
-# Title: 7.3 Modifying Local Connectivity
+# Title: 8.3 Modifying Local Connectivity
 # Updated: 2025-02-04
 #
 # Contributors:

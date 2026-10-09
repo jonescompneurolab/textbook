@@ -1,5 +1,5 @@
 <!--
-# Title: 5.1 GUI Tutorial of Alpha/Beta Rhythms
+# Title: 6.1 GUI Tutorial of Alpha/Beta Rhythms
 # Updated: 2025-02-04
 #
 # Contributors:
@@ -9,7 +9,7 @@
 
 <!-- this markdown file and images originally adapted from https://github.com/jonescompneurolab/hnn-tutorials/tree/core-gui/coregui_alpha_and_beta -->
 
-# 5.1 GUI Tutorial of Alpha/Beta Rhythms
+# 6.1 GUI Tutorial of Alpha/Beta Rhythms
 
 ## Video Walkthrough
 
@@ -68,7 +68,7 @@ Our goal was to use our neocortical model to reproduce features of the waveform 
 ](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/old-image29.png)
 </div>
 
-We found that a sequence of exogenous subthreshold excitatory synaptic drive could activate the network in a manner that reproduced important features of the SI rhythms in the model ([Figure 2](#figure-2)). This drive consisted of two nearly-synchronous 10 Hz rhythmic drives that contacted the network through proximal and distal projection pathways ([Figure 3](#figure-3), see also [Textbook Section 2.5: Evoked and Rhythmic Driving Inputs](03_model_assumptions/evoked_and_rhythmic_driving_inputs.html)). The drives were simulated as population "bursts" of action potentials that contacted the network every 100ms with the mean delay between the proximal and distal burst of 0ms. Specifically, as shown schematically in [Figure 3](#figure-3), these 10 population bursts consisted of 2-spike bursts (i.e. spike "doublets"), Gaussian distributed in time. We presumed that during such spontaneous activity, these drives may be provided by leminscial and non-lemniscal thalamic nuclei, which contact proximal and distal pyramidal neurons respectively, and they are know to burst fire at ~10 Hz frequencies in spontaneous states ([@jones_thalamic_2001], [@hughes_thalamic_2005]).
+We found that a sequence of exogenous subthreshold excitatory synaptic drive could activate the network in a manner that reproduced important features of the SI rhythms in the model ([Figure 2](#figure-2)). This drive consisted of two nearly-synchronous 10 Hz rhythmic drives that contacted the network through proximal and distal projection pathways ([Figure 3](#figure-3), see also [Textbook Section 3.5: Evoked and Rhythmic Driving Inputs](../03_model_assumptions/evoked_and_rhythmic_driving_inputs.html)). The drives were simulated as population "bursts" of action potentials that contacted the network every 100ms with the mean delay between the proximal and distal burst of 0ms. Specifically, as shown schematically in [Figure 3](#figure-3), these 10 population bursts consisted of 2-spike bursts (i.e. spike "doublets"), Gaussian distributed in time. We presumed that during such spontaneous activity, these drives may be provided by leminscial and non-lemniscal thalamic nuclei, which contact proximal and distal pyramidal neurons respectively, and they are know to burst fire at ~10 Hz frequencies in spontaneous states ([@jones_thalamic_2001], [@hughes_thalamic_2005]).
 
 <div class="stylefig">
 ### Figure 3
@@ -133,7 +133,7 @@ hnn-gui
 As described in  [Section 1. Background](#toc-1), low-frequency alpha and beta rhythms can be simulated by a combination of rhythmic subthreshold proximal and distal ~10Hz inputs. Here, we begin by describing the impact of **only proximal inputs**. An initial parameter set that will simulate the effect of ~10 Hz subthreshold proximal drive is provided in the file
 `OnlyRhythmicProx.json`, which you downloaded in [Section 2](#toc-2)
 
-The default cortical column network for this simulation, and HNN as a whole, is described in the [Template Model section](../01_getting_started/template_model.html). Several of the network parameters can be adjusted via the GUI in the `Network` tab (e.g. local excitatory and inhibitory connection strengths), but we will **not** be changing them in this tutorial. Instead, we will **only** be changing parameters in the `Simulation`, `External drives`, and `Visualization` tabs.
+The default cortical column network for this simulation, and HNN as a whole, is described in the [Template Model section](../02_getting_started/template_model.html). Several of the network parameters can be adjusted via the GUI in the `Network` tab (e.g. local excitatory and inhibitory connection strengths), but we will **not** be changing them in this tutorial. Instead, we will **only** be changing parameters in the `Simulation`, `External drives`, and `Visualization` tabs.
 
 To load the initial parameter set, navigate to the GUI and do the following steps (these are illustrated below in [Figure 5](#figure-5)):
 
@@ -416,7 +416,7 @@ You should see the values displayed in the dialogue boxes below.
 
 For this simulation, the only difference in the parameters from that of the prior `AlphaAndBeta.json` simulation is that `Start time dev (ms)` for both drives has been increased from 0 to 50 ms. Both drives will still input at a 10 Hz rate, but the distal versus proximal inputs are less likely to occur at the same time.
 
-Finally, we need to change one more parameter before we run the simulations: `Trials`. If we increase `Trials` above 1, this will cause HNN to run that number of consecutive simulations, each with different randomized initial conditions for the drives. After all trial simulations are complete, the averaged data will automatically be computed and plotted. You will then be able to do further plots using the averaged signal. Note that increasing the number of trials will correspondingly increase the amount of time needed to run the simulations; e.g. if you are using the Google Colab notebook, running 3 trials may take approximately 12 minutes if a single simulation takes 4 minutes. (We do support parallelization of simulation across trials, but this is beyond the scope of this tutorial; see our [Installation guide](../01_getting_started/installation.html) for how to install it, and [our Joblib usage guide here](../08_using_hnn_api/parallelism_joblib.html).)
+Finally, we need to change one more parameter before we run the simulations: `Trials`. If we increase `Trials` above 1, this will cause HNN to run that number of consecutive simulations, each with different randomized initial conditions for the drives. After all trial simulations are complete, the averaged data will automatically be computed and plotted. You will then be able to do further plots using the averaged signal. Note that increasing the number of trials will correspondingly increase the amount of time needed to run the simulations; e.g. if you are using the Google Colab notebook, running 3 trials may take approximately 12 minutes if a single simulation takes 4 minutes. (We do support parallelization of simulation across trials, but this is beyond the scope of this tutorial; see our [Installation guide](../02_getting_started/installation.html) for how to install it, and [our Joblib usage guide here](../08_using_hnn_api/parallelism_joblib.html).)
 
 Do the following:
 

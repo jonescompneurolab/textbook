@@ -1,5 +1,5 @@
 <!--
-# Title: 5.2 API Tutorial of Alpha/Beta Rhythms
+# Title: 6.2 API Tutorial of Alpha/Beta Rhythms
 # Updated: 2025-02-04
 #
 # Contributors:

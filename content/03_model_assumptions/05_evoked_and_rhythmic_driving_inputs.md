@@ -1,5 +1,5 @@
 <!--
-# Title: 2.5 Evoked and Rhythmic Driving Inputs
+# Title: 3.5 Evoked and Rhythmic Driving Inputs
 # Updated: 2024-01-16
 #
 # Contributors:
@@ -8,7 +8,7 @@
 
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/04_evoked-rhythmic-inputs/04_evoked-rhythmic-inputs -->
 
-# 2.5 Evoked and Rhythmic Driving Inputs
+# 3.5 Evoked and Rhythmic Driving Inputs
 
 ### Proximal vs. Distal Inputs
 

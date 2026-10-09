@@ -1,22 +1,22 @@
 <!--
-# Title: 3.1 GUI Quickstart
+# Title: 4.1 GUI Quickstart
 # Updated: 2025-06-10
 #
 # Contributors:
     # Austin Soplata
 -->
 
-# 3.1 HNN GUI Quickstart
+# 4.1 HNN GUI Quickstart
 
 This tutorial is meant to illustrate the bare minimum usage of the GUI. For more in-depth guidance on using the HNN GUI, see our tutorials in later sections, such as our 	[ERP Tutorial here](../05_erps/erp_overview.html), [GUI Alpha/Beta Tutorial here](../06_alpha_beta/gui.html), or [GUI Gamma Tutorial here](../07_gamma/gamma_in_gui.html) (also accessible via the sidebar).
 
 ## Setup
 
-Make sure you have followed our [Installation section here](../01_getting_started/installation.html), and are either using HNN in the cloud, using the `conda` package, or installing GUI support using `pip`.
+Make sure you have followed our [Installation section here](../02_getting_started/installation.html), and are either using HNN in the cloud, using the `conda` package, or installing GUI support using `pip`.
 
 If you are running HNN "in the cloud", follow the instructions in the method you have chosen until you can access a webpage that resembles [Figure 1](#figure-1).
 
-If you are using a local installation of HNN, then activate your Python environment (see our [Local Installation Guide](../01_getting_started/installation.html#local-installation) for details), and run the following command in your terminal:
+If you are using a local installation of HNN, then activate your Python environment (see our [Local Installation Guide](../02_getting_started/installation.html#local-installation) for details), and run the following command in your terminal:
 
 ```
 hnn-gui

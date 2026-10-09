@@ -1,5 +1,5 @@
 <!--
-# Title: 2.4 Synaptic Connectivity
+# Title: 3.4 Synaptic Connectivity
 # Updated: 2024-01-16
 #
 # Contributors:
@@ -8,7 +8,7 @@
 
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/03_architecture-connectivity/03_architecture-connectivity -->
 
-# 2.4 Synaptic Connectivity
+# 3.4 Synaptic Connectivity
 
 <table style="border:none">
   <tr>

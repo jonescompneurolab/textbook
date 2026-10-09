@@ -1,5 +1,5 @@
 <!--
-# Title: 7.8 Parallelism: MPI
+# Title: 8.8 Parallelism: MPI
 # Updated: 2025-02-04
 #
 # Contributors:

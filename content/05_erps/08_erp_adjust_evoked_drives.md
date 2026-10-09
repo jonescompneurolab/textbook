@@ -1,12 +1,12 @@
 <!--
-# Title: 4.8 Adjusting Evoked Drives
+# Title: 5.8 Adjusting Evoked Drives
 # Updated: 2026-07-25
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.8 Adjusting Evoked Drives
+# 5.8 Adjusting Evoked Drives
 
 <div
   id="video-container"

@@ -1,12 +1,12 @@
 <!--
-# Title: 4.4 Simulation Workflow
+# Title: 5.4 Simulation Workflow
 # Updated: 2026-07-11
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.4 Simulation Workflow in HNN
+# 5.4 Simulation Workflow in HNN
 
 Before we dive into the details of using the software, we want to emphasize that HNN is designed around specific **workflows** for examining the multi-scale generators of event-related potentials (ERPs) and brain rhythms. 
 

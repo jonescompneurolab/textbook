@@ -1,12 +1,12 @@
 <!--
-# Title: 1.1 Introducing HNN
+# Title: 2.1 Introducing HNN
 # Updated: 2025-03-06
 #
 # Contributors:
     # Dylan Daniels
 -->
 
-## 1.1 Introducing the Human Neocortical Neurosolver (HNN)
+## 2.1 Introducing the Human Neocortical Neurosolver (HNN)
 
 HNN is an open-source software for developing and testing hypotheses on the cellular and circuit-level mechanisms of electro- and magneto-encephalography (EEG/MEG) signals from a localized neocortical area. The foundation of HNN is a biophysically-principled neocortical column model that simulates the electrical activity of the neocortical cells and circuits that generate the primary electrical currents underlying EEG/MEG recordings. It is designed around workflows to activate the neocortical model via thalamic and cortical inputs to examine the multi-scale generators of ERPs and brain rhythms. To learn more about the HNN model, see the [Template Model](template_model.html) section of the Textbook.
 

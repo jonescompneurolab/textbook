@@ -709,7 +709,7 @@ if (isMobileDevice()) {
 // Create link variables and assign to corresponding div elements 
 // ----------------------------------------
 // Install page link
-const installUrl = "https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html";
+const installUrl = "https://jonescompneurolab.github.io/textbook/content/02_getting_started/installation.html";
 
 // Get all <a> children of .install-row
 const installLinks = document.querySelectorAll(".install-row > a");

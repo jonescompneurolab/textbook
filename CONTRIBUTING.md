@@ -62,7 +62,7 @@ All content lives inside the `content/` directory. It is organized into numbered
 ```
 content/
 ├── 00_preface.md                   ← a top-level page (no section)
-├── 01_getting_started/             ← a section
+├── 02_getting_started/             ← a section
 │   ├── README.md                   ← section title lives here
 │   ├── 01_challenge.md             ← first page in this section
 │   ├── 02_template_model.md        ← second page
@@ -98,7 +98,7 @@ on the website.
 ### Creating a New Markdown Page
 
 1. Pick the section directory where your page belongs (e.g.
-`content/01_getting_started/`).
+`content/02_getting_started/`).
 2. Choose a numeric prefix that places it in the right order. For example, to
 add a page between `02_template_model.md` and `03_installation.md`, you would
 name your file `03_new_page.md` and rename the old `03_installation.md` to
@@ -180,7 +180,7 @@ Here are the most common things you will use:
 [Template Model](template_model.html)
 
 <!-- Link to a page in a different section -->
-[Installation](../01_getting_started/installation.html)
+[Installation](../02_getting_started/installation.html)
 ```
 
 Note: When linking to other pages inside your Markdown document, use the `.html`
@@ -233,7 +233,7 @@ notebook. A minimal companion page looks like this:
 
 ```markdown
 <!--
-# Title: 7.1 Plot Firing Pattern
+# Title: 8.1 Plot Firing Pattern
 # Updated: 2025-02-04
 #
 # Contributors:

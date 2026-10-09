@@ -1,5 +1,5 @@
 <!--
-# Title: 2.3 Neurons: Morphology and Physiology
+# Title: 3.3 Neurons: Morphology and Physiology
 # Updated: 2024-01-16
 #
 # Contributors:
@@ -8,7 +8,7 @@
 
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/02_morphology-physiology/02_morphology-physiology -->
 
-# 2.3 Neurons: Morphology and Physiology
+# 3.3 Neurons: Morphology and Physiology
 
 The template cortical column model contains the following types of neurons:
 

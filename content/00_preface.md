@@ -16,7 +16,7 @@ HNN is an open-source software built in Python using the software NEURON, and it
 
 Our Getting Started section provides an overview of key background information needed to follow along. Some basic background knowledge in neuroscience and neural modeling is assumed. Additionally, references are included at the end of each section for those who wish to dive deeper into the methods and underlying theory. You can see more examples of papers that used HNN to investigate scientific questions [on the Publications section of our Frontpage here](https://hnn.brown.edu/publications.html).
 
-To get the most out of this textbook, we recommend that you [use HNN from the cloud](01_getting_started/installation.html#running-hnn-in-the-cloud) or [install HNN locally](01_getting_started/installation.html#local-installation) and follow along with the examples we provide.
+To get the most out of this textbook, we recommend that you [use HNN from the cloud](02_getting_started/installation.html#running-hnn-in-the-cloud) or [install HNN locally](02_getting_started/installation.html#local-installation) and follow along with the examples we provide.
 
 If you have any questions, please visit our [HNN Discussion board](https://github.com/jonescompneurolab/hnn-core/discussions) on GitHub.
 

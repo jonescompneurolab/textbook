@@ -1,5 +1,5 @@
 <!--
-# Title: 7.7 Parallelism: Joblib
+# Title: 8.7 Parallelism: Joblib
 # Updated: 2025-02-04
 #
 # Contributors:

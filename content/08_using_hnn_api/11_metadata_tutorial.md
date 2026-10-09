@@ -1,5 +1,5 @@
 <!--
-# Title: 7.11 Cell Metadata Tutorial
+# Title: 8.11 Cell Metadata Tutorial
 # Updated: 2025-02-04
 #
 # Contributors:

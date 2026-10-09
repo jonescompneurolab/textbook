@@ -1,12 +1,12 @@
 <!--
-# Title: 4.11 Concluding Remarks
+# Title: 5.11 Concluding Remarks
 # Updated: 2026-07-27
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.11 Concluding Remarks
+# 5.11 Concluding Remarks
 
 <div
   id="video-container"
