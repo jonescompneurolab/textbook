@@ -299,7 +299,8 @@
     # Dylan Daniels
 -->
 <h1>1.3 Installation</h1>
-<h2>Running HNN in the cloud</h2>
+<hr />
+<h2>Running HNN in the cloud (no installation)</h2>
 <h3>Google CoLab</h3>
 <p>As an alternative to installing HNN locally, we provide Google CoLab notebooks that allow you to run HNN out of your browser, with access to your local filesystem.</p>
 <ul>
@@ -309,12 +310,50 @@
 <p>This is the quickest way to get up and running with HNN, though it does require a Google account. If you do not have a Google account, you can create one for free to run the notebooks. There is no charge associated with using Google CoLab.</p>
 <h3>Neuroscience Gateway Portal</h3>
 <p>HNN is available for free, public use on the <a href="https://www.nsgportal.org/">Neuroscience Gateway Portal (NSG)</a>. You can find instructions for using HNN on NSG <a href="https://users.sdsc.edu/~kenneth/hnn/index.html">at this page here</a>.</p>
-<h2>Using the Textbook</h2>
-<p>To follow along with the examples in the textbook, you’ll need to clone or download the <a href="https://github.com/jonescompneurolab/hnn-data">hnn-data repository</a>. The hnn-data repository includes both source-localized data used in our lab’s published research as well as network configurations that have been tuned for simulating different types of signals. Note that this is <em>not</em> the same as installing HNN – these are only files that you will use as you go through our textbook examples.</p>
-<p>You can directly <a href="https://github.com/jonescompneurolab/hnn-data/archive/refs/heads/main.zip">download the hnn-data folder by clicking here</a>. Alternatively, you can clone the repository using the following command:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jonescompneurolab/hnn-data.git</span></code></pre></div>
-<h2>Local Installation</h2>
-<p>We <strong>strongly</strong> recommend that you install HNN from our <strong><code>conda</code> package</strong> instead of from <code>pip</code>. This <code>conda</code> package is “batteries included” and contains ALL features of HNN: the HNN API, the HNN GUI, Optimization, Joblib Parallelism, and MPI Parallelism. This is <em>significantly</em> easier to install than using <code>pip</code>.</p>
+<hr />
+<h2>Local Installation - Simple</h2>
+<p>If you want to install HNN-Core on your local computer, follow these steps. This will install both the API and the GUI. (For more complex installation questions, such as installing on Brown’s OSCAR environment, installing with MPI speedup, installing for development, etc., see the <strong>Local Installation - Detailed</strong> section later).</p>
+<ol type="1">
+<li><p>Install the <a href="https://www.anaconda.com/download/success">Anaconda Python Distribution</a> (also known as “Conda”). If you are unsure which version to install, download the Graphical Installer for the Anaconda Distribution, though any option works. If you are unfamiliar with using Anaconda/Conda virtual environments, <a href="https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial">you can find guidance about them here</a>.</p></li>
+<li><p>If you are on Windows, then you must <strong>download</strong> and <strong>install</strong> the program at this link, which is the NEURON cell simulator: <a href="https://github.com/neuronsimulator/nrn/releases/download/8.2.7/nrn-8.2.7.w64-mingw-py-39-310-311-312-313-setup.exe">https://github.com/neuronsimulator/nrn/releases/download/8.2.7/nrn-8.2.7.w64-mingw-py-39-310-311-312-313-setup.exe</a></p></li>
+<li><p>AFTER you have done the above, open the “Terminal” app (if on Mac or Linux) or the “Anaconda Prompt” app (if on Windows).</p></li>
+<li><p>Copy and paste the following commands into your Terminal/Anaconda Prompt:</p></li>
+</ol>
+<pre><code>conda create -y -q -n hnn-core-env python=3.12
+conda activate hnn-core-env</code></pre>
+<ol start="5" type="1">
+<li>Install HNN-Core using the following command:</li>
+</ol>
+<pre><code>pip install &quot;hnn_core[all]&quot;</code></pre>
+<ol start="6" type="1">
+<li>Test that everything installed correctly by copying and pasting the following command into the same window:</li>
+</ol>
+<pre><code>python -c &quot;
+from hnn_core import neymotin_2020_model, simulate_dipole
+simulate_dipole(neymotin_2020_model(), tstop=20)
+print(&#39;--&gt; SUCCESS: The test worked&#39;)
+&quot;</code></pre>
+<ol start="7" type="1">
+<li><p>That’s it! HNN should now be installed. Proceed to the rest of <a href="../preface.html">our HNN Textbook</a> to get started.</p></li>
+<li><p>To quickly start the GUI from inside your environment, just run the command:</p></li>
+</ol>
+<pre><code>hnn-gui</code></pre>
+<p>You can find more details about the GUI at <a href="https://jonescompneurolab.github.io/textbook/content/04_using_hnn_gui/gui_quickstart.html">HNN GUI Quickstart</a>.</p>
+<ol start="9" type="1">
+<li>Note: The next time you need to re-enter the Conda Environment (such as after you restart your computer), all you need to do is run</li>
+</ol>
+<pre><code>conda activate hnn-core-env</code></pre>
+<p><strong>If you have any questions or problems</strong> while installing HNN, feel free to ask for help on <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our GitHub Discussions page</a>!</p>
+<hr />
+<h2>Local Installation - Detailed</h2>
+<!-- Which version ------------------------------------------------------- -->
+<div class="collapsible-section">
+<h5 class="collapsible-header">
+Which version to install?
+</h5>
+<div class="collapsible-content">
+<p><a id="which-version"></a></p>
+<p>We recommend that you install HNN from our <strong><code>conda</code> package</strong> instead of from <code>pip</code>. This <code>conda</code> package is “batteries included” and contains ALL features of HNN: the HNN API, the HNN GUI, Optimization, Joblib Parallelism, and MPI Parallelism. This is <em>significantly</em> easier to install than using <code>pip</code>. The sole exception is on Windows: for Windows, the easiest way to install is using the <strong>“<code>pip</code> Package Installation”</strong> method listed below, but this does not include MPI parallelism automatically. You can install the <code>conda</code> package on Windows to get speedup from MPI, but you must install Windows Subsystem for Linux for this; instructions for every step are documented below.</p>
 <p>However, there are some cases where you should <strong>not</strong> use the <code>conda</code> installation:</p>
 <ul>
 <li><strong>If you want to co-install HNN alongside MNE:</strong> In this case, we strongly recommend that you install MNE <em>first</em> <a href="https://mne.tools/stable/install/index.html">(MNE install guides here)</a>. If you installed MNE using its <code>pip</code> or <code>conda</code> methods, then afterwards, you should install HNN using our <strong><code>pip</code> Package Installation</strong> method below, but <em>in the same Python environment</em> that you installed MNE into.</li>
@@ -325,6 +364,10 @@
 <p>The terms HNN, <code>hnn-core</code>, and <code>hnn_core</code> are effectively equivalent, as they are all different names for the same codebase. <code>hnn-core</code> or <code>hnn_core</code> are often used during the installation process or when you are using the API.</p>
 <p>After you have installed HNN, we recommend you follow the <strong>Testing Your Installation</strong> section below to make sure it is installed correctly.</p>
 <p><strong>If you have any questions or problems</strong> while installing HNN, feel free to ask for help on <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our GitHub Discussions page</a>!</p>
+</div>
+</div>
+<p><span style="height: 30px;" /></p>
+<!-- Conda pkg ------------------------------------------------------- -->
 <div class="collapsible-section">
 <h5 class="collapsible-header">
 <code>conda</code> Package Installation
@@ -356,12 +399,12 @@ conda activate hnn-core-env</code></pre>
 <li><p>You will now have a new App available from the Start Menu called <code>Ubuntu</code>. Run that app.</p></li>
 <li><p>The first time you start Ubuntu, it will prompt you to <code>Create a default Unix user account</code> and ask for a password. If you provide a password, write it down.</p></li>
 <li><p>You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 4, enter that when it prompts you for your password.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
 <li><p>In the same window, copy and paste the following commands, then follow the prompts. We strongly recommend that when you are asked <code>Do you wish to update your shell profile to automatically initialize conda?</code> you enter <code>yes</code>. If you do not, then you will have to manually activate Conda whenever you open your Ubuntu app using the command this program provides at the end.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
 <p>If you see output similar to <code>WARNING: Your machine hardware does not appear to be x86_64</code>, then please contact us via <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>. You may be able to install by using <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh" class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a> instead.</p></li>
 <li><p>Close the Ubuntu window, then open a new one. Your prompt should now show <code>(base)</code> at the beginning.</p></li>
 <li><p>Inside this window, follow all the steps above in the <a href="#conda-macos-or-linux"><code>conda</code> MacOS or Linux</a> section, then return here.</p></li>
@@ -371,6 +414,7 @@ conda activate hnn-core-env</code></pre>
 </div>
 </div>
 <p><span style="height: 30px;" /></p>
+<!-- Pip pkg ------------------------------------------------------- -->
 <div class="collapsible-section">
 <h5 class="collapsible-header">
 <code>pip</code> Package Installation
@@ -411,12 +455,12 @@ conda activate hnn-core-env</code></pre>
 <li><p>You will now have a new App available from the Start Menu called <code>Ubuntu</code>. Run that app.</p></li>
 <li><p>The first time you start Ubuntu, it will prompt you to <code>Create a default Unix user account</code> and ask for a password. If you provide a password, write it down.</p></li>
 <li><p>You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 4, enter that when it prompts you for your password.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
 <li><p>In the same window, copy and paste the following commands, then follow the prompts. We strongly recommend that when you are asked <code>Do you wish to update your shell profile to automatically initialize conda?</code> you enter <code>yes</code>. If you do not, then you will have to manually activate Conda whenever you open your Ubuntu app using the command this program provides at the end.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
 <p>If you see output similar to <code>WARNING: Your machine hardware does not appear to be x86_64</code>, then please contact us via <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>. You may be able to install by using <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh" class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a> instead.</p></li>
 <li><p>Close the Ubuntu window, then open a new one. Your prompt should now show <code>(base)</code> at the beginning.</p></li>
 <li><p>Inside this window, follow all the steps below for your preferred <code>pip</code> package installation type <strong>as if you are installing for Linux</strong>, then return here.</p></li>
@@ -510,6 +554,7 @@ Trial 1: 10.0 ms...</code></pre></li>
 </div>
 </div>
 <p><span style="height: 30px;" /></p>
+<!-- Pip src ------------------------------------------------------- -->
 <div class="collapsible-section">
 <h5 class="collapsible-header">
 <code>pip</code> Source Installation
@@ -550,12 +595,12 @@ Trial 1: 10.0 ms...</code></pre></li>
 <li><p>You will now have a new App available from the Start Menu called <code>Ubuntu</code>. Run that app.</p></li>
 <li><p>The first time you start Ubuntu, it will prompt you to <code>Create a default Unix user account</code> and ask for a password. If you provide a password, write it down.</p></li>
 <li><p>You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 4, enter that when it prompts you for your password.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install wget</span></code></pre></div></li>
 <li><p>In the same window, copy and paste the following commands, then follow the prompts. We strongly recommend that when you are asked <code>Do you wish to update your shell profile to automatically initialize conda?</code> you enter <code>yes</code>. If you do not, then you will have to manually activate Conda whenever you open your Ubuntu app using the command this program provides at the end.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span></code></pre></div>
 <p>If you see output similar to <code>WARNING: Your machine hardware does not appear to be x86_64</code>, then please contact us via <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our Github Discussions page</a>. You may be able to install by using <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh" class="uri">https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh</a> instead.</p></li>
 <li><p>Close the Ubuntu window, then open a new one. Your prompt should now show <code>(base)</code> at the beginning.</p></li>
 <li><p>Inside this window, follow all the steps below for your preferred <code>pip</code> package installation type <strong>as if you are installing for Linux</strong>, then return here.</p></li>
@@ -621,7 +666,11 @@ Testing Your Installation
 <div class="collapsible-content">
 <p><a id="testing-your-installation"></a></p>
 <p>To check whether HNN was installed correctly, you can run the following command:</p>
-<pre><code>python -c &quot;from hnn_core import neymotin_2020_model, simulate_dipole ; simulate_dipole(neymotin_2020_model(), tstop=20) ; print(&#39;--&gt; SUCCESS: The test worked&#39;)&quot;</code></pre>
+<pre><code>python -c &quot;
+from hnn_core import neymotin_2020_model, simulate_dipole
+simulate_dipole(neymotin_2020_model(), tstop=20)
+print(&#39;--&gt; SUCCESS: The test worked&#39;)
+&quot;</code></pre>
 <p>This will run a very short test simulation, and should not give any Error messages (Warning messages are okay).</p>
 <p>If you installed MPI, it is <strong>strongly recommended</strong> to test your install. You can test that HNN, NEURON, and MPI were all installed correctly and can talk to each other by running the following command:</p>
 <pre><code>python -c &quot;
