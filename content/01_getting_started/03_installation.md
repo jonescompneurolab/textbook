@@ -10,7 +10,9 @@
 
 # 1.3 Installation
 
-## Running HNN in the cloud
+-----------------------------------
+
+## Running HNN in the cloud (no installation)
 
 ### Google CoLab
 
@@ -25,6 +27,8 @@ This is the quickest way to get up and running with HNN, though it does require 
 
 HNN is available for free, public use on the [Neuroscience Gateway Portal (NSG)](https://www.nsgportal.org/). You can find instructions for using HNN on NSG [at this page here](https://users.sdsc.edu/~kenneth/hnn/index.html).
 
+-----------------------------------
+
 ## Local Installation - Simple
 
 If you want to install HNN-Core on your local computer, follow these steps. This will install both the API and the GUI. (For more complex installation questions, such as installing on Brown's OSCAR environment, installing with MPI speedup, installing for development, etc., see the **Local Installation - Detailed** section later).
@@ -33,9 +37,9 @@ If you want to install HNN-Core on your local computer, follow these steps. This
 
 2. If you are on Windows, then you must **download** and **install** the program at this link, which is the NEURON cell simulator: [https://github.com/neuronsimulator/nrn/releases/download/8.2.7/nrn-8.2.7.w64-mingw-py-39-310-311-312-313-setup.exe](https://github.com/neuronsimulator/nrn/releases/download/8.2.7/nrn-8.2.7.w64-mingw-py-39-310-311-312-313-setup.exe)
 
-3. AFTER you have done the above, open the "Terminal" app (if on Mac or Linux) or the "Command Prompt" app (if on Windows).
+3. AFTER you have done the above, open the "Terminal" app (if on Mac or Linux) or the "Anaconda Prompt" app (if on Windows).
 
-4. Copy and paste the following commands into your Terminal/Command Prompt:
+4. Copy and paste the following commands into your Terminal/Anaconda Prompt:
 
 ```
 conda create -y -q -n hnn-core-env python=3.12
@@ -76,6 +80,7 @@ conda activate hnn-core-env
 
 **If you have any questions or problems** while installing HNN, feel free to ask for help on [our GitHub Discussions page][]!
 
+-----------------------------------
 
 ## Local Installation - Detailed
 
