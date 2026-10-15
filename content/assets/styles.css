@@ -22,7 +22,6 @@
 */
 html {
   scroll-padding-top: 60px;
-  overflow: hidden;
 }
 
 /* 
@@ -111,13 +110,14 @@ a:hover {
 }
 
 #main-scroll-container {
+    transition: margin-left 0.5s;
     position: fixed;
     top: 52.5px;
     right: 0;
     bottom: 0;
     left: 0;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     scrollbar-color: var(--light-gray) transparent;
     box-sizing: border-box;
     scrollbar-gutter: stable;
@@ -238,7 +238,19 @@ p .code-text {
     color: var(--hnn-violet);
 }
 
-
+/* 
+    Element: #video-container iframe
+    Notes:
+        - style iframe containers that are auto-generated children of
+          id="video-container" elements
+*/
+#video-container iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    border: none;
+}
 
 /*
     Element: .csl-entry
@@ -380,10 +392,10 @@ body.sidebar-closed .sidebar {
         If the sidebar is closed, margin-left for main should be 0. If the
             sidebar is opened, margin-left should be 350px
 */
-body.sidebar-open #main {
+body.sidebar-open #main-scroll-container  {
     margin-left: 350px;
 }
-body.sidebar-closed #main {
+body.sidebar-closed #main-scroll-container  {
     margin-left: 0;
 }
 
@@ -1499,11 +1511,11 @@ body.dark-mode .output-code {
 }
 
 .output-cell img {
+    box-sizing: border-box;
     max-width: 100%;
     height: auto;
     border-radius: 5px;
     padding: 10px;
-
 }
 
 /*

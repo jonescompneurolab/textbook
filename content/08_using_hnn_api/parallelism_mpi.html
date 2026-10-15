@@ -488,15 +488,15 @@ dpls = simulate_dipole(net, tstop=210., n_trials=1)
 
         MPI will run 1 trial(s) sequentially by distributing network neurons over 4 processes.
 
-        [1792082564.140646] [runnervm8k3b6:13053:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1792082564.144093] [runnervm8k3b6:13054:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1792082564.149835] [runnervm8k3b6:13056:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1792082564.150496] [runnervm8k3b6:13055:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
+        [runnervm8k3b6:12935] pml_ucx.c:319  Error: Failed to create UCP worker
+[runnervm8k3b6:12934] pml_ucx.c:319  Error: Failed to create UCP worker
+[runnervm8k3b6:12933] pml_ucx.c:319  Error: Failed to create UCP worker
+[runnervm8k3b6:12932] pml_ucx.c:319  Error: Failed to create UCP worker
+[1792103294.396027] [runnervm8k3b6:12935:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
+[1792103294.396140] [runnervm8k3b6:12934:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
+[1792103294.397476] [runnervm8k3b6:12933:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
+[1792103294.398715] [runnervm8k3b6:12932:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
 numprocs=4
-[runnervm8k3b6:13053] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervm8k3b6:13054] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervm8k3b6:13056] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervm8k3b6:13055] pml_ucx.c:319  Error: Failed to create UCP worker
 
         Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model

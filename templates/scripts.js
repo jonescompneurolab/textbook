@@ -161,7 +161,7 @@ const maxWidth = '350px';
 
 function toggleNav() {
     const sidebar = document.getElementById("mySidebar");
-    const main = document.getElementById("main");
+    const main = document.getElementById("main-scroll-container");
     const topbar = document.querySelector(".topbar");
 
     // Toggle sidebar state
@@ -221,7 +221,7 @@ if (savedState === "closed") {
 
 window.onload = function() {
     const sidebar = document.getElementById("mySidebar");
-    const main = document.getElementById("main");
+    const main = document.getElementById("main-scroll-container");
     const topbar = document.querySelector(".topbar");
 
     // Retrieve stored state
@@ -607,6 +607,8 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeHeadings();
     window.addEventListener("resize", resizeHeadings);
 });
+
+window.addEventListener("load", resizeHeadings);
 
 // ----------------------------------------
 // Code syntax highlighting
