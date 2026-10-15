@@ -15,11 +15,14 @@
 }
 
 /* 
-    scroll padding to account for topbar height so anchor
-    links work correctly
+    Notes:
+        - scroll padding to account for topbar height so anchor links work correctly
+        - "overflow: hidden" is included as scrollbar will be managed via 
+          #main-scroll-container 
 */
 html {
   scroll-padding-top: 60px;
+  overflow: hidden;
 }
 
 /* 
@@ -107,10 +110,27 @@ a:hover {
     min-width: 450px;
 }
 
+#main-scroll-container {
+    position: fixed;
+    top: 52.5px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: var(--light-gray) transparent;
+    box-sizing: border-box;
+    scrollbar-gutter: stable;
+}
+
+body.dark-mode #main-scroll-container {
+    scrollbar-color: var(--icon-base) transparent;
+}
+
 #content-wrapper {
     width: 100%;
-    margin-top: 50px;
-    max-width: 920px;
+    margin-top: 0px;
+    max-width: 1120px;
     padding: 0 40px;
     box-sizing: border-box;
     overflow: hidden;
@@ -745,14 +765,19 @@ body.dark-mode .sidebar-tooltip::after {
 
 /* 
     Element: .topbar
-    Description: 'position: relative;' used here for the img centering
+    Notes: 
+        - 'position: relative;' used here for the img centering
+        - the 'padding-right' accounts for the width of the scrollbar in 'main' to 
+          ensure that elements are properly aligned horizontally
 */
 .topbar {
+    box-sizing: border-box;
     height: 50px;
     min-width: inherit;
     display: flex;
     align-items: center;
     padding: 0 0px;
+    padding-right: var(--browser-scrollbar-width);
     border-bottom: 2.5px solid var(--light-gray);
     width: 100%;
     position: fixed; 
@@ -1359,7 +1384,7 @@ body.dark-mode .callout-body > ol > li > ul > li {
 .code-cell {
     font-family: 'Courier New', monospace;
     word-wrap: break-word;
-    margin: 10px 0;
+    margin: 10px auto;
     padding: 0px;
     border-radius: 5px;
     border: solid 2px var(--light-purple);
@@ -1367,10 +1392,33 @@ body.dark-mode .callout-body > ol > li > ul > li {
     position: relative;
 }
 
+/* 
+    Element: .code-scroll-wrapper
+    Description: a container for the horizontal scrollbar in code cells
+*/
+.code-scroll-wrapper {
+    padding: 0px 30px;
+    /* width: 100%; */
+    /* box-sizing: border-box; */
+}
+
+body.dark-mode .code-scroll-wrapper {
+    background-color: var(--sidebar-gray);
+}
+
+
+.code-cell code.language-python {
+    scrollbar-color: var(--light-gray) transparent;
+}
+
+body.dark-mode .code-cell code.language-python {
+    scrollbar-color: var(--terminal-gray) transparent;
+}
+
 .code-cell code.language-python {
     display: block;
     background-color: #fff;
-    padding: 15px 30px;
+    padding: 15px 0px;
     margin: 0px;
     font-size: 0.85em;
     border: none;
@@ -1395,7 +1443,7 @@ body.dark-mode .code-cell code.language-python{
     display: flex;
     align-items: flex-start;
     font-family: 'Courier New', monospace;
-    margin: 20px 0;
+    margin: 20px auto;
     border-radius: 2px;
 }
 
@@ -1839,32 +1887,88 @@ body.dark-mode .md-table-blur.right {
     white-space: pre-line;
 }
 
-/* 
-# ------------------------------------------------------------
-# Workshop page
+/*
+# Collapsible Toggles - General
 # ------------------------------------------------------------ 
 */
+
+/* 
+    Notes:
+        - This section defines key properties for the *functional* components shared
+          across all collapsible toggles, as opposed to the *style* components that
+          may need to vary based on the page, section, etc.
+*/ 
+
+.collapsible-header {
+    cursor: pointer;
+    position: relative;
+    padding-right: 30px;
+}
+
+.collapsible-content {
+    display: none;
+    overflow: hidden;
+}
+
+.collapsible-content pre code {
+    overflow-x: auto;
+}
+
+/* Plus sign == "\002B" */
+.collapsible-header:before  {
+    content: "\002B"; 
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+}
+
+/* Minus sign == "\2212" */
+.collapsible-header.active:before {
+    content: "\2212";
+}
 
 /*
-# Collapsible Toggles
+# Collapsible Toggles - Default
 # ------------------------------------------------------------ 
 */
 
-.collapsible-section.active {
+/* 
+    Note:
+        - Add the "collapsible-default" class to the "collapsible-section" <div>
+          element to apply the styling defined in this section, as shown in the
+          example below
+    
+    Example:
+    ```
+    <!--
+    # Title: Preface
+    #  File: 00_preface.md
+    -->
+
+    <div class="collapsible-section collapsible-default">
+    <div class="collapsible-header">
+    Collapsible Section
+    </div>
+    <div class="collapsible-content">
+    ...
+    </div>
+    </div>
+    ```
+*/
+
+.collapsible-default.active {
     border: 2px solid var(--light-purple);
     background-color: #fff;
     border-radius: 5px;
     padding: 0px 15px;
 }
 
-body.dark-mode .collapsible-section.active {
+body.dark-mode .collapsible-default.active {
     background: var(--sidebar-gray);
     border: 2px solid var(--light-gray);
 }
 
-.collapsible-header {
-    cursor: pointer;
-    font-size: 18px;
+.collapsible-default .collapsible-header {
     font-weight: bold;
     background-color: #fff;
     padding: 15px;
@@ -1873,44 +1977,137 @@ body.dark-mode .collapsible-section.active {
     border-radius: 5px;
 }
 
-body.dark-mode .collapsible-header{
-    border: 2px solid var(--light-gray);
+body.dark-mode .collapsible-default .collapsible-header {
+    border: 2px solid var(--light-purple);
     background: var(--sidebar-gray);
 }
 
-.collapsible-header.active, body.dark-mode .collapsible-header.active {
+.collapsible-default .collapsible-header.active{
     border: 0px;
     padding-left: 0px;
-    padding-right: 0px;
+    padding-right: 30px;
     padding-bottom: 0px;
 }
 
-.collapsible-header:after {
-    content: '\002B'; /* Plus sign */
-    font-weight: bold;
-    float: right;
-}
-
-.collapsible-header.active:after {
-    content: "\2212"; /* Minus sign */
-}
-
-.collapsible-content {
+.collapsible-default .collapsible-content {
     padding: 0 18px;
-    display: none;
-    overflow: hidden;
     background-color: #fff;
 }
 
-body.dark-mode .collapsible-content {
+body.dark-mode .collapsible-default .collapsible-content {
     border-bottom: 0px;
     background: var(--sidebar-gray);
     border-radius: 5px;
 }
 
-.collapsible-content pre code {
-    overflow-x: auto;
+
+/*
+# Collapsible Toggles - API Tutorials
+# ------------------------------------------------------------ 
+*/
+
+/* 
+    Note:
+        - Add the "collapsible-api-notebook" class to the "collapsible-section" <div>
+          element to apply the styling defined in this section, as shown in the
+          example below
+        - To take advantage of the dynamic header resizing (see `function 
+          resizeHeadings()` in scripts.js), use a header instead of a generic <div>
+          element in your raw html code. It's best to avoid <h1> which has a built-in
+          ":after" element, as defined in the `h1` CSS class above
+    
+    Example:
+    ```
+    <!--
+    # Title: 4.5 Simulate the Default Network
+    #  File: 05_erp_initial_simulation.md
+    -->
+    
+    <div class="collapsible-section collapsible-api-notebook">
+    <h5 class="collapsible-header">
+    API Walkthrough
+    </h5>
+    <div class="collapsible-content">
+    [[erp_api_walkthrough.ipynb][Simulate the Default Network]]
+    </div>
+    </div>
+    ```
+*/
+
+.collapsible-api-notebook .collapsible-header {
+    font-size: 1.6em;
+    background-color: #fff;
+    padding: 15px 15px 15px 40px;
+    margin: 0;
+    border: 2px solid var(--light-purple);
+    border-radius: 5px;
 }
+
+body.dark-mode .collapsible-api-notebook .collapsible-header {
+    border: 2px solid var(--light-purple);
+    background: var(--content-gray);
+    border-radius: 5px;
+}
+
+
+/* move plus and minus sign icons to left side */
+.collapsible-api-notebook .collapsible-header:before  {
+    left: 15px;
+}
+
+/* 
+    Alternative styling option:
+      - use only border bottom to match other headers when
+        the collapsible container is active
+    
+    Implemented for the "light-mode" theme below
+*/
+
+/* 
+    Note:
+        - To use the "alternative styling option" for dark mode, uncomment-out
+          the line below
+*/
+/* body.dark-mode .collapsible-api-notebook .collapsible-header.active, */
+.collapsible-api-notebook .collapsible-header.active {
+    border: none;
+    padding: 17px 17px 17px 42px;
+    border-radius: 0px;
+
+}
+
+.collapsible-api-notebook .collapsible-header.active::after {
+    content: "";
+    display: block; 
+    height: 2px;
+    background: var(--sidebar-purple);
+    margin-top: 15px;
+    margin-left: -42px;
+    width: calc(100% + 59px);
+}
+
+/* 
+    Note:
+        - To use the "alternative styling option" for dark mode, uncomment-out
+          the line below
+*/
+/* body.dark-mode .collapsible-api-notebook .collapsible-header.active::after {
+    background: var(--light-gray);
+} */
+
+/* 
+    Note:
+        - To use the "alternative styling option" for dark mode, hide the css
+          below by *commenting-out* the following two sections
+*/
+body.dark-mode .collapsible-api-notebook .collapsible-header.active {
+    padding: 15px 15px 15px 40px;
+}
+
+body.dark-mode .collapsible-api-notebook .collapsible-header.active::after {
+    display: none;
+}
+
 
 /*
 # Schedule table
@@ -2023,4 +2220,10 @@ body.dark-mode code.workshop-button:hover {
     --content-gray: #14181e;
     --tooltip-gray: #555;
     --lighter-gray: #e1e4e8;
+    --browser-scrollbar-width: 15px;
 }
+/* 
+    note: 
+       - we calculate `browser-scrollbar-width` dynamically in our javascript, with
+         the 15px definition in `:root` acting as a fallback
+*/

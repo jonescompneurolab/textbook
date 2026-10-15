@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -324,6 +325,11 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1Kog80FF6LNL_fQJhWeTEJifztElon_PM/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
 <div class='markdown-cell'>
     <h2>First Proximal Drive (Contd…)</h2>
 
@@ -342,8 +348,9 @@ layer-specific dipoles without any smoothing.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig = plot_combined_raster_hist(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig = plot_combined_raster_hist(
     dipole=unsmoothed_dipole,
     net=net_default_gui,
 )
@@ -353,7 +360,8 @@ for ax in fig.axes:
         ax,
         show_origin_line=False,
     )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -415,8 +423,9 @@ the object so we can view all of its attributes.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # create a pointer variable for "evprox1"
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # create a pointer variable for "evprox1"
 evprox1 = net_default.external_drives["evprox1"]
 
 # print the keys
@@ -427,7 +436,8 @@ print(
     sep="\n",
 )
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -460,8 +470,9 @@ and values that are the numerical weights for those connections.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # below, we set up a loop to print the keys and values
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # below, we set up a loop to print the keys and values
 # for each of synapse types
 
 synapse_types = ["weights_ampa", "weights_nmda"]
@@ -484,7 +495,8 @@ for synapse_weights in synapse_types:
         print(
             evprox1["weights_nmda"],
         )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -565,8 +577,9 @@ distal drive.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig = plot_initial_gui_figure(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig = plot_initial_gui_figure(
     net_default_gui,
     processed_dipole,
     threshold_experimental_dpl,
@@ -583,7 +596,8 @@ add_outline_to_subplot(
     fig.axes[1],
     x_bounds=[54, 110],
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -618,8 +632,9 @@ observation further.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig = plot_combined_raster_hist(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig = plot_combined_raster_hist(
     dipole=unsmoothed_dipole,
     net=net_default_gui,
 )
@@ -632,7 +647,8 @@ for ax in fig.axes:
         x_bounds=[54, 110],
         show_origin_line=False,
     )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -705,6 +721,8 @@ other to push current up and down the apical dendrites.</p>
 
 
 <!-- markdown cell -->
+</div>
+</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
@@ -733,7 +751,8 @@ other to push current up and down the apical dendrites.</p>
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

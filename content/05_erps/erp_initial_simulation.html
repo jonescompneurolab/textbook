@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -320,10 +321,15 @@
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
-<h1>4.5 Simulate the Default Network</h1>
+<h1>4.5 Simulate an ERP using the Default Parameters</h1>
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1H2zNHtOYVJQ_TPaTCYBeViFxkoZKmgrK/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
 <div class='markdown-cell'>
     <h2>Simulate the Default Network</h2>
 
@@ -340,8 +346,9 @@ this section of the tutorial</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        from urllib.request import urlretrieve
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            from urllib.request import urlretrieve
 
 import matplotlib.pyplot as plt
 from hnn_core import (
@@ -352,7 +359,8 @@ from hnn_core import (
 )
 from hnn_core.network_models import add_erp_drives_to_jones_model
 from hnn_core.viz import plot_dipole
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -383,14 +391,16 @@ data from there)</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # link to the data in the `hnn-data` GitHub repository
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # link to the data in the `hnn-data` GitHub repository
 data_url = "https://raw.githubusercontent.com/jonescompneurolab/hnn-data/main/MEG_detection_data/yes_trial_S1_ERP_all_avg.txt"
 urlretrieve(
     data_url,
     "yes_trial_S1_ERP_all_avg.txt",
 );
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -412,8 +422,9 @@ specific data attributes: <code>times</code> and <code>data</code>.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # load the experimental data as a `Dipole` object and
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # load the experimental data as a `Dipole` object and
 # assign it to a variable
 threshold_experimental_dpl = read_dipole(
     "yes_trial_S1_ERP_all_avg.txt",
@@ -431,7 +442,8 @@ print(
     f" Times type: {type(threshold_times)}",
     sep="\n",
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -465,8 +477,9 @@ printing its keys and value types.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print(
     "# Examining the `data` dictionary:",
     "# " + "-" * 40,
     sep="\n",
@@ -478,7 +491,8 @@ for key, value in threshold_data.items():
         f"    Value type: {type(value)}",
         sep="\n",
     )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -530,9 +544,11 @@ use the built-in <code>Dipole.plot()</code> method to view the data</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        _ = threshold_experimental_dpl.plot()
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            _ = threshold_experimental_dpl.plot()
+        </code>
+    </div>
 </div>
 
 
@@ -584,13 +600,15 @@ external driving inputs by default. We can verify this by confirming the
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print("Check if the `neymotin_2020_model` includes external drives ...")
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print("Check if the `neymotin_2020_model` includes external drives ...")
 if neymotin_2020_model().external_drives:
     print("   Existing drives found!")
 else:
     print("   No drives found; `neymotin_2020_model().external_drives` is empty")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -627,8 +645,9 @@ proximal drives and one distal drive.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # if there are no drives attached to the Network, then add them
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # if there are no drives attached to the Network, then add them
 if not net_default.external_drives:
     print("No existing drives found. Adding default external drives ... ")
 
@@ -645,7 +664,8 @@ else:
 
 for key in net_default.external_drives.keys():
     print(f"   {key}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -693,8 +713,9 @@ nested key structure drive["dynamics"]["mu"].</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # ----------------------------------------
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # ----------------------------------------
 # inspecting a single drive object
 # ----------------------------------------
 # let's first inspect a single external drive object to understand
@@ -757,7 +778,8 @@ for key, drive_object in net_default.external_drives.items():
         f'Mean arrival time for "{key}": {mean_arrival} ms',
         sep="\n",
     )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -835,8 +857,9 @@ page.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # choose a backend, and select the number of cores
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # choose a backend, and select the number of cores
 # --------------------------------------------------
 # try changing the use_MPI flag and comparing
 # the simulation speeds
@@ -868,7 +891,8 @@ ncores = min(manual_ncores, auto_ncores)
 print(
     f"Using {ncores} of {auto_ncores} available cores",
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -914,8 +938,9 @@ list of <code>Dipole</code> objects (one per each trial).</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # set additional simulation parameters
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # set additional simulation parameters
 # --------------------------------------------------
 tstop = 170.0  # length of the simulation
 dt = 0.025  # integration timestep
@@ -931,7 +956,8 @@ with chosen_backend(ncores):
         dt=dt,
     )
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -954,16 +980,17 @@ Trial 1: 0.03 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
-
-        Trial 1: 50.0 ms...
+Trial 1: 50.0 ms...
 Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
+
+        Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
 
         Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
+
+        Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 
@@ -995,8 +1022,9 @@ output and compare the two signals directly.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig, axes = plt.subplots(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig, axes = plt.subplots(
     nrows=2,
     ncols=1,
     sharex=True,
@@ -1027,7 +1055,8 @@ for subplot in axes:
 axes[0].set_title("Simulated Dipole")
 axes[1].set_title("Experimental Dipole");
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1063,6 +1092,8 @@ we will discuss these steps in the next section.</p>
 
 
                 <!-- markdown cell -->
+</div>
+</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
@@ -1091,7 +1122,8 @@ we will discuss these steps in the next section.</p>
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

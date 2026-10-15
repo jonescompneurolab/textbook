@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -349,12 +350,14 @@ and around the HNN network model.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import matplotlib.pyplot as plt
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import matplotlib.pyplot as plt
 
 from hnn_core import neymotin_2020_model, simulate_dipole
 from hnn_core.network_models import add_erp_drives_to_jones_model
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -374,12 +377,14 @@ potential (ERP) example for details.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        net = neymotin_2020_model()
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            net = neymotin_2020_model()
 add_erp_drives_to_jones_model(net)
 
 net.set_cell_positions(inplane_distance=30.)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -394,10 +399,12 @@ placement of each electrode.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        net.plot_cells(show=False)
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            net.plot_cells(show=False)
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -440,11 +447,13 @@ for details.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        depths = list(range(-325, 2150, 100))
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            depths = list(range(-325, 2150, 100))
 electrode_pos = [(135, 135, dep) for dep in depths]
 net.add_electrode_array('shank1', electrode_pos)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -465,13 +474,15 @@ MPI</a> will speed up computation considerably.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print(net.rec_arrays)
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print(net.rec_arrays)
 net.plot_cells(show=False)
 plt.show()
 
 dpl = simulate_dipole(net, tstop=170)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -557,8 +568,9 @@ applied in two steps). Decimation speeds up plotting significantly.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        trial_idx = 0
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            trial_idx = 0
 window_len = 10  # ms
 decimate = [5, 4]  # from 40k to 8k to 2k
 
@@ -567,14 +579,16 @@ dpl[trial_idx].smooth(window_len=window_len)
 
 # Use the same smoothing window on the LFP traces to allow comparison to dipole
 electrode_data = net.rec_arrays['shank1'][trial_idx].smooth(window_len=window_len)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig, axs = plt.subplots(4, 1,
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig, axs = plt.subplots(4, 1,
                         sharex=True,
                         figsize=(6, 8),
                         gridspec_kw={'height_ratios': [1, 2, 2, 2]})
@@ -603,7 +617,8 @@ axs[3].set_ylabel('Electrode depth (um)')
 axs[3].set_title('CSD Plot')
 plt.tight_layout()
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -668,7 +683,8 @@ href="https://doi.org/10.1016/j.neuron.2011.09.029">https://doi.org/10.1016/j.ne
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -328,6 +329,11 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1TwPdd1E5APjQQAeta5T8tcFM63OfU_gf/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
 <div class='markdown-cell'>
     <h2>Using the HNN Python API</h2>
 
@@ -356,10 +362,12 @@ implementation from (Neymotin et al., 2020).</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import hnn_core  
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import hnn_core  
 from hnn_core import neymotin_2020_model
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -377,9 +385,11 @@ net_default.</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        net_default = neymotin_2020_model()
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            net_default = neymotin_2020_model()
+        </code>
+    </div>
 </div>
 
 
@@ -403,8 +413,9 @@ attributes that advanced users may want to interact with</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # get all available attributes
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # get all available attributes
 attributes = dir(net_default)
 
 # get the available *methods* (functions) that act on the network object
@@ -437,7 +448,8 @@ print(*methods, sep=", ")
 # print public data attributes
 print("\nData attributes:")
 print(*data_attributes, sep=", ")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -471,10 +483,12 @@ we know how to interact with it</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # check the `net.cell_types` object's type
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # check the `net.cell_types` object's type
 print(f"Object type: {type(net_default.cell_types)}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -504,13 +518,15 @@ us the unique cell types in the network</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print("Cell types:")
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print("Cell types:")
 
 # loop through the dictionary keys and print them
 for key in net_default.cell_types.keys():
     print(f"\t{key}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -542,13 +558,15 @@ variable for easier access</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # assign net_default.cell_types["L5_pyramidal"] to a variable
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # assign net_default.cell_types["L5_pyramidal"] to a variable
 l5_pyr_celltype = net_default.cell_types["L5_pyramidal"]
 
 # check its type
 print(type(l5_pyr_celltype))
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -576,15 +594,17 @@ structure</p>
 
             <!-- code cell -->
             <div class='code-cell'>
-                <code class='language-python'>
-                    for key, value in l5_pyr_celltype.items():
+                <div class='code-scroll-wrapper'>
+                    <code class='language-python'>
+                        for key, value in l5_pyr_celltype.items():
 print(f'Key: "{key}"')
 print("Value:")
 print(f"   Type:  {type(value)}")
 print(f"   Value: {value}")
 print("\n" + "-" * 20 + "\n")
 
-                </code>
+                    </code>
+                </div>
             </div>
 
 
@@ -643,10 +663,12 @@ shows all of the cell types in a 3D grid</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # we can plot a diagram of the network using the .plot_cells() method
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # we can plot a diagram of the network using the .plot_cells() method
 _ = net_default.plot_cells()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -680,15 +702,17 @@ method</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # using the variable we created above, we can access the `Cell` class
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # using the variable we created above, we can access the `Cell` class
 # object and plot its morphology
 
 # remember: l5_pyr_celltype is a dictionary, so we need to use the
 # "cell_object" key to access the `Cell` class for plotting
 
 _ = l5_pyr_celltype["cell_object"].plot_morphology()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -711,6 +735,8 @@ _ = l5_pyr_celltype["cell_object"].plot_morphology()
 
 
                 <!-- markdown cell -->
+</div>
+</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
@@ -739,7 +765,8 @@ _ = l5_pyr_celltype["cell_object"].plot_morphology()
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

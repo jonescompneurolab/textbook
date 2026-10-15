@@ -19,4 +19,13 @@
   style="padding: 10px 0px 30px 0px;"
 ></div>
 
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
+
 [[erp_api_walkthrough.ipynb][Using the HNN Python API]]
+
+</div>
+</div>

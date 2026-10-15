@@ -60,12 +60,49 @@ function showIframes() {
     });
 }
 
+// ----------------------------------------
+// Get scrollbar width
+// ----------------------------------------
+// We need to add padding to the topbar that equals the scrollbar width since the
+// scrollbar gutter is always present in the main body. This ensures the HNN image
+// in the topbar remains perfectly centered relative to the main body. Since scrollbar
+// width can vary accross browser, we can compute it dynamically (with a fallback of
+// 15px set in styles.css)
+
+function getScrollbarWidth() {
+    const element = document.createElement("div");
+
+    element.style.cssText = `
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        overflow: scroll;
+        visibility: hidden;
+        top: -9999px;
+    `;
+
+    document.body.appendChild(element);
+    const scrollbarWidth = element.offsetWidth - element.clientWidth;
+    element.remove();
+
+    return scrollbarWidth;
+}
+
+function initTopbarScrollbarSpacing() {
+    document.documentElement.style.setProperty(
+        "--browser-scrollbar-width",
+        `${getScrollbarWidth()}px`
+    );
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     initSidebar();
+    resizeCodeCells();
 });
 
 window.addEventListener("load", () => {
     initTopbar();
+    initTopbarScrollbarSpacing();
     initMainContent();
     hideIframes();
     injectIframe();
@@ -434,6 +471,9 @@ function increaseFontSize() {
 
     // save font size to localStorage
     localStorage.setItem("fontSize", newSize);
+
+    resizeHeadings();
+    resizeCodeCells();
 }
 
 function decreaseFontSize() {
@@ -446,6 +486,9 @@ function decreaseFontSize() {
 
     // save font size to localStorage
     localStorage.setItem("fontSize", newSize);
+
+    resizeHeadings();
+    resizeCodeCells();
 }
 
 // Dropdown for font buttons
@@ -532,6 +575,40 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ----------------------------------------
+// Keep headings on one line
+// ----------------------------------------
+// - This also accounts for the clickable '#' that is dynamically added to headers
+// - The text is dynamically resized down to 12px to (in most reasonable cases) prevent 
+//   the headers from wrapping onto new lines
+function resizeHeadings() {
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(header => {
+        // Remove any previous adjustment so the current inherited
+        // font size can be used as the starting point
+        header.style.fontSize = "";
+        header.style.whiteSpace = "nowrap";
+
+        const originalFontSize = parseFloat(getComputedStyle(header).fontSize);
+        let fontSize = originalFontSize;
+
+        while (header.scrollWidth > header.clientWidth) {
+            fontSize -= 1;
+
+            if (fontSize <= 12) {
+                fontSize = 12;
+                break;
+            }
+
+            header.style.fontSize = `${fontSize}px`;
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    resizeHeadings();
+    window.addEventListener("resize", resizeHeadings);
+});
+
+// ----------------------------------------
 // Code syntax highlighting
 // ----------------------------------------
 
@@ -601,7 +678,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// ----------------------------------------
+// Code cell wrap width
+// ----------------------------------------
+// Notes:
+//   - we want .code-cell elements that have a child "language-python" to
+//     set the max-width to 80 characters (what we use for ruff) before
+//     the overflow goes into effect
+
+function resizeCodeCells() {
+    document.querySelectorAll(".code-cell code.language-python").forEach(code => {
+        const wrapper = code.parentElement;
+
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        context.font = getComputedStyle(code).font;
+
+        const textWidth = context.measureText("0".repeat(80)).width;
+        const padding = parseFloat(getComputedStyle(wrapper).paddingLeft)
+            + parseFloat(getComputedStyle(wrapper).paddingRight);
+
+        const maxWidth = `${textWidth + padding}px`;
+
+        let style = document.getElementById("dynamic-cell-widths");
+
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "dynamic-cell-widths";
+            document.head.appendChild(style);
+        }
+
+        style.textContent = `
+            .code-cell,
+            .output-cell {
+                max-width: ${maxWidth};
+            }
+        `;
+    });
+}
+
+// ----------------------------------------
+// Collapsible sections
+// ----------------------------------------
+
 document.querySelectorAll(".collapsible-header").forEach(header => {
+    const originalHeaderText = header.textContent.trim();
+
     header.addEventListener("click", function () {
         const section = this.closest(".collapsible-section"); // Get parent section
         section.classList.toggle("active");
@@ -609,8 +732,67 @@ document.querySelectorAll(".collapsible-header").forEach(header => {
 
         const content = section.querySelector(".collapsible-content");
         content.style.display = content.style.display === "block" ? "none" : "block";
+
+        // [DEV] 
+        //      Option for dynamically-updated "Open"/"Close" text
+        //      Note: currently doesn't populate text correctly when 
+        //            hyperlinking to the api tutorial in an open state
+        // if (section.classList.contains("collapsible-api-notebook")) {
+        //     const headerText = originalHeaderText.replace(
+        //         /\b(Open|Close)( the API Walkthrough)\b/,
+        //         this.classList.contains("active")
+        //             ? "Close$2"
+        //             : "Open$2"
+        //     );
+
+        //     this.textContent = headerText;
+
+        //     resizeHeadings();
+        // }
     });
 });
+
+// ----------------------------------------
+// Open collapsible section for "page-jump" links
+// ----------------------------------------
+// - Headers with page-jump links embedded within collapsible sections should cause
+//   the page to load with the collapsible section *open* so that the page loads at
+//   the correct window location  
+
+function openCollapsibleForHash() {
+    const targetId = window.location.hash.slice(1);
+
+    if (!targetId) {
+        return;
+    }
+
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+        return;
+    }
+
+    const section = target.closest(".collapsible-section");
+
+    if (!section) {
+        return;
+    }
+
+    const content = section.querySelector(".collapsible-content");
+
+    if (!content) {
+        return;
+    }
+
+    section.classList.add("active");
+    section.querySelector(".collapsible-header").classList.add("active");
+    content.style.display = "block";
+
+    target.scrollIntoView();
+}
+
+document.addEventListener("DOMContentLoaded", openCollapsibleForHash);
+window.addEventListener("hashchange", openCollapsibleForHash);
 
 // ----------------------------------------
 // Style standard markdown table

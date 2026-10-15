@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -324,6 +325,11 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1ubnrDn1aVVCrYr0dTZsO4qWPwjdPSnDS/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
 <div class='markdown-cell'>
     <h2>Hand Tuning Evoked Drives</h2>
 
@@ -364,8 +370,9 @@ condition of the tactile detection task.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # fetch the new data from the `hnn-data` repository
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # fetch the new data from the `hnn-data` repository
 data_url = "https://raw.githubusercontent.com/jonescompneurolab/hnn-data/main/MEG_detection_data/S1_SupraT.txt"
 urlretrieve(
     data_url,
@@ -383,7 +390,8 @@ fig = plot_initial_gui_figure(
     processed_dipole,
     suprathreshold_dpl,
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -436,11 +444,13 @@ properties of the <code>add_evoked_drive</code> method, like so:</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import inspect  
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import inspect  
 
 print(inspect.signature(net_default_gui.add_evoked_drive))
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -500,8 +510,9 @@ for the drive object. Let's</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        evprox1 = net_default_gui.external_drives["evprox1"]
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            evprox1 = net_default_gui.external_drives["evprox1"]
 print(
     "# " + "-"*40,
     "# Drive Object",
@@ -517,7 +528,8 @@ print(
     list(evprox1.keys()),
     sep="\n"
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -566,10 +578,12 @@ the default network.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # instantiate the default network
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # instantiate the default network
 net_01 = neymotin_2020_model()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -591,10 +605,12 @@ neurons</em></strong> only.</p>
 
             <!-- code cell -->
             <div class='code-cell'>
-                <code class='language-python'>
-                    for key, drive in net_default_gui.external_drives.items():
+                <div class='code-scroll-wrapper'>
+                    <code class='language-python'>
+                        for key, drive in net_default_gui.external_drives.items():
 print(f"{key}: {drive["weights_ampa"]}\n")
-                </code>
+                    </code>
+                </div>
             </div>
 
 
@@ -630,8 +646,9 @@ connection onto a pyramidal neuron by 5 fold.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # create pointers to the default drives
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # create pointers to the default drives
 # ----------------------------------------
 evprox1 = net_default_gui.external_drives["evprox1"]
 evdist1 = net_default_gui.external_drives["evdist1"]
@@ -715,7 +732,8 @@ print(
     "Drives added:",
     list(net_01.external_drives.keys())
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -742,8 +760,9 @@ results against the data.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        with chosen_backend(ncores):
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            with chosen_backend(ncores):
     dipoles_list = simulate_dipole(
         net=net_01,
         tstop=170.0,
@@ -754,7 +773,8 @@ results against the data.</p>
 net_01_dpl_01 = dipoles_list[0].copy()
 net_01_dpl_01.smooth(30).scale(3000)
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -766,7 +786,6 @@ net_01_dpl_01.smooth(30).scale(3000)
                     <div class='output-code mod_shrink_output'>
 
         MPIBackend is set to use 1 core: transferring the simulation to JoblibBackend....
-
 Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
 Building the NEURON model
 
@@ -774,26 +793,28 @@ Building the NEURON model
 Trial 1: 0.03 ms...
 
         Trial 1: 10.0 ms...
-
-        Trial 1: 20.0 ms...
+Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
+
+        Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
 
-        Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
+        Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
 
-        Trial 1: 100.0 ms...
+        Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
+
+        Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
-Trial 1: 140.0 ms...
+
+        Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f2f122f6120&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f4b22b35250&gt;
                     </div>
                 </div>
 
@@ -808,8 +829,9 @@ simulations.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # plot the data using our custom function
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_01,
     net_01_dpl_01,
@@ -825,7 +847,8 @@ fig.axes[1].plot(
 )
 
 fig.axes[1].legend();
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -868,10 +891,12 @@ simulation.</p>
 
             <!-- code cell -->
             <div class='code-cell'>
-                <code class='language-python'>
-                    for name, drive in net_01.external_drives.items():
+                <div class='code-scroll-wrapper'>
+                    <code class='language-python'>
+                        for name, drive in net_01.external_drives.items():
 print(f"{name}: {drive["dynamics"]["mu"]}")
-                </code>
+                    </code>
+                </div>
             </div>
 
 
@@ -901,8 +926,9 @@ drives appears more pronounced.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # first we'll create a dictionary of updated
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # first we'll create a dictionary of updated
 # mean arrival times for the drives
 update_arrival_times = {
     "evprox1": 18,
@@ -917,7 +943,8 @@ for name, drive in net_01.external_drives.items():
     print(f"    starting value: {drive["dynamics"]["mu"]}")
     drive["dynamics"]["mu"] = update_arrival_times[name]
     print(f"    `mu` now set to {drive["dynamics"]["mu"]}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -955,8 +982,9 @@ plot once again</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        with chosen_backend(ncores):
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            with chosen_backend(ncores):
     dipoles_list = simulate_dipole(
         net=net_01,
         tstop=170.0,
@@ -968,7 +996,8 @@ net_01_dpl_02 = dipoles_list[0].copy()
 net_01_dpl_02.smooth(30).scale(3000)
 
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -988,33 +1017,37 @@ Trial 1: 0.03 ms...
 
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
-Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
 
-        Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
+        Trial 1: 30.0 ms...
 
-        Trial 1: 70.0 ms...
+        Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+
+        Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
 
-        Trial 1: 130.0 ms...
-Trial 1: 140.0 ms...
+        Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+
+        Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
+Trial 1: 130.0 ms...
+
+        Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f2f129d5a30&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f4b2afffa70&gt;
                     </div>
                 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # plot the data using our custom function
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_01,
     net_01_dpl_02,
@@ -1037,7 +1070,8 @@ fig.axes[1].plot(
 )
 
 fig.axes[1].legend();
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1078,8 +1112,9 @@ distal drive more synchronous. Let's try reducing the value of sigma to
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        evdist1_net_01 = net_01.external_drives["evdist1"]
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            evdist1_net_01 = net_01.external_drives["evdist1"]
 print(f"Updating `sigma` for {name}...")
 print(
     "    starting value: "
@@ -1090,7 +1125,8 @@ print(
     "    `sigma` now set to "
     f"{evdist1_net_01["dynamics"]["sigma"]}"
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1111,8 +1147,9 @@ print(
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        with chosen_backend(ncores):
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            with chosen_backend(ncores):
     dipoles_list = simulate_dipole(
         net=net_01,
         tstop=170.0,
@@ -1123,7 +1160,8 @@ print(
 net_01_dpl_03 = dipoles_list[0].copy()
 net_01_dpl_03.smooth(30).scale(3000)
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1145,22 +1183,25 @@ Trial 1: 0.03 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
-Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
-Trial 1: 70.0 ms...
 
-        Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
+        Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
+
+        Trial 1: 70.0 ms...
+Trial 1: 80.0 ms...
+
+        Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
-Trial 1: 120.0 ms...
+
+        Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 
         Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f2f1c99c110&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f4b30fd2c90&gt;
                     </div>
                 </div>
 
@@ -1174,7 +1215,8 @@ Trial 1: 160.0 ms...
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
 
 # plot the data using our custom function
 fig = plot_initial_gui_figure(
@@ -1199,7 +1241,8 @@ fig.axes[1].plot(
 )
 
 fig.axes[1].legend();
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1240,8 +1283,9 @@ drive to account for this shift.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        evdist1_net_01 = net_01.external_drives["evdist1"]
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            evdist1_net_01 = net_01.external_drives["evdist1"]
 print(f"Updating `mu` for {name}...")
 print(
     "    starting value: "
@@ -1252,7 +1296,8 @@ print(
     "    `mu` now set to "
     f"{evdist1_net_01["dynamics"]["mu"]}"
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1273,8 +1318,9 @@ print(
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        with chosen_backend(ncores):
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            with chosen_backend(ncores):
     dipoles_list = simulate_dipole(
         net=net_01,
         tstop=170.0,
@@ -1285,7 +1331,8 @@ print(
 net_01_dpl_04 = dipoles_list[0].copy()
 net_01_dpl_04.smooth(30).scale(3000)
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1305,34 +1352,35 @@ Trial 1: 0.03 ms...
 
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
-
-        Trial 1: 30.0 ms...
+Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
 
-        Trial 1: 70.0 ms...
+        Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
 
-        Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
+        Trial 1: 110.0 ms...
 Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 
         Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
-Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f2f12a2ffb0&gt;
+        Trial 1: 160.0 ms...
+
+        &lt;hnn_core.dipole.Dipole at 0x7f4b2a824ec0&gt;
                     </div>
                 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # plot the data using our custom function
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_01,
     net_01_dpl_04,
@@ -1355,7 +1403,8 @@ fig.axes[1].plot(
 )
 
 fig.axes[1].legend();
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1407,6 +1456,8 @@ with invasive animal recording, or other imaging modalities)</p>
 
 
 <!-- markdown cell -->
+</div>
+</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
@@ -1435,7 +1486,8 @@ with invasive animal recording, or other imaging modalities)</p>
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

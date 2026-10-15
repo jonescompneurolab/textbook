@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -331,11 +332,13 @@ serves as the baseline for our exploration.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        net = neymotin_2020_model()
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            net = neymotin_2020_model()
 print(f"Network created with {len(net.cell_types)} cell types")
 print(f"Cell types: {list(net.cell_types.keys())}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -355,9 +358,11 @@ Cell types: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        type(net.cell_types) # cell types are returned as a dictionary now for us to see
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            type(net.cell_types) # cell types are returned as a dictionary now for us to see
+        </code>
+    </div>
 </div>
 
 
@@ -375,9 +380,11 @@ Cell types: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        net.cell_types  # each cell type is a dictionary containing the cell object and cell metadata
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            net.cell_types  # each cell type is a dictionary containing the cell object and cell metadata
+        </code>
+    </div>
 </div>
 
 
@@ -418,14 +425,16 @@ Cell types: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # The cell metadata contains information on morphology, cell type (inhibitory/excitatory), layer, and whether the cell contributes to the dipole
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # The cell metadata contains information on morphology, cell type (inhibitory/excitatory), layer, and whether the cell contributes to the dipole
 for cell_type_name, cell_type_data in net.cell_types.items():
     print(f"\n{cell_type_name}:")
     metadata = cell_type_data["cell_metadata"]
     for key, value in metadata.items():
         print(f"  {key}: {value}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -471,15 +480,17 @@ L5_pyramidal:
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # The cell object contains the properties of the cell, such as its sections, synapses, and ion channels (see below for an example)
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # The cell object contains the properties of the cell, such as its sections, synapses, and ion channels (see below for an example)
 # the properties of each section can be accessed as follows:
 
 cell_type = "L2_pyramidal"
 for key, value in net.cell_types[cell_type]["cell_object"].sections.items():
     print(f"\nSection: {key}")
     print(f"  Properties: {value}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -531,8 +542,9 @@ ephys, or morphology.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        excitatory = net.filter_cell_types(electro_type='excitatory')
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            excitatory = net.filter_cell_types(electro_type='excitatory')
 print(f"Excitatory cells: {excitatory}")
 
 layer2_cells = net.filter_cell_types(layer='2')
@@ -540,7 +552,8 @@ print(f"Layer 2 cells: {layer2_cells}")
 
 dipole_contributors = net.filter_cell_types(measure_dipole=True)
 print(f"Dipole contributors: {dipole_contributors}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -571,8 +584,9 @@ the default weights and delays.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        src_example = 'L2_pyramidal'
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            src_example = 'L2_pyramidal'
 target_example = 'L2_pyramidal'
 
 print(f"Example: {src_example} \u2192 {target_example} proximal connections")
@@ -591,7 +605,8 @@ for conn in net.connectivity:
         print(f"  Effective weight: {weight * gain:.6f} \u03bcS")
         print(f"  Delay: {conn['nc_dict']['A_delay']} ms")
         print(f"  Space constant: {conn['nc_dict']['lamtha']}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -633,8 +648,9 @@ with!</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        #cells that contribute to the dipole
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            #cells that contribute to the dipole
 dipole_cells = net.filter_cell_types(measure_dipole=True)
 non_dipole_cells = net.filter_cell_types(measure_dipole=False)
 
@@ -645,7 +661,8 @@ for cell_type in dipole_cells:
 print("\nCells NOT contributing to dipole signal:")
 for cell_type in non_dipole_cells:
     print(f"{cell_type}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -678,8 +695,9 @@ visualizations</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig = plt.figure(figsize=(14, 10))
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig = plt.figure(figsize=(14, 10))
 
 for idx, (cell_name, cell_data) in enumerate(net.cell_types.items()):
     ax = fig.add_subplot(2, 2, idx + 1, projection='3d')  # Create 3D subplot
@@ -692,7 +710,8 @@ for idx, (cell_name, cell_data) in enumerate(net.cell_types.items()):
 plt.suptitle('Cell Morphologies in the Network', fontsize=14, y=0.98)
 plt.tight_layout()
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -724,8 +743,9 @@ want to find all excitatory cells in a specific layer.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # excitatory cells in layer 2
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # excitatory cells in layer 2
 l2_excitatory = net.filter_cell_types(layer='2', electro_type='excitatory')
 print(f"Layer 2 excitatory cells: {l2_excitatory}")
 
@@ -739,7 +759,8 @@ if l2_excitatory:
     print(f"  Cell count: {cell_count}")
     print(f"  Morphology: {metadata['morpho_type']}")
     print(f"  Contributes to dipole: {metadata['measure_dipole']}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -771,8 +792,9 @@ ion channels across different cell types</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # metadata to find a pyramidal cell, then examine its conductances
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # metadata to find a pyramidal cell, then examine its conductances
 pyramidal_cells = net.filter_cell_types(morpho_type='pyramidal')
 example_pyramidal = pyramidal_cells[0]
 
@@ -799,7 +821,8 @@ if 'apical_tuft' in cell_obj.sections:
             conductances = {k: v for k, v in mech_params.items() if 'gbar' in k}
             if conductances:
                 print(f"  {mech_name}: {conductances}")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -849,7 +872,8 @@ Apical tuft ion channels:
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

@@ -6,7 +6,7 @@
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.5 Simulate the Default Network
+# 4.5 Simulate an ERP using the Default Parameters
 
 <div
   id="video-container"
@@ -15,4 +15,13 @@
   style="padding: 10px 0px 30px 0px;"
 ></div>
 
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
+
 [[erp_api_walkthrough.ipynb][Simulate the Default Network]]
+
+</div>
+</div>

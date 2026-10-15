@@ -10,8 +10,6 @@
 
 # 1.3 Installation
 
------------------------------------
-
 ## Running HNN in the cloud (no installation)
 
 ### Google CoLab
@@ -26,8 +24,6 @@ This is the quickest way to get up and running with HNN, though it does require 
 ### Neuroscience Gateway Portal
 
 HNN is available for free, public use on the [Neuroscience Gateway Portal (NSG)](https://www.nsgportal.org/). You can find instructions for using HNN on NSG [at this page here](https://users.sdsc.edu/~kenneth/hnn/index.html).
-
------------------------------------
 
 ## Local Installation - Simple
 
@@ -80,13 +76,11 @@ conda activate hnn-core-env
 
 **If you have any questions or problems** while installing HNN, feel free to ask for help on [our GitHub Discussions page][]!
 
------------------------------------
-
 ## Local Installation - Detailed
 
 <!-- Which version ------------------------------------------------------- -->
 
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> Which version to install? </h5>
 <div class="collapsible-content">
 
@@ -115,7 +109,7 @@ After you have installed HNN, we recommend you follow the **Testing Your Install
 
 <!-- Conda pkg ------------------------------------------------------- -->
 
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> `conda` Package Installation </h5>
 <div class="collapsible-content">
 
@@ -202,7 +196,7 @@ For Windows users, there are some extra steps since you need to install HNN thro
 
 <!-- Pip pkg ------------------------------------------------------- -->
 
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> `pip` Package Installation </h5>
 <div class="collapsible-content">
 
@@ -463,7 +457,7 @@ Unfortunately, we do not officially support MPI usage on native Windows due to t
 
 <!-- Pip src ------------------------------------------------------- -->
 
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> `pip` Source Installation </h5>
 <div class="collapsible-content">
 
@@ -681,7 +675,7 @@ steps](https://docs.github.com/en/get-started/git-basics/set-up-git#authenticati
 
 <span style="height: 30px;" />
 
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> Testing Your Installation </h5>
 <div class="collapsible-content">
 

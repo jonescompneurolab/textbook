@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -324,6 +325,11 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1H0rhgltr6Mh77XOBS7jEEKybqoZuKDJY/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
 <div class='markdown-cell'>
     <h2>Hand Tuning Drive Parameters</h2>
 
@@ -359,9 +365,11 @@ printing the keys in the <code>cell_types</code> data dictionary.</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        print(list(net_default_gui.cell_types.keys()))
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            print(list(net_default_gui.cell_types.keys()))
+        </code>
+    </div>
 </div>
 
 
@@ -399,8 +407,9 @@ decay time for each synapse type</p></li>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        l5_pyr_celltype = net_default_gui.cell_types["L5_pyramidal"]
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            l5_pyr_celltype = net_default_gui.cell_types["L5_pyramidal"]
 l5_pyr_object = l5_pyr_celltype["cell_object"]
 
 print(
@@ -409,7 +418,8 @@ print(
     l5_pyr_object.synapses,
     sep="\n\n"
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -442,8 +452,9 @@ above. We can inspect them using the object's <code>__dict__</code></p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        l5_pyr_soma = l5_pyr_object.sections["soma"]
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            l5_pyr_soma = l5_pyr_object.sections["soma"]
 
 print(
     'Printout for sections["soma"]:',
@@ -452,7 +463,8 @@ print(
     f"    {list(l5_pyr_soma.__dict__.keys())}",
     sep="\n",
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -488,9 +500,11 @@ for the <code>soma</code> with:</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        l5_pyr_object.sections["soma"].mechs
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            l5_pyr_object.sections["soma"].mechs
+        </code>
+    </div>
 </div>
 
 
@@ -530,9 +544,11 @@ un-comment the cell and rerun it.</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        # l5_pyr_object.to_dict()
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            # l5_pyr_object.to_dict()
+        </code>
+    </div>
 </div>
 
 
@@ -560,13 +576,15 @@ condition).</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig = plot_initial_gui_figure(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig = plot_initial_gui_figure(
     net_default_gui,
     processed_dipole,
     suprathreshold_dpl,
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -621,9 +639,11 @@ print the first entry to examine its properties</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        net_default_gui.connectivity[0]
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            net_default_gui.connectivity[0]
+        </code>
+    </div>
 </div>
 
 
@@ -668,11 +688,13 @@ copying" the default network. We'll call this network
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        from copy import deepcopy  
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            from copy import deepcopy  
 
 net_02 = read_network_configuration("gui_default.json")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -701,14 +723,16 @@ were correctly updated.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        net_02.set_global_synaptic_gains(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            net_02.set_global_synaptic_gains(
     e_e=2,
     e_i=2,
 )
 
 print(net_02.get_global_synaptic_gains())
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -734,8 +758,9 @@ print(net_02.get_global_synaptic_gains())
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        with chosen_backend(ncores):
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            with chosen_backend(ncores):
     net_02_dpl_01 = simulate_dipole(
         net=net_02,
         tstop=170.0,
@@ -746,7 +771,8 @@ print(net_02.get_global_synaptic_gains())
 processed_dpl_02_01 = net_02_dpl_01[0].copy()
 processed_dpl_02_01.smooth(30).scale(3000)
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -767,7 +793,8 @@ Trial 1: 0.03 ms...
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
+
+        Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
 
         Trial 1: 60.0 ms...
@@ -782,18 +809,18 @@ Trial 1: 110.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
+Trial 1: 160.0 ms...
 
-        Trial 1: 160.0 ms...
-
-        &lt;hnn_core.dipole.Dipole at 0x7f2f15fceff0&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f4b2862ade0&gt;
                     </div>
                 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # plot the data using our custom function
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_02,
     processed_dpl_02_01,
@@ -809,7 +836,8 @@ fig.axes[1].plot(
 )
 
 fig.axes[1].legend();
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -863,9 +891,11 @@ off, without needing to re-simulate it later. We'll call the copy
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        net_02_checkpoint_01 = deepcopy(net_02)
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            net_02_checkpoint_01 = deepcopy(net_02)
+        </code>
+    </div>
 </div>
 
 
@@ -881,8 +911,9 @@ method, and you can then load it at a later time with the same
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        from hnn_core import write_network_configuration
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            from hnn_core import write_network_configuration
 
 save_to_disk = False
 
@@ -891,7 +922,8 @@ if save_to_disk:
         net_02_checkpoint_01,
         "net_02_checkpoint_01.json",
     )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -913,15 +945,17 @@ pyramidal neurons will yield an overall stronger response.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        net_02.set_global_synaptic_gains(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            net_02.set_global_synaptic_gains(
     e_e=1,
     e_i=1,
     i_e=0.5,  # i.e., 50%
 )
 
 print(net_02.get_global_synaptic_gains())
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -940,8 +974,9 @@ print(net_02.get_global_synaptic_gains())
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        with chosen_backend(ncores):
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            with chosen_backend(ncores):
     net_02_dpl_02 = simulate_dipole(
         net=net_02,
         tstop=170.0,
@@ -952,7 +987,8 @@ print(net_02.get_global_synaptic_gains())
 processed_dpl_02_02 = net_02_dpl_02[0].copy()
 processed_dpl_02_02.smooth(30).scale(3000)
 
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -972,33 +1008,35 @@ Trial 1: 0.03 ms...
 
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
-Trial 1: 30.0 ms...
+
+        Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
 
         Trial 1: 50.0 ms...
 Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
 
-        Trial 1: 120.0 ms...
+        Trial 1: 90.0 ms...
+Trial 1: 100.0 ms...
+
+        Trial 1: 110.0 ms...
+Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
-
-        Trial 1: 150.0 ms...
+Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
-        &lt;hnn_core.dipole.Dipole at 0x7f2f13eceba0&gt;
+        &lt;hnn_core.dipole.Dipole at 0x7f4b2a8a3b60&gt;
                     </div>
                 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # plot the data using our custom function
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # plot the data using our custom function
 fig = plot_initial_gui_figure(
     net_02,
     processed_dpl_02_02,
@@ -1021,7 +1059,8 @@ fig.axes[1].plot(
 )
 
 fig.axes[1].legend();
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1077,6 +1116,8 @@ targets for validation in follow-up experiments</p>
 
 
 <!-- markdown cell -->
+</div>
+</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
@@ -1105,7 +1146,8 @@ targets for validation in follow-up experiments</p>
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

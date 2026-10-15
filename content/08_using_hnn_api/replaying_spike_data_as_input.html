@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -334,9 +335,11 @@ visualizing the results. Let's dive in!</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        # Authors: Maira Usman <maira.usman5703@gmail.com>
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            # Authors: Maira Usman <maira.usman5703@gmail.com>
+        </code>
+    </div>
 </div>
 
 
@@ -355,8 +358,9 @@ temporary file for efficient handling.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import numpy as np
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import numpy as np
 import matplotlib.pyplot as plt
 from hnn_core import neymotin_2020_model, simulate_dipole, read_spikes
 import os.path as op
@@ -391,7 +395,8 @@ with tempfile.TemporaryDirectory() as tmp_dir:
     net_A.cell_response.write(spike_file)
     cell_response = read_spikes(op.join(tmp_dir, 'spk_*.txt'))
     print(f"Extracted {sum(len(t) for t in cell_response.spike_times)} spikes from Network A")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -415,22 +420,25 @@ Trial 1: 0.03 ms...
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
-Trial 1: 40.0 ms...
 
-        Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
+        Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
+
+        Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
-Trial 1: 100.0 ms...
 
-        Trial 1: 110.0 ms...
+        Trial 1: 100.0 ms...
+Trial 1: 110.0 ms...
 Trial 1: 120.0 ms...
-Trial 1: 130.0 ms...
+
+        Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
 Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
-Writing file /tmp/tmpwt1n3bh6/spk_0.txt
+
+        Writing file /tmp/tmpdr3xn0j4/spk_0.txt
 Extracted 616 spikes from Network A
 
                     </div>
@@ -453,8 +461,9 @@ cells to Network B's layers, ensuring a realistic interaction.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print("Creating and configuring Network B...")
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print("Creating and configuring Network B...")
 net_B = neymotin_2020_model()
 net_B._params.update({'tstop': 225.0})
 
@@ -503,7 +512,8 @@ net_B.add_spike_train_drive(
     synaptic_delays=0.1,
     conn_seed=42
 )
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -533,8 +543,9 @@ how the input from Network A influences Network B's activity.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print("Simulating Network B...")
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print("Simulating Network B...")
 dpls_b = simulate_dipole(net_B, tstop=225.0, n_trials=1)
 
 # Visualize results
@@ -549,7 +560,8 @@ axes[1].set_title('Network B: Spike Raster')
 axes[1].set_ylabel('Cell ID')
 axes[1].set_xlabel('Time (ms)')
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -579,22 +591,19 @@ Trial 1: 70.0 ms...
         Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
-
-        Trial 1: 110.0 ms...
+Trial 1: 110.0 ms...
 Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
+
+        Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
-
-        Trial 1: 170.0 ms...
+Trial 1: 170.0 ms...
 Trial 1: 180.0 ms...
-
-        Trial 1: 190.0 ms...
+Trial 1: 190.0 ms...
 Trial 1: 200.0 ms...
 Trial 1: 210.0 ms...
-
-        Trial 1: 220.0 ms...
+Trial 1: 220.0 ms...
 
         &lt;Figure size 1000x1200 with 2 Axes&gt;
                     </div>
@@ -617,8 +626,9 @@ ensure the connection was established correctly.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        print("\nVerifying configuration:")
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            print("\nVerifying configuration:")
 drive_name = 'drive_from_NetA'
 if drive_name in net_B.external_drives:
     drive = net_B.external_drives[drive_name]
@@ -629,7 +639,8 @@ if drive_name in net_B.external_drives:
     print(f"  Number of connections from drive: {drive_connections}")
 else:
     print(f"  ERROR: Drive '{drive_name}' not found")
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -690,7 +701,8 @@ and delays to explore different dynamics. Try modifying the
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

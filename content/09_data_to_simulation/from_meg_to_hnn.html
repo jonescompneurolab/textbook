@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -341,10 +342,12 @@ et al., 2007), (Neymotin et al., 2020).</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # Authors: Mainak Jas <mainakjas@gmail.com>
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # Authors: Mainak Jas <mainakjas@gmail.com>
 #          Ryan Thorpe <ryan_thorpe@brown.edu>
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -360,21 +363,25 @@ into your Python environment automatically.</strong></p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        # %pip install -q mne nibabel ipyevents "pyvista[all]" pyvistaqt pooch==1.8.2
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            # %pip install -q mne nibabel ipyevents "pyvista[all]" pyvistaqt pooch==1.8.2
+        </code>
+    </div>
 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # Needed for certain plotting to work
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # Needed for certain plotting to work
 import pyvista as pv
 from mne.viz import set_3d_backend
 set_3d_backend('notebook')
 pv.set_jupyter_backend('client')
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -404,14 +411,16 @@ importing <code>somato</code> from <code>mne.datasets</code>.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import os.path as op
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import os.path as op
 import matplotlib.pyplot as plt
 
 import mne
 from mne.datasets import somato
 from mne.minimum_norm import apply_inverse, make_inverse_operator
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -425,8 +434,9 @@ subject <code>01</code>.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        data_path = somato.data_path()
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            data_path = somato.data_path()
 subject = '01'
 task = 'somato'
 raw_fname = op.join(data_path, 'sub-{}'.format(subject), 'meg',
@@ -434,7 +444,8 @@ raw_fname = op.join(data_path, 'sub-{}'.format(subject), 'meg',
 fwd_fname = op.join(data_path, 'derivatives', 'sub-{}'.format(subject),
                     'sub-{}_task-{}-fwd.fif'.format(subject, task))
 subjects_dir = op.join(data_path, 'derivatives', 'freesurfer', 'subjects')
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -447,8 +458,9 @@ subjects_dir = op.join(data_path, 'derivatives', 'freesurfer', 'subjects')
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # Read and band-pass filter the raw data
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # Read and band-pass filter the raw data
 raw = mne.io.read_raw_fif(raw_fname, preload=True)
 l_freq, h_freq = 1, 40
 raw.filter(l_freq, h_freq)
@@ -466,7 +478,8 @@ epochs = mne.Epochs(raw, events, event_id, tmin, tmax, baseline=baseline,
 fwd = mne.read_forward_solution(fwd_fname)
 cov = mne.compute_covariance(epochs)
 inv = make_inverse_operator(epochs.info, fwd, cov)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -625,14 +638,16 @@ be normal to the cortical surface. Hence, using the option
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        snr = 3.
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            snr = 3.
 lambda2 = 1. / snr ** 2
 evoked = epochs.average()
 stc = apply_inverse(evoked, inv, lambda2, method='MNE',
                     pick_ori="normal", return_residual=False,
                     verbose=True)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -681,13 +696,15 @@ we create a label for the postcentral gyrus (S1) in source-space</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        hemi = 'rh'
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            hemi = 'rh'
 label_tag = 'G_postcentral'
 label_s1 = mne.read_labels_from_annot(subject, parc='aparc.a2009s', hemi=hemi,
                                       regexp=label_tag,
                                       subjects_dir=subjects_dir)[0]
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -725,8 +742,9 @@ activation at 0.040 sec that resemble the following images.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        '''
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            '''
 Brain = mne.viz.get_brain_class()
 brain_label = Brain(subject, hemi, 'white', subjects_dir=subjects_dir)
 brain_label.add_label(label_s1, color='green', alpha=0.9)
@@ -735,7 +753,8 @@ brain = stc_label.plot(subjects_dir=subjects_dir, hemi=hemi, surface='white',
                        view_layout='horizontal', initial_time=0.04,
                        backend='pyvista')
 '''
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -793,8 +812,9 @@ cortex.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        flip_data = stc.extract_label_time_course(label_s1, inv['src'],
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            flip_data = stc.extract_label_time_course(label_s1, inv['src'],
                                           mode='pca_flip')
 dipole_tc = -flip_data[0] * 1e9
 
@@ -805,7 +825,8 @@ plt.ylabel('Current Dipole (nAm)')
 plt.xlim((0, 170))
 plt.axhline(0, c='k', ls=':')
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -840,15 +861,17 @@ instantiate the network.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import hnn_core
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import hnn_core
 from hnn_core import simulate_dipole, neymotin_2020_model
 from hnn_core import average_dipoles, JoblibBackend
 
 hnn_core_root = op.dirname(hnn_core.__file__)
 params_fname = op.join(hnn_core_root, 'param', 'N20.json')
 net = neymotin_2020_model(params_fname)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -870,8 +893,9 @@ across cells in the network.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # Early proximal drive
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # Early proximal drive
 weights_ampa_p = {'L2_basket': 0.0036, 'L2_pyramidal': 0.0039,
                   'L5_basket': 0.0019, 'L5_pyramidal': 0.0020}
 weights_nmda_p = {'L2_basket': 0.0029, 'L2_pyramidal': 0.0005,
@@ -926,7 +950,8 @@ net.add_evoked_drive(
     n_drive_cells=1, cell_specific=False, weights_ampa=weights_ampa_d,
     weights_nmda=weights_nmda_d, synaptic_delays=synaptic_delays_d,
     event_seed=275)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -941,12 +966,14 @@ set <code>n_trials</code> to be &gt;=25.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        n_trials = 2
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            n_trials = 2
 # n_trials = 25
 with JoblibBackend(n_jobs=2):
     dpls = simulate_dipole(net, tstop=170., n_trials=n_trials)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -966,56 +993,56 @@ Building the NEURON model
 
         [Done]
 [Done]
-Trial 2: 0.03 ms...
 Trial 1: 0.03 ms...
+Trial 2: 0.03 ms...
 
-        Trial 2: 10.0 ms...
-Trial 1: 10.0 ms...
+        Trial 1: 10.0 ms...
+Trial 2: 10.0 ms...
 
-        Trial 2: 20.0 ms...
-Trial 1: 20.0 ms...
+        Trial 1: 20.0 ms...
+Trial 2: 20.0 ms...
 
-        Trial 2: 30.0 ms...
-Trial 1: 30.0 ms...
+        Trial 1: 30.0 ms...
+Trial 2: 30.0 ms...
 
-        Trial 2: 40.0 ms...
-Trial 1: 40.0 ms...
+        Trial 1: 40.0 ms...
+Trial 2: 40.0 ms...
 
-        Trial 2: 50.0 ms...
-Trial 1: 50.0 ms...
+        Trial 1: 50.0 ms...
+Trial 2: 50.0 ms...
 
-        Trial 2: 60.0 ms...
-Trial 1: 60.0 ms...
+        Trial 1: 60.0 ms...
+Trial 2: 60.0 ms...
 
-        Trial 2: 70.0 ms...
-Trial 1: 70.0 ms...
+        Trial 1: 70.0 ms...
+Trial 2: 70.0 ms...
 
-        Trial 2: 80.0 ms...
-Trial 1: 80.0 ms...
+        Trial 1: 80.0 ms...
+Trial 2: 80.0 ms...
 
-        Trial 2: 90.0 ms...
-Trial 1: 90.0 ms...
+        Trial 1: 90.0 ms...
+Trial 2: 90.0 ms...
 
-        Trial 2: 100.0 ms...
-Trial 1: 100.0 ms...
+        Trial 1: 100.0 ms...
+Trial 2: 100.0 ms...
 
-        Trial 2: 110.0 ms...
-Trial 1: 110.0 ms...
+        Trial 1: 110.0 ms...
+Trial 2: 110.0 ms...
 
-        Trial 2: 120.0 ms...
-Trial 1: 120.0 ms...
+        Trial 1: 120.0 ms...
+Trial 2: 120.0 ms...
 
-        Trial 2: 130.0 ms...
-Trial 1: 130.0 ms...
+        Trial 1: 130.0 ms...
+Trial 2: 130.0 ms...
 
-        Trial 2: 140.0 ms...
-Trial 1: 140.0 ms...
+        Trial 1: 140.0 ms...
+Trial 2: 140.0 ms...
 
-        Trial 2: 150.0 ms...
-Trial 1: 150.0 ms...
+        Trial 1: 150.0 ms...
+Trial 2: 150.0 ms...
 
-        Trial 2: 160.0 ms...
-Trial 1: 160.0 ms...
+        Trial 1: 160.0 ms...
+Trial 2: 160.0 ms...
 
                     </div>
                 </div>
@@ -1037,13 +1064,15 @@ responsible for the recorded macroscopic evoked response (Jones et al.,
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        dpl_smooth_win = 20
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            dpl_smooth_win = 20
 dpl_scalefctr = 12
 for dpl in dpls:
     dpl.smooth(dpl_smooth_win)
     dpl.scale(dpl_scalefctr)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1057,8 +1086,9 @@ median nerve evoked response waveforms, and output spike histogram.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig, axes = plt.subplots(3, 1, sharex=True, figsize=(6, 6),
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig, axes = plt.subplots(3, 1, sharex=True, figsize=(6, 6),
                          constrained_layout=True)
 net.cell_response.plot_spikes_hist(ax=axes[0],
                                    spike_types=['evprox', 'evdist'],
@@ -1070,7 +1100,8 @@ axes[1].legend(['MNE label average', 'HNN simulation'])
 axes[1].set_ylabel('Current Dipole (nAm)')
 net.cell_response.plot_spikes_raster(ax=axes[2], show=False)
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -1134,7 +1165,8 @@ href="https://doi.org/10.7554/eLife.51214">https://doi.org/10.7554/eLife.51214</
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

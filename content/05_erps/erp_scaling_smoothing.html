@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -324,6 +325,11 @@
 <div id="video-container" class="text-align: center;" data-src="https://drive.google.com/file/d/1vAF7of4CMAslYKzGsGinX2ez_XmyaJRJ/preview" style="padding: 10px 0px 30px 0px;">
 
 </div>
+<div class="collapsible-section collapsible-api-notebook">
+<h5 class="collapsible-header">
+API Walkthrough
+</h5>
+<div class="collapsible-content">
 <div class='markdown-cell'>
     <h2>Simulation Scaling and Smoothing in the API</h2>
 
@@ -344,12 +350,14 @@ so there will be some discrepancies.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        gui_colors = {
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            gui_colors = {
     "orange": "#ff7f0e",
     "blue": "#1f77b4",
 }
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -395,11 +403,13 @@ individual trial to apply the dipole scaling factor.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # get the first (in this case, only) trial from the
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # get the first (in this case, only) trial from the
 # list of dipole objects
 dipole_01 = dipoles_list[0]
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -416,15 +426,17 @@ factor so we can plot both dipoles</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # we use copy() to ensure we have a new copy of the dipole
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # we use copy() to ensure we have a new copy of the dipole
 # that is seprate from the original
 dipole_01_scaled = dipole_01.copy()
 
 # set scaling factor and apply it to the copy only
 scaling_factor = 3000
 dipole_01_scaled.scale(scaling_factor);
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -446,8 +458,9 @@ troughs) remain the same</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # plot the dipoles side by side
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # plot the dipoles side by side
 # --------------------------------------------------
 fig, axes = plt.subplots(
     nrows=1,
@@ -483,7 +496,8 @@ for subplot in axes:
 
     # show legends
     subplot.legend()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -515,8 +529,9 @@ of magnitude and see if our scaling factor was appropriate</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        # conditionally add experimental data to our figure
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            # conditionally add experimental data to our figure
 # --------------------------------------------------
 for subplot in axes:
     # if there's only one line on the plot, we still
@@ -544,7 +559,8 @@ for subplot in axes:
     subplot.tick_params(axis="y", colors="black")
 
 fig
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -592,8 +608,9 @@ window widths for comparison.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig, ax = plt.subplots(
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig, ax = plt.subplots(
     figsize=(8, 6),
     constrained_layout=True,
 )
@@ -637,7 +654,8 @@ ax.lines[-1].set_label("Experimental data")
 ax.lines[-1].set_color(gui_colors["orange"])
 
 plt.legend()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -648,7 +666,7 @@ plt.legend()
                     </div>
                     <div class='output-code'>
 
-        &lt;matplotlib.legend.Legend at 0x7f2f177e8ec0&gt;
+        &lt;matplotlib.legend.Legend at 0x7f4b34508680&gt;
         &lt;Figure size 800x600 with 1 Axes&gt;
                     </div>
                 </div>
@@ -685,6 +703,8 @@ and your data into the same order of magnitude.</p>
 
 
                 <!-- markdown cell -->
+</div>
+</div>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
@@ -713,7 +733,8 @@ and your data into the same order of magnitude.</p>
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

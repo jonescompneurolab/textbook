@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -299,7 +300,6 @@
     # Dylan Daniels
 -->
 <h1>1.3 Installation</h1>
-<hr />
 <h2>Running HNN in the cloud (no installation)</h2>
 <h3>Google CoLab</h3>
 <p>As an alternative to installing HNN locally, we provide Google CoLab notebooks that allow you to run HNN out of your browser, with access to your local filesystem.</p>
@@ -310,7 +310,6 @@
 <p>This is the quickest way to get up and running with HNN, though it does require a Google account. If you do not have a Google account, you can create one for free to run the notebooks. There is no charge associated with using Google CoLab.</p>
 <h3>Neuroscience Gateway Portal</h3>
 <p>HNN is available for free, public use on the <a href="https://www.nsgportal.org/">Neuroscience Gateway Portal (NSG)</a>. You can find instructions for using HNN on NSG <a href="https://users.sdsc.edu/~kenneth/hnn/index.html">at this page here</a>.</p>
-<hr />
 <h2>Local Installation - Simple</h2>
 <p>If you want to install HNN-Core on your local computer, follow these steps. This will install both the API and the GUI. (For more complex installation questions, such as installing on Brown’s OSCAR environment, installing with MPI speedup, installing for development, etc., see the <strong>Local Installation - Detailed</strong> section later).</p>
 <ol type="1">
@@ -344,10 +343,9 @@ print(&#39;--&gt; SUCCESS: The test worked&#39;)
 </ol>
 <pre><code>conda activate hnn-core-env</code></pre>
 <p><strong>If you have any questions or problems</strong> while installing HNN, feel free to ask for help on <a href="https://github.com/jonescompneurolab/hnn-core/discussions">our GitHub Discussions page</a>!</p>
-<hr />
 <h2>Local Installation - Detailed</h2>
 <!-- Which version ------------------------------------------------------- -->
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header">
 Which version to install?
 </h5>
@@ -368,7 +366,7 @@ Which version to install?
 </div>
 <p><span style="height: 30px;" /></p>
 <!-- Conda pkg ------------------------------------------------------- -->
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header">
 <code>conda</code> Package Installation
 </h5>
@@ -415,7 +413,7 @@ conda activate hnn-core-env</code></pre>
 </div>
 <p><span style="height: 30px;" /></p>
 <!-- Pip pkg ------------------------------------------------------- -->
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header">
 <code>pip</code> Package Installation
 </h5>
@@ -555,7 +553,7 @@ Trial 1: 10.0 ms...</code></pre></li>
 </div>
 <p><span style="height: 30px;" /></p>
 <!-- Pip src ------------------------------------------------------- -->
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header">
 <code>pip</code> Source Installation
 </h5>
@@ -659,7 +657,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${CONDA_PREFIX}/lib</code></pre></li>
 </div>
 </div>
 <p><span style="height: 30px;" /></p>
-<div class="collapsible-section">
+<div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header">
 Testing Your Installation
 </h5>
@@ -710,7 +708,8 @@ print(&#39;--&gt; SUCCESS: The test worked&#39;)
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

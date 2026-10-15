@@ -285,6 +285,7 @@
         </div>
     </div>
 
+    <div id="main-scroll-container">
     <div id="main">
     <div id="content-wrapper">
     <div id="content">
@@ -349,14 +350,16 @@ libraries:</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        import os.path as op
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            import os.path as op
 import tempfile
 
 import matplotlib.pyplot as plt
 
 from hnn_core import read_spikes, neymotin_2020_model, simulate_dipole
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -372,9 +375,11 @@ example</a>.</p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <code class='language-python'>
-        net = neymotin_2020_model()
-    </code>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            net = neymotin_2020_model()
+        </code>
+    </div>
 </div>
 
 
@@ -391,8 +396,9 @@ distributed with a certain mean and standard deviation.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        weights_ampa_d1 = {'L2_basket': 0.006562, 'L2_pyramidal': 7e-6,
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            weights_ampa_d1 = {'L2_basket': 0.006562, 'L2_pyramidal': 7e-6,
                    'L5_pyramidal': 0.142300}
 weights_nmda_d1 = {'L2_basket': 0.019482, 'L2_pyramidal': 0.004317,
                    'L5_pyramidal': 0.080074}
@@ -402,7 +408,8 @@ net.add_evoked_drive(
     'evdist1', mu=63.53, sigma=3.85, numspikes=1, weights_ampa=weights_ampa_d1,
     weights_nmda=weights_nmda_d1, location='distal',
     synaptic_delays=synaptic_delays_d1, event_seed=274)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -419,8 +426,9 @@ negative deflection.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        weights_ampa_p1 = {'L2_basket': 0.08831, 'L2_pyramidal': 0.01525,
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            weights_ampa_p1 = {'L2_basket': 0.08831, 'L2_pyramidal': 0.01525,
                    'L5_basket': 0.19934, 'L5_pyramidal': 0.00865}
 synaptic_delays_prox = {'L2_basket': 0.1, 'L2_pyramidal': 0.1,
                         'L5_basket': 1., 'L5_pyramidal': 1.}
@@ -430,7 +438,8 @@ net.add_evoked_drive(
     'evprox1', mu=26.61, sigma=2.47, numspikes=1, weights_ampa=weights_ampa_p1,
     weights_nmda=None, location='proximal',
     synaptic_delays=synaptic_delays_prox, event_seed=544)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -445,8 +454,9 @@ weights differ from first.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        weights_ampa_p2 = {'L2_basket': 0.000003, 'L2_pyramidal': 1.438840,
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            weights_ampa_p2 = {'L2_basket': 0.000003, 'L2_pyramidal': 1.438840,
                    'L5_basket': 0.008958, 'L5_pyramidal': 0.684013}
 # all NMDA weights are zero; omit weights_nmda (defaults to None)
 net.add_evoked_drive(
@@ -455,7 +465,8 @@ net.add_evoked_drive(
     synaptic_delays=synaptic_delays_prox, event_seed=814)
 
 dpls = simulate_dipole(net, tstop=170., record_vsec='soma')
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -477,22 +488,20 @@ Trial 1: 0.03 ms...
 Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
+Trial 1: 50.0 ms...
 
-        Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
+        Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 
         Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
-
-        Trial 1: 110.0 ms...
+Trial 1: 110.0 ms...
 
         Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 Trial 1: 140.0 ms...
-
-        Trial 1: 150.0 ms...
+Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
                     </div>
@@ -512,10 +521,12 @@ object as a dictionary.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        gid_ranges = net.gid_ranges
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            gid_ranges = net.gid_ranges
 print(net.gid_ranges)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -545,11 +556,13 @@ individual cells including spikes, voltages and currents.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        trial_idx = 0
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            trial_idx = 0
 vsec = net.cell_response.vsec[trial_idx]
 print(vsec.keys())
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -576,15 +589,17 @@ the gid.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        gid = 170
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            gid = 170
 plt.figure(figsize=(4, 4), constrained_layout=True)
 plt.plot(net.cell_response.times, vsec[gid]['soma'])
 plt.title('%s (gid=%d)' % (net.gid_to_type(gid), gid))
 plt.xlabel('Time (ms)')
 plt.ylabel('Voltage (mV)')
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -620,14 +635,16 @@ file and after, ensuring that they look the same.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        net.cell_response.plot_spikes_raster(show=False)
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            net.cell_response.plot_spikes_raster(show=False)
 with tempfile.TemporaryDirectory() as tmp_dir_name:
     net.cell_response.write(op.join(tmp_dir_name, 'spk_%d.txt'))
     cell_response = read_spikes(op.join(tmp_dir_name, 'spk_*.txt'))
 cell_response.plot_spikes_raster(show=False)
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -638,7 +655,7 @@ plt.show()
                     </div>
                     <div class='output-code'>
 
-        Writing file /tmp/tmppagu9d0f/spk_0.txt
+        Writing file /tmp/tmpcavbxg0m/spk_0.txt
 
         &lt;Figure size 640x480 with 1 Axes&gt;
                     </div>
@@ -680,8 +697,9 @@ class by specifying a time window with <code>tstart</code> and
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        all_rates = cell_response.mean_rates(tstart=0, tstop=170,
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            all_rates = cell_response.mean_rates(tstart=0, tstop=170,
                                      gid_ranges=net.gid_ranges,
                                      mean_type='all')
 trial_rates = cell_response.mean_rates(tstart=0, tstop=170,
@@ -691,7 +709,8 @@ print('Mean spike rates across trials:')
 print(all_rates)
 print('Mean spike rates for individual trials:')
 print(trial_rates)
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -721,8 +740,9 @@ with raster plots and histograms for the pyramidal cells.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <code class='language-python'>
-                        fig, axes = plt.subplots(3, 1, figsize=(5, 7), sharex=True)
+                    <div class='code-scroll-wrapper'>
+                        <code class='language-python'>
+                            fig, axes = plt.subplots(3, 1, figsize=(5, 7), sharex=True)
 
 for idx in range(10):  # only 10 cells per cell-type
     gid = gid_ranges['L2_pyramidal'][idx]
@@ -736,7 +756,8 @@ net.cell_response.plot_spikes_hist(ax=axes[2],
                                                 'L2_pyramidal'],
                                    show=False)
 plt.show()
-                    </code>
+                        </code>
+                    </div>
                 </div>
 
 
@@ -784,7 +805,8 @@ plt.show()
         </div> <!-- close footer -->
     </div> <!-- close content -->
     </div> <!-- close content wrapper -->
-</div> <!-- close main --><!------------------------ #
+</div> <!-- close main -->
+</div> <!-- close main scroll container --><!------------------------ #
 # Code syntax highlighting #
 # ------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
