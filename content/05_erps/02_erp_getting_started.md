@@ -1,5 +1,5 @@
 <!--
-# Title: 4.3 Getting Started
+# Title: 4.2 Getting Started
 # Updated: 2025-01-29
 #
 # Contributors:
@@ -10,7 +10,7 @@
     # Christopher Bailey <cjb@cfin.au.dk>
 -->
 
-# 4.3 Getting Started with HNN and ERP Simulations
+# 4.2 Getting Started with HNN and ERP Simulations
 
 <div
   id="video-container"

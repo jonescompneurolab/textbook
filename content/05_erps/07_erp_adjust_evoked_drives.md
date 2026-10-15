@@ -1,17 +1,17 @@
 <!--
-# Title: 4.5 Simulate the Default Network
-# Updated: 2026-07-15
+# Title: 4.7 Adjusting Evoked Drives
+# Updated: 2026-07-25
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.5 Simulate an ERP using the Default Parameters
+# 4.7 Adjusting Evoked Drives
 
 <div
   id="video-container"
   class="text-align: center;"
-  data-src="https://drive.google.com/file/d/1H2zNHtOYVJQ_TPaTCYBeViFxkoZKmgrK/preview"
+  data-src="https://drive.google.com/file/d/1ubnrDn1aVVCrYr0dTZsO4qWPwjdPSnDS/preview"
   style="padding: 10px 0px 30px 0px;"
 ></div>
 
@@ -21,7 +21,7 @@ API Walkthrough
 </h5>
 <div class="collapsible-content">
 
-[[erp_api_walkthrough.ipynb][Simulate the Default Network]]
+[[erp_api_walkthrough.ipynb][Hand Tuning Evoked Drives]]
 
 </div>
 </div>

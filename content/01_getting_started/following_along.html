@@ -80,6 +80,7 @@
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
 				<a href="/textbook/content/01_getting_started/template_model.html">1.2 Template Model</a>
 				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
+				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -116,17 +117,16 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/05_erps/erp_overview.html">4.1 Intro and Overview Lecture</a>
-				<a href="/textbook/content/05_erps/erp_following_along.html">4.2 Following Along</a>
-				<a href="/textbook/content/05_erps/erp_getting_started.html">4.3 Getting Started</a>
-				<a href="/textbook/content/05_erps/erp_simulation_workflow.html">4.4 Simulation Workflow</a>
-				<a href="/textbook/content/05_erps/erp_initial_simulation.html">4.5 Simulate the Default Network</a>
-				<a href="/textbook/content/05_erps/erp_scaling_smoothing.html">4.6 Simulation Scaling and Smoothing</a>
-				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_01.html">4.7.1 Multiscale Interpretation Part I</a>
-				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_02.html">4.7.2 Multiscale Interpretation Part II</a>
-				<a href="/textbook/content/05_erps/erp_adjust_evoked_drives.html">4.8 Adjusting Evoked Drives</a>
-				<a href="/textbook/content/05_erps/erp_adjusting_network_parameters.html">4.9 Adjusting Network Parameters And Testing Hypotheses</a>
-				<a href="/textbook/content/05_erps/erp_hypotheses_to_validation.html">4.10 From Hypotheses to Validation Targets</a>
-				<a href="/textbook/content/05_erps/erp_conclusion.html">4.11 Concluding Remarks</a>
+				<a href="/textbook/content/05_erps/erp_getting_started.html">4.2 Getting Started</a>
+				<a href="/textbook/content/05_erps/erp_simulation_workflow.html">4.3 Simulation Workflow</a>
+				<a href="/textbook/content/05_erps/erp_initial_simulation.html">4.4 Simulate the Default Network</a>
+				<a href="/textbook/content/05_erps/erp_scaling_smoothing.html">4.5 Simulation Scaling and Smoothing</a>
+				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_01.html">4.6.1 Multiscale Interpretation Part I</a>
+				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_02.html">4.6.2 Multiscale Interpretation Part II</a>
+				<a href="/textbook/content/05_erps/erp_adjust_evoked_drives.html">4.7 Adjusting Evoked Drives</a>
+				<a href="/textbook/content/05_erps/erp_adjusting_network_parameters.html">4.8 Adjusting Network Parameters And Testing Hypotheses</a>
+				<a href="/textbook/content/05_erps/erp_hypotheses_to_validation.html">4.9 From Hypotheses to Validation Targets</a>
+				<a href="/textbook/content/05_erps/erp_conclusion.html">4.10 Concluding Remarks</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -290,170 +290,49 @@
     <div id="content-wrapper">
     <div id="content">
 
-
-		<div class="notebook-download-wrapper">
-		    <a href='erp_api_walkthrough.ipynb' download>
-		        <button class="notebook-download">
-		            <svg xmlns="http://www.w3.org/2000/svg"
-		                width="20"
-		                height="20"
-		                viewBox="0 0 24 24"
-		                fill="none"
-		                stroke="currentColor"
-		                stroke-width="2"
-		                stroke-linecap="round"
-		                stroke-linejoin="round">
-		                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-		                <polyline points="7 10 12 15 17 10"/>
-		                <line x1="12" y1="15" x2="12" y2="3"/>
-		            </svg>
-		            <span style="width: 8px"></span>
-		            <span>Download Notebook</span>
-		        </button>
-		    </a>
-		</div>
-
-
 <!--
-# Title: 4.2 Following Along
-# Updated: 2026-07-14
+# Title: 1.4 Follow Along with the Textbook
+# Updated: 2026-10-15
 #
 # Contributors:
-    # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
+    # Dylan Daniels
 -->
-<h1>4.2 Following Along with the ERP Tutorial</h1>
-<div class='markdown-cell'>
-    <h2>Set Up Your HNN Environment</h2>
-
-</div>
-
-
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>We assume for this walkthrough that you have access to the latest
-stable version of the <code>hnn-core</code> software. If not, please
-follow the instructions on our <a
-href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html">Installation
-page</a> to step up HNN. We also recommend reading the remainer of this
-page in full, as there are additional instructions for following along
-with the ERP walkthrough.</p>
-<p>Note that the <a
-href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html">Installation
-page</a> includes instructions for running HNN "on the cloud" and for
-installing HNN locally on your personal machine. While the cloud
-versions of HNN can be relatively easy to get up and running, they do
-come with certain limitations (such as limited access to compute cores
-in the case of Google CoLab). As such, we recommend that you install HNN
-on your local machine using the <code>conda</code> installation method.
-However, if you are unable to install HNN locally, using one of the
-cloud methods is a perfectly viable alternative.</p>
-<p>The (recommended) <code>conda</code> installation method will install
-the latest <strong>stable</strong> version of <code>hnn-core</code> on
-your device, including the Graphical User Interface (GUI) and other
-dependencies for running faster simulations using parallelism (i.e.,
-multuiple processor cores).</p>
-<p>Once you have completed the <code>conda</code> installation
-instructions, you can activate your conda environment with the following
-Command Line command:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate hnn-core-env</span></code></pre></div>
-<p>You can then launch the GUI from the active conda environment with
-the following command:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hnn-gui</span></span></code></pre></div>
-
-                </div>
-
-
-<!-- markdown cell --><div class='markdown-cell'>
-    <h3>Following Along With the Textbook's Python API Tutorials</h3>
-
-</div>
-
-
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>Note that any code blocks on the subsequent pages of the
-<strong>Simulating ERPs</strong> walkthrough are <em>cumulative</em>.
-That is to say, these code blocks are meant to be run in sequential
-order, as they are drawn from a single <code>ipython</code> notebook
-file.</p>
-<p>By clicking the <code>Download Notebook</code> button at the top of
-this page, you can download the entire <code>.ipynb</code> file and run
-it interactively through Jupyter Notebook or through your preferred code
-editor (VS Code, Pycharm, etc.).</p>
-<p>Keep in mind that your code editor may install additional
-dependencies needed to open and run <code>.ipynb</code> files when using
-the <code>hnn-core-env</code> conda environment.</p>
-<p>If you would like to launch a Jupyter Notebook server directly from
-the Command Line, you will need to install Jupyter's
-<code>notebook</code> dependency directly into
-<code>hnn-core-env</code>. To do so, run the following command from your
-active <code>hnn-core-env</code> conda environment:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge notebook</span></code></pre></div>
-<p>After installation, you can launch the jupyter server with the
-following command:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook</span></code></pre></div>
-<p>Alternatively, you can start an interactive ipython environment with
-the command below. This will allow you to run individual commands from
-your Command Line interface without needing to install the additional
-<code>notebook</code> dependency from Jupyter.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ipython</span></span></code></pre></div>
-
-                </div>
-
-
-<!-- markdown cell --><div class='markdown-cell'>
-    <h3>Accessing Data and Network Files</h3>
-
-</div>
-
-
-                <!-- markdown cell -->
-                <div class='markdown-cell'>
-                    <p>At various points in the tutorials, we will reference particular
-network and/or data files. These files can be found on our <a
-href="https://github.com/jonescompneurolab/hnn-data/">hnn-data GitHub
-repository</a></p>
-<p>In brief, the <code>MEG_detection_data</code> subdirectory contains
-the experimental MEG data referenced in our Jones et al. (2007) study,
-while the <code>network-configurations</code> subdirectory contains
-various network configuration files for simulating ERPs and rhythms</p>
-<p>We recommend that you clone this repository to your local machine, as
-you will need several of these files to follow along with the
-tutorials</p>
+<h1>1.4 Follow Along with the Textbook</h1>
+<h2>Set Up Your HNN Environment</h2>
+<p>To follow along with our detailed walkthroughs for simulating ERPs and rhythms, we assume that you have access to the latest stable version of the <code>hnn-core</code> software. If not, please follow the instructions on our <a href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html">Installation page</a> to set up HNN. We also recommend reading the remainder of this page in full, as there are additional instructions for following along with the walkthroughs.</p>
+<p>Note that the <a href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html">Installation page</a> includes instructions for running HNN “through the cloud” and for installing HNN locally on your personal machine.</p>
+<p>While the cloud versions of HNN can be relatively easy to get up and running, they do come with certain limitations (such as limited access to compute cores in the case of Google Colab). As such, we recommend that you install HNN using one of the local installation methods. However, if you are unable to install HNN locally, using one of the cloud methods is a perfectly viable alternative.</p>
+<p>The easiest way to install HNN locally is by following our <a href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html#local-installation---simple">Simple Installation Instructions</a>. This will install the basic version of both the HNN API and the HNN GUI, which is sufficient for following our walkthroughs for simulating ERPs and rhythms, but will lack the dependencies to run some of our advanced “Using the API” tutorials later on in the Textbook.</p>
+<p>If you want <em>all</em> features of HNN, we recommend that you follow our <a href="https://jonescompneurolab.github.io/textbook/content/01_getting_started/installation.html#conda-package-installation">Conda Package Installation</a> instructions, which will not only install the latest stable version of <code>hnn-core</code> on your device, but will also install <strong>all</strong> optional dependencies, including those needed for running faster simulations using the MPI distribution for parallel simulation.</p>
+<p>Both of the above methods utilize <code>conda</code> environments. Once you’ve completed the installation instructions, you can activate your conda environment with the following terminal command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate hnn-core-env</span></code></pre></div>
+<p>You can then launch the GUI from the active conda environment with the following command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hnn-gui</span></span></code></pre></div>
+<h2>Follow Along With the Python API Tutorials</h2>
+<p>Note that any code blocks in our <strong>Simulating ERPs</strong> walkthrough are <em>cumulative</em>. That is to say, these code blocks are meant to be run in sequential order, as they are drawn from a single <code>ipython</code> notebook file.</p>
+<p>By clicking the <code>Download Notebook</code> button at the top of any subpage, you can download the entire <code>.ipynb</code> file and run it interactively through Jupyter Notebook or through your preferred code editor (VS Code, PyCharm, etc.).</p>
+<p>Keep in mind that your code editor may install additional dependencies needed to open and run <code>.ipynb</code> files when using the <code>hnn-core-env</code> conda environment.</p>
+<p>If you would like to launch a Jupyter Notebook server directly from the command line, you will need to install Jupyter’s <code>notebook</code> dependency directly into <code>hnn-core-env</code>. To do so, run the following command from your active <code>hnn-core-env</code> conda environment:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge notebook</span></code></pre></div>
+<p>After installation, you can launch the jupyter server with the following command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook</span></code></pre></div>
+<p>Alternatively, you can start an interactive <code>ipython</code> environment with the command below. This will allow you to run individual commands from your command line interface without needing to install the additional <code>notebook</code> dependency from Jupyter.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ipython</span></span></code></pre></div>
+<h2>Accessing Data and Network Files</h2>
+<p>At various points in the tutorials, we will reference particular network and/or data files. These files can be found on our <a href="https://github.com/jonescompneurolab/hnn-data/">hnn-data GitHub repository</a>.</p>
+<p>In brief, the <code>MEG_detection_data</code> subdirectory contains the experimental MEG data referenced in our Jones et al. (2007) study, while the <code>network-configurations</code> subdirectory contains various network configuration files for simulating ERPs and rhythms.</p>
+<p>We recommend that you clone this repository to your local machine, as you will need several of these files to follow along with the tutorials.</p>
 <p>You can clone this repository with the following command:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jonescompneurolab/hnn-data.git</span></code></pre></div>
-<p>We will periodically update or add new network configuration files,
-so we recommend occasionally pulling the latest changes from GitHub. You
-can do so with the following commands:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span></code></pre></div>
-
-                </div>
-
-
-                <!-- markdown cell -->                <div class='markdown-cell'>
-                    <h3>References</h3>
-<p>Jones, S. R., Pritchett, D. L., Stufflebeam, S. M., Hämäläinen, M.
-&amp; Moore, C. I. Neural correlates of tactile detection: a combined
-magnetoencephalography and biophysically based computational modeling
-study. J. Neurosci. 27, 10751–10764 (2007). <a
-href="https://doi.org/10.1523/JNEUROSCI.0482-07.2007">https://doi.org/10.1523/JNEUROSCI.0482-07.2007</a></p>
-
-                </div>
-
-
-<!-- markdown cell -->
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jonescompneurolab/hnn-data.git</span></code></pre></div>
+<p>We will periodically update or add new network configuration files, so we recommend occasionally pulling the latest changes from GitHub. You can do so with the following commands:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span></code></pre></div>
+<h2>References</h2>
+<p>Jones, S. R., Pritchett, D. L., Stufflebeam, S. M., Hämäläinen, M. &amp; Moore, C. I. Neural correlates of tactile detection: a combined magnetoencephalography and biophysically based computational modeling study. J. Neurosci. 27, 10751–10764 (2007). <a href="https://doi.org/10.1523/JNEUROSCI.0482-07.2007">https://doi.org/10.1523/JNEUROSCI.0482-07.2007</a></p>
         <!-- footer area -->
         <!----------------->
         <div class="footer-area">
-            <div class="previous-area" data-link="/textbook/content/05_erps/erp_overview.html">
+            <div class="previous-area" data-link="/textbook/content/01_getting_started/installation.html">
                 <div class="previous-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="arrow-path" d="M15 5L9 12L15 19" />
@@ -461,13 +340,13 @@ href="https://doi.org/10.1523/JNEUROSCI.0482-07.2007">https://doi.org/10.1523/JN
                 </div>
                 <div class="previous-text">
                     <p>Previous</p>
-                    <a>4.1 Intro and Overview Lecture</a>
+                    <a>1.3 Installation</a>
                 </div>
             </div>
-            <div class="next-area" data-link="/textbook/content/05_erps/erp_getting_started.html">
+            <div class="next-area" data-link="/textbook/content/03_model_assumptions/cortical_column_structure.html">
                 <div class="next-text">
                     <p>Next</p>
-                    <a>4.3 Getting Started</a>
+                    <a>2.1 Cortical Column Structure</a>
                 </div>
                 <div class="next-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

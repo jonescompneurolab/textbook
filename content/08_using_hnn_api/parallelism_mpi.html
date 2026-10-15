@@ -80,6 +80,7 @@
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
 				<a href="/textbook/content/01_getting_started/template_model.html">1.2 Template Model</a>
 				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
+				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -116,17 +117,16 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/05_erps/erp_overview.html">4.1 Intro and Overview Lecture</a>
-				<a href="/textbook/content/05_erps/erp_following_along.html">4.2 Following Along</a>
-				<a href="/textbook/content/05_erps/erp_getting_started.html">4.3 Getting Started</a>
-				<a href="/textbook/content/05_erps/erp_simulation_workflow.html">4.4 Simulation Workflow</a>
-				<a href="/textbook/content/05_erps/erp_initial_simulation.html">4.5 Simulate the Default Network</a>
-				<a href="/textbook/content/05_erps/erp_scaling_smoothing.html">4.6 Simulation Scaling and Smoothing</a>
-				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_01.html">4.7.1 Multiscale Interpretation Part I</a>
-				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_02.html">4.7.2 Multiscale Interpretation Part II</a>
-				<a href="/textbook/content/05_erps/erp_adjust_evoked_drives.html">4.8 Adjusting Evoked Drives</a>
-				<a href="/textbook/content/05_erps/erp_adjusting_network_parameters.html">4.9 Adjusting Network Parameters And Testing Hypotheses</a>
-				<a href="/textbook/content/05_erps/erp_hypotheses_to_validation.html">4.10 From Hypotheses to Validation Targets</a>
-				<a href="/textbook/content/05_erps/erp_conclusion.html">4.11 Concluding Remarks</a>
+				<a href="/textbook/content/05_erps/erp_getting_started.html">4.2 Getting Started</a>
+				<a href="/textbook/content/05_erps/erp_simulation_workflow.html">4.3 Simulation Workflow</a>
+				<a href="/textbook/content/05_erps/erp_initial_simulation.html">4.4 Simulate the Default Network</a>
+				<a href="/textbook/content/05_erps/erp_scaling_smoothing.html">4.5 Simulation Scaling and Smoothing</a>
+				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_01.html">4.6.1 Multiscale Interpretation Part I</a>
+				<a href="/textbook/content/05_erps/erp_multiscale_interpretation_02.html">4.6.2 Multiscale Interpretation Part II</a>
+				<a href="/textbook/content/05_erps/erp_adjust_evoked_drives.html">4.7 Adjusting Evoked Drives</a>
+				<a href="/textbook/content/05_erps/erp_adjusting_network_parameters.html">4.8 Adjusting Network Parameters And Testing Hypotheses</a>
+				<a href="/textbook/content/05_erps/erp_hypotheses_to_validation.html">4.9 From Hypotheses to Validation Targets</a>
+				<a href="/textbook/content/05_erps/erp_conclusion.html">4.10 Concluding Remarks</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -488,21 +488,13 @@ dpls = simulate_dipole(net, tstop=210., n_trials=1)
 
         MPI will run 1 trial(s) sequentially by distributing network neurons over 4 processes.
 
-        [runnervm8k3b6:12935] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervm8k3b6:12934] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervm8k3b6:12933] pml_ucx.c:319  Error: Failed to create UCP worker
-[runnervm8k3b6:12932] pml_ucx.c:319  Error: Failed to create UCP worker
-[1792103294.396027] [runnervm8k3b6:12935:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1792103294.396140] [runnervm8k3b6:12934:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1792103294.397476] [runnervm8k3b6:12933:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-[1792103294.398715] [runnervm8k3b6:12932:0]      ucp_worker.c:1492 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Address not valid
-numprocs=4
+        numprocs=4
 
         Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
 Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.soLoading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+
 
         [Done]
 Trial 1: 0.03 ms...

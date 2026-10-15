@@ -246,10 +246,12 @@ p .code-text {
 */
 #video-container iframe {
     display: block;
+    max-width: 800px;
     width: 100%;
     aspect-ratio: 4 / 3;
     height: auto;
     border: none;
+    margin: 0 auto;
 }
 
 /*
@@ -1615,6 +1617,19 @@ div.sourceCode:has(
     background: #fff;
     width: 75%;
     box-sizing: border-box;
+}
+
+/* Copy button in the header */
+div.sourceCode:has(
+    code.sourceCode.bash,
+    code.sourceCode.sh,
+    code.sourceCode.console
+) .copy-button {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    z-index: 1;
+    color: white;
 }
 
 /* command line header text */
