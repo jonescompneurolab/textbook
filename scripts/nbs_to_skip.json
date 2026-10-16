@@ -3,7 +3,8 @@
         "api_alpha_beta.ipynb",
         "plot_simulate_gamma.ipynb",
         "optimize_simulated_evoked_response_parameters_notebook.ipynb",
-        "optimize_simulated_rhythmic_response_parameters_notebook.ipynb"
+        "optimize_simulated_rhythmic_response_parameters_notebook.ipynb",
+        "from_meg_to_hnn_notebook.ipynb"
     ],
     "skip_if_dev": [
         "api_alpha_beta.ipynb",

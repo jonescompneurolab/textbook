@@ -342,12 +342,10 @@ et al., 2007), (Neymotin et al., 2020).</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            # Authors: Mainak Jas <mainakjas@gmail.com>
+                    <code class='language-python'>
+                        # Authors: Mainak Jas <mainakjas@gmail.com>
 #          Ryan Thorpe <ryan_thorpe@brown.edu>
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -363,25 +361,21 @@ into your Python environment automatically.</strong></p>
 
 <!-- code cell -->
 <div class='code-cell'>
-    <div class='code-scroll-wrapper'>
-        <code class='language-python'>
-            # %pip install -q mne nibabel ipyevents "pyvista[all]" pyvistaqt pooch==1.8.2
-        </code>
-    </div>
+    <code class='language-python'>
+        # %pip install -q mne nibabel ipyevents "pyvista[all]" pyvistaqt pooch==1.8.2
+    </code>
 </div>
 
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            # Needed for certain plotting to work
+                    <code class='language-python'>
+                        # Needed for certain plotting to work
 import pyvista as pv
 from mne.viz import set_3d_backend
 set_3d_backend('notebook')
 pv.set_jupyter_backend('client')
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -411,16 +405,14 @@ importing <code>somato</code> from <code>mne.datasets</code>.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            import os.path as op
+                    <code class='language-python'>
+                        import os.path as op
 import matplotlib.pyplot as plt
 
 import mne
 from mne.datasets import somato
 from mne.minimum_norm import apply_inverse, make_inverse_operator
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -434,9 +426,8 @@ subject <code>01</code>.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            data_path = somato.data_path()
+                    <code class='language-python'>
+                        data_path = somato.data_path()
 subject = '01'
 task = 'somato'
 raw_fname = op.join(data_path, 'sub-{}'.format(subject), 'meg',
@@ -444,8 +435,7 @@ raw_fname = op.join(data_path, 'sub-{}'.format(subject), 'meg',
 fwd_fname = op.join(data_path, 'derivatives', 'sub-{}'.format(subject),
                     'sub-{}_task-{}-fwd.fif'.format(subject, task))
 subjects_dir = op.join(data_path, 'derivatives', 'freesurfer', 'subjects')
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -458,9 +448,8 @@ subjects_dir = op.join(data_path, 'derivatives', 'freesurfer', 'subjects')
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            # Read and band-pass filter the raw data
+                    <code class='language-python'>
+                        # Read and band-pass filter the raw data
 raw = mne.io.read_raw_fif(raw_fname, preload=True)
 l_freq, h_freq = 1, 40
 raw.filter(l_freq, h_freq)
@@ -478,8 +467,7 @@ epochs = mne.Epochs(raw, events, event_id, tmin, tmax, baseline=baseline,
 fwd = mne.read_forward_solution(fwd_fname)
 cov = mne.compute_covariance(epochs)
 inv = make_inverse_operator(epochs.info, fwd, cov)
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -490,133 +478,71 @@ inv = make_inverse_operator(epochs.info, fwd, cov)
                     </div>
                     <div class='output-code'>
 
-        Opening raw data file /home/runner/mne_data/MNE-somato-data/sub-01/meg/sub-01_task-somato_meg.fif...
+        Opening raw data file /Users/austinsoplata/mne_data/MNE-somato-data/sub-01/meg/sub-01_task-somato_meg.fif...
+    Range : 237600 ... 506999 =    791.189 ...  1688.266 secs
+Ready.
+Reading 0 ... 269399  =      0.000 ...   897.077 secs...
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 1 - 40 Hz
 
-            Range : 237600 ... 506999 =    791.189 ...  1688.266 secs
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 1.00
+- Lower transition bandwidth: 1.00 Hz (-6 dB cutoff frequency: 0.50 Hz)
+- Upper passband edge: 40.00 Hz
+- Upper transition bandwidth: 10.00 Hz (-6 dB cutoff frequency: 45.00 Hz)
+- Filter length: 993 samples (3.307 s)
 
-        Ready.
-
-        Reading 0 ... 269399  =      0.000 ...   897.077 secs...
-
-        Filtering raw data in 1 contiguous segment
-
-        Setting up band-pass filter from 1 - 40 Hz
-
-
-
-        FIR filter parameters
-
-        ---------------------
-
-        Designing a one-pass, zero-phase, non-causal bandpass filter:
-
-        - Windowed time-domain design (firwin) method
-
-        - Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
-
-        - Lower passband edge: 1.00
-
-        - Lower transition bandwidth: 1.00 Hz (-6 dB cutoff frequency: 0.50 Hz)
-
-        - Upper passband edge: 40.00 Hz
-
-        - Upper transition bandwidth: 10.00 Hz (-6 dB cutoff frequency: 45.00 Hz)
-
-        - Filter length: 993 samples (3.307 s)
-
-
-
-        Finding events on: STI 014
-
-        111 events found on stim channel STI 014
-
-        Event IDs: [1]
-
-        Not setting metadata
-
-        111 matching events found
-
-        No baseline correction applied
-
-        0 projection items activated
-
-        Using data from preloaded Raw for 111 events and 112 original time points ...
-
-        0 bad epochs dropped
-
-        Reading forward solution from /home/runner/mne_data/MNE-somato-data/derivatives/sub-01/sub-01_task-somato-fwd.fif...
-
-            Reading a source space...
-
-            [done]
-
-            Reading a source space...
-
-            [done]
-
-            2 source spaces read
-
-            Desired named matrix (kind = 3523 (FIFF_MNE_FORWARD_SOLUTION_GRAD)) not available
-
-            Read MEG forward solution (8155 sources, 306 channels, free orientations)
-
-            Source spaces transformed to the forward solution coordinate frame
-
-        Reducing data rank from 306 -&gt; 306
+Finding events on: STI 014
+111 events found on stim channel STI 014
+Event IDs: [1]
+Not setting metadata
+111 matching events found
+No baseline correction applied
+0 projection items activated
+Using data from preloaded Raw for 111 events and 112 original time points ...
+0 bad epochs dropped
+Reading forward solution from /Users/austinsoplata/mne_data/MNE-somato-data/derivatives/sub-01/sub-01_task-somato-fwd.fif...
+    Reading a source space...
+    [done]
+    Reading a source space...
+    [done]
+    2 source spaces read
+    Desired named matrix (kind = 3523 (FIFF_MNE_FORWARD_SOLUTION_GRAD)) not available
+    Read MEG forward solution (8155 sources, 306 channels, free orientations)
+    Source spaces transformed to the forward solution coordinate frame
+Reducing data rank from 306 -&gt; 306
 
         Estimating covariance using EMPIRICAL
-
-        Done.
-
-        Number of samples used : 12432
-
-        [done]
-
-        Converting forward solution to surface orientation
-
-            No patch info available. The standard source space normals will be employed in the rotation to the local surface coordinates....
-
-            Converting to surface-based source orientations...
-
-            [done]
-
-        Computing inverse operator with 306 channels.
-
-            306 out of 306 channels remain after picking
-
-        Selected 306 channels
-
-        Creating the depth weighting matrix...
-
-            204 planar channels
-
-            limit = 7615/8155 = 10.004172
-
-            scale = 5.17919e-08 exp = 0.8
-
-        Applying loose dipole orientations to surface source spaces: 0.2
-
-        Whitening the forward solution.
-
-        Computing rank from covariance with rank=None
-
-            Using tolerance 2e-12 (2.2e-16 eps * 306 dim * 29  max singular value)
-
-            Estimated rank (mag + grad): 64
-
-            MEG: rank 64 computed from 306 data channels with 0 projectors
-
-            Setting small MEG eigenvalues to zero (without PCA)
-
-        Creating the source covariance matrix
-
-        Adjusting source covariance matrix.
-
-        Computing SVD of whitened and weighted lead field matrix.
-
-            largest singular value = 2.42284
-
-            scaling factor to adjust the trace = 3.86104e+18 (nchan = 306 nzero = 242)
+Done.
+Number of samples used : 12432
+[done]
+Converting forward solution to surface orientation
+    No patch info available. The standard source space normals will be employed in the rotation to the local surface coordinates....
+    Converting to surface-based source orientations...
+    [done]
+Computing inverse operator with 306 channels.
+    306 out of 306 channels remain after picking
+Selected 306 channels
+Creating the depth weighting matrix...
+    204 planar channels
+    limit = 7615/8155 = 10.004172
+    scale = 5.17919e-08 exp = 0.8
+Applying loose dipole orientations to surface source spaces: 0.2
+Whitening the forward solution.
+Computing rank from covariance with rank=None
+    Using tolerance 2e-12 (2.2e-16 eps * 306 dim * 29  max singular value)
+    Estimated rank (mag + grad): 64
+    MEG: rank 64 computed from 306 data channels with 0 projectors
+    Setting small MEG eigenvalues to zero (without PCA)
+Creating the source covariance matrix
+Adjusting source covariance matrix.
+Computing SVD of whitened and weighted lead field matrix.
+    largest singular value = 2.42284
+    scaling factor to adjust the trace = 3.86104e+18 (nchan = 306 nzero = 242)
 
                     </div>
                 </div>
@@ -638,16 +564,14 @@ be normal to the cortical surface. Hence, using the option
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            snr = 3.
+                    <code class='language-python'>
+                        snr = 3.
 lambda2 = 1. / snr ** 2
 evoked = epochs.average()
 stc = apply_inverse(evoked, inv, lambda2, method='MNE',
                     pick_ori="normal", return_residual=False,
                     verbose=True)
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -659,28 +583,17 @@ stc = apply_inverse(evoked, inv, lambda2, method='MNE',
                     <div class='output-code'>
 
         Preparing the inverse operator for use...
-
-            Scaled noise and source covariance from nave = 1 to nave = 111
-
-            Created the regularized inverter
-
-            The projection vectors do not apply to these channels.
-
-            Created the whitener using a noise covariance matrix with rank 64 (242 small eigenvalues omitted)
-
-        Applying inverse operator to &quot;1&quot;...
-
-            Picked 306 channels from the data
-
-            Computing inverse...
-
-            Eigenleads need to be weighted ...
-
-            Computing residual...
-
-            Explained  86.1% variance
-
-        [done]
+    Scaled noise and source covariance from nave = 1 to nave = 111
+    Created the regularized inverter
+    The projection vectors do not apply to these channels.
+    Created the whitener using a noise covariance matrix with rank 64 (242 small eigenvalues omitted)
+Applying inverse operator to &quot;1&quot;...
+    Picked 306 channels from the data
+    Computing inverse...
+    Eigenleads need to be weighted ...
+    Computing residual...
+    Explained  86.1% variance
+[done]
 
                     </div>
                 </div>
@@ -696,15 +609,13 @@ we create a label for the postcentral gyrus (S1) in source-space</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            hemi = 'rh'
+                    <code class='language-python'>
+                        hemi = 'rh'
 label_tag = 'G_postcentral'
 label_s1 = mne.read_labels_from_annot(subject, parc='aparc.a2009s', hemi=hemi,
                                       regexp=label_tag,
                                       subjects_dir=subjects_dir)[0]
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -716,8 +627,7 @@ label_s1 = mne.read_labels_from_annot(subject, parc='aparc.a2009s', hemi=hemi,
                     <div class='output-code'>
 
         Reading labels from parcellation...
-
-           read 1 labels from /home/runner/mne_data/MNE-somato-data/derivatives/freesurfer/subjects/01/label/rh.aparc.a2009s.annot
+   read 1 labels from /Users/austinsoplata/mne_data/MNE-somato-data/derivatives/freesurfer/subjects/01/label/rh.aparc.a2009s.annot
 
                     </div>
                 </div>
@@ -742,9 +652,8 @@ activation at 0.040 sec that resemble the following images.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            '''
+                    <code class='language-python'>
+                        '''
 Brain = mne.viz.get_brain_class()
 brain_label = Brain(subject, hemi, 'white', subjects_dir=subjects_dir)
 brain_label.add_label(label_s1, color='green', alpha=0.9)
@@ -753,8 +662,7 @@ brain = stc_label.plot(subjects_dir=subjects_dir, hemi=hemi, surface='white',
                        view_layout='horizontal', initial_time=0.04,
                        backend='pyvista')
 '''
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -812,9 +720,8 @@ cortex.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            flip_data = stc.extract_label_time_course(label_s1, inv['src'],
+                    <code class='language-python'>
+                        flip_data = stc.extract_label_time_course(label_s1, inv['src'],
                                           mode='pca_flip')
 dipole_tc = -flip_data[0] * 1e9
 
@@ -825,8 +732,7 @@ plt.ylabel('Current Dipole (nAm)')
 plt.xlim((0, 170))
 plt.axhline(0, c='k', ls=':')
 plt.show()
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -861,17 +767,15 @@ instantiate the network.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            import hnn_core
+                    <code class='language-python'>
+                        import hnn_core
 from hnn_core import simulate_dipole, neymotin_2020_model
 from hnn_core import average_dipoles, JoblibBackend
 
 hnn_core_root = op.dirname(hnn_core.__file__)
 params_fname = op.join(hnn_core_root, 'param', 'N20.json')
 net = neymotin_2020_model(params_fname)
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -893,9 +797,8 @@ across cells in the network.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            # Early proximal drive
+                    <code class='language-python'>
+                        # Early proximal drive
 weights_ampa_p = {'L2_basket': 0.0036, 'L2_pyramidal': 0.0039,
                   'L5_basket': 0.0019, 'L5_pyramidal': 0.0020}
 weights_nmda_p = {'L2_basket': 0.0029, 'L2_pyramidal': 0.0005,
@@ -950,8 +853,7 @@ net.add_evoked_drive(
     n_drive_cells=1, cell_specific=False, weights_ampa=weights_ampa_d,
     weights_nmda=weights_nmda_d, synaptic_delays=synaptic_delays_d,
     event_seed=275)
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -966,14 +868,12 @@ set <code>n_trials</code> to be &gt;=25.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            n_trials = 2
+                    <code class='language-python'>
+                        n_trials = 2
 # n_trials = 25
 with JoblibBackend(n_jobs=2):
     dpls = simulate_dipole(net, tstop=170., n_trials=n_trials)
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -986,63 +886,46 @@ with JoblibBackend(n_jobs=2):
 
         Joblib will run 2 trial(s) in parallel by distributing trials over 2 jobs.
 
-        Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+        Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
-Loading custom mechanism files from /usr/share/miniconda/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+Loading custom mechanism files from /opt/anaconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/arm64/.libs/libnrnmech.so
 Building the NEURON model
-
-        [Done]
-Trial 1: 0.03 ms...
 [Done]
+[Done]
+Trial 1: 0.03 ms...
 Trial 2: 0.03 ms...
-
-        Trial 1: 10.0 ms...
+Trial 1: 10.0 ms...
 Trial 2: 10.0 ms...
-
-        Trial 1: 20.0 ms...
+Trial 1: 20.0 ms...
 Trial 2: 20.0 ms...
-
-        Trial 1: 30.0 ms...
 Trial 2: 30.0 ms...
-
-        Trial 1: 40.0 ms...
+Trial 1: 30.0 ms...
 Trial 2: 40.0 ms...
-
-        Trial 1: 50.0 ms...
+Trial 1: 40.0 ms...
 Trial 2: 50.0 ms...
-
-        Trial 1: 60.0 ms...
+Trial 1: 50.0 ms...
 Trial 2: 60.0 ms...
-
-        Trial 1: 70.0 ms...
+Trial 1: 60.0 ms...
 Trial 2: 70.0 ms...
-
-        Trial 1: 80.0 ms...
+Trial 1: 70.0 ms...
 Trial 2: 80.0 ms...
-
-        Trial 1: 90.0 ms...
+Trial 1: 80.0 ms...
 Trial 2: 90.0 ms...
-
-        Trial 1: 100.0 ms...
+Trial 1: 90.0 ms...
 Trial 2: 100.0 ms...
-
-        Trial 1: 110.0 ms...
+Trial 1: 100.0 ms...
 Trial 2: 110.0 ms...
-
-        Trial 1: 120.0 ms...
+Trial 1: 110.0 ms...
 Trial 2: 120.0 ms...
-
-        Trial 1: 130.0 ms...
+Trial 1: 120.0 ms...
 Trial 2: 130.0 ms...
-
-        Trial 1: 140.0 ms...
+Trial 1: 130.0 ms...
 Trial 2: 140.0 ms...
-
-        Trial 1: 150.0 ms...
+Trial 1: 140.0 ms...
+Trial 1: 150.0 ms...
 Trial 2: 150.0 ms...
-
-        Trial 1: 160.0 ms...
 Trial 2: 160.0 ms...
+Trial 1: 160.0 ms...
 
                     </div>
                 </div>
@@ -1064,15 +947,13 @@ responsible for the recorded macroscopic evoked response (Jones et al.,
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            dpl_smooth_win = 20
+                    <code class='language-python'>
+                        dpl_smooth_win = 20
 dpl_scalefctr = 12
 for dpl in dpls:
     dpl.smooth(dpl_smooth_win)
     dpl.scale(dpl_scalefctr)
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 
@@ -1086,9 +967,8 @@ median nerve evoked response waveforms, and output spike histogram.</p>
 
                 <!-- code cell -->
                 <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            fig, axes = plt.subplots(3, 1, sharex=True, figsize=(6, 6),
+                    <code class='language-python'>
+                        fig, axes = plt.subplots(3, 1, sharex=True, figsize=(6, 6),
                          constrained_layout=True)
 net.cell_response.plot_spikes_hist(ax=axes[0],
                                    spike_types=['evprox', 'evdist'],
@@ -1100,8 +980,7 @@ axes[1].legend(['MNE label average', 'HNN simulation'])
 axes[1].set_ylabel('Current Dipole (nAm)')
 net.cell_response.plot_spikes_raster(ax=axes[2], show=False)
 plt.show()
-                        </code>
-                    </div>
+                    </code>
                 </div>
 
 

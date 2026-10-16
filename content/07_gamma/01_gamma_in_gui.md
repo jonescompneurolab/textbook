@@ -59,9 +59,11 @@ In addition to the written tutorial below, we also provide a video walkthrough o
 
 In order to understand the workflow and initial parameter sets provided with this tutorial, we must first briefly describe prior studies on the mechanistic origin of gamma rhythms, including our prior modeling work that led to the creation of the parameter sets you will work with [@lee_distinguishing_2013].
 
-Gamma rhythms can encompass a wide band of frequencies from 30-150 Hz. Here, we will focus on the generation of so called low gamma rhythms in the 30-80 Hz range. It has been well established through experiments and computational modeling that these rhythms can emerge in local spiking networks through interactions of excitatory cell and inhibitory cell interactions, with the period of the oscillation set by the time constant of decay of GABAA-mediated inhibitory currents ([@cardin_driving_2009], [@vierling-claassen_computational_2010], [@buzsaki_mechanisms_2012]), a mechanism that has been referred to as pyramidal-interneuronal gamma (PING). In normal regimes, the decay time constant of GABAA-mediated synapses (~25 ms) bounds oscillations to the low gamma frequency band (~40 Hz).
+Gamma rhythms can encompass a wide band of frequencies from 30-150 Hz. Here, we will focus on the generation of so-called "low gamma" rhythms in the 30-80 Hz range. It has been well established through experiments and computational modeling that these rhythms can emerge in local spiking networks through interactions of excitatory cell and inhibitory cell interactions, with the period of the oscillation set by the time constant of decay of GABAA-mediated inhibitory currents ([@cardin_driving_2009], [@vierling-claassen_computational_2010], [@buzsaki_mechanisms_2012]), a mechanism that has been referred to as pyramidal-interneuronal gamma (PING). In normal regimes, the decay time constant of GABAA-mediated synapses (~25 ms) bounds oscillations to the low gamma frequency band (~40 Hz).
 
-In general, PING rhythms are initiated by "excitation" to the excitatory (E) cells that causes spiking, which in turn synaptically activates a spiking population of inhibitory (I) cells. In turn, these I cells inhibit the E cells, preventing further E cell activity until the E cells can overcome the effects of the inhibition (~25 ms later). The pattern is repeated, creating a gamma frequency oscillation (~40 Hz, 40 spikes/second). This general principle is schematically described in Figure 1 below. The frequency of the rhythm is paced by this time constant of decay of inhibition, which is mediated by strong GABA-A currents, as well as the excitability of the E cells (if the E cells are very excitable, they can fire before the inhibition has completely worn off, and the oscillation will be faster).
+In general, PING rhythms arise when excitatory input drives excitatory (E) cells to spike. These cells then synaptically activate a population of inhibitory (I) cells through a fast excitatory (AMPA) synapse. In turn, the I cells inhibit the E cells via a slower, GABAA-mediated synaptic current that rises and then decays over a period of approximately 25ms. During this period, the E cells are hyperpolarized and do not fire action potentials. As inhibition decays, the ongoing excitatory input can again depolarize the E cells toward their threshold, allowing them to fire again when the inhibition has worn off (~25 ms later). The pattern is repeated, creating a gamma frequency oscillation (~40 Hz, 40 spikes/second).
+
+This general principle is schematically described in Figure 1 below using a simplified network consisting of one E cell and one I cell. The frequency of the rhythm is paced by the time constant of decay of inhibition, which is mediated by strong GABA-A currents, as well as the excitability of the E cells.
 
 <div class="stylefig">
 ### Figure 1
@@ -69,9 +71,9 @@ In general, PING rhythms are initiated by "excitation" to the excitatory (E) cel
 ![Schematic illustration showing the PING rhythm mechanism with excitatory pyramidal neurons firing first, followed by inhibitory interneurons, with timing controlled by GABA-A decay, adapted from several figures in the papers of the Background section](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_01.png)
 </div>
 
-In this tutorial, we will explore the generation of PING rhythms in the HNN model. We will provide example parameter files and walk through simulations that generate gamma activity in both Layers 2/3 and Layer 5, as in [@lee_distinguishing_2013]. This tutorial relies on a different type of exogenous drive to "activate" the local network than the other tutorials. Here, the necessary excitation to generate spiking in the pyramidal neurons that initiates the rhythm (see PING description above) is provided by a continuous train of action potentials with a Poisson distribution that activates post-synaptic excitatory AMPA synapses on the pyramidal neurons. This Poisson drive causes the pyramidal neurons to fire, dependent on the chosen conductance of the AMPA currents. The inhibition in the network is strong enough to overcome the Poisson drive and entrain the network spiking into a gamma frequency rhythm.
+In this tutorial, we will explore the generation of PING rhythms in the HNN model. We will provide example parameter files and walk through simulations that generate gamma activity in both Layers 2/3 and Layer 5, as in [@lee_distinguishing_2013]. This tutorial relies on a different type of exogenous drive to "activate" the local network than the other tutorials. Here, the necessary excitation to generate spiking in the pyramidal neurons that initiates the rhythm (see PING description above) is provided by a continuous train of action potentials with a Poisson distribution that activates post-synaptic excitatory AMPA synapses on the pyramidal neurons. This Poisson drive causes the pyramidal neurons to fire, depending on the chosen conductance of the AMPA currents. The inhibition in the network is strong enough to overcome the Poisson drive and entrain the network spiking into a gamma frequency rhythm.
 
-Of note, gamma rhythms can be generated by circuit mechanisms other than PING, including subthreshold rhythmic exogenous drive. The publication [@lee_distinguishing_2013] examined various mechanisms of generation of gamma activity and described ways to distinguish the mechanisms of generation based on features of current dipole signal. After completing this tutorial, we encourage you to explore alternate mechanisms of gamma generation and to compare to your own gamma data.
+Of note, gamma rhythms can be generated by circuit mechanisms other than PING, including subthreshold rhythmic exogenous drive. The publication [@lee_distinguishing_2013] examined various mechanisms of generation of gamma activity and described ways to distinguish the mechanisms of generation based on features of current dipole signal. After completing this tutorial, we encourage you to explore alternative mechanisms of gamma generation and to compare to your own gamma data.
 
 <div class="callout callout-warning">
   <table class="callout-table">
@@ -205,14 +207,14 @@ Now that we have set our Simulation parameters and loaded in both our network co
   </table>
 </div>
 
-The console below the `Run` button will print progress as the simulation is running. Once it is complete, the input histogram and the dipole will be plotted in the right-most panel, as shown in [Figure 4](#figure-4) below.
+The console below the `Run` button will print progress as the simulation is running. Once it is complete, the input histogram and the dipole will be plotted in the right-most panel, as shown in Figure 4 below. The simulated current dipole provides an aggregate measure of the net current flow in pyramidal neuron dendrites (across all pyramidal neurons) in units of current over distance (nAm) that can be directly compared to source localized EEG and MEG signals.
 
 <div class="stylefig">
 ### Figure 4
 ![GUI screenshot of simulation output showing Poisson drive histogram without rhythmicity in top panel and resulting rhythmic dipole signal in bottom panel](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_04.png)
 </div>
 
-A histogram displaying the Poisson drive to the excitatory cells is shown in the top panel, displaying no clear rhythmicity. However, in the simulated dipole below it, there *is* some obvious rhythmicity in the signal!
+A histogram displaying the Poisson drive to the excitatory cells is shown in the top panel, displaying no clear rhythmicity. However, in the simulated dipole below it, there *is* some obvious rhythmicity in the signal. Gamma in the dipole therefore emerges from the recurrent interactions within the network, rather than from rhythmic structure in the external drive. 
 
 The Poisson drive provided causes pyramidal neurons to fire, which in turn cause the inhibitory neurons to fire. Feedback inhibition from the interneurons to the pyramidal neurons generates a regular gamma rhythm via the PING mechanism described above (see [Section 1. Background](#toc-1)), which we can see in the rhythmicity of the simulated dipole. The sharp downward deflections in the dipole are reflective of the strong inhibition onto the pyramidal neuron somas, which pulls current flow down the dendrites.
 
@@ -228,7 +230,7 @@ To confirm that the rhythmicity is in the gamma frequency range, let's plot a sp
 ![Spectrogram visualization showing strong gamma frequency activity at approximately 55 Hz throughout the simulation time](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_05.png)
 </div>
 
-The spectrogram confirms that, for this network and drive configuration, the dipole signal contains spectral content in the gamma range (~55 Hz).
+A spectrogram shows how the frequency content of a signal evolves over time: at each point in the simulation, it indicates which frequencies carry the greatest power. Here, the concentration of power around ~55 Hz throughout the simulation indicates a relatively stable gamma rhythm in the dipole signal.
 
 <a id="toc-7"></a>
 
@@ -245,9 +247,9 @@ We can make a new figure to view the spiking activity generated by the different
 ![GUI screenshot of spike rastergram showing pyramidal neurons in orange and red firing before inhibitory basket cells in blue and green, demonstrating the essential PING rhythm dynamics](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_06.png)
 </div>
 
-Notice that the excitatory pyramidal neurons in each layer (orange and red dots / lines) fire before the inhibitory basket cells in each layer (blue and green dots / lines). The pyramidal neuron firing drives the basket cells to fire. The basket cells are highly synchronous due to the strong inhibitory-to-inhibitory connections. The basket cells then prevent the pyramidal neurons from firing for ~25 ms, generating the PING rhythms. The pyramidal neurons are firing periodically, but with lower synchrony due to the Poisson drive, which creates randomized spike times across the populations (once the inhibition sufficiently wears off). This type of dispersed pyramidal neuron firing is considered **"weak" PING** - hence the configuration file name including "weak" in the name.
+Notice that the excitatory pyramidal neurons in each layer (orange and red dots / lines) fire before the inhibitory basket cells in each layer (blue and green dots / lines). The pyramidal neuron firing drives the basket cells to fire. The basket cells are highly synchronous due in part to the strong inhibitory-to-inhibitory connections. The basket cells then prevent the pyramidal neurons from firing for ~25 ms, generating the PING rhythm. Because they receive stochastic Poisson input, different pyramidal cells are recruited on different cycles, and individual cells typically fire on only a fraction of the population cycles. This sparse E-cell participation is characteristic of “weak PING”, hence the use of “weak” in the configuration file name.
 
-We can also confirm that this oscillation is in the gamma frequency range by viewing the power spectral density of the current dipole signal (average spectrogram across time). To view the PSD from this simulation, do the following:
+We can also confirm that this oscillation is in the gamma frequency range by viewing the power spectral density (PSD) of the current dipole signal (average spectrogram across time). The spectrogram and PSD provide complementary views of the same signal. The spectrogram shows how spectral content changes over time, whereas the PSD summarizes power across the entire simulation, making the dominant oscillation frequencies easier to identify. To view the PSD from this simulation, do the following:
 
 1. Click the `Layout template` dropdown menu again, but this time, select the `PSD Layers (3x1)` option.
 2. Click the `Dataset` dropdown, then make sure the correct simulation (`gamma_L5weak_L2weak`) is selected. Note that when plotting future simulations, you always need to change this.
@@ -355,6 +357,8 @@ Similarly, if we compare [Figure 11-C](#figure-11-c) to the previous network (i.
 
 We see that while increasing the excitability causes the pyramidal cells to fire more synchronously, interpreting the competing effects of the excitation and inhibition is not always straightforward. The more synchronous pyramidal neuron firing is not strong enough to induce a "strong" PING in the local network, as there is still some apparent noise from the Poisson input. However, the overall **increase** in the pyramidal neuron firing rate appears to more strongly recruit the inhibitory interneurons, which has the net effect of slightly **decreasing** the frequency of the observed gamma rhythm.
 
+This illustrates an important distinction between single-cell and network-level activity. Increasing pyramidal-cell excitability might by itself suggest faster firing in a single cell, but in a recurrent E–I circuit the same change also alters recruitment of the inhibitory population. The resulting oscillation frequency therefore depends on the interaction between excitation and the inhibitory feedback it recruits.
+
 <a id="toc-8-3"></a>
 
 ### 8.3 Increasing Tonic Input
@@ -429,7 +433,7 @@ As we've done in previous sections, you'll want to generate additional visualiza
 ![GUI screenshot of power spectral density with weakened E-to-I connections paradoxically showing gamma frequency decreased to approximately 40 Hz due to delayed basket cell response](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_13_C.png)
 </div>
 
-You may be thinking something like *"The last several simulations gradually increased pyramidal firing, which caused increased inhibitory cell firing, which then caused the frequency to go down. If we're weakening the E-to-I connection in this simulation, then the frequency should increase."* However! Part of what makes science interesting is the unexpected and counter-intuitive. In [Figure 13-C](#figure-13-c), you can clearly see that the gamma rhythm has continued to **decrease**, from ~44 Hz to ~40 Hz. This slowing is still due to the fact that the excitatory-to-inhibitory connection was greatly weakened. It now takes longer for the basket cells to respond to the excitation: notice how there there is an increase in the "lag" in the response of the inhibitory cells (green) in [Figure 13-B](#figure-13-b) which is longer than in the earlier simulation [Figure 12-B](#figure-12-b).
+You may be thinking something like *"The last several simulations gradually increased pyramidal firing, which caused increased inhibitory cell firing, which then caused the frequency to go down. If we're weakening the E-to-I connection in this simulation, then the frequency should increase."* However! Part of what makes science interesting is the unexpected and counter-intuitive. In [Figure 13-C](#figure-13-c), you can clearly see that the gamma rhythm has continued to **decrease**, from ~44 Hz to ~40 Hz. This slowing is still due to the fact that the excitatory-to-inhibitory connection was greatly weakened. It now takes longer for the basket cells to respond to the excitation: notice how there there is an increase in the "lag" in the response of the inhibitory cells (green) in [Figure 13-B](#figure-13-b) which is longer than in the earlier simulation [Figure 12-B](#figure-12-b). Because inhibitory feedback therefore arrives later, the duration of each excitation–inhibition cycle increases, resulting in a longer oscillation period and a lower gamma frequency.
 
 <a id="toc-8-5"></a>
 
@@ -477,7 +481,8 @@ Next, let's experiment with removing the inhibitory-to-inhibitory connections. D
 ![GUI screenshot of power spectral density without inhibitory-to-inhibitory connections showing broader, less distinct gamma peak due to rhythm irregularity](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_14_C.png)
 </div>
 
-Notice that the rhythm is still present but is much less regular and much more noisy (compare [Figure 14-A](#figure-14-a) to [Figure 8](#figure-8)). You can also observe this in the spiking activity by comparing [Figure 14-B](#figure-14-b) to [Figure 9-A](#figure-9-a). This lack of regularity is due to the fact that removal of the inhibitory-to-inhibitory connections causes the inhibition to be less synchronous and noisier. This causes the overall PING rhythm to become noisier itself.
+Notice that the rhythm is still present but is much less regular and much more noisy (compare [Figure 14-A](#figure-14-a) to [Figure 8](#figure-8)). You can also observe this in the spiking activity by comparing [Figure 14-B](#figure-14-b) to [Figure 9-A](#figure-9-a). This lack of regularity is due to the fact that removal of the inhibitory-to-inhibitory connections causes the inhibition to be less synchronous and noisier. This causes the overall PING rhythm to become noisier itself. More specifically, with I-to-I inhibition intact, the I-cell population fires within a relatively narrow time window, producing a coordinated inhibitory input to the pyramidal population. When these connections are removed, I-cell firing becomes more dispersed, so inhibition reaches pyramidal cells over a broader interval rather than as a synchronized inhibitory event. The pyramidal population is consequently reset less synchronously, reducing the temporal coherence of the PING rhythm.
+
 
 Indeed, if we plot the spectrogram of this simulation without the inhibitory-to-inhibitory connections, we can see that the gamma oscillation itself becomes unstable and gradually changes in frequency:
 
@@ -506,7 +511,7 @@ Lastly, we'll show that the time constant of inhibitory decay is an essential pa
 6. Set the `Cell Properties` to `Synapses`.
 7. Decrease the `GABAA decay time (ms)` from `5` to `2`, as shown in [Figure 16](#figure-16) below.
 8. Click the `Simulation` tab.
-9. Change the `Name` to  `gamma_L5weak_only_fasterinh`.
+9. Change the `Name` to `gamma_L5weak_only_fasterinh`.
 6. Click the `Run` button.
 7. Similar to before, create the additional visualizations.
 
@@ -622,7 +627,7 @@ Finally, let's run the simulation:
 ![GUI screenshot of spectrogram for strong PING showing sustained gamma oscillations at approximately 45 Hz throughout the simulation period](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_19_D.png)
 </div>
 
-In this simulation, there are no spiking inputs provided to the model; instead, a current clamp provides a constant depolarizing current to the pyramidal neuron somas, causing the cells to fire. This firing initiates the PING rhythm through mechanisms similar to that described above. In contrast to the Poisson drive, the constant depolarization to pyramidal neurons creates higher excitability in the pyramidal neurons, causing more synchronous firing. In turn, this causes the interneurons to fire synchronously, producing a higher amplitude gamma oscillation.
+In this simulation, there are no spiking inputs provided to the model; instead, a current clamp provides a constant depolarizing current to the pyramidal neuron somas, causing the cells to fire. This firing initiates the PING rhythm through mechanisms similar to that described above. Unlike the Poisson-driven weak-PING configuration, where stochastic input timing contributes to more dispersed pyramidal neuron firing, the tonic current increases pyramidal neuron excitability and does not itself introduce stochastic variability in input timing. This allows the pyramidal neuron population to be recruited much more synchronously, which in turn produces synchronous recruitment of the interneurons and a higher-amplitude gamma oscillation
 
 In [Figure 19-A](#figure-19-a) above we see that the dipole displays sharp downward deflections (compare to the "weak" PING in [Figure 4](#figure-4)). This is caused by the strong synchronous inhibition onto the pyramidal neuron somas, which pulls current flow down the dendrites. This PING rhythm has less variability (compare [Figure 19-B](#figure-19-b) to [Figure 9-A](#figure-9-a)) and would thus be considered "strong" PING rather than "weak" PING.
 
@@ -691,7 +696,7 @@ Let's run our simulation by doing the following:
 ![GUI screenshot of spectrogram for rhythmic drive showing consistent 50 Hz gamma activity throughout the simulation with minimal frequency variation](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/07_gamma/gamma_fig_20_D.png)
 </div>
 
-The net dipole signal in this simulation, shown in [Figure 20-A](#figure-20-a) and elsewhere, shows a clear gamma rhythm at ~50 Hz, produced by the Layer 5 pyramidal neurons. In [Figure 20-B](#figure-20-b), our spike rastergram is completely empty unlike before, because these are *sub-threshold* oscillations. Note that here, the Layer 2/3 pyramidal neurons are not receiving any drive, and therefore do not contribute to the dipole current (visible in [Figure 20-C](#figure-20-c)). There is only minor stochasticity to the synaptic inputs (recall that `Burst std dev (Hz)` is 2.5). Also note that the waveform shape in this simulation is distinct from the previous examples in both the total magnitude of the dipole moment and in the lack of sharp deflections (which, previously, were produced by neuronal firing and strong somatic inhibition during PING).
+The net dipole signal in this simulation, shown in [Figure 20-A](#figure-20-a) and elsewhere, shows a clear gamma rhythm at ~50 Hz, produced by the Layer 5 pyramidal neurons. In [Figure 20-B](#figure-20-b), our spike rastergram is completely empty unlike before, because these are *sub-threshold* oscillations. This simulation illustrates an important point about interpreting neural field signals: a rhythmic dipole does not require rhythmic action-potential firing. Here, the phase offset between the proximal and distal synaptic inputs drives alternating current flow up and down the dendrites of pyramidal neurons, generating an oscillatory dipole even though the neurons remain subthreshold. Note that here, the Layer 2/3 pyramidal neurons are not receiving any drive, and therefore do not contribute to the dipole current (visible in [Figure 20-C](#figure-20-c)). There is only minor stochasticity to the synaptic inputs (recall that `Burst std dev (Hz)` is 2.5). Also note that the waveform shape in this simulation is distinct from the previous examples in both the total magnitude of the dipole moment and in the lack of sharp deflections (which, previously, were produced by neuronal firing and strong somatic inhibition during PING).
 
 <a id="toc-10-1"></a>
 
@@ -706,7 +711,7 @@ The net dipole signal in this simulation, shown in [Figure 20-A](#figure-20-a) a
 In the final simulation of this section, we will add more noise to the previously applied 50 Hz rhythmic drive. Do the following:
 
 1. Click the `External drives` tab.
-2. For each of the two drives, change the value of the `Burst std dev (Hz)` from `2.5` to `5`. This increase adds variability to the timing of the burst of synaptic drive each input provides, and hence adds more "noise" to the network.
+2. For each of the two drives, change the value of the `Burst std dev (Hz)` from `2.5` to `5`. This increase adds variability to the timing of the burst of synaptic drive each input provides, and hence adds more "noise" to the network. The burst standard deviation controls the temporal precision of the rhythmic drive. With a small value, bursts occur close to their expected times and the input is highly periodic. Increasing the standard deviation introduces greater variability in burst timing, reducing the temporal coherence of the input.
 3. Click the `Simulation` tab.
 4. Change the `Name` to `gamma_rhythmic_more_noise`.
 5. Click `Run`.
@@ -733,7 +738,7 @@ Due to the higher variability in synaptic input timing, there is now more variab
 
 ### 10.2 Exercises for Further Exploration
 
-- Go back to the `gamma_L5weak_L2weak` configuration and add recurrent synaptic connectivity between pyramidal neurons within a layer (e.g., L5 Pyr -> L5 Pyr weight = `0.00091e-4`); how does that change  the gamma rhythm? What happens as you change the strength of this connection?
+- Go back to the `gamma_L5weak_L2weak` configuration and add recurrent synaptic connectivity between pyramidal neurons within a layer (e.g., L5 Pyr -> L5 Pyr weight = `0.00091e-4`); how does that change the gamma rhythm? What happens as you change the strength of this connection?
 
 - Add connectivity between Layer 2/3 and Layer 5. Is gamma rhythmicity retained? Under what circumstances might gamma persist?
 

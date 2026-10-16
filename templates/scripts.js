@@ -722,9 +722,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // Code cell wrap width
 // ----------------------------------------
 // Notes:
-//   - we want .code-cell elements that have a child "language-python" to
-//     set the max-width to 80 characters (what we use for ruff) before
-//     the overflow goes into effect
+//   - set .code-cell elements that have a child "language-python" to use
+//     a max-width of 80 characters before the overflow goes into effect
 
 function resizeCodeCells() {
     document.querySelectorAll(".code-cell code.language-python").forEach(code => {

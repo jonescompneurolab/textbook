@@ -1118,7 +1118,16 @@ body.dark-mode .callout {
 }
 
 .callout-warning {
-    border: 2px solid var(--gentle-red);
+    border: 3px solid var(--gentle-red);
+    background-color: var(--output-background);
+}
+
+body.dark-mode .callout-warning {
+    background-color: var(--dark-output-background);
+}
+
+.callout-warning .text-cell {
+    padding: 1px 10px 1px 10px;
 }
 
 .callout code {
@@ -1131,8 +1140,9 @@ body.dark-mode .callout {
 */
 .exclamation-icon {
     fill: var(--gentle-red);
-    width: 22px;
-    height: 22px;
+    padding: 1px 10px 1px 10px;
+    width: 30px;
+    height: 30px;
 }
 
 /*
@@ -1464,7 +1474,7 @@ body.dark-mode .code-cell code.language-python{
 
 .output-cell:has(> .output-label) {
     border-left: 4px solid var(--gentle-red);
-    background: #f4dcdc85;
+    background: var(--output-background);
 }
 
 .output-label {
@@ -1476,7 +1486,7 @@ body.dark-mode .code-cell code.language-python{
 }
 
 body.dark-mode .output-cell:has(> .output-label) {
-    background: #fcc0c036;
+    background: var(--dark-output-background);
 }
 
 /*
@@ -2005,11 +2015,12 @@ body.dark-mode .collapsible-default.active {
 }
 
 body.dark-mode .collapsible-default .collapsible-header {
-    border: 2px solid var(--light-purple);
+    border: 2px solid var(--light-gray);
     background: var(--sidebar-gray);
 }
 
-.collapsible-default .collapsible-header.active{
+.collapsible-default .collapsible-header.active, 
+body.dark-mode .collapsible-default .collapsible-header.active {
     border: 0px;
     padding-left: 0px;
     padding-right: 30px;
@@ -2238,6 +2249,8 @@ body.dark-mode code.workshop-button:hover {
     --light-purple: #ba83be;
     --light-gray: #d3d3d3;
     --gentle-red: #ff7777;
+    --output-background: #f4dcdc85;
+    --dark-output-background: #fcc0c036;
     --text-light: #333; 
     --icon-base: #bababa;
     --icon-hover: #444;
