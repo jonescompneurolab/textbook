@@ -1,5 +1,5 @@
 <!--
-# Title: 7.7 Parallelism: Joblib
+# Title: 7.9 Parallelism: MPI
 # Updated: 2025-02-04
 #
 # Contributors:
@@ -10,5 +10,5 @@
     # Christopher Bailey <cjb@cfin.au.dk>
 -->
 
-[[parallelism_joblib_notebook.ipynb]]
+[[parallelism_mpi_notebook.ipynb]]
 

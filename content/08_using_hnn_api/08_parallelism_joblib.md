@@ -1,5 +1,5 @@
 <!--
-# Title: 7.9 Optimize simulated evoked response parameters
+# Title: 7.8 Parallelism: Joblib
 # Updated: 2025-02-04
 #
 # Contributors:
@@ -10,4 +10,5 @@
     # Christopher Bailey <cjb@cfin.au.dk>
 -->
 
-[[optimize_simulated_evoked_response_parameters_notebook.ipynb]]
+[[parallelism_joblib_notebook.ipynb]]
+
