@@ -1,12 +1,12 @@
 <!--
-# Title: 4.4 Simulate the Default Network
+# Title: 4.3 Simulate an ERP using the Default Parameters
 # Updated: 2026-07-15
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.4 Simulate an ERP using the Default Parameters
+# 4.3 Simulate an ERP using the Default Parameters
 
 <div
   id="video-container"

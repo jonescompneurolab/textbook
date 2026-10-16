@@ -1,12 +1,12 @@
 <!--
-# Title: 4.3 Simulation Workflow
+# Title: 1.5 Simulation Workflow
 # Updated: 2026-07-11
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.3 Simulation Workflow in HNN
+# 1.5 Simulation Workflow in HNN
 
 Before we dive into the details of using the software, we want to emphasize that HNN is designed around specific **workflows** for examining the multi-scale generators of event-related potentials (ERPs) and brain rhythms. 
 
@@ -41,7 +41,7 @@ Typical HNN Workflow
     - There is no guarantee that your data will match the scale of HNN's default models, so you will typically need to adjust the scaling to bring them in line with each other
 4. Hand tune the model parameters to improve the fit between your experimental data your simulations
     - HNN is a **hypothesis-testing tool** first and foremost. Our workflows are centered around making predictions about the cell- and circuit-level generators of your experimental signal, and then testing those predictions through simulation
-    - For studying ERPs, we recommend that you start by tuning the timing and strengths of the external drives to the network
+    - For studying ERPs and rhythms, we recommend that you start by tuning the timing and strengths of the external drives to the network
 5. Optimize your simulation
     - Once you have obtained a reasonable fit from hand tuning, you run an optimization algorithm to find the optimal parameter values.
     - You can constrain the search space of the optimization based on what you discovered when you tuned the network by hand

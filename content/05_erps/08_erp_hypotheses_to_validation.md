@@ -1,17 +1,17 @@
 <!--
-# Title: 4.5 Simulation Scaling and Smoothing
-# Updated: 2026-07-15
+# Title: 4.8 From Hypotheses to Validation Targets
+# Updated: 2026-07-26
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.5 Simulation Scaling and Smoothing
+# 4.8 From Hypotheses to Validation Targets
 
 <div
   id="video-container"
   class="text-align: center;"
-  data-src="https://drive.google.com/file/d/1vAF7of4CMAslYKzGsGinX2ez_XmyaJRJ/preview"
+  data-src="https://drive.google.com/file/d/12yO9Rgm1l7nhyy1NaZbWrbfv1Y4AR4o8/preview"
   style="padding: 10px 0px 30px 0px;"
 ></div>
 
@@ -21,7 +21,7 @@ API Walkthrough
 </h5>
 <div class="collapsible-content">
 
-[[erp_api_walkthrough.ipynb][Simulation Scaling and Smoothing in the API]]
+[[erp_api_walkthrough.ipynb][From Hypotheses to Validation Targets]]
 
 </div>
 </div>

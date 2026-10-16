@@ -1,17 +1,17 @@
 <!--
-# Title: 4.6.2 Multiscale Interpretation Part II
+# Title: 4.4 Simulation Scaling and Smoothing
 # Updated: 2026-07-15
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 
-# 4.6.2 Multiscale Interpretation Part II
+# 4.4 Simulation Scaling and Smoothing
 
 <div
   id="video-container"
   class="text-align: center;"
-  data-src="https://drive.google.com/file/d/1Kog80FF6LNL_fQJhWeTEJifztElon_PM/preview"
+  data-src="https://drive.google.com/file/d/1vAF7of4CMAslYKzGsGinX2ez_XmyaJRJ/preview"
   style="padding: 10px 0px 30px 0px;"
 ></div>
 
@@ -21,9 +21,7 @@ API Walkthrough
 </h5>
 <div class="collapsible-content">
 
-[[erp_api_walkthrough.ipynb][First Proximal Drive (Contd...)]]
-
-[[erp_api_walkthrough.ipynb][First Distal Drive]]
+[[erp_api_walkthrough.ipynb][Simulation Scaling and Smoothing in the API]]
 
 </div>
 </div>
