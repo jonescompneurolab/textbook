@@ -1,5 +1,5 @@
 <!--
-# Title: 2.1 Cortical Column Structure
+# Title: 2.2 Cortical Column Structure
 # Updated: 2024-11-14
 #
 # Contributors:
@@ -8,7 +8,7 @@
 
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/01_cortical-column-structure/01_cortical-column-structure -->
 
-# 2.1 Cortical Column Structure
+# 2.2 Cortical Column Structure
 
 Neocortical circuits are organized with remarkably similar features across areas and species. These features include a common laminar structure with generalizable cell classes as well as similar local connectivity and input and output connectivity patterns. We have harnessed this generalization into HNN’s foundational neural model that is provided as a template circuit to work with.
 

@@ -8,6 +8,12 @@
 
 # 4.8 From Hypotheses to Validation Targets
 
+<div class="gui-video-title">
+<h4>
+    GUI Video Walkthrough
+</h4>
+</div>
+
 <div
   id="video-container"
   class="text-align: center;"

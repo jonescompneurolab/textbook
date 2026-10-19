@@ -70,6 +70,7 @@
 	    </div>
 
 		<a href="/textbook/content/preface.html">Preface</a>
+		<a href="/textbook/content/readme.html">README</a>
 		<div class="sidebar-list">
 		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
 		        <span class="toggle-icon">+</span>
@@ -78,7 +79,6 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
-				<a href="/textbook/content/01_getting_started/template_model.html">1.2 Template Model</a>
 				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
 				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
 				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.5 Simulation Workflow</a>
@@ -91,12 +91,13 @@
 		    </a>
 		    <div class="submenu">
 
-				<a href="/textbook/content/03_model_assumptions/cortical_column_structure.html">2.1 Cortical Column Structure</a>
-				<a href="/textbook/content/03_model_assumptions/primary_electric_currents.html">2.2 Primary Electrical Currents</a>
-				<a href="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a>
-				<a href="/textbook/content/03_model_assumptions/synaptic_connectivity.html">2.4 Synaptic Connectivity</a>
-				<a href="/textbook/content/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a>
-				<a href="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>
+				<a href="/textbook/content/03_model_assumptions/template_model.html">2.1 Template Model</a>
+				<a href="/textbook/content/03_model_assumptions/cortical_column_structure.html">2.2 Cortical Column Structure</a>
+				<a href="/textbook/content/03_model_assumptions/primary_electric_currents.html">2.3 Primary Electrical Currents</a>
+				<a href="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">2.4 Neurons: Morphology and Physiology</a>
+				<a href="/textbook/content/03_model_assumptions/synaptic_connectivity.html">2.5 Synaptic Connectivity</a>
+				<a href="/textbook/content/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.6 Evoked and Rhythmic Driving Inputs</a>
+				<a href="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.7 Tonic and Noisy Driving Inputs</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -154,7 +155,7 @@
 		<div class="sidebar-list">
 		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
 		        <span class="toggle-icon">+</span>
-		        7. Using the HNN API
+		        7. Other HNN API Examples
 		    </a>
 		    <div class="submenu">
 
@@ -163,11 +164,11 @@
 				<a href="/textbook/content/08_using_hnn_api/modifying_local_connectivity.html">7.3 Modifying Local Connectivity</a>
 				<a href="/textbook/content/08_using_hnn_api/animating_hnn_simulations.html">7.4 Animating HNN Simulations</a>
 				<a href="/textbook/content/08_using_hnn_api/batch_simulation.html">7.5 Batch Simulation</a>
-				<a href="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-modulated ERP</a>
+				<a href="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-Modulated ERP</a>
 				<a href="/textbook/content/08_using_hnn_api/parallelism_joblib.html">7.7 Parallelism: Joblib</a>
 				<a href="/textbook/content/08_using_hnn_api/parallelism_mpi.html">7.8 Parallelism: MPI</a>
-				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
-				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize Simulated Evoked Response Parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize Simulated Rhythmic Response Parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
 				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
@@ -175,11 +176,11 @@
 		<div class="sidebar-list">
 		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
 		        <span class="toggle-icon">+</span>
-		        8. From Data to Simulation
+		        8. HNN API Median Nerve Example
 		    </a>
 		    <div class="submenu">
 
-				<a href="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG sensor-space data to HNN simulation</a>
+				<a href="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG Sensor Space to HNN Circuit Interpretation</a>
 			</div>
 		</div>
 	    <div style='height: 30px;'></div>
@@ -292,14 +293,14 @@
 
 <!--
 # Title: 1.5 Simulation Workflow
-# Updated: 2026-07-11
+# Updated: 2026-10-19
 #
 # Contributors:
     # Dylan Daniels <dylan_s_daniels@alumni.brown.edu>
 -->
 <h1>1.5 Simulation Workflow in HNN</h1>
-<p>Before we dive into the details of using the software, we want to emphasize that HNN is designed around specific <strong>workflows</strong> for examining the multi-scale generators of event-related potentials (ERPs) and brain rhythms.</p>
-<p>Since HNN simulates the primary current dipoles, i.e. the neural sources of the sensor-level EEG/MEG signal, your experimental data must be source-localized to a particular neocoritcal area for a direct comparison to HNN simulation outputs</p>
+<p>Before we dive into the details of using the software, we want to emphasize that HNN is designed around specific <strong>workflows</strong> for examining the multiscale generators of event-related potentials (ERPs) and low-frequency brain rhythms.</p>
+<p>Since HNN is designed to simulate the multiscale origin of source-localized primary current dipoles, i.e. the neural sources of the sensor-level EEG/MEG signals, experimental data should be source localized to a particular neocortical area for a direct comparison to HNN dipole outputs.</p>
 <p>When using HNN to understand your own experimental data, you’ll typically start with the workflow outlined below.</p>
 <div class="callout callout-note">
 <div class="callout-header">
@@ -314,30 +315,41 @@
 </div>
 <div class="callout-body">
 <ol type="1">
+<li>Initialize the software
+<ul>
+<li>When starting the software with either the HNN-GUI or HNN-Core API, a network model is initialized that contains a pre-tuned neocortical column model and initial parameters for activating the network</li>
+</ul></li>
 <li>Load your experimental data in the proper format
 <ul>
 <li>Note that HNN is <strong>not</strong> a source localization software. This step must be performed before loading your data into HNN</li>
-<li>HNN expects data in nanoampere-meters (nAm) x milliseconds, so you should convert your signal to the proper units before loading your data</li>
+<li>HNN expects source-localized data in nanoampere-meters (nAm) x milliseconds, so the data should be converted to the proper units before loading</li>
 </ul></li>
-<li>Run an initial simulation using one of the default models
+<li>Activate the network
 <ul>
-<li>We provide numerous network configurations for different experimental conditions that can be used as a starting point for simulating your data</li>
-<li>These can be found in our <a href="https://github.com/jonescompneurolab/hnn-data/tree/main">hnn-data GitHub repository</a></li>
+<li>All simulation experiments begin by activating the pre-tuned neocortical column model with a sequence of layer-specific excitatory synaptic drives</li>
+<li>HNN is distributed with pre-defined patterns of drive to use as a starting point for studying ERPs and low-frequency oscillations (see our Textbook tutorials). We provide numerous network configurations for different experimental conditions that can be used as a starting point for simulating your data</li>
+<li>To begin, one of these pre-tuned (“default”) patterns of drives is chosen and an initial simulation is run to compare the default model output to the experimental data. These pre-tuned drives can be found in our <a href="https://github.com/jonescompneurolab/hnn-data/tree/main">hnn-data GitHub repository</a></li>
 </ul></li>
 <li>Adjust the scaling (and smoothing) of your signal
 <ul>
-<li>The scaling in HNN represents the size of the area of cortex that contributes to the recorded signal</li>
-<li>There is no guarantee that your data will match the scale of HNN’s default models, so you will typically need to adjust the scaling to bring them in line with each other</li>
+<li>While the pre-tuned network model and driving pattern have proven to be a good starting point for many studies, often the size of the simulated dipole is not on the same scale as the empirical data.</li>
+<li>A multiplicative scaling factor can be applied to the simulated current dipole to better match the empirical dipole magnitude. The proper scaling factor in HNN provides an estimate of the actual number of neurons representing the size of the area of cortex that contributes to the recorded signal</li>
 </ul></li>
-<li>Hand tune the model parameters to improve the fit between your experimental data your simulations
+<li>Identify parameters of interest for tuning to improve the fit between your experimental data and your simulations, and begin hand tuning the parameters
 <ul>
-<li>HNN is a <strong>hypothesis-testing tool</strong> first and foremost. Our workflows are centered around making predictions about the cell- and circuit-level generators of your experimental signal, and then testing those predictions through simulation</li>
-<li>For studying ERPs and rhythms, we recommend that you start by tuning the timing and strengths of the external drives to the network</li>
+<li>HNN is a large-scale model that contains many pre-tuned parameters that have proven to be a useful starting point for many studies. HNN is designed to be a hypothesis development and testing tool. When fitting model output to empirical data, users must first identify a limited set of “parameters of interest” hypothesized to be key contributing mechanisms to the recorded signals. Our tutorials guide users through an initial set of “parameters of interest” to tune based on many prior studies on the mechanisms contributing to ERPs and low-frequency oscillations</li>
+<li>We recommend that you start by tuning the parameters of interest “by hand” using our interactive HNN-GUI (rather than using a parameter optimization algorithm) to gain intuition on how parameter changes impact the underlying multiscale simulation through parameter exploration. HNN’s model complexity is uniquely designed to enable this exploration.</li>
 </ul></li>
-<li>Optimize your simulation
+<li>Algorithmic parameter optimization
 <ul>
-<li>Once you have obtained a reasonable fit from hand tuning, you run an optimization algorithm to find the optimal parameter values.</li>
-<li>You can constrain the search space of the optimization based on what you discovered when you tuned the network by hand</li>
+<li>Once a reasonable fit between the simulated and recorded data is obtained via hand tuning, parameter optimization algorithms can be applied to identify optimal parameter values that provide the best fit to your data</li>
+<li>Parameter distributions and uniqueness of parameters can be quantified using a technique called Simulation-Based Inference, available only with the HNN-Core API</li>
+</ul></li>
+<li>Multiscale examination and validation
+<ul>
+<li>The above workflow is designed around matching simulated and empirical current dipole signals. Once a good fit is obtained, users can examine the underlying microcircuit dynamics, such as cell- and layer-specific spike activity, layer-specific dipoles, and further details in the HNN-Core API, including LFP/CSD and pyramidal neuron calcium dynamics</li>
+<li>The underlying multiscale dynamics provide targets for validating and/or further constraining model-derived predictions in follow-up experiments</li>
+<li>As an alternative to the workflow described above, if data are available, users may start by constraining the model to micro- (e.g., cell spiking) or meso-scale (e.g., LFP/CSD) activity and predict the corresponding macroscale E/MEG current dipole signal</li>
 </ul></li>
 </ol>
 </div>
@@ -356,10 +368,10 @@
                     <a>1.4 Follow Along with the Textbook</a>
                 </div>
             </div>
-            <div class="next-area" data-link="/textbook/content/03_model_assumptions/cortical_column_structure.html">
+            <div class="next-area" data-link="/textbook/content/03_model_assumptions/template_model.html">
                 <div class="next-text">
                     <p>Next</p>
-                    <a>2.1 Cortical Column Structure</a>
+                    <a>2.1 Template Model</a>
                 </div>
                 <div class="next-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -70,6 +70,7 @@
 	    </div>
 
 		<a href="/textbook/content/preface.html">Preface</a>
+		<a href="/textbook/content/readme.html">README</a>
 		<div class="sidebar-list">
 		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
 		        <span class="toggle-icon">+</span>
@@ -78,7 +79,6 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
-				<a href="/textbook/content/01_getting_started/template_model.html">1.2 Template Model</a>
 				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
 				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
 				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.5 Simulation Workflow</a>
@@ -91,12 +91,13 @@
 		    </a>
 		    <div class="submenu">
 
-				<a href="/textbook/content/03_model_assumptions/cortical_column_structure.html">2.1 Cortical Column Structure</a>
-				<a href="/textbook/content/03_model_assumptions/primary_electric_currents.html">2.2 Primary Electrical Currents</a>
-				<a href="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">2.3 Neurons: Morphology and Physiology</a>
-				<a href="/textbook/content/03_model_assumptions/synaptic_connectivity.html">2.4 Synaptic Connectivity</a>
-				<a href="/textbook/content/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.5 Evoked and Rhythmic Driving Inputs</a>
-				<a href="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.6 Tonic and Noisy Driving Inputs</a>
+				<a href="/textbook/content/03_model_assumptions/template_model.html">2.1 Template Model</a>
+				<a href="/textbook/content/03_model_assumptions/cortical_column_structure.html">2.2 Cortical Column Structure</a>
+				<a href="/textbook/content/03_model_assumptions/primary_electric_currents.html">2.3 Primary Electrical Currents</a>
+				<a href="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">2.4 Neurons: Morphology and Physiology</a>
+				<a href="/textbook/content/03_model_assumptions/synaptic_connectivity.html">2.5 Synaptic Connectivity</a>
+				<a href="/textbook/content/03_model_assumptions/evoked_and_rhythmic_driving_inputs.html">2.6 Evoked and Rhythmic Driving Inputs</a>
+				<a href="/textbook/content/03_model_assumptions/tonic_and_noisy_driving_inputs.html">2.7 Tonic and Noisy Driving Inputs</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -154,7 +155,7 @@
 		<div class="sidebar-list">
 		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
 		        <span class="toggle-icon">+</span>
-		        7. Using the HNN API
+		        7. Other HNN API Examples
 		    </a>
 		    <div class="submenu">
 
@@ -163,11 +164,11 @@
 				<a href="/textbook/content/08_using_hnn_api/modifying_local_connectivity.html">7.3 Modifying Local Connectivity</a>
 				<a href="/textbook/content/08_using_hnn_api/animating_hnn_simulations.html">7.4 Animating HNN Simulations</a>
 				<a href="/textbook/content/08_using_hnn_api/batch_simulation.html">7.5 Batch Simulation</a>
-				<a href="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-modulated ERP</a>
+				<a href="/textbook/content/08_using_hnn_api/simulate_beta_modulated_erp.html">7.6 Simulate Beta-Modulated ERP</a>
 				<a href="/textbook/content/08_using_hnn_api/parallelism_joblib.html">7.7 Parallelism: Joblib</a>
 				<a href="/textbook/content/08_using_hnn_api/parallelism_mpi.html">7.8 Parallelism: MPI</a>
-				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize simulated evoked response parameters</a>
-				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize simulated rhythmic response parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_evoked_response_parameters.html">7.9 Optimize Simulated Evoked Response Parameters</a>
+				<a href="/textbook/content/08_using_hnn_api/optimize_simulated_rhythmic_response_parameters.html">7.10 Optimize Simulated Rhythmic Response Parameters</a>
 				<a href="/textbook/content/08_using_hnn_api/metadata_tutorial.html">7.11 Cell Metadata Tutorial</a>
 				<a href="/textbook/content/08_using_hnn_api/replaying_spike_data_as_input.html">7.12 Replaying Spike Data as Input</a>
 			</div>
@@ -175,11 +176,11 @@
 		<div class="sidebar-list">
 		    <a id="sidebar-section" onclick="toggleSubmenu(event)">
 		        <span class="toggle-icon">+</span>
-		        8. From Data to Simulation
+		        8. HNN API Median Nerve Example
 		    </a>
 		    <div class="submenu">
 
-				<a href="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG sensor-space data to HNN simulation</a>
+				<a href="/textbook/content/09_data_to_simulation/from_meg_to_hnn.html">8.1 From MEG Sensor Space to HNN Circuit Interpretation</a>
 			</div>
 		</div>
 	    <div style='height: 30px;'></div>
@@ -291,14 +292,14 @@
     <div id="content">
 
 <!--
-# Title: 2.2 Primary Electrical Currents
+# Title: 2.3 Primary Electrical Currents
 # Updated: 2024-11-14
 #
 # Contributors:
     # Dylan Daniels
 -->
 <!-- compare original: https://jonescompneurolab.github.io/hnn-under_the_hood/06_primary-electrical-currents/06_primary-electrical-currents -->
-<h1>2.2 Primary Electrical Currents</h1>
+<h1>2.3 Primary Electrical Currents</h1>
 <p>Axial current flow between any two neighboring model compartments i,j is defined as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo>−</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><msub><mi>r</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">i_{axial} = (v_i - v_j) / r_{axial}</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>a</mi><mi>x</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">r_{axial}</annotation></semantics></math> are the voltages in compartment i, j, and the resistance between the compartments, respectively. In order to convert this axial current into a dipole signal, we apply a length scaling where the axial current is scaled by the inter-compartment distance along the vertical axis. The length scaling means that for the longer apical dendrites of layer 5 pyramidal neurons, the contribution will be larger than from the shorter layer 2/3 pyramidal neuron apical dendrites. Note that the orientation of the dendrites relative to the vertical axis also influences the contribution to the dipole signal. For example, the horizontally-oriented oblique dendrites which do not have any vertical length component, do not contribute to the dipole signal, whereas for basal dendrites oriented at 45 degrees from the vertical axis, the scaling is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msqrt><mn>2</mn></msqrt><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">-\sqrt{2}/2</annotation></semantics></math> (note the negative sign is because these dendrites are pointing downward). The contribution from all neighboring compartments within a neuron is integrated and then added to a value across the set of all pyramidal neurons. As a result of the multiplication between axial current and length, the model dipole output signal has the same units of measure as the experimental data (in units of nano-Ampere-meters) and we are then able to directly compare the two signals, as well as precisely tune model parameters to match characteristics of recorded signals <span class="citation" data-cites="okada_genesis_1997">(<a href="#ref-okada_genesis_1997" role="doc-biblioref">Okada, Wu, and Kyuhou 1997</a>)</span>.</p>
 <h2>References</h2>
 <!-- Any Bibtex bibliographic references are automatically generated, so we don't need to add anything other than a section title. -->
@@ -318,13 +319,13 @@ Okada, Yoshio C., Jie Wu, and Shinichi Kyuhou. 1997. <span>“Genesis of <span>M
                 </div>
                 <div class="previous-text">
                     <p>Previous</p>
-                    <a>2.1 Cortical Column Structure</a>
+                    <a>2.2 Cortical Column Structure</a>
                 </div>
             </div>
             <div class="next-area" data-link="/textbook/content/03_model_assumptions/neurons_morphology_and_physiology.html">
                 <div class="next-text">
                     <p>Next</p>
-                    <a>2.3 Neurons: Morphology and Physiology</a>
+                    <a>2.4 Neurons: Morphology and Physiology</a>
                 </div>
                 <div class="next-icon">
                     <svg class="svg-arrow" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

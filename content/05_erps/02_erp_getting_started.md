@@ -12,6 +12,12 @@
 
 # 4.2 Getting Started with HNN and ERP Simulations
 
+<div class="gui-video-title">
+<h4>
+    GUI Video Walkthrough
+</h4>
+</div>
+
 <div
   id="video-container"
   class="text-align: center;"

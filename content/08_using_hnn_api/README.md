@@ -1,5 +1,5 @@
 <!--
-# Title: 7. Using the HNN API
+# Title: 7. Other HNN API Examples
 # Updated: 2024-01-16
 #
 # Contributors:

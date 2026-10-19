@@ -8,6 +8,12 @@
 
 # 4.7 Adjusting Network Parameters And Testing Hypotheses
 
+<div class="gui-video-title">
+<h4>
+    GUI Video Walkthrough
+</h4>
+</div>
+
 <div
   id="video-container"
   class="text-align: center;"

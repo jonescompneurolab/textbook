@@ -8,6 +8,12 @@
 
 # 4.6 Adjusting Evoked Drives
 
+<div class="gui-video-title">
+<h4>
+    GUI Video Walkthrough
+</h4>
+</div>
+
 <div
   id="video-container"
   class="text-align: center;"
