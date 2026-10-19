@@ -1,5 +1,5 @@
 <!--
-# Title: 8.1 From MEG sensor-space data to HNN simulation
+# Title: 8.1 From MEG Sensor Space to HNN Circuit Interpretation
 # Updated: 2025-02-04
 #
 # Contributors:

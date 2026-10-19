@@ -254,6 +254,15 @@ p .code-text {
     margin: 0 auto;
 }
 
+.gui-video-title {
+    text-align: center;
+    
+} 
+
+.gui-video-title :is(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 0px;
+}
+
 /*
     Element: .csl-entry
     Description: adjust spacing in the automatically-generated bibliography
@@ -1163,8 +1172,9 @@ body.dark-mode .exclamation-icon {
     display: grid;
     grid-template-columns: 42px 1fr;
     align-items: center;
-    font-weight: 600;
+    /* font-weight: 600; */
     margin-bottom: 0px;
+    font-size: 1.3em;
 }
 
 body.dark-mode .callout .callout-header {
@@ -1181,6 +1191,10 @@ body.dark-mode .callout .callout-header {
     margin-left: 12px ;
 }
 
+.callout-title p {
+    margin-bottom: 15px;
+}
+
 .callout-body {
     margin-left: 42px;
     margin-top: 0px;
@@ -1191,15 +1205,20 @@ body.dark-mode .callout .callout-header {
 }
 
 .callout-body > ol > li {
-    font-size: 1.1em;
+    font-size: 1.2em;
+    padding: 0px 0px 10px 0px;
 }
 
 body.dark-mode .callout-body > ol > li {
     color: var(--hnn-yellow)
 }
 
+.callout-body > ol > li > ul {
+    padding-left: 30px;
+}
+
 .callout-body > ol > li > ul > li {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 body.dark-mode .callout-body > ol > li > ul > li {

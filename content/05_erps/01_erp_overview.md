@@ -11,7 +11,7 @@
 
 Welcome to the HNN ERP tutorial!
 
-This walkthrough is designed to teach you to use **both** the Graphical User Interface (GUI) **and** the Python API. In the sections that follow, the videos will guide you through how to use the HNN GUI, and the web pages themselves will include code blocks that mimic the GUI workflow in the Python API. Note that there will be slight deviations between what is covered in the GUI versus the API, as the API includes some features that are not available in the GUI. In general, though, we maintain close parity between the GUI and API tutorials, such that you can choose whichever method you prefer without missing any essential content.
+This walkthrough is designed to teach you to use **both** the Graphical User Interface (GUI) **and** the Python API for ERP simulations. In the sections that follow, the videos will guide you through how to use the HNN GUI, and the web pages themselves will include code blocks that mimic the GUI workflow in the Python API. Note that there will be slight deviations between what is covered in the GUI versus the API, as the API includes some features that are not available in the GUI. In general, though, we maintain close parity between the GUI and API tutorials, such that you can choose whichever method you prefer without missing any essential content.
 
 In order to understand the workflow and initial parameter sets provided with this walkthrough, we recommend that you watch the ERP overview video below. We additionally provide a brief scientific background in the accompanying text below, but note that the video overview provides a more comprehensive introduction.
 

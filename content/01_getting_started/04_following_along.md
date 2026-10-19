@@ -35,7 +35,7 @@ hnn-gui
 
 ## Follow Along With the Python API Tutorials
 
-Note that any code blocks in our **Simulating ERPs** walkthrough are *cumulative*. That is to say, these code blocks are meant to be run in sequential order, as they are drawn from a single `ipython` notebook file.
+Note that any code blocks in our API walkthroughs are *cumulative*. That is to say, these code blocks are meant to be run in sequential order, as they are drawn from a single `ipython` notebook file.
 
 By clicking the `Download Notebook` button at the top of any subpage, you can download the entire `.ipynb` file and run it interactively through Jupyter Notebook or through your preferred code editor (VS Code, PyCharm, etc.).
 
