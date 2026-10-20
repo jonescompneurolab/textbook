@@ -3,14 +3,17 @@ dev/
 local
 references
 
-# OS, run, and IDE artifacts
-__pycache__
+# OS, run, IDE, and AI slop artifacts
+*.pyc
+.DS_Store
+.claude/
 .idea/
 .ipynb_checkpoints
-.DS_Store
 .vscode/
+__pycache__
+CLAUDE.md
+AGENTS.md
 tags
-*.pyc
 
 # Virtual environments
 .venv
