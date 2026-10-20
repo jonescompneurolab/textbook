@@ -74,6 +74,18 @@ You can find more details about the GUI at [HNN GUI Quickstart](https://jonescom
 conda activate hnn-core-env
 ```
 
+10. If you wish to run a Jupyter notebook file that you downloaded from this Textbook website, then inside your Conda environment, first install Jupyter notebooks using
+
+```bash
+pip install notebook
+```
+
+Then you can start the Jupyter server using the following command, after which you should navigate to the notebook you want to run:
+
+```bash
+jupyter notebook
+```
+
 **If you have any questions or problems** while installing HNN, feel free to ask for help on [our GitHub Discussions page][]!
 
 ## Local Installation - Detailed
