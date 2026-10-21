@@ -1,5 +1,5 @@
 <!--
-# Title: 1. Read This First!
+# Title: Read This First!
 # Updated: 2026-10-05
 #
 # Contributors:
