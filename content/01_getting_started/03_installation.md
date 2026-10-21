@@ -35,20 +35,35 @@ If you want to install HNN-Core on your local computer, follow these steps. This
 
 3. AFTER you have done the above, open the "Terminal" app (if on Mac or Linux) or the "Anaconda Prompt" app (if on Windows).
 
-4. Copy and paste the following commands into your Terminal/Anaconda Prompt:
+4. If you are on MacOS, then in the "Terminal" app, copy, paste, and enter the following command, **then RESTART your computer after it has run!**
+
+```bash
+xcode-select --install
+```
+
+5. If you have "Low Battery" mode activated on your computer, please turn it off.
+
+6. Copy and paste the following commands into your Terminal/Anaconda Prompt:
 
 ```bash
 conda create -y -q -n hnn-core-env python=3.12
 conda activate hnn-core-env
 ```
 
-5. Install HNN-Core using the following command:
+7. If you get an error about needing to accept the Terms of service, then enter the following commands, then afterwards re-try step 6.
+
+```bash
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+```
+
+8. Install HNN-Core using the following command:
 
 ```bash
 pip install "hnn_core[all]"
 ```
 
-6. Test that everything installed correctly by copying and pasting the following command into the same window:
+9. Test that everything installed correctly by copying and pasting the following command into the same window:
 
 ```bash
 python -c "
@@ -58,9 +73,9 @@ print('--> SUCCESS: The test worked')
 "
 ```
 
-7. That's it! HNN should now be installed. Proceed to the rest of [our HNN Textbook][] to get started.
+10. That's it! HNN should now be installed. Proceed to the rest of [our HNN Textbook][] to get started.
 
-8. To quickly start the GUI from inside your environment, just run the command:
+11. To quickly start the GUI from inside your environment, just run the command:
 
 ```bash
 hnn-gui
@@ -68,13 +83,13 @@ hnn-gui
 
 You can find more details about the GUI at [HNN GUI Quickstart](https://jonescompneurolab.github.io/textbook/content/04_using_hnn_gui/gui_quickstart.html).
 
-9. Note: The next time you need to re-enter the Conda Environment (such as after you restart your computer), all you need to do is run
+12. Note: The next time you need to re-enter the Conda Environment (such as after you restart your computer), all you need to do is run
 
 ```bash
 conda activate hnn-core-env
 ```
 
-10. If you wish to run a Jupyter notebook file that you downloaded from this Textbook website, then inside your Conda environment, first install Jupyter notebooks using
+13. If you wish to run a Jupyter notebook file that you downloaded from this Textbook website, then inside your Conda environment, first install Jupyter notebooks using
 
 ```bash
 pip install notebook
