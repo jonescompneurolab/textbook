@@ -374,7 +374,7 @@ Importantly, in all the simulations of this tutorial so far, the strength of the
 4. Finally, click the `Make Figure` button.
 
 <div class="stylefig">
-### Figure 20
+### Figure 15
 ![GUI screenshot of spike rastergram showing proximal and distal drive histograms with empty bottom panel demonstrating no neuronal spiking, confirming subthreshold generation of alpha and beta events](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta_Spikes.png)
 </div>
 
@@ -402,7 +402,7 @@ You should see the values displayed in the dialogue boxes below.
 
 <div class="stylefig">
 <table>
-### Figure 15
+### Figure 16
 <tr>
 <td>
 ![GUI screenshot showing `bursty1` proximal drive parameters with start time standard deviation increased to 50 ms for jittered timing](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image21.png)
@@ -427,7 +427,7 @@ Do the following:
 Once completed, we recommend you immediately plot the spectrogram of these simulations, using the instructions before in [Section 4.3](#toc-4-3) and selecting the new dataset for `AlphaAndBetaJitter50`. You should get a plot that looks like below:
 
 <div class="stylefig">
-### Figure 16
+### Figure 17
 ![GUI screenshot of an averaged spectrogram across 3 trials with jittered start times showing more continuous alpha and beta bands due to accumulation of non-time-locked events](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaJitter50_Spect.png)
 </div>
 
@@ -503,13 +503,13 @@ We have also found that another factor that contributes to the prevalence of bet
 4. Click the tab labeled: `External drives`.
 5. Inside of the inside of the tab, click the button `Load external drives (0)`, then select the previously-used file `AlphaAndBeta.json`.
 6. Click the dropdown menu labeled `bursty2 (distal)`. (NOT `bursty1 (proximal)`!)
-7. Decrease `Burst std dev (Hz)` from `20` to `10`.
-8. Scroll down, and increase the `AMPA weights` to both `L5_pyramidal` and `L2_pyramidal` from `0.000054` to `0.00006`
+7. Decrease `Burst std dev (Hz)` from `20` to `5`.
+8. Scroll down, and increase the `AMPA weights` of `L5_pyramidal` from `0.000054` to `0.00007`. (Do NOT increase the AMPA weights of `L2_pyramidal`.)
 
 Both of these changes will cause the distal input burst to push a greater amount of current flow down the pyramidal neuron dendrites. Your `bursty2 (distal)` drive parameters should look like the following:
 
 <div class="stylefig">
-### Figure 17
+### Figure 18
 ![GUI screenshot showing `bursty2` distal drive parameters with decreased burst standard deviation to 10 Hz and increased AMPA weights to 0.00006 for stronger beta](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image28.png)
 </div>
 
@@ -519,16 +519,34 @@ Both of these changes will cause the distal input burst to push a greater amount
 Once completed, you will see output in the GUI similar to that shown below:
 
 <div class="stylefig">
-### Figure 18
+### Figure 19
 ![GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta.png)
 </div>
 
 <div class="stylefig">
-### Figure 19
+### Figure 20
 ![GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta_Spect.png)
 </div>
 
 First, notice that the histogram profile of the distal input bursts (green) are narrower, corresponding to more synchronous input than in the original `AlphaAndBeta` simulation ([Figure 14](#figure-14)). Second, notice that the waveform of the oscillation is also different, with a sharper downward (negative) deflecting signal, due to to the stronger distal input. These deflections lead to increased ~20 Hz beta activity relative to 10 Hz alpha activity, as seen in the corresponding spectrogram (compare to [Figure 14](#figure-14)). The 20 Hz frequency is set by the duration of the downward current flow, which here is approximately 50 ms (see [@sherman_neural_2016] for further details).
+
+Next, let's simulate this across multiple trials and compare to the `jitter` simulations previously. This new set of simulations should now show much stronger beta than alpha, both in individual simulations and when averaged in the spectral domain.
+
+1. Rename The simulation to `AlphaAndIncrBeta-multiple`
+2. Increase `Trials` to `4`
+3. Click `Run Simulation`.
+4. After the long simulations complete, plot the spectrogram like before.
+
+<div class="stylefig">
+### Figure 21
+![GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta-multiple.png)
+</div>
+
+<div class="stylefig">
+### Figure 22
+![GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta-multiple_Spect.png)
+</div>
+
 
 <!-- ### 9.1.1 Exercise for further exploration
 <!-- ### 8.1.1 Exercise for further exploration -->
@@ -563,12 +581,12 @@ Note that both the proximal and distal input frequency are set to 10 Hz (bursts 
 Once completed, you will see output similar to that shown below.
 
 <div class="stylefig">
-### Figure 20
+### Figure 23
 ![GUI screenshot of simulation output showing antiphase proximal and distal drive histograms with dipole waveform producing continuous alpha oscillation without beta](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly.png)
 </div>
 
 <div class="stylefig">
-### Figure 21
+### Figure 24
 ![GUI screenshot of spectrogram showing continuous pure alpha activity at 10 Hz without beta components from alternating out-of-phase proximal and distal drives](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly_Spect.png)
 </div>
 
@@ -606,14 +624,14 @@ Recall that in the above simulations, the strength of the rhythmic proximal and 
 Your `bursty2 (distal)` drive parameters should look like the following:
 
 <div class="stylefig">
-### Figure 22
+### Figure 25
 ![GUI screenshot showing `bursty2` distal drive parameters with greatly increased AMPA weights to 0.0004 for inducing spiking activity](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image25.png)
 </div>
 
 Your simulation output should look like the following:
 
 <div class="stylefig">
-### Figure 23
+### Figure 26
 ![GUI screenshot of simulation output showing sharp rapidly oscillating dipole waveform from spiking activity induced by strong distal inputs](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking.png)
 </div>
 
@@ -622,7 +640,7 @@ Because we have greatly increased postsynaptic conductance of the distal driving
 In the most recent set of instructions, we increased the frequency range that our spectrograms should display. If you then create a spectrogram using the instructions provided in previous steps, you should see the following:
 
 <div class="stylefig">
-### Figure 24
+### Figure 27
 ![GUI screenshot of a spectrogram showing broadband high-frequency spiking activity from 60-120 Hz due to pyramidal neuron firing and rapid dendritic repolarization](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_Spect.png)
 </div>
 
@@ -636,7 +654,7 @@ Next, We can verify that the neurons are spiking by looking at the spiking raste
 4. Finally, click the `Make Figure` button.
 
 <div class="stylefig">
-### Figure 25
+### Figure 28
 ![GUI screenshot of a spike rastergram overlaid on layer dipole contributions showing highly synchronous neuronal spiking in each population coinciding with high-frequency dipole events](https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_SpikingOverlay.png)
 </div>
 

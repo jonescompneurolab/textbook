@@ -593,7 +593,7 @@
 <li>Finally, click the <code>Make Figure</code> button.</li>
 </ol>
 <section class="stylefig">
-<h3>Figure 20</h3>
+<h3>Figure 15</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBeta_Spikes.png" alt="GUI screenshot of spike rastergram showing proximal and distal drive histograms with empty bottom panel demonstrating no neuronal spiking, confirming subthreshold generation of alpha and beta events" />
 <figcaption aria-hidden="true">GUI screenshot of spike rastergram showing proximal and distal drive histograms with empty bottom panel demonstrating no neuronal spiking, confirming subthreshold generation of alpha and beta events</figcaption>
@@ -616,7 +616,7 @@
 <p>You should see the values displayed in the dialogue boxes below.</p>
 <div class="stylefig">
 <table>
-<h3>Figure 15</h3>
+<h3>Figure 16</h3>
 <tr>
 <td>
 <figure>
@@ -643,7 +643,7 @@
 </ol>
 <p>Once completed, we recommend you immediately plot the spectrogram of these simulations, using the instructions before in <a href="#toc-4-3">Section 4.3</a> and selecting the new dataset for <code>AlphaAndBetaJitter50</code>. You should get a plot that looks like below:</p>
 <section class="stylefig">
-<h3>Figure 16</h3>
+<h3>Figure 17</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaJitter50_Spect.png" alt="GUI screenshot of an averaged spectrogram across 3 trials with jittered start times showing more continuous alpha and beta bands due to accumulation of non-time-locked events" />
 <figcaption aria-hidden="true">GUI screenshot of an averaged spectrogram across 3 trials with jittered start times showing more continuous alpha and beta bands due to accumulation of non-time-locked events</figcaption>
@@ -693,12 +693,12 @@
 <li>Click the tab labeled: <code>External drives</code>.</li>
 <li>Inside of the inside of the tab, click the button <code>Load external drives (0)</code>, then select the previously-used file <code>AlphaAndBeta.json</code>.</li>
 <li>Click the dropdown menu labeled <code>bursty2 (distal)</code>. (NOT <code>bursty1 (proximal)</code>!)</li>
-<li>Decrease <code>Burst std dev (Hz)</code> from <code>20</code> to <code>10</code>.</li>
-<li>Scroll down, and increase the <code>AMPA weights</code> to both <code>L5_pyramidal</code> and <code>L2_pyramidal</code> from <code>0.000054</code> to <code>0.00006</code></li>
+<li>Decrease <code>Burst std dev (Hz)</code> from <code>20</code> to <code>5</code>.</li>
+<li>Scroll down, and increase the <code>AMPA weights</code> of <code>L5_pyramidal</code> from <code>0.000054</code> to <code>0.00007</code>. (Do NOT increase the AMPA weights of <code>L2_pyramidal</code>.)</li>
 </ol>
 <p>Both of these changes will cause the distal input burst to push a greater amount of current flow down the pyramidal neuron dendrites. Your <code>bursty2 (distal)</code> drive parameters should look like the following:</p>
 <section class="stylefig">
-<h3>Figure 17</h3>
+<h3>Figure 18</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image28.png" alt="GUI screenshot showing bursty2 distal drive parameters with decreased burst standard deviation to 10 Hz and increased AMPA weights to 0.00006 for stronger beta" />
 <figcaption aria-hidden="true">GUI screenshot showing <code>bursty2</code> distal drive parameters with decreased burst standard deviation to 10 Hz and increased AMPA weights to 0.00006 for stronger beta</figcaption>
@@ -710,20 +710,41 @@
 </ol>
 <p>Once completed, you will see output in the GUI similar to that shown below:</p>
 <section class="stylefig">
-<h3>Figure 18</h3>
+<h3>Figure 19</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta.png" alt="GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input" />
 <figcaption aria-hidden="true">GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input</figcaption>
 </figure>
 </section>
 <section class="stylefig">
-<h3>Figure 19</h3>
+<h3>Figure 20</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta_Spect.png" alt="GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive" />
 <figcaption aria-hidden="true">GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive</figcaption>
 </figure>
 </section>
 <p>First, notice that the histogram profile of the distal input bursts (green) are narrower, corresponding to more synchronous input than in the original <code>AlphaAndBeta</code> simulation (<a href="#figure-14">Figure 14</a>). Second, notice that the waveform of the oscillation is also different, with a sharper downward (negative) deflecting signal, due to to the stronger distal input. These deflections lead to increased ~20 Hz beta activity relative to 10 Hz alpha activity, as seen in the corresponding spectrogram (compare to <a href="#figure-14">Figure 14</a>). The 20 Hz frequency is set by the duration of the downward current flow, which here is approximately 50 ms (see <span class="citation" data-cites="sherman_neural_2016">(<a href="#ref-sherman_neural_2016" role="doc-biblioref">Sherman et al. 2016</a>)</span> for further details).</p>
+<p>Next, let’s simulate this across multiple trials and compare to the <code>jitter</code> simulations previously. This new set of simulations should now show much stronger beta than alpha, both in individual simulations and when averaged in the spectral domain.</p>
+<ol type="1">
+<li>Rename The simulation to <code>AlphaAndIncrBeta-multiple</code></li>
+<li>Increase <code>Trials</code> to <code>4</code></li>
+<li>Click <code>Run Simulation</code>.</li>
+<li>After the long simulations complete, plot the spectrogram like before.</li>
+</ol>
+<section class="stylefig">
+<h3>Figure 21</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta-multiple.png" alt="GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input" />
+<figcaption aria-hidden="true">GUI screenshot of simulation output showing narrower distal drive bursts and sharper negative dipole deflections from strengthened synchronized distal input</figcaption>
+</figure>
+</section>
+<section class="stylefig">
+<h3>Figure 22</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaAndBetaIncrBeta-multiple_Spect.png" alt="GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive" />
+<figcaption aria-hidden="true">GUI screenshot of a spectrogram showing increased beta activity at approximately 20 Hz relative to alpha activity due to stronger and more synchronous distal drive</figcaption>
+</figure>
+</section>
 <!-- ### 9.1.1 Exercise for further exploration
 <!-- ### 8.1.1 Exercise for further exploration -->
 <h3>7.1.1 Exercise for further exploration</h3>
@@ -750,14 +771,14 @@
 </ol>
 <p>Once completed, you will see output similar to that shown below.</p>
 <section class="stylefig">
-<h3>Figure 20</h3>
+<h3>Figure 23</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly.png" alt="GUI screenshot of simulation output showing antiphase proximal and distal drive histograms with dipole waveform producing continuous alpha oscillation without beta" />
 <figcaption aria-hidden="true">GUI screenshot of simulation output showing antiphase proximal and distal drive histograms with dipole waveform producing continuous alpha oscillation without beta</figcaption>
 </figure>
 </section>
 <section class="stylefig">
-<h3>Figure 21</h3>
+<h3>Figure 24</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/AlphaOnly_Spect.png" alt="GUI screenshot of spectrogram showing continuous pure alpha activity at 10 Hz without beta components from alternating out-of-phase proximal and distal drives" />
 <figcaption aria-hidden="true">GUI screenshot of spectrogram showing continuous pure alpha activity at 10 Hz without beta components from alternating out-of-phase proximal and distal drives</figcaption>
@@ -788,7 +809,7 @@
 </ol>
 <p>Your <code>bursty2 (distal)</code> drive parameters should look like the following:</p>
 <section class="stylefig">
-<h3>Figure 22</h3>
+<h3>Figure 25</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/image25.png" alt="GUI screenshot showing bursty2 distal drive parameters with greatly increased AMPA weights to 0.0004 for inducing spiking activity" />
 <figcaption aria-hidden="true">GUI screenshot showing <code>bursty2</code> distal drive parameters with greatly increased AMPA weights to 0.0004 for inducing spiking activity</figcaption>
@@ -796,7 +817,7 @@
 </section>
 <p>Your simulation output should look like the following:</p>
 <section class="stylefig">
-<h3>Figure 23</h3>
+<h3>Figure 26</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking.png" alt="GUI screenshot of simulation output showing sharp rapidly oscillating dipole waveform from spiking activity induced by strong distal inputs" />
 <figcaption aria-hidden="true">GUI screenshot of simulation output showing sharp rapidly oscillating dipole waveform from spiking activity induced by strong distal inputs</figcaption>
@@ -805,7 +826,7 @@
 <p>Because we have greatly increased postsynaptic conductance of the distal driving spikes, our distal inputs have induced spiking activity in the pyramidal neurons on several cycles of the drive, resulting in a sharp and rapidly oscillating dipole waveform.</p>
 <p>In the most recent set of instructions, we increased the frequency range that our spectrograms should display. If you then create a spectrogram using the instructions provided in previous steps, you should see the following:</p>
 <section class="stylefig">
-<h3>Figure 24</h3>
+<h3>Figure 27</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_Spect.png" alt="GUI screenshot of a spectrogram showing broadband high-frequency spiking activity from 60-120 Hz due to pyramidal neuron firing and rapid dendritic repolarization" />
 <figcaption aria-hidden="true">GUI screenshot of a spectrogram showing broadband high-frequency spiking activity from 60-120 Hz due to pyramidal neuron firing and rapid dendritic repolarization</figcaption>
@@ -820,7 +841,7 @@
 <li>Finally, click the <code>Make Figure</code> button.</li>
 </ol>
 <section class="stylefig">
-<h3>Figure 25</h3>
+<h3>Figure 28</h3>
 <figure>
 <img src="https://raw.githubusercontent.com/jonescompneurolab/jones-website/master/images/textbook/content/06_alpha_beta/images/HighFreqSpiking_SpikingOverlay.png" alt="GUI screenshot of a spike rastergram overlaid on layer dipole contributions showing highly synchronous neuronal spiking in each population coinciding with high-frequency dipole events" />
 <figcaption aria-hidden="true">GUI screenshot of a spike rastergram overlaid on layer dipole contributions showing highly synchronous neuronal spiking in each population coinciding with high-frequency dipole events</figcaption>
