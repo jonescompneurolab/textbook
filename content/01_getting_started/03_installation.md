@@ -25,9 +25,103 @@ This is the quickest way to get up and running with HNN, though it does require 
 
 HNN is available for free, public use on the [Neuroscience Gateway Portal (NSG)](https://www.nsgportal.org/). You can find instructions for using HNN on NSG [at this page here](https://users.sdsc.edu/~kenneth/hnn/index.html).
 
+----------------------------------------------
+
 ## Local Installation - Simple
 
-If you want to install HNN-Core on your local computer, follow these steps. This will install both the API and the GUI. (For more complex installation questions, such as installing on Brown's OSCAR environment, installing with MPI speedup, installing for development, etc., see the **Local Installation - Detailed** section later).
+If you want to install HNN-Core on your local computer with all features, including API, GUI, MPI, and others, follow the below steps.
+
+Alternatively, if your circumstances are more complex, such as if you need to install into an existing `conda` environment, or you are using Brown University's OSCAR system, or you want to install for development, etc., then please see the **Local Installation - Detailed** section later. You can also always reach out to us at [our Github Discussions page][]. Additionally, if you are on Windows but are unable to install Windows Subsystem for Linux, such as due to hospital IT policy, then see the **non-WSL Windows Installation** section later.
+
+## Part 1. Platform-specific requirements
+
+<div class="collapsible-section collapsible-default">
+<h5 class="collapsible-header"> MacOS </h5>
+<div class="collapsible-content">
+
+<a id="macos"></a>
+
+1. Before you install HNN-Core, you must install "Xcode Command-Line Tools". This can be
+  done by opening the "Terminal" app, running the following command, and then clicking
+  through the prompts in the window that will pop up.
+
+    ```bash
+    xcode-select --install
+    ```
+
+    If you see output that says `xcode-select: note: Command line tools are already installed.` then proceed to the next step.
+
+2. **Restart your computer.**
+
+3. Make sure your computer has the latest updates by opening the Settings app and going to "Software Update". Download and install all updates, then restart your computer again. **Note that you may have to do this multiple times**.
+
+4. Once there are no more updates to your system, proceed to Part 2.
+
+</div>
+</div>
+
+<span style="height: 30px;" />
+
+<div class="collapsible-section collapsible-default">
+<h5 class="collapsible-header"> Windows (WSL) </h5>
+<div class="collapsible-content">
+
+<a id="windows-wsl"></a>
+
+1. Install ["Windows Subsystem for Linux" (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install). You can do this via following the steps at <https://learn.microsoft.com/en-us/windows/wsl/install> or the steps here:
+
+    1.1. Open the Start Menu and type "Powershell".
+
+    1.2. Right-click on the icon for Powershell and select "Run as administrator". A new window should open.
+
+    1.3. Inside the Powershell window, run the following command:
+
+    ```bash
+    wsl --install
+    ```
+
+    1.5 Once it has finished, close the PowerShell window
+
+2. You will now have a new App available from the Start Menu called `Ubuntu`. Run that app.
+
+3. The first time you start Ubuntu, it will prompt you to `Create a default Unix user account` and ask for a password.
+
+4. You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 3, enter that when it prompts you for your password.
+
+    ```bash
+    sudo apt-get update
+    sudo apt-get install build-essential
+    ```
+
+5. Proceed to Part 2.
+
+</div>
+</div>
+
+<div class="collapsible-section collapsible-default">
+<h5 class="collapsible-header"> Linux (Debian/Ubuntu) </h5>
+<div class="collapsible-content">
+
+1. Install the fundamental software building packages for your distribution. For Debian/Ubuntu-based distributions (e.g. Debian, Ubuntu, Linux Mint, etc.), you can do this with the following command in your Terminal:
+
+    ```bash
+    sudo apt-get update
+    sudo apt-get install build-essential
+    ```
+
+2. Proceed to Part 2.
+
+</div>
+</div>
+
+<span style="height: 30px;" />
+
+
+## Part 2. `uv` installation
+
+1. Download the [`uv` Python package and project manager
+
+
 
 1. Install the [Anaconda Python Distribution](https://www.anaconda.com/download/success) (also known as "Conda"). If you are unsure which version to install, download the Graphical Installer for the Anaconda Distribution, though any option works. If you are unfamiliar with using Anaconda/Conda virtual environments, [you can find guidance about them here](https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial).
 
@@ -234,7 +328,7 @@ Please follow the instructions in Steps 1, 2, and 3, *in that order*. This insta
 Note that the `pip` installation methods do *not* include all features by default, only the API. If you want to install a specific set of features, you must include all of them in your `pip` install command. For example, if you want HNN GUI support and Optimization support, but not Parallel support, then you would replace the final command in Step 3 with
 
 ```bash
-pip install "hnn_core[gui,opt]"
+pip install "hnn_core[all]"
 ```
 
 ## Step 1. `pip` Python Environment
