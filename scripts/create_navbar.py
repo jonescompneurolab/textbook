@@ -64,6 +64,7 @@ def create_toggle_section(toggle_label):
             <a id="sidebar-header" onclick="toggleSubmenu(event)">
                 <span class="toggle-icon">+</span>
                 {toggle_label}
+                <label class="toggle-label">Dark/Light-mode Toggle</label>
             </a>
             <div class="submenu">
     """)
@@ -186,7 +187,7 @@ def generate_sidebar_html(
                         </svg>
                 </div>
                 <div class="install-row">
-                    <a class="download-icon-link">
+                    <a class="download-icon-link" aria-label="Installation">
                         <svg class="download-icon" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 19L5.78311 18.9954C3.12231 18.8818 1 16.6888 1
@@ -235,7 +236,10 @@ def generate_sidebar_html(
         sidebar_html += workshop_link
 
     # AES updating of the index has been moved upwards into generate_page_html
-    with open(index_path, "r",) as f:
+    with open(
+        index_path,
+        "r",
+    ) as f:
         json_page_index = json.load(f)
 
     # build the page navigation elements
@@ -244,7 +248,37 @@ def generate_sidebar_html(
     dynamic_links_html, ordered_links = build_navbar(json_page_index)
 
     close_sidebar = textwrap.dedent("""
-            <div style='height: 30px;'></div>
+                <div style="height:
+                     20px
+                ;"></div>
+                <div class="survey-row">
+                    <a class="download-icon-link" aria-label="Take the HNN Survey">
+                        <svg class="download-icon" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                           <path stroke="none" fill="#fff" d="M8 6H5c-.553
+                           0-1-.448-1-1s.447-1 1-1h3c.553 0 1 .448 1 1s-.447 1-1 1zM13
+                           10H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447
+                           1-1 1zM13 14H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448
+                           1 1s-.447 1-1 1z"/>
+                           <path stroke="none" fill="#fff" d="M18 2v8c0 .55-.45 1-1
+                           1s-1-.45-1-1V2.5c0-.28-.22-.5-.5-.5h-13c-.28
+                           0-.5.22-.5.5v19c0 .28.22.5.5.5h13c.28 0
+                           .5-.22.5-.5V21c0-.55.45-1 1-1s1 .45 1 1v1c0 1.1-.9 2-2
+                           2H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0h14c1.1 0 2 .9 2 2z"/>
+                            <path stroke="none" fill="#fff" d="M23.71 8.817c.44.438.372
+                            1.212-.148 1.732l-7.835
+                            7.84c-.07.068-.148.126-.227.173l-2.382
+                            1.317c-.33.183-.7.152-.927-.075-.226-.227-.25-.603-.07-.923l1.328-2.373c.042-.085.1-.153.162-.216
+                            0-.012.007-.018.007-.018l7.835-7.84c.52-.52 1.294-.587
+                            1.73-.15l.53.53z"/>
+                        </svg>
+                    </a>
+                    <a>
+                        Take the HNN Survey here!
+                    </a>
+                </div>
+
+    <div style='height: 30px;'></div>
         </div>
     """)
     close_sidebar = textwrap.indent(close_sidebar, "\t")

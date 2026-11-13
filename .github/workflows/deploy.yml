@@ -1,8 +1,12 @@
-name: Build and Deploy
+name: Build and Deploy Textbook Website
 
 on:
   push:
     branches: [ '**' ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -11,8 +15,18 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
+      # For both Upstream and Forks, we always want to build a (Stable, to Content)
+      # version of the website.
+      # ----------------------------------------------------------------------------
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Check for dev/ in .gitignore
+        run: |
+          if ! grep -qx 'dev/' .gitignore; then
+            echo "dev/ not found in .gitignore, exiting."
+            exit 1
+          fi
 
       - name: Set Up Conda
         uses: conda-incubator/setup-miniconda@v3
@@ -20,18 +34,18 @@ jobs:
           auto-activate-base: false
 
       - name: Create Conda Environment With MPI and Stable HNN version
-        run: make create-textbook-stable-build
+        run: make create-textbook-stable-env
 
       - name: Test MPI
         run: |
-          conda run -n textbook-stable-build \
+          conda run -n textbook-stable-env \
           mpiexec -np 2 nrniv -mpi -python -c '
           from neuron import h;
           from mpi4py import MPI;
           print(f"Hello from proc {MPI.COMM_WORLD.Get_rank()}");
           h.quit()'
 
-      - name: Modify .gitignore
+      - name: Remove HTML output from .gitignore
         run: |
           # Remove the line that ignores HTML files in the content directory
           grep -v '^content/\*\*/\*.html$' .gitignore > .gitignore.tmp && mv .gitignore.tmp .gitignore
@@ -39,23 +53,79 @@ jobs:
 
       - name: Determine Build Method
         run: |
-          if conda run -n textbook-stable-build python scripts/check_nb_versions.py; then
-            echo "BUILD_FLAG=--execution-filter execute-updated-unskipped-notebooks" >> $GITHUB_ENV
+          if conda run -n textbook-stable-env python scripts/check_nb_versions.py; then
+            echo "BUILD_FLAG=--execution-type updated-unskipped-notebooks" >> $GITHUB_ENV
           else
-            echo "BUILD_FLAG=--execution-filter execute-updated-unskipped-notebooks" >> $GITHUB_ENV
+            echo "BUILD_FLAG=--execution-type all-unskipped-notebooks" >> $GITHUB_ENV
             echo "Not all notebooks were executed on the latest version. Forcing re-execution."
           fi
 
-      - name: Build Website
-        run: conda run -n textbook-stable-build env PYTHONUNBUFFERED=1 python build.py $BUILD_FLAG
+      - name: Build Website (Stable, to Content) (Upstream-only, Fail if error)
+        if: github.repository == 'jonescompneurolab/textbook' && github.ref == 'refs/heads/main'
+        run: |
+          conda run -n textbook-stable-env env \
+              PYTHONUNBUFFERED=1 python build.py \
+              $BUILD_FLAG
 
-      - name: Deploy to GitHub Pages
+      - name: Build Website (Stable, to Content) (Fork-only, Continue if error)
+        if: github.repository != 'jonescompneurolab/textbook'
+        continue-on-error: true
+        run: |
+          conda run -n textbook-stable-env env \
+              PYTHONUNBUFFERED=1 python build.py \
+              $BUILD_FLAG
+
+      - name: Build Website (Stable, to Content)
+        continue-on-error: true
+        run: |
+          conda run -n textbook-stable-env env \
+              PYTHONUNBUFFERED=1 python build.py \
+              $BUILD_FLAG
+
+      # For Upstream only, we want to deploy the Stable version of the website to GitHub
+      # Pages.
+      - name: Deploy to GitHub Pages if Official Website
         if: github.repository == 'jonescompneurolab/textbook' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
 
+      # For Forks only, we additionally want to build a (Master, to Dev) version of the
+      # website.
+      # -----------------------------------------------------------------------------
+      - name: Remove 'dev/' output from .gitignore
+        if: github.repository != 'jonescompneurolab/textbook'
+        run: |
+          # Remove the line that ignores HTML files in the content directory
+          grep -v '^dev\/$' .gitignore > .gitignore.tmp && mv .gitignore.tmp .gitignore
+          cat .gitignore
+
+      - name: Create Conda Environment With MPI and Dev (Master) HNN version
+        if: github.repository != 'jonescompneurolab/textbook'
+        run: make create-textbook-dev-env
+
+      - name: Test MPI (Master)
+        if: github.repository != 'jonescompneurolab/textbook'
+        run: |
+          conda run -n textbook-dev-env \
+          mpiexec -np 2 nrniv -mpi -python -c '
+          from neuron import h;
+          from mpi4py import MPI;
+          print(f"Hello from proc {MPI.COMM_WORLD.Get_rank()}");
+          h.quit()'
+
+      - name: Build Website (Master, to Dev)
+        if: github.repository != 'jonescompneurolab/textbook'
+        continue-on-error: true
+        run: |
+            # Should NOT re-use BUILD_FLAG for master build
+            conda run -n textbook-dev-env env \
+                PYTHONUNBUFFERED=1 python build.py \
+                --execution-type updated-unskipped-notebooks --code-version=master
+
+      # For Forks only, we want to deploy BOTH the Stable (in content) and Master (in
+      # dev) versions of the website to GitHub Pages.
       - name: Deploy to GitHub Pages (Fork)
         if: github.repository != 'jonescompneurolab/textbook'
         uses: peaceiris/actions-gh-pages@v3

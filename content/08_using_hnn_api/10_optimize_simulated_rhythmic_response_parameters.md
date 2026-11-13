@@ -1,5 +1,5 @@
 <!--
-# Title: 7.10 Optimize simulated rhythmic response parameters
+# Title: 7.10 Optimize Simulated Rhythmic Response Parameters
 # Updated: 2025-02-04
 #
 # Contributors:

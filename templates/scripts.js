@@ -29,18 +29,21 @@ function initMainContent() {
 }
 
 function injectIframe() {
-    const container = document.getElementById("video-container");
-    if (container && container.dataset.src && !container.querySelector("iframe")) {
-        const iframe = document.createElement("iframe");
-        iframe.src = container.dataset.src;
-        iframe.width = "640";
-        iframe.height = "480";
-        iframe.style.border = "none";
-        iframe.style.display = "block";
-        iframe.style.margin = "0 auto";
-        iframe.allowFullscreen = true;
-        container.appendChild(iframe);
-    }
+    // Note: pages may contain multiple video containers, so this must use
+    // querySelectorAll and not getElementById (which only returns the first)
+    document.querySelectorAll('[id="video-container"]').forEach(container => {
+        if (container.dataset.src && !container.querySelector("iframe")) {
+            const iframe = document.createElement("iframe");
+            iframe.src = container.dataset.src;
+            iframe.width = "640";
+            iframe.height = "480";
+            iframe.style.border = "none";
+            iframe.style.display = "block";
+            iframe.style.margin = "0 auto";
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+        }
+    });
 }
 
 function hideIframes() {
@@ -57,12 +60,49 @@ function showIframes() {
     });
 }
 
+// ----------------------------------------
+// Get scrollbar width
+// ----------------------------------------
+// We need to add padding to the topbar that equals the scrollbar width since the
+// scrollbar gutter is always present in the main body. This ensures the HNN image
+// in the topbar remains perfectly centered relative to the main body. Since scrollbar
+// width can vary accross browser, we can compute it dynamically (with a fallback of
+// 15px set in styles.css)
+
+function getScrollbarWidth() {
+    const element = document.createElement("div");
+
+    element.style.cssText = `
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        overflow: scroll;
+        visibility: hidden;
+        top: -9999px;
+    `;
+
+    document.body.appendChild(element);
+    const scrollbarWidth = element.offsetWidth - element.clientWidth;
+    element.remove();
+
+    return scrollbarWidth;
+}
+
+function initTopbarScrollbarSpacing() {
+    document.documentElement.style.setProperty(
+        "--browser-scrollbar-width",
+        `${getScrollbarWidth()}px`
+    );
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     initSidebar();
+    resizeCodeCells();
 });
 
 window.addEventListener("load", () => {
     initTopbar();
+    initTopbarScrollbarSpacing();
     initMainContent();
     hideIframes();
     injectIframe();
@@ -121,7 +161,7 @@ const maxWidth = '350px';
 
 function toggleNav() {
     const sidebar = document.getElementById("mySidebar");
-    const main = document.getElementById("main");
+    const main = document.getElementById("main-scroll-container");
     const topbar = document.querySelector(".topbar");
 
     // Toggle sidebar state
@@ -181,7 +221,7 @@ if (savedState === "closed") {
 
 window.onload = function() {
     const sidebar = document.getElementById("mySidebar");
-    const main = document.getElementById("main");
+    const main = document.getElementById("main-scroll-container");
     const topbar = document.querySelector(".topbar");
 
     // Retrieve stored state
@@ -218,7 +258,7 @@ window.onload = function() {
 }
 
 function toggleSubmenu(event) {
-    const header = event.target.closest('#sidebar-header');
+    const header = event.target.closest('#sidebar-section');
         // Get the clicked header
     const submenu = header.nextElementSibling;
         // Get the submenu
@@ -356,7 +396,7 @@ document.querySelectorAll('.sidebar a').forEach(function(link) {
 // Close all open submenus in the sidebar
 // --------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
-    // Function to close all open submenus in the navbar
+    // Function to close all open submenus in the sidebar
     function closeAllSubmenus() {
         const allSubmenus = document.querySelectorAll('.submenu.open'); // Select all open submenus
         allSubmenus.forEach(submenu => {
@@ -382,6 +422,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // -----------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
     // Get the full path relative to the 'content' folder
+    // TODO? Currently breaks automatic sidebar display of current page  on "dev"
+    // builds, but probably not worth fixing
     const currentPage = window.location.pathname.split("/content/")[1].split("?")[0];
 
     // Find the active link using the full path
@@ -429,6 +471,9 @@ function increaseFontSize() {
 
     // save font size to localStorage
     localStorage.setItem("fontSize", newSize);
+
+    resizeHeadings();
+    resizeCodeCells();
 }
 
 function decreaseFontSize() {
@@ -441,6 +486,9 @@ function decreaseFontSize() {
 
     // save font size to localStorage
     localStorage.setItem("fontSize", newSize);
+
+    resizeHeadings();
+    resizeCodeCells();
 }
 
 // Dropdown for font buttons
@@ -527,6 +575,42 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ----------------------------------------
+// Keep headings on one line
+// ----------------------------------------
+// - This also accounts for the clickable '#' that is dynamically added to headers
+// - The text is dynamically resized down to 12px to (in most reasonable cases) prevent 
+//   the headers from wrapping onto new lines
+function resizeHeadings() {
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(header => {
+        // Remove any previous adjustment so the current inherited
+        // font size can be used as the starting point
+        header.style.fontSize = "";
+        header.style.whiteSpace = "nowrap";
+
+        const originalFontSize = parseFloat(getComputedStyle(header).fontSize);
+        let fontSize = originalFontSize;
+
+        while (header.scrollWidth > header.clientWidth) {
+            fontSize -= 1;
+
+            if (fontSize <= 12) {
+                fontSize = 12;
+                break;
+            }
+
+            header.style.fontSize = `${fontSize}px`;
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    resizeHeadings();
+    window.addEventListener("resize", resizeHeadings);
+});
+
+window.addEventListener("load", resizeHeadings);
+
+// ----------------------------------------
 // Code syntax highlighting
 // ----------------------------------------
 
@@ -596,7 +680,90 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// ----------------------------------------
+// Copy button on command-line code blocks
+// ----------------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(
+        'div.sourceCode:has(code.sourceCode.bash, code.sourceCode.sh, code.sourceCode.console)'
+    ).forEach(cell => {
+        // Avoid inserting the button multiple times
+        if (cell.querySelector('.copy-button')) return;
+
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+
+        // Define copy icon and text
+        button.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 0.25em;">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy</span>
+        `;
+
+        // Copy text and add click effects
+        button.addEventListener('click', () => {
+            const code = cell.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.querySelector('span').textContent = 'Copied!';
+                setTimeout(() => {
+                    button.querySelector('span').textContent = 'Copy';
+                }, 1000);
+            });
+        });
+
+        cell.appendChild(button);
+    });
+});
+
+// ----------------------------------------
+// Code cell wrap width
+// ----------------------------------------
+// Notes:
+//   - set .code-cell elements that have a child "language-python" to use
+//     a max-width of 80 characters before the overflow goes into effect
+
+function resizeCodeCells() {
+    document.querySelectorAll(".code-cell code.language-python").forEach(code => {
+        const wrapper = code.parentElement;
+
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        context.font = getComputedStyle(code).font;
+
+        const textWidth = context.measureText("0".repeat(80)).width;
+        const padding = parseFloat(getComputedStyle(wrapper).paddingLeft)
+            + parseFloat(getComputedStyle(wrapper).paddingRight);
+
+        const maxWidth = `${textWidth + padding}px`;
+
+        let style = document.getElementById("dynamic-cell-widths");
+
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "dynamic-cell-widths";
+            document.head.appendChild(style);
+        }
+
+        style.textContent = `
+            .code-cell,
+            .output-cell {
+                max-width: ${maxWidth};
+            }
+        `;
+    });
+}
+
+// ----------------------------------------
+// Collapsible sections
+// ----------------------------------------
+
 document.querySelectorAll(".collapsible-header").forEach(header => {
+    const originalHeaderText = header.textContent.trim();
+
     header.addEventListener("click", function () {
         const section = this.closest(".collapsible-section"); // Get parent section
         section.classList.toggle("active");
@@ -604,8 +771,67 @@ document.querySelectorAll(".collapsible-header").forEach(header => {
 
         const content = section.querySelector(".collapsible-content");
         content.style.display = content.style.display === "block" ? "none" : "block";
+
+        // [DEV] 
+        //      Option for dynamically-updated "Open"/"Close" text
+        //      Note: currently doesn't populate text correctly when 
+        //            hyperlinking to the api tutorial in an open state
+        // if (section.classList.contains("collapsible-api-notebook")) {
+        //     const headerText = originalHeaderText.replace(
+        //         /\b(Open|Close)( the API Walkthrough)\b/,
+        //         this.classList.contains("active")
+        //             ? "Close$2"
+        //             : "Open$2"
+        //     );
+
+        //     this.textContent = headerText;
+
+        //     resizeHeadings();
+        // }
     });
 });
+
+// ----------------------------------------
+// Open collapsible section for "page-jump" links
+// ----------------------------------------
+// - Headers with page-jump links embedded within collapsible sections should cause
+//   the page to load with the collapsible section *open* so that the page loads at
+//   the correct window location  
+
+function openCollapsibleForHash() {
+    const targetId = window.location.hash.slice(1);
+
+    if (!targetId) {
+        return;
+    }
+
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+        return;
+    }
+
+    const section = target.closest(".collapsible-section");
+
+    if (!section) {
+        return;
+    }
+
+    const content = section.querySelector(".collapsible-content");
+
+    if (!content) {
+        return;
+    }
+
+    section.classList.add("active");
+    section.querySelector(".collapsible-header").classList.add("active");
+    content.style.display = "block";
+
+    target.scrollIntoView();
+}
+
+document.addEventListener("DOMContentLoaded", openCollapsibleForHash);
+window.addEventListener("hashchange", openCollapsibleForHash);
 
 // ----------------------------------------
 // Style standard markdown table
@@ -712,4 +938,16 @@ const installLinks = document.querySelectorAll(".install-row > a");
 // Set the href of each link
 installLinks.forEach(link => {
     link.href = installUrl;
+});
+
+
+// Survey page link
+const surveyUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfN2F4IkGATs6cy1QBO78C6QJqvm9y14TqsCUsuR4Rrkmr1Mg/viewform";
+
+// Get all <a> children of .survey-row
+const surveyLinks = document.querySelectorAll(".survey-row > a");
+
+// Set the href of each link
+surveyLinks.forEach(link => {
+    link.href = surveyUrl;
 });

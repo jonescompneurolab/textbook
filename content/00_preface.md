@@ -14,10 +14,20 @@ This textbook provides a comprehensive introduction to how HNN can be used to de
 
 HNN is an open-source software built in Python using the software NEURON, and it can be run through an interactive graphical user interface (GUI) or a command-line interface (CLI). In practice, users start by using the interactive GUI to learn how to activate the HNN model and adjust parameters to study ERPs and rhythms. Once a basic understanding is achieved, the same simulations can be run through the CLI. Most sections of the textbook will include workflows for using both the GUI and CLII, although some advanced features (e.g., batch simulation) are only available in the CLI, which allows for more advanced user-defined workflows.
 
-Our Getting Started section provides an overview of key background information needed to follow along. Some basic background knowledge in neuroscience and neural modeling is assumed. Additionally, references are included at the end of each section for those who wish to dive deeper into the methods and underlying theory.
+Our Getting Started section provides an overview of key background information needed to follow along. Some basic background knowledge in neuroscience and neural modeling is assumed. Additionally, references are included at the end of each section for those who wish to dive deeper into the methods and underlying theory. You can see more examples of papers that used HNN to investigate scientific questions [on the Publications section of our Frontpage here](https://hnn.brown.edu/publications.html).
 
 To get the most out of this textbook, we recommend that you [use HNN from the cloud](01_getting_started/installation.html#running-hnn-in-the-cloud) or [install HNN locally](01_getting_started/installation.html#local-installation) and follow along with the examples we provide.
 
 If you have any questions, please visit our [HNN Discussion board](https://github.com/jonescompneurolab/hnn-core/discussions) on GitHub.
 
+Finally, it *greatly* helps HNN's development if you are willing to [volunteer your demographic information using our survey here](https://docs.google.com/forms/d/e/1FAIpQLSfN2F4IkGATs6cy1QBO78C6QJqvm9y14TqsCUsuR4Rrkmr1Mg/viewform).
+
 Happy modeling!
+
+---
+
+HNN-core development has been funded in part by the following United States of America federal government grants:
+
+- NIH R01EB022889 Human Neocortical Neurosolver
+- NIH 1U24NS129945 Dissemination of the Human Neocortical Neurosolver (HNN) software for circuit level interpretation of human MEG/EEG
+- NSF IIS 2424101 Collaborative Research: CRCNS Research Proposal: Uncovering the mechanisms and meaning of brain rhythm frequency shifts during decision making

@@ -174,7 +174,7 @@ def test_notebook_is_skipped(
     )
 
     # Check that returns for _process_notebook match what we expect.
-    # Returns: (current_hash, loaded_notebook, notebook_executed, notebook_was_run)
+    # Returns: (current_nb_hash, loaded_notebook, notebook_executed, notebook_was_run)
     #
     # Notes:
     #   - Since _get_notebook is "mocked," valid values for root, nb_path, and
@@ -344,7 +344,7 @@ def test_notebook_executed_on_hash_change(
 
     # --------------------------------------------------
     # Check expected return values
-    # Returns: (current_hash, loaded_notebook, notebook_executed, notebook_was_run)
+    # Returns: (current_nb_hash, loaded_notebook, notebook_executed, notebook_was_run)
     # --------------------------------------------------
     expected_notebook = executed_notebook if executed_flag.get("called") else notebook
     confirm_notebook_executed = (

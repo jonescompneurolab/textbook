@@ -1,7 +1,7 @@
 
-.PHONY: all build clean create-textbook-stable-build create-textbook-dev-build
+.PHONY: all build clean create-textbook-stable-env create-textbook-dev-env
 
-HNN_VERSION := 0.5.0
+HNN_VERSION := 0.6.1
 OS := $(shell uname -s)
 
 # Function to create and configure a conda environment with library paths
@@ -45,25 +45,25 @@ endef
 all: build
 
 build:
-	@#"This option is now equivalent to running build with '--execution-filter no-execution'."
+	@#"This option is now equivalent to running build with '--execution-type no-execution'."
 	python build.py
 
 force-execute-all-notebooks:
-	@echo "This option has been replaced with '--execution-filter execute-all-unskipped-notebooks'"
-	@echo "You can run 'make execute-all-unskipped-notebooks' for the same command."
+	@echo "This option has been replaced with '--execution-type all-unskipped-notebooks'"
+	@echo "You can run 'make all-unskipped-notebooks' for the same command."
 
 execute-notebooks:
-	@echo "This option has been replaced with '--execution-filter execute-updated-unskipped-notebooks'"
-	@echo "You can run 'make execute-updated-unskipped-notebooks' for the same command."
+	@echo "This option has been replaced with '--execution-type updated-unskipped-notebooks'"
+	@echo "You can run 'make updated-unskipped-notebooks' for the same command."
 
-execute-absolutely-all-notebooks:
-	python build.py --execution-filter execute-absolutely-all-notebooks
+absolutely-all-notebooks:
+	python build.py --execution-type absolutely-all-notebooks
 
-execute-all-unskipped-notebooks:
-	python build.py --execution-filter execute-all-unskipped-notebooks
+all-unskipped-notebooks:
+	python build.py --execution-type all-unskipped-notebooks
 
-execute-updated-unskipped-notebooks:
-	python build.py --execution-filter execute-updated-unskipped-notebooks
+updated-unskipped-notebooks:
+	python build.py --execution-type updated-unskipped-notebooks
 
 clean:
 	rm -rf content/*.html
@@ -71,20 +71,20 @@ clean:
 	rm -rf dev/*.html
 	rm -rf dev/*/*.html
 
-create-textbook-stable-build:
-	$(call create-and-configure-env,textbook-stable-build,false)
-	conda run -n textbook-stable-build pip install 'hnn_core[dev]==$(HNN_VERSION)'
-	@echo "Conda environment 'textbook-stable-build' successfully created."
-	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-build'"
+create-textbook-stable-env:
+	$(call create-and-configure-env,textbook-stable-env,false)
+	conda run -n textbook-stable-env pip install 'hnn_core[dev]==$(HNN_VERSION)'
+	@echo "Conda environment 'textbook-stable-env' successfully created."
+	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-env'"
 
-create-textbook-dev-build:
-	$(call create-and-configure-env,textbook-dev-build,true)
+create-textbook-dev-env:
+	$(call create-and-configure-env,textbook-dev-env,true)
 
 	@# Get the latest commit hash of hnn-core master branch
 	LATEST_HASH=$$(git ls-remote https://github.com/jonescompneurolab/hnn-core.git master | cut -f1);
 	@# Install hnn-core in developer mode, forcing reinstall without cache
-	conda run -n textbook-dev-build pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"
+	conda run -n textbook-dev-env pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"
 
-	@echo "Conda environment 'textbook-dev-build' successfully created."
-	@echo -e "\n\nActivate your environment with 'conda activate textbook-dev-build'"
+	@echo "Conda environment 'textbook-dev-env' successfully created."
+	@echo -e "\n\nActivate your environment with 'conda activate textbook-dev-env'"
 

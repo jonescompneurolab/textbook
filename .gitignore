@@ -1,15 +1,19 @@
 # folders
+dev/
 local
 references
 
-# OS, run, and IDE artifacts
-__pycache__
+# OS, run, IDE, and AI slop artifacts
+*.pyc
+.DS_Store
+.claude/
 .idea/
 .ipynb_checkpoints
-.DS_Store
 .vscode/
+__pycache__
+CLAUDE.md
+AGENTS.md
 tags
-*.pyc
 
 # Virtual environments
 .venv
@@ -20,3 +24,9 @@ VENV/
 
 # all HTML files inside content/
 content/**/*.html
+
+
+# tutorial-specific files
+content/05_erps/S1_SupraT.txt
+content/05_erps/gui_default.json
+content/05_erps/yes_trial_S1_ERP_all_avg.txt
