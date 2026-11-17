@@ -8,6 +8,10 @@
     # Dylan Daniels
 -->
 
+use the collapsible here, but the one that still uses the border
+
+https://jonescompneurolab.github.io/textbook/content/05_erps/erp_initial_simulation.html#api-walkthrough
+
 # 1.3 Installation
 
 ## Running HNN in the cloud (no installation)
@@ -208,6 +212,11 @@ Alternatively, if your circumstances are more complex (such as if you need to in
     [our HNN Textbook][] to get started.
 
 
+------------------------------------
+
+##### "Alternative installations"
+
+
 <div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> non-WSL Windows Installation </h5>
 <div class="collapsible-content">
@@ -268,6 +277,14 @@ To install HNN-Core on "plain" Windows, follow these instructions:
     ```
 
     If you encounter any errors or problems with this step, please reach out to us on [our Github Discussions page][].
+
+
+TODO test if uvx works
+
+Add popups from frontpage here
+
+todo collapsible cloud (with linkage!)
+
 
 4. Next, run the GUI using the following command:
 
