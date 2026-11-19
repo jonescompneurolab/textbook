@@ -10,6 +10,10 @@
 
 use the collapsible here, but the one that still uses the border
 
+
+* TODO add API reference side link to textbook
+
+
 https://jonescompneurolab.github.io/textbook/content/05_erps/erp_initial_simulation.html#api-walkthrough
 
 # 1.3 Installation
@@ -268,7 +272,17 @@ of using `uv`.
 
 3. You should now have a new app that you can access from the Start Menu named "Anaconda Prompt". Open that program.
 
-4. Inside that program, copy, paste, and run the following commands. You can copy and paste them all at once:
+4. Inside that program, copy, paste, and run the following commands.
+
+<!--
+Austin note 2026-11-19:
+UGHHHH Anaconda Prompt breaks copy/paste! I've had it with this!
+When testing in Windows, whenever I try to paste text (such as our install instructions)
+from anywhere into the Anaconda Prompt window, it prepends the pasted text with
+".anaconda" for some unknown reason, breaking the whole command!
+For this reason, I'm also reverting the instructions in this case 
+-->
+
 
     ```bash
 	# Accept Anaconda Terms of Service
@@ -286,6 +300,49 @@ of using `uv`.
     print('--> SUCCESS: The test worked')
     " # make sure to include this ending quote
 	```
+
+
+
+
+
+* TODO
+    uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
+	# uv pip install -U "hnn-core[all]@git+https://github.com/jonescompneurolab/hnn-core.git@master"
+ 
+ 
+ 
+ RUN AS ADMIN
+
+firs trun this, then press "Y" for Yes. If you are unable to do this step, then reach out to us at TODO
+ 
+     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+ 
+ run the following, which will take approximately 5 minutes
+ 
+	```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+    # Install Python:
+    uv python install 3.14
+    # Move to your "home" directory (where the environment will live, feel free to change):
+    cd ~
+    # Create a virtual environment at `.venv/` that uses the above Python version:
+    uv venv -p 3.14
+    # Activate / enter the environment:
+    .venv\Scripts\activate
+    # Now that you're inside the environment, install HNN-Core:
+    uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
+	# uv pip install -U "hnn-core[all]"
+    # Test that HNN-Core runs correctly
+    python -c "
+    from hnn_core import neymotin_2020_model, simulate_dipole
+    simulate_dipole(neymotin_2020_model(), tstop=20)
+    print('--> SUCCESS: The test worked')
+    " # make sure to include this ending quote
+    ```
+
 
 5. Close the "Anaconda Prompt" window, then open a new one.
 
