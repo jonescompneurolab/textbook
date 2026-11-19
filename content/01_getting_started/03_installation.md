@@ -88,23 +88,23 @@ Alternatively, if your circumstances are more complex (such as if you need to in
 
     1.2. Right-click on the icon for Powershell and select "Run as administrator". A new window should open.
 
-    1.3. Inside the Powershell window, run the following command:
+    1.3. Inside the Powershell window, run the following command, which will take several minutes at least:
 
     ```bash
     wsl --install
     ```
+	
+	1.4 It should eventually prompt you to `Create a default Unix user account` and ask for a password. Provide a username and password, which can be anything, and write the password down!
 
     1.5 Once it has finished, close the PowerShell window.
 
 2. You will now have a new App available from the Start Menu called `Ubuntu`. Run that app.
 
-3. The first time you start Ubuntu, it will prompt you to `Create a default Unix user account` and ask for a password.
-
-4. You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy and paste the following commands. If you entered a password in Step 3, enter that when it prompts you for your password.
+3. You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy, paste, and run the following commands. If you entered a password in Step 3, enter that when it prompts you for your password. When it asks 
 
     ```bash
     sudo apt-get update
-    sudo apt-get install build-essential
+    sudo apt-get -y install build-essential
     ```
 
 5. Proceed to Part 2.
@@ -153,8 +153,12 @@ Alternatively, if your circumstances are more complex (such as if you need to in
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
 
-3. Copy, paste, and run the following series of commands in order to install Python,
-   create a new "virtual environment", install HNN-Core, and test HNN-Core:
+    Note: If you are using "Windows Subsystem for Linux (WSL)" then do *not* use the "Windows" commands on the installation page - instead, use the "macOS and Linux" version inside your Ubuntu window.
+
+3. Close your Terminal or Ubuntu window, then open a new one.
+
+4. Copy, paste, and run the following series of commands in order to install Python,
+   create a new "virtual environment", install HNN-Core, and test HNN-Core. You can copy and paste all of them together *at one time*:
 
     ```bash
     # Install Python:
@@ -174,7 +178,7 @@ Alternatively, if your circumstances are more complex (such as if you need to in
     with MPIBackend():
         simulate_dipole(neymotin_2020_model(), tstop=20)
     print('--> SUCCESS: The test worked')
-    "
+    " # make sure to include this ending quote
     ```
 
     If you encounter any errors or problems with this step, please reach out to us on
@@ -183,28 +187,27 @@ Alternatively, if your circumstances are more complex (such as if you need to in
     page](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments)
     for more information on using "virtual environments".
 
-4. Next, run the GUI using the following command:
+5. Close your Terminal or Ubuntu window *again*, then open a new one.
+
+6. Copy, paste, and run the following command to re-activate your "virtual environment" that contains HNN-Core. **Note that you will need to do this each time you open a new Anaconda Prompt window, or if you restart your computer and want to use HNN-Core**:
+
+    ```bash
+	source ~/.venv/bin/activate
+	```
+
+7. Once you have activated your environment, you can run the GUI using the following command. Do this now:
 
     ```bash
     hnn-gui
     ```
 
-5. Note: If you are on **Windows Subsystem for Linux**, then in order to access the GUI, you
-   must *also* go to your browser and navigate to the following URL, which you can copy
-   and paste into your browser:
-
-    ```bash
-    http://localhost:8866
-    ```
-
-6. Everything should be installed! Please note that if you restart your computer or open
-   new Terminal windows, then you will have to "activate your virtual environment" once
+8. Everything should be installed and working now! As a reminder, if you restart your computer or open
+   new Terminal/Ubuntu windows, then you will have to "activate your virtual environment" once
    again to use the HNN-Core API or the GUI. You can do this using the following
-   commands:
+   command:
 
     ```bash
-    cd ~
-    source .venv/bin/activate
+    source ~/.venv/bin/activate
     ```
 
     After which you can run `hnn-gui` to open the GUI, run python code/files using
@@ -221,28 +224,110 @@ Alternatively, if your circumstances are more complex (such as if you need to in
 <h5 class="collapsible-header"> non-WSL Windows Installation </h5>
 <div class="collapsible-content">
 
-On Windows, we strongly recommend you first try the "Windows (WSL)" (Windows Subsystem for Linux) install above. The following instructions are only for those who strictly cannot use WSL, such as due to hospital IT policy. Using "plain" Windows is discouraged since we do not support MPI usage on the platform (only on Windows-WSL), the installation is complex, and it is more difficult to develop for HNN-Core on.
+On Windows, we strongly recommend you first try the "Windows (WSL)" (Windows Subsystem for 
+Linux) install above. The following instructions are only for those who strictly cannot use 
+WSL, such as due to hospital IT policy. Using "plain" Windows is discouraged since we **do not 
+support MPI usage on the platform (only on Windows-WSL)**, the installation is complex, and 
+it is more difficult to develop for HNN-Core on. If you run into any issues installing on 
+Windows, please feel free to reach out to us on [our Github Discussions page][].
 
-To install HNN-Core on "plain" Windows, follow these instructions:
 
-1. Open the "Powershell" app.
-
-2. Download and [install the `uv` Python package and project
-   manager](https://docs.astral.sh/uv/getting-started/installation/) by copying,
-   pasting, and running the following command. (Note: if you are using an existing
-   `conda` environment, then do not follow these directions, and instead refer to the
-   later **Local Installation - Detailed** section.) You can also follow the directions
-   at that link.
-
-    ```cmd
-    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-    ```
-
-3. Before you install HNN, it is important that you **download** and then **install**
+1. Before you install HNN, it is important that you **download** and then **install**
   the [NEURON][] software system-wide using its [Windows-specific binaries, such as this
   one](https://github.com/neuronsimulator/nrn/releases/download/9.0.2/nrn-9.0.2.w64-mingw-py-310-311-312-313-314-setup.exe);
   you can see more information at [this
-  link](https://www.neuronsimulator.org/en/latest/install/install_instructions.html#windows). Afterwards,
+  link](https://www.neuronsimulator.org/en/latest/install/install_instructions.html#windows).
+
+<!-- 
+Note from Austin on 2026-11-18:
+Ugh. Both Windows' normal and hospital IT security policies can make Windows installation difficult.
+If the user is at this case, where they aren't allowed to install WSL, then the following are our
+options, judging from my own testing of Windows 11:
+
+1. We tell them to install `uv`, BUT, in order to run the script that activates their environment,
+  they have to *first change their system's Powershell security policy* using:
+  ```
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+  ```
+  
+2. We tell them to install Anaconda just in order to get Python, and then do a "pip" install like normal.
+
+In theory, if they're already limited from installing WSL on their system, then their organization's
+security policy may prevent EITHER of these from working. Regardless, I think #2 (the Anaconda) method
+is more likely to work, since it only involves installing new software, instead of changing system
+permissions.
+
+Conclusion: Therefore, for non-WSL Windows installs, I'm going to recommend the old Anaconda way instead
+of using `uv`.
+-->
+
+2. Install the [Anaconda Python Distribution from this link](https://www.anaconda.com/download/success) (also known as “Conda”). If you are unsure which
+ version to install, download the Graphical Installer for the Anaconda Distribution, though 
+ any option works. If you are unfamiliar with using Anaconda/Conda virtual environments, you 
+ [can find guidance about them here](https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial).
+
+3. You should now have a new app that you can access from the Start Menu named "Anaconda Prompt". Open that program.
+
+4. Inside that program, copy, paste, and run the following commands. You can copy and paste them all at once:
+
+    ```bash
+	# Accept Anaconda Terms of Service
+	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
+	# Create and activate our new Python / Anaconda "virtual environment"
+	conda create -y -q -n hnn-core-env python=3.12
+    conda activate hnn-core-env
+	# Install HNN-Core
+	pip install "hnn-core[all]"
+	# Test that HNN works
+	python -c "
+    from hnn_core import neymotin_2020_model, simulate_dipole
+    simulate_dipole(neymotin_2020_model(), tstop=20)
+    print('--> SUCCESS: The test worked')
+    " # make sure to include this ending quote
+	```
+
+5. Close the "Anaconda Prompt" window, then open a new one.
+
+6. Copy, paste, and run the following command to re-activate your "virtual environment" that contains HNN-Core. **Note that you will need to do this each time you open a new Anaconda Prompt window, or if you restart your computer and want to use HNN-Core**:
+
+    ```bash
+	conda activate hnn-core-env
+	```
+
+7. Once you have activated your environment, you can run the GUI using the following command. Do this now:
+
+    ```bash
+    hnn-gui
+    ```
+
+8. Everything should be installed and working now! As a reminder, if you restart your computer or open
+   new Anaconda Prompt windows, then you will have to "activate your virtual environment" once
+   again to use the HNN-Core API or the GUI. You can do this using the following
+   command:
+
+    ```bash
+    conda activate hnn-core-env
+    ```
+
+    After which you can run `hnn-gui` to open the GUI, run python code/files using
+    `python`, or open Jupyter notebooks using `jupyter notebook`. Proceed to the rest of
+    [our HNN Textbook][] to get started.
+
+
+
+- Before you install HNN, it is important that you **install** the [NEURON][]
+  software system-wide using its [Windows-specific
+  binaries](https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows). You
+  can test that NEURON was installed correctly by opening a Command Prompt (or
+  similar) via your Anaconda install (or virtual environment), and running the
+  following command:
+
+    ```bash
+    python -c "import neuron"
+    ```
+  
+  Afterwards,
   you can test that NEURON was installed correctly by opening a Powershell window and
   running the following command:
 
@@ -251,32 +336,6 @@ To install HNN-Core on "plain" Windows, follow these instructions:
     python -c "import neuron"
     ```
 
-4. Copy, paste, and run the following series of commands in order to install Python,
-   create a new "virtual environment", install HNN-Core, and test HNN-Core:
-
-    ```bash
-    # Install Python:
-    uv python install 3.14
-    # Move to your "home" directory (where the environment will live, feel free to change):
-    TODO
-    # Create a virtual environment at `.venv/` that uses the above Python version:
-    uv venv -p 3.14
-    # Activate / enter the environment:
-    TODO
-    source .venv/bin/activate
-    # Now that you're inside the environment, install HNN-Core:
-    uv pip install -U "hnn-core[all]"
-    # AES TODOoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-    # Test that HNN-Core runs correctly
-    python -c "
-    from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
-    with MPIBackend():
-        simulate_dipole(neymotin_2020_model(), tstop=20)
-    print('--> SUCCESS: The test worked')
-    "
-    ```
-
-    If you encounter any errors or problems with this step, please reach out to us on [our Github Discussions page][].
 
 
 TODO test if uvx works
