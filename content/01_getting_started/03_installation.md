@@ -8,69 +8,100 @@
     # Dylan Daniels
 -->
 
-
-<!--
-Reminder:
-macOS zsh does not support "# " for comments by default, so there should be NO comments
-in your command-line sections!
--->
-
-use the collapsible here, but the one that still uses the border
-
-    uv pip install -U "hnn-core[all]@git+https://github.com/jonescompneurolab/hnn-core.git@master"
-    uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
-	uv pip install -U "hnn-core[all]"
-
-
-
-
-
-
-TODO test if uvx works
-
-Add popups from frontpage here
-
-todo collapsible cloud (with linkage!)
-
-
-https://jonescompneurolab.github.io/textbook/content/05_erps/erp_initial_simulation.html#api-walkthrough
-
 # 1.3 Installation
 
-## Running HNN in the cloud (no installation)
+<!--
+Developers: Reminder:
+- macOS zsh does not support "# " for comments by default, so there should be NO
+comments in your command-line sections!
+-->
+
+TODOs
+
+- test if uvx works
+- Add popups from frontpage here. NOPE tried, but even after adding CSS, could see the popup boxes on the main page, but clicking the boxes did NOT cause the big box overlay to actually spawn. Leaving this for another day.
+- test mne hnn coinstall
+
+- wtf there is no section 1.2 anymore? if you're going to make a change to the textbook, then UPDATE THE RELEVANT OTHER PAGES! STOP ADDING MORE TEHCNICAL DEBT!
+- integrate 1.4
+
+scratch pad:
+
+uv pip install -U "hnn-core[all]@git+https://github.com/jonescompneurolab/hnn-core.git@master"
+uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
+uv pip install -U "hnn-core[all]"
+uvx --from="hnn_core[gui]" --python=3.13 hnn-gui
+
+
+end of scratch pad
+
+---------------------------------------
+
+If you want to run HNN **for free** in the browser, click on the below box and follow the
+directions:
+
+<div class="collapsible-section collapsible-default">
+<h4 class="collapsible-header">
+Running HNN in the cloud (no installation)
+</h4>
+<div class="collapsible-content">
 
 ### Google CoLab
 
-As an alternative to installing HNN locally, we provide Google CoLab notebooks that allow you to run HNN out of your browser, with access to your local filesystem.
+We provide Google CoLab notebooks that allow you to run HNN out of your browser, with
+access to your local filesystem.
 
 - [GUI Colab Notebook](https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing)
 - [API Colab Notebook](https://colab.research.google.com/drive/1FcNhHatsuxl-pACIFn7V6H5J4GPfZ1t8)
 
-This is the quickest way to get up and running with HNN, though it does require a Google account. If you do not have a Google account, you can create one for free to run the notebooks. There is no charge associated with using Google CoLab.
+This is the quickest way to get up and running with HNN, though it does require a Google
+account. If you do not have a Google account, you can create one for free to run the
+notebooks. There is **no charge** associated with using Google CoLab.
 
 ### Neuroscience Gateway Portal
 
-HNN is available for free, public use on the [Neuroscience Gateway Portal (NSG)](https://www.nsgportal.org/). You can find instructions for using HNN on NSG [at this page here](https://users.sdsc.edu/~kenneth/hnn/index.html).
+If you want, instead of using Google Colab, you can run HNN for free, public use on the
+[Neuroscience Gateway Portal (NSG)](https://www.nsgportal.org/). You can find
+instructions for using HNN on NSG [at this page
+here](https://users.sdsc.edu/~kenneth/hnn/index.html).
 
-----------------------------------------------
+</div>
+</div>
 
 ## Local Installation - Simple
 
-If you want to install HNN-Core on your local computer with all features, including API, GUI, MPI, and others, follow the below steps.
+If you want to install HNN-Core on your local computer with all features, including API,
+GUI, MPI, and others, follow [Part
+1](#local-installation-part-1-platform-specific-requirements) then [Part
+2](#local-installation-part-2-uv-and-hnn-core-installation) below. Alternatively, if
+your circumstances are more complex (e.g. if you are using Anaconda/`conda`, you are
+using Brown University's OSCAR system, you want to install for development, etc.) then
+please see the [**Local Installation - Detailed**
+section](#local-installation---detailed). You can always reach out to us at [our Github
+Discussions page][] for installation help!
 
-Alternatively, if your circumstances are more complex (such as if you need to install into an existing `conda` environment, or you are using Brown University's OSCAR system, you want to install for development, etc.) then please see the **Local Installation - Detailed** section later. You can also always reach out to us at [our Github Discussions page][] for installation help. Additionally, if you are on Windows but are unable to install "Windows Subsystem for Linux", such as due to hospital IT policy, then see the **non-WSL Windows Installation** section later.
+## Local Installation Part 1: Platform-specific requirements
 
-## Part 1. Platform-specific requirements
+<!--
+Developers: Austin note 2026-11-20:
+Removing the step about uninstalling system-wide NEURON from all platforms. Doing this
+in order to cut down on the number of steps, and because *most* users will *probably*
+not have already installed the system-wide install of NEURON (as opposed to a different
+tool's `pip` install, etc.).
+-->
+
+For Part 1, click on the section for your operating system and follow the directions
+inside the box.
 
 <div class="collapsible-section collapsible-default">
-<h5 class="collapsible-header"> MacOS </h5>
+<h5 class="collapsible-header">
+MacOS
+</h5>
 <div class="collapsible-content">
 
-<a id="macos"></a>
-
 1. Before you install HNN-Core, you must install "Xcode Command-Line Tools". This can be
-  done by opening the "Terminal" app, running the following command, and then clicking
-  through the prompts in the window that will pop up.
+  done by opening the `Terminal` app, then copyying, pasting, and running the following
+  command, and then clicking through the prompts in the window that will pop up.
 
     ```bash
     xcode-select --install
@@ -82,21 +113,17 @@ Alternatively, if your circumstances are more complex (such as if you need to in
 
 3. Make sure your computer has the latest updates by opening the Settings app and going
    to "Software Update". Download and install all updates, then restart your computer
-   again. **Note that you may have to do this multiple times**.
+   again, then check "Software Update" again for more updates. **Note that you may have
+   to do this multiple times**.
 
+4. Once there are **no more updates to your system available**, check that you are not
+   on the `Low Battery` setting by clicking on your battery in the top bar. If you are
+   set to `Low Battery` mode, switch it to a different battery mode.
 
-- TODO If you already installed the [NEURON][] software system-wide using its
-  traditional installer package, you must **remove it** first. We
-  will be installing NEURON using its `pip` package.
-
-
-4. Once there are no more updates to your system, check that you are not on the "Low
-   Battery" setting by clicking on your battery in the top bar, and switch it to a
-   different mode. Then, proceed to Part 2.
+5. Proceed to Part 2.
 
 </div>
 </div>
-
 <span style="height: 30px;" />
 
 <div class="collapsible-section collapsible-default">
@@ -107,23 +134,27 @@ Alternatively, if your circumstances are more complex (such as if you need to in
 
 1. Install ["Windows Subsystem for Linux" (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install). You can do this via following the steps at <https://learn.microsoft.com/en-us/windows/wsl/install> or the steps here:
 
-    1.1. Open the Start Menu and type "Powershell", but do not hit enter or left-click the icon yet.
+    1.1. Open the Start Menu and type `powershell`, but do not hit enter or left-click the icon yet.
 
-    1.2. Right-click on the icon for Powershell and select "Run as administrator". A new window should open.
+    1.2. Right-click on the icon for Powershell and select `Run as administrator`. A new window should open.
 
-    1.3. Inside the Powershell window, run the following command, which will take several minutes at least:
+    1.3. Inside the Powershell window, run the following command, which will take several minutes:
 
     ```bash
     wsl --install
     ```
 
-	1.4 It should eventually prompt you to `Create a default Unix user account` and ask for a password. Provide a username and password, which can be anything, and write the password down!
+    1.4. It should eventually prompt you to `Create a default Unix user account` and ask
+    for a password. Provide a username and password, which can be anything, and write
+    the password down!
 
-    1.5 Once it has finished, close the PowerShell window.
+    1.5. Once it has finished, close the PowerShell window.
 
 2. You will now have a new App available from the Start Menu called `Ubuntu`. Run that app.
 
-3. You should now see a prompt and a blinking cursor similar to PowerShell/Command Prompt. Copy, paste, and run the following commands. If you entered a password in Step 3, enter that when it prompts you for your password. When it asks 
+3. You should now see a prompt and a blinking cursor. Copy, paste, and run the following
+   commands. When it asks for your password, provide the password you created in the
+   prior step 1.4.
 
     ```bash
     sudo apt-get update
@@ -134,56 +165,46 @@ Alternatively, if your circumstances are more complex (such as if you need to in
 
 </div>
 </div>
+<span style="height: 30px;" />
 
 <div class="collapsible-section collapsible-default">
 <h5 class="collapsible-header"> Linux (Debian/Ubuntu) </h5>
 <div class="collapsible-content">
 
-1. Install the fundamental software building packages for your distribution. For Debian/Ubuntu-based distributions (e.g. Debian, Ubuntu, Linux Mint, etc.), you can do this with the following command in your Terminal:
+1. Install the fundamental software building packages for your distribution. For
+   Debian/Ubuntu-based distributions (e.g. Debian, Ubuntu, Linux Mint, etc.), you can do
+   this with the following command in your Terminal:
 
     ```bash
     sudo apt-get update
-    sudo apt-get install build-essential
+    sudo apt-get -y install build-essential
     ```
-
-
-- TODO If you already installed the [NEURON][] software system-wide using its
-  traditional installer package, you must **remove it** first. We
-  will be installing NEURON using its `pip` package.
-
-
 
 2. Proceed to Part 2.
 
 </div>
 </div>
-
 <span style="height: 30px;" />
 
+## Local Installation Part 2: `uv` and HNN-Core installation
 
-## Part 2. `uv` and HNN-Core installation
-
-1. Open a new Terminal (MacOS / Linux) or Ubuntu (Windows Subsystem for Linux) window.
+1. Open a new `Terminal` (MacOS / Linux) or `Ubuntu` (Windows Subsystem for Linux) window.
 
 2. Download and [install the `uv` Python package and project
    manager](https://docs.astral.sh/uv/getting-started/installation/) by copying,
-   pasting, and running the following command. (Note: if you are using an existing
-   `conda` environment, then do not follow these directions, and instead refer to the
-   later **Local Installation - Detailed** section.)
+   pasting, and running the following command:
 
     ```bash
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
-
-    Note: If you are using "Windows Subsystem for Linux (WSL)" then do *not* use the "Windows" commands on `uv`'s installation page - instead, use the "macOS and Linux" version inside your Ubuntu window.
-
-3. Close your Terminal or Ubuntu window, then open a new one.
+3. Close your `Terminal` / `Ubuntu` window, then open a new one.
 
 4. Copy, paste, and run the following series of commands in order to install Python,
    create a new "virtual environment", install HNN-Core, and test HNN-Core. You can copy
-   and paste all of them together *at one time*:
+   and paste *all of them together at one time*:
 
     TODO swap pip
+    uv pip install -U "hnn-core[all]"
 
     ```bash
     uv python install 3.14
@@ -199,20 +220,21 @@ Alternatively, if your circumstances are more complex (such as if you need to in
     ```
 
     If you encounter any errors or problems with this step, please reach out to us on
-    [our Github Discussions page][]. You can view [this
+    [our Github Discussions page][]. If you want, you can view [this
     page](https://docs.python.org/3/library/venv.html) or [this
     page](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-and-use-virtual-environments)
-    for more information on using "virtual environments".
+    for more guidance on using "virtual environments".
 
-5. Close your Terminal or Ubuntu window *again*, then open a new one.
+5. Close your `Terminal` / `Ubuntu` window *again*, then open a new one.
 
 6. Copy, paste, and run the following command to re-activate your "virtual environment"
    that contains HNN-Core. **Note that you will need to do this each time you open a new
-   Terminal/Ubuntu window, or if you restart your computer and want to use HNN-Core**:
+   `Terminal`/`Ubuntu` window, or if you restart your computer and want to use HNN-Core
+   again**:
 
     ```bash
-	source ~/.venv/bin/activate
-	```
+    source ~/.venv/bin/activate
+    ```
 
 7. Once you have activated your environment, you can run the GUI using the following
    command:
@@ -222,26 +244,126 @@ Alternatively, if your circumstances are more complex (such as if you need to in
     ```
 
 8. Everything should be installed and working now! As a reminder, if you restart your
-   computer or open new Terminal/Ubuntu windows, then you will have to "activate your
-   virtual environment" once again to use the HNN-Core API or the GUI. You can do this
-   using the following command:
+   computer or open new `Terminal`/`Ubuntu` windows, then you will have to "activate
+   your virtual environment" once again to use the HNN-Core API or the GUI. You can do
+   this using the following command:
 
     ```bash
     source ~/.venv/bin/activate
     ```
 
     After which you can run `hnn-gui` to open the GUI, run python code/files using
-    `python`, or open Jupyter notebooks using `jupyter notebook`. Proceed to the rest of
-    [our HNN Textbook][] to get started.
+    `python` or `ipython`, or open Jupyter notebooks using `jupyter notebook`. Proceed to the rest of
+    [our HNN Textbook][] to get started!
 
 
 ------------------------------------
 
-##### "Alternative installations"
+
+<div class="collapsible-section collapsible-default">
+<h4 class="collapsible-header">
+Local Installation - Detailed
+</h4>
+<div class="collapsible-content">
+
+This section intended for advanced users or if you are having issues installing HNN-Core on Windows. If the above [Windows (WSL)](#windows-wsl) install did not work for you, then please either try the [non-WSL Windows Installation section below](#non-wsl-windows-installation) or reach out to us on [our Github Discussions page][] and we will happily assist you.
+
+There are a few cases where you should **not** follow the [above "simple" directions](#local-installation---simple):
+
+- **If you want to co-install HNN alongside MNE:** In this case, we strongly recommend that you install MNE *first* [(MNE install guides here)](https://mne.tools/stable/install/index.html). If you installed MNE using its `pip` or `conda` methods, then afterwards, you should install HNN using the command `pip install "hnn-core[all]"`, but **only in the same Python environment that you installed MNE into**.
+
+- **If you are using your institution's High-Performance Computing (HPC) environment** (also called a "computing cluster" or supercomputer): Refer to your HPC's documentation (or ask an HPC colleague) whether your HPC supports `conda` or `uv`. If they only support `conda`, then follow [these directions below]() but excluding installation and *adapted to your HPC's configuration*. Additionally, if you are using an HPC, then **after you have install HNN-Core, you should run `uv pip uninstall openmpi`**. This will allow you to use your HPC's custom MPI libraries, but this will require additional configuration unique to your HPC. You can always ask us for help at [our Github Discussions page][].
+
+- **If you are at Brown University and want to use HNN on the OSCAR system:** We have made custom instructions for you, which [can be found here at this other page](https://github.com/jonescompneurolab/oscar-install).
+
+- **If you want to use a "custom" version of HNN's source code:** This includes if you need to use your own "Github fork", someone else's fork, or **if you want to contribute to HNN's development**. In this case, you should follow the TODO **Install from Source Code** section below.
+
+**If you have any questions or problems** while installing HNN, feel free to ask for help on [our GitHub Discussions page][]!
+
+
+TODO conda package upgrade
 
 
 <div class="collapsible-section collapsible-default">
-<h5 class="collapsible-header"> non-WSL Windows Installation </h5>
+<h5 class="collapsible-header">
+Anaconda / `conda`
+</h5>
+<div class="collapsible-content">
+
+We recommend using `uv` to install Python and manage your enviroments, but if you prefer
+or must use the [Anaconda Python
+Distribution](https://www.anaconda.com/download/success) (aka `conda`), then HNN-Core
+works there too. You can install HNN-Core in a `conda` environment using the following:
+
+1. Install [Anaconda Python Distribution](https://www.anaconda.com/download/success) if
+   you have not already done so. If you are unfamiliar with using Anaconda/Conda virtual
+   environments, [you can find guidance about them
+   here](https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial).
+
+2. Open either your `Terminal` app (MacOS / Linux) or the `Anaconda Prompt` app if you
+   installed Anaconda on Windows.
+
+3. Accept the terms of service by copying, pasting, and running the following commands:
+
+    ```bash
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+    ```
+
+4. Create a `conda` environment if you have not already done so by copying, pasting, and
+   running the following command:
+
+    ```bash
+    conda create -y -q -n hnn-core-env python=3.14
+
+    ```
+
+5. Activate the `conda` environment using the following command. **Note that you must do
+   this every time you open a new `Terminal`/`Anaconda Prompt` window or after you
+   restart your computer**.
+
+    ```bash
+    conda activate hnn-core-env
+    ```
+
+6. Finally, install and test HNN-Core using the following commands:
+
+    ```bash
+    pip install "hnn-core[all]"
+    python -c "
+    from hnn_core import neymotin_2020_model, simulate_dipole
+    simulate_dipole(neymotin_2020_model(), tstop=20)
+    print('--> SUCCESS: The test worked')"
+    ```
+
+7. You can start the GUI by running the following command:
+
+    ```bash
+    hnn-gui
+    ```
+
+8. Everything should be installed and working now! As a reminder, if you restart your
+   computer or open new `Terminal`/`Anaconda Prompt` windows, then you will have to
+   "activate your virtual environment" once again to use the HNN-Core API or the
+   GUI. You can do this using the following command:
+
+    ```bash
+    source ~/.venv/bin/activate
+    ```
+
+    After which you can run `hnn-gui` to open the GUI, run python code/files using
+    `python` or `ipython`, or open Jupyter notebooks using `jupyter notebook`. Proceed to the rest of
+    [our HNN Textbook][] to get started!
+
+</div>
+</div>
+<span style="height: 30px;" />
+
+
+<div class="collapsible-section collapsible-default">
+<h5 class="collapsible-header">
+non-WSL Windows Installation
+</h5>
 <div class="collapsible-content">
 
 On Windows, we strongly recommend you first try the "Windows (WSL)" (Windows Subsystem
@@ -260,7 +382,7 @@ Github Discussions page][].
   link](https://www.neuronsimulator.org/en/latest/install/install_instructions.html#windows).
 
 <!--
-Note from Austin on 2026-11-18:
+Developers: Note from Austin on 2026-11-18:
 Ugh. Both Windows' normal and hospital IT security policies can make Windows
 installation difficult.  If the user is at this case, where they aren't allowed to
 install WSL, then the following are our options, judging from my own testing of Windows
@@ -315,7 +437,7 @@ a solution specific to their case.
     .venv\Scripts\activate
     # Now that you're inside the environment, install HNN-Core:
     uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
-	# TODO uv pip install -U "hnn-core[all]"
+    # TODO uv pip install -U "hnn-core[all]"
     # Test that HNN-Core runs correctly
     python -c "
     from hnn_core import neymotin_2020_model, simulate_dipole
@@ -334,7 +456,7 @@ a solution specific to their case.
     TODO test combo
     cd ~
     .venv\Scripts\activate
-	```
+    ```
 
 7. Once you have activated your environment, you can run the GUI using the following
    command. Do this now:
@@ -359,56 +481,6 @@ a solution specific to their case.
 
 </div>
 </div>
-
-<span style="height: 30px;" />
-
-<div class="collapsible-section collapsible-default">
-<h5 class="collapsible-header"> Local Installation - Detailed </h5>
-<div class="collapsible-content">
-
-
-
-
-
-
-
-
-# Run the GUI
-hnn-gui
-
-1. Install the [Anaconda Python Distribution](https://www.anaconda.com/download/success) (also known as "Conda"). If you are unsure which version to install, download the Graphical Installer for the Anaconda Distribution, though any option works. If you are unfamiliar with using Anaconda/Conda virtual environments, [you can find guidance about them here](https://www.anaconda.com/docs/getting-started/working-with-conda/conda-intro-tutorial).
-
-
-
-
-<div class="collapsible-section collapsible-default">
-<h5 class="collapsible-header"> Which version to install? </h5>
-<div class="collapsible-content">
-
-<a id="which-version"></a>
-
-We recommend that you install HNN from our **`conda` package** instead of from `pip`. This `conda` package is "batteries included" and contains ALL features of HNN: the HNN API, the HNN GUI, Optimization, Joblib Parallelism, and MPI Parallelism. This is *significantly* easier to install than using `pip`. The sole exception is on Windows: for Windows, the easiest way to install is using the **"`pip` Package Installation"** method listed below, but this does not include MPI parallelism automatically. You can install the `conda` package on Windows to get speedup from MPI, but you must install Windows Subsystem for Linux for this; instructions for every step are documented below.
-
-However, there are some cases where you should **not** use the `conda` installation:
-
-- **If you want to co-install HNN alongside MNE:** In this case, we strongly recommend that you install MNE *first* [(MNE install guides here)](https://mne.tools/stable/install/index.html). If you installed MNE using its `pip` or `conda` methods, then afterwards, you should install HNN using our **`pip` Package Installation** method below, but *in the same Python environment* that you installed MNE into.
-- **If you are using your institution's High-Performance Computing (HPC) environment** (also called a "computing cluster" or supercomputer): The `conda` installation may work on your HPC, but if you want to use your HPC's custom MPI libraries, you should try using our **`pip` Package Installation** below. Your HPC usually has documentation on how they want you to load OpenMPI (which is not a Python package) and possibly `mpi4py` (which is a Python package). You can always ask us for help at [our Github Discussions page][].
-- **If you are at Brown University and want to use HNN on the OSCAR system:** We have made custom instructions for you, which [can be found here at this other page](https://github.com/jonescompneurolab/oscar-install).
-- **If you want to use a "custom" version of HNN's source code:** This includes if you need to use your own "Github fork", someone else's fork, or **if you want to contribute to HNN's development**. In this case, you should follow our **`pip` Source Installation** guide below.
-
-The terms HNN, `hnn-core`, and `hnn_core` are effectively equivalent, as they are all different names for the same codebase. `hnn-core` or `hnn_core` are often used during the installation process or when you are using the API.
-
-After you have installed HNN, we recommend you follow the **Testing Your Installation** section below to make sure it is installed correctly.
-
-**If you have any questions or problems** while installing HNN, feel free to ask for help on [our GitHub Discussions page][]!
-
-
-TODO conda package upgrade
-
-
-</div>
-</div>
-
 <span style="height: 30px;" />
 
 
@@ -462,7 +534,7 @@ For guidance on using Optimization, see our "Using the HNN API" notebooks in the
 
 ### `pip` Joblib Installation
 
-To install HNN with both its API and Joblib support, run the following command (make sure to include the "quotes"):
+ To install HNN with both its API and Joblib support, run the following command (make sure to include the "quotes"):
 
 ```bash
 pip install "hnn_core[parallel]"
@@ -825,6 +897,24 @@ If either of the above commands run into Errors (Warnings are okay), then feel f
 
 </div>
 </div>
+
+
+
+
+##### "Alternative installations"
+
+Additionally, if you are on Windows but are unable to
+install "Windows Subsystem for Linux", such as due to hospital IT policy, then see the
+**non-WSL Windows Installation** section later.
+
+
+
+
+
+
+
+
+
 
 [our HNN Textbook]: ../preface.html
 [NEURON]: https://nrn.readthedocs.io/
