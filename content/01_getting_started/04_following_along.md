@@ -52,30 +52,30 @@ You can download these files in two ways:
 
 ### 1. Simple clicking
 
-A. First, go to our [hnn-data GitHub repository](https://github.com/jonescompneurolab/hnn-data/).
+1. First, go to our [hnn-data GitHub repository](https://github.com/jonescompneurolab/hnn-data/).
 
-B. Click the green `Code` dropdown button.
+2. Click the green `Code` dropdown button.
 
-C. Click where it says `Download ZIP` to download all the files in a single ZIP compressed file.
+3. Click where it says `Download ZIP` to download all the files in a single ZIP compressed file.
 
-D. On your local computer, go to where you downloaded the file and either double-click on the ZIP file (MacOS) or right-click and then click on an option that says "Extract All" or "Extract Here" (Windows or Linux).
+4. On your local computer, go to where you downloaded the file and either double-click on the ZIP file (MacOS) or right-click and then click on an option that says "Extract All" or "Extract Here" (Windows or Linux).
 
-E. The files will now be available in a new folder.
+5. The files will now be available in a new folder.
 
 ### 2. Clone from `git`
 
-A. [Setup `git` using the instructions
+1. [Setup `git` using the instructions
 here](https://docs.github.com/en/get-started/git-basics/set-up-git), if you do not already have it installed.
 
-B. Open a Terminal/Ubuntu window, and navigate to where you want the data to be downloaded to.
+2. Open a Terminal/Ubuntu window, and navigate to where you want the data to be downloaded to.
 
-C. Clone our Github repository by running the following command:
+3. Clone our Github repository by running the following command:
 
 ```bash
 git clone https://github.com/jonescompneurolab/hnn-data.git
 ```
 
-D. We will periodically update or add new network configuration files, so we recommend occasionally pulling the latest changes from GitHub. You can do so with the following commands:
+4. We will periodically update or add new network configuration files, so we recommend occasionally pulling the latest changes from GitHub. You can do so with the following commands:
 
 ```bash
 git checkout main

@@ -24,6 +24,8 @@ TODOs
 - test mne hnn coinstall
 - fix the missing 1.2 section install
 - update oscar
+- update readme
+
 
 scratch pad:
 
