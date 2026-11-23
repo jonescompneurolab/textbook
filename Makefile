@@ -1,7 +1,7 @@
 
 .PHONY: all build clean create-textbook-stable-env create-textbook-dev-env
 
-HNN_VERSION := 0.6.1
+HNN_VERSION := 1.0.0
 OS := $(shell uname -s)
 
 # Function to create and configure a conda environment with library paths
