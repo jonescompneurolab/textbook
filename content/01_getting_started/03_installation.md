@@ -347,7 +347,7 @@ works there too. You can install HNN-Core in a `conda` environment using the fol
    GUI. You can do this using the following command:
 
     ```bash
-    source ~/.venv/bin/activate
+    conda activate hnn-core-env
     ```
 
     After which you can run `hnn-gui` to open the GUI, run python code/files using
