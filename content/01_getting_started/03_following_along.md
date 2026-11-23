@@ -1,12 +1,12 @@
 <!--
-# Title: 1.4 Follow Along with the Textbook
+# Title: 1.3 Follow Along with the Textbook
 # Updated: 2026-10-15
 #
 # Contributors:
     # Dylan Daniels
 -->
 
-# 1.4 Follow Along with the Textbook
+# 1.3 Follow Along with the Textbook
 
 ## Set Up Your HNN Environment
 

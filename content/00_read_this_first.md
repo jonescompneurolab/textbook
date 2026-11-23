@@ -42,4 +42,4 @@ You can run the HNN-Core API via two ways:
 
 All API tutorials on this Textbook website, [such as the one here](08_using_hnn_api/plot_firing_pattern.html), have a button at the top marked **Download Notebook** where you can download the page and code as a Jupyter notebook file. If you have installed HNN-Core locally, then you can edit and/or run the code in these notebook files and build your own workflows off of them (see [our Installation Guide][] for details on how to install Jupyter notebooks).
 
-[our Installation Guide]: 02_getting_started/installation.html
+[our Installation Guide]: 01_getting_started/installation.html

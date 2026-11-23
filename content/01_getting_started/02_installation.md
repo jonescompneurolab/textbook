@@ -1,5 +1,5 @@
 <!--
-# Title: 1.3 Installation
+# Title: 1.2 Installation
 # Updated: 2026-10-15
 #
 # Contributors:
@@ -8,7 +8,7 @@
     # Dylan Daniels
 -->
 
-# 1.3 Installation
+# 1.2 Installation
 
 <!--
 Developers: Reminder:
