@@ -19,7 +19,6 @@ comments in your command-line sections!
 TODOs
 
 - discuss HNN-Core vs HNN terminology with group
-- test if uvx works
 -- Add popups from frontpage here. NOPE tried, but even after adding CSS, could see the popup boxes on the main page, but clicking the boxes did NOT cause the big box overlay to actually spawn. Leaving this for another day.
 - test mne hnn coinstall
 - fix the missing 1.2 section install
@@ -191,9 +190,6 @@ MacOS
 </div>
 <span style="height: 30px;" />
 
-
--------------------------------------------------------------
-
 ## Local Installation Part 2: `uv` and HNN-Core installation
 
 1. Open a new `Terminal` (MacOS / Linux) or `Ubuntu` (Windows Subsystem for Linux) window.
@@ -260,9 +256,6 @@ MacOS
     After which you can run `hnn-gui` to open the GUI, run python code/files using
     `python` or `ipython`, or open Jupyter notebooks using `jupyter notebook`. Proceed to the rest of
     [our HNN Textbook][] to get started!
-
-
--------------------------------------------------------------
 
 
 <!------------------------ Detailed/complex collapsible --------------------------->
