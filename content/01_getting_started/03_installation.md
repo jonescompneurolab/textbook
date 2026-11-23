@@ -16,28 +16,6 @@ Developers: Reminder:
 comments in your command-line sections!
 -->
 
-TODOs
-
-- discuss HNN-Core vs HNN terminology with group
--- Add popups from frontpage here. NOPE tried, but even after adding CSS, could see the popup boxes on the main page, but clicking the boxes did NOT cause the big box overlay to actually spawn. Leaving this for another day.
-- test mne hnn coinstall
-- fix the missing 1.2 section install
-- update oscar
-- update readme
-
-
-scratch pad:
-
-uv pip install -U "hnn-core[all]@git+https://github.com/jonescompneurolab/hnn-core.git@master"
-uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
-uv pip install -U "hnn-core[all]"
-uvx --from="hnn_core[gui]" --python=3.13 hnn-gui
-
-
-end of scratch pad
-
----------------------------------------
-
 If you want to run HNN **for free** in the browser, click on the below box and follow the
 directions:
 
@@ -71,9 +49,12 @@ here](https://users.sdsc.edu/~kenneth/hnn/index.html).
 
 ## Local Installation - Simple
 
-If you want to install HNN-Core on your local computer with all features, including API
-(code), GUI (Graphical User Interface), MPI ([parallel
-computing](file:///Users/austinsoplata/rep/brn/textbook/content/08_using_hnn_api/parallelism_mpi.html),
+If you want to install HNN-Core on your local computer with all features, including [API
+(code)](https://jonescompneurolab.github.io/textbook/content/read_this_first.html#api-coding),
+[GUI (Graphical User
+Interface)](https://jonescompneurolab.github.io/textbook/content/read_this_first.html#gui-graphical-user-interface),
+MPI ([parallel
+computing](file:///Users/austinsoplata/rep/brn/textbook/content/08_using_hnn_api/parallelism_mpi.html)),
 and others, follow [Part 1](#local-installation-part-1-platform-specific-requirements)
 then [Part 2](#local-installation-part-2-uv-and-hnn-core-installation)
 below. Alternatively, if your circumstances are more complex (e.g. if you are using
@@ -192,6 +173,31 @@ MacOS
 
 ## Local Installation Part 2: `uv` and HNN-Core installation
 
+Note: This section assumes that you are **not** already using a Python virtual
+environment manager, such as [poetry](https://python-poetry.org/),
+[pyenv](https://github.com/pyenv/pyenv), or
+[Anaconda](https://www.anaconda.com/download/success), among many others. *If you don't
+know what this means or are unsure, then move on to step 1 below*. If you are, then you
+should create a new environment using your environment manager and run the following
+command from inside the environment:
+
+<!---
+Developer note: Users/devs should NEVER intermix different python environment managers!
+If someone is already using one, we should be clear that they should NOT start using uv,
+especially accidentally inside of another environment manager!
+-->
+
+```bash
+pip install -U "hnn-core[all]"
+python -c "
+from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
+with MPIBackend(n_procs=2):
+    simulate_dipole(neymotin_2020_model(), tstop=20)
+print('--> SUCCESS: The test worked')"
+```
+
+Otherwise, continue on to Step 1.
+
 1. Open a new `Terminal` (MacOS / Linux) or `Ubuntu` (Windows Subsystem for Linux) window.
 
 2. Download and [install the `uv` Python package and project
@@ -201,6 +207,7 @@ MacOS
     ```bash
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
+
 3. Close your `Terminal` / `Ubuntu` window, then open a new one.
 
 4. Copy, paste, and run the following series of commands in order to install Python,
@@ -216,7 +223,7 @@ MacOS
     uv pip install -U "hnn-core[all]"
     python -c "
     from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
-    with MPIBackend():
+    with MPIBackend(n_procs=2):
         simulate_dipole(neymotin_2020_model(), tstop=20)
     print('--> SUCCESS: The test worked')"
     ```
@@ -455,7 +462,6 @@ a solution specific to their case.
    Powershell window, or if you restart your computer and want to use HNN-Core**:
 
     ```bash
-    TODO test combo
     cd ~
     .venv\Scripts\activate
     ```
@@ -547,7 +553,7 @@ steps](https://docs.github.com/en/get-started/git-basics/set-up-git#authenticati
     uv pip install --editable ".[dev]"
     python -c "
     from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
-    with MPIBackend():
+    with MPIBackend(n_procs=2):
         simulate_dipole(neymotin_2020_model(), tstop=20)
     print('--> SUCCESS: The test worked')"
     ```
