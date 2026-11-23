@@ -53,8 +53,8 @@ Running HNN in the cloud (no installation)
 We provide Google CoLab notebooks that allow you to run HNN out of your browser, with
 access to your local filesystem.
 
-- [GUI Colab Notebook](https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing)
-- [API Colab Notebook](https://colab.research.google.com/drive/1FcNhHatsuxl-pACIFn7V6H5J4GPfZ1t8)
+- [GUI Colab Notebook (Graphical User Interface)](https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing)
+- [API Colab Notebook (Code-only, no GUI)](https://colab.research.google.com/drive/1FcNhHatsuxl-pACIFn7V6H5J4GPfZ1t8)
 
 This is the quickest way to get up and running with HNN, though it does require a Google
 account. If you do not have a Google account, you can create one for free to run the
@@ -72,13 +72,14 @@ here](https://users.sdsc.edu/~kenneth/hnn/index.html).
 
 ## Local Installation - Simple
 
-If you want to install HNN-Core on your local computer with all features, including API,
-GUI, MPI, and others, follow [Part
-1](#local-installation-part-1-platform-specific-requirements) then [Part
-2](#local-installation-part-2-uv-and-hnn-core-installation) below. Alternatively, if
-your circumstances are more complex (e.g. if you are using Anaconda/`conda`, you are
-using Brown University's OSCAR system, you want to install for development, etc.) then
-please see the [**Local Installation - Detailed**
+If you want to install HNN-Core on your local computer with all features, including API
+(code), GUI (Graphical User Interface), MPI ([parallel
+computing](file:///Users/austinsoplata/rep/brn/textbook/content/08_using_hnn_api/parallelism_mpi.html),
+and others, follow [Part 1](#local-installation-part-1-platform-specific-requirements)
+then [Part 2](#local-installation-part-2-uv-and-hnn-core-installation)
+below. Alternatively, if your circumstances are more complex (e.g. if you are using
+Anaconda/`conda`, you are using Brown University's OSCAR system, you want to install for
+development, etc.) then please see the [**Local Installation - Detailed**
 section](#local-installation---detailed). You can always reach out to us at [our Github
 Discussions page][] for installation help!
 
@@ -104,7 +105,7 @@ MacOS
 <div class="collapsible-content">
 
 1. Before you install HNN-Core, you must install "Xcode Command-Line Tools". This can be
-  done by opening the `Terminal` app, then copyying, pasting, and running the following
+  done by opening the `Terminal` app, then copying, pasting, and running the following
   command, and then clicking through the prompts in the window that will pop up.
 
     ```bash
@@ -210,15 +211,12 @@ MacOS
    create a new "virtual environment", install HNN-Core, and test HNN-Core. You can copy
    and paste *all of them together at one time*:
 
-    TODO swap pip
-    uv pip install -U "hnn-core[all]"
-
     ```bash
     uv python install 3.14
     cd ~
     uv venv -p 3.14
     source .venv/bin/activate
-    uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
+    uv pip install -U "hnn-core[all]"
     python -c "
     from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
     with MPIBackend():
@@ -447,8 +445,7 @@ a solution specific to their case.
     # Activate / enter the environment:
     .venv\Scripts\activate
     # Now that you're inside the environment, install HNN-Core:
-    uv pip install -U --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match "hnn-core[all]==1.0.0"
-    # TODO uv pip install -U "hnn-core[all]"
+    uv pip install -U "hnn-core[all]"
     # Test that HNN-Core runs correctly
     python -c "
     from hnn_core import neymotin_2020_model, simulate_dipole
