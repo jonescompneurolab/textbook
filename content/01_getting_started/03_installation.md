@@ -212,6 +212,7 @@ MacOS
     cd ~
     uv venv -p 3.14
     source .venv/bin/activate
+    hash -r
     uv pip install -U "hnn-core[all]"
     python -c "
     from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
@@ -542,6 +543,7 @@ steps](https://docs.github.com/en/get-started/git-basics/set-up-git#authenticati
     uv python install 3.14
     uv venv -p 3.14
     source .venv/bin/activate
+    hash -r
     uv pip install --editable ".[dev]"
     python -c "
     from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
