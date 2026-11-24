@@ -22,7 +22,7 @@ Figure 1 shows an example of the HNN-GUI with an evoked response simulation. The
 
 1. **"In the cloud"**: Run the GUI using either [this Google Colab notebook](https://colab.research.google.com/drive/1yyjuEBimIu_f7_0Nf3YLwUiVOO7ZrKK3?usp=sharing) or the Neuroscience Gateway Portal for free, as described in [our Installation Guide][]. This is the easiest way to use HNN as no local installation is necessary, but is also the slowest.
 
-2. **Local installation**: You can also install HNN to your local computer with just a few steps, by following [our Installation Guide][]. Once installed, you can open the HNN-GUI in the Terminal (on macOS or Linux) or the Anaconda Prompt (on Windows) by first activating your Conda environment, then running the command `hnn-gui`. A new tab should appear in your browser, running the HNN-GUI on your computer.
+2. **Local installation**: You can also install HNN to your local computer with just a few steps, by following [our Installation Guide][]. Once installed, you can open the HNN-GUI in the Terminal (on macOS or Linux) or Ubuntu (on Windows-WSL) by first activating your Python environment, then running the command `hnn-gui`. A new tab should appear in your browser, running the HNN-GUI on your computer.
 
 Note that the GUI is always a *tab* in your web browser (e.g. Google Chrome, Mozilla Firefox, Brave, Safari, etc.). This is true whether you are running it on your local computer or in the cloud!
 
@@ -42,4 +42,4 @@ You can run the HNN-Core API via two ways:
 
 All API tutorials on this Textbook website, [such as the one here](08_using_hnn_api/plot_firing_pattern.html), have a button at the top marked **Download Notebook** where you can download the page and code as a Jupyter notebook file. If you have installed HNN-Core locally, then you can edit and/or run the code in these notebook files and build your own workflows off of them (see [our Installation Guide][] for details on how to install Jupyter notebooks).
 
-[our Installation Guide]: 02_getting_started/installation.html
+[our Installation Guide]: 01_getting_started/installation.html

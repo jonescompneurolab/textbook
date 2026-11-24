@@ -79,9 +79,9 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
-				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
-				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
-				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.5 Simulation Workflow</a>
+				<a href="/textbook/content/01_getting_started/installation.html">1.2 Installation</a>
+				<a href="/textbook/content/01_getting_started/following_along.html">1.3 Follow Along with the Textbook</a>
+				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.4 Simulation Workflow</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -363,7 +363,6 @@ from hnn_core import (
     read_dipole,
     simulate_dipole,
 )
-from hnn_core.network_models import add_erp_drives_to_jones_model
 from hnn_core.viz import plot_dipole
                         </code>
                     </div>
@@ -635,13 +634,13 @@ else:
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
                     <p>We can add the default drives for simulating ERPs automatically using
-the <code>add_erp_drives_to_jones_model()</code> function we imported
-from <code>hnn_core.network_models</code>. (You can also manually add
-individual drives, and we will cover how to do so in a future
-section.)</p>
+the <code>add_erp_drives</code> argument to the
+<code>neymotin_2020_model()</code> function we imported. (You can also
+manually add individual drives, and we will cover how to do so in a
+future section.)</p>
 <p>Let's first check if there are an external drives already attached to
-our network object <code>net default</code>; if not, we'll add the
-drives using the aforementioned function.</p>
+our network object <code>net_default</code>; if not, we'll redefine our
+network and add the drives using the aforementioned argument.</p>
 <p>Lastly, we will inspect the drives attached to
 <code>net_default</code>. For simulating ERPs, we expect to see two
 proximal drives and one distal drive.</p>
@@ -657,11 +656,8 @@ proximal drives and one distal drive.</p>
 if not net_default.external_drives:
     print("No existing drives found. Adding default external drives ... ")
 
-    # add the default external drives for ERP simulation
-    # note:
-    #   the drives are added to the object **in place**, meaning we don't
-    #   need to assign the output back to the `net_default` variable
-    add_erp_drives_to_jones_model(net_default)
+    # Redefine the network, and add the default external drives for ERP simulation
+    net_default = neymotin_2020_model(add_erp_drives=True)
 
     print("The following drives were added:")
 else:
@@ -683,7 +679,8 @@ for key in net_default.external_drives.keys():
                     <div class='output-code'>
 
         No existing drives found. Adding default external drives ... 
-The following drives were added:
+
+        The following drives were added:
    evdist1
    evprox1
    evprox2
@@ -987,18 +984,20 @@ Trial 1: 20.0 ms...
 Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
 Trial 1: 50.0 ms...
-Trial 1: 60.0 ms...
 
-        Trial 1: 70.0 ms...
+        Trial 1: 60.0 ms...
+Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
-Trial 1: 90.0 ms...
+
+        Trial 1: 90.0 ms...
 Trial 1: 100.0 ms...
-Trial 1: 110.0 ms...
+
+        Trial 1: 110.0 ms...
 Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
+Trial 1: 140.0 ms...
 
-        Trial 1: 140.0 ms...
-Trial 1: 150.0 ms...
+        Trial 1: 150.0 ms...
 Trial 1: 160.0 ms...
 
                     </div>

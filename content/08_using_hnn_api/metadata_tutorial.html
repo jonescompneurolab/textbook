@@ -79,9 +79,9 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
-				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
-				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
-				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.5 Simulation Workflow</a>
+				<a href="/textbook/content/01_getting_started/installation.html">1.2 Installation</a>
+				<a href="/textbook/content/01_getting_started/following_along.html">1.3 Follow Along with the Textbook</a>
+				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.4 Simulation Workflow</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -400,26 +400,38 @@ Cell types: [&#x27;L2_basket&#x27;, &#x27;L2_pyramidal&#x27;, &#x27;L5_basket&#x
   &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;basket&#x27;,
    &#x27;electro_type&#x27;: &#x27;inhibitory&#x27;,
    &#x27;layer&#x27;: &#x27;2&#x27;,
+   &#x27;zdist_origin&#x27;: 0.8,
    &#x27;measure_dipole&#x27;: False,
-   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}},
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;,
+   &#x27;color&#x27;: &#x27;m&#x27;,
+   &#x27;marker&#x27;: &#x27;x&#x27;}},
  &#x27;L2_pyramidal&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
   &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;pyramidal&#x27;,
    &#x27;electro_type&#x27;: &#x27;excitatory&#x27;,
    &#x27;layer&#x27;: &#x27;2&#x27;,
+   &#x27;zdist_origin&#x27;: 1,
    &#x27;measure_dipole&#x27;: True,
-   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}},
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;,
+   &#x27;color&#x27;: &#x27;c&#x27;,
+   &#x27;marker&#x27;: &#x27;^&#x27;}},
  &#x27;L5_basket&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
   &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;basket&#x27;,
    &#x27;electro_type&#x27;: &#x27;inhibitory&#x27;,
    &#x27;layer&#x27;: &#x27;5&#x27;,
+   &#x27;zdist_origin&#x27;: 0.2,
    &#x27;measure_dipole&#x27;: False,
-   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}},
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;,
+   &#x27;color&#x27;: &#x27;r&#x27;,
+   &#x27;marker&#x27;: &#x27;x&#x27;}},
  &#x27;L5_pyramidal&#x27;: {&#x27;cell_object&#x27;: &lt;Cell | gid=None&gt;,
   &#x27;cell_metadata&#x27;: {&#x27;morpho_type&#x27;: &#x27;pyramidal&#x27;,
    &#x27;electro_type&#x27;: &#x27;excitatory&#x27;,
    &#x27;layer&#x27;: &#x27;5&#x27;,
+   &#x27;zdist_origin&#x27;: 0,
    &#x27;measure_dipole&#x27;: True,
-   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;}}}
+   &#x27;reference&#x27;: &#x27;https://doi.org/10.7554/eLife.51214&#x27;,
+   &#x27;color&#x27;: &#x27;b&#x27;,
+   &#x27;marker&#x27;: &#x27;^&#x27;}}}
                     </div>
                 </div>
 
@@ -451,29 +463,41 @@ L2_basket:
   morpho_type: basket
   electro_type: inhibitory
   layer: 2
+  zdist_origin: 0.8
   measure_dipole: False
   reference: https://doi.org/10.7554/eLife.51214
+  color: m
+  marker: x
 
 L2_pyramidal:
   morpho_type: pyramidal
   electro_type: excitatory
   layer: 2
+  zdist_origin: 1
   measure_dipole: True
   reference: https://doi.org/10.7554/eLife.51214
+  color: c
+  marker: ^
 
 L5_basket:
   morpho_type: basket
   electro_type: inhibitory
   layer: 5
+  zdist_origin: 0.2
   measure_dipole: False
   reference: https://doi.org/10.7554/eLife.51214
+  color: r
+  marker: x
 
 L5_pyramidal:
   morpho_type: pyramidal
   electro_type: excitatory
   layer: 5
+  zdist_origin: 0
   measure_dipole: True
   reference: https://doi.org/10.7554/eLife.51214
+  color: b
+  marker: ^
 
                     </div>
                 </div>
@@ -593,8 +617,8 @@ target_example = 'L2_pyramidal'
 print(f"Example: {src_example} \u2192 {target_example} proximal connections")
 
 for conn in net.connectivity:
-    if (conn['src_type'] == src_example and 
-        conn['target_type'] == target_example and 
+    if (conn['src_type'] == src_example and
+        conn['target_type'] == target_example and
         conn['loc'] == 'proximal'):
 
         weight = conn['nc_dict']['A_weight']
@@ -808,7 +832,7 @@ if 'soma' in cell_obj.sections:
     soma_mechs = cell_obj.sections['soma'].mechs
     print("\nSoma ion channels:")
     for mech_name, mech_params in soma_mechs.items():
-        conductances = {k: v for k, v in mech_params.items() 
+        conductances = {k: v for k, v in mech_params.items()
                        if 'gbar' in k or 'gkbar' in k or 'gnabar' in k}
         if conductances:
             print(f"  {mech_name}: {conductances}")

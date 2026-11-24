@@ -1648,6 +1648,13 @@ div.sourceCode:has(
     box-sizing: border-box;
 }
 
+
+code.sourceCode.bash,
+code.sourceCode.sh,
+code.sourceCode.console {
+    overflow-x: auto !important;
+}
+
 /* Copy button in the header */
 div.sourceCode:has(
     code.sourceCode.bash,

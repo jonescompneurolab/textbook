@@ -79,9 +79,9 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
-				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
-				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
-				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.5 Simulation Workflow</a>
+				<a href="/textbook/content/01_getting_started/installation.html">1.2 Installation</a>
+				<a href="/textbook/content/01_getting_started/following_along.html">1.3 Follow Along with the Textbook</a>
+				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.4 Simulation Workflow</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -370,10 +370,8 @@ invasive recording modality.</p>
 the underlying network activity around the time of the first
 <em>proximal</em> drive. In the next page (Part 2), we will repeat the
 same exercise for the time around the first <em>distal</em> drive.</p>
-<p>We will begin by making a new figure that more closely matches the
-standard GUI output, so that the
-<strong><em>interpretation</em></strong> of the figures matches what is
-said in the accompanying video. We will generate a figure that
+<p>We will begin by making a new figure that matches the standard GUI
+output shown in the accompanying video. We will generate a figure that
 shows:</p>
 <ol type="1">
 <li><p>A histogram of spikes from the
@@ -382,58 +380,29 @@ shows:</p>
 simulation</p></li>
 <li><p>The loaded experimental data</p></li>
 </ol>
-<p>In order to get a 1-to-1 match with the standard GUI output, we will
-also need to re-simulate the default network. The reason for this is
-that the GUI and the Python API initialize the <code>default</code>
-evoked drives with different <code>seed</code> (a.k.a. random number
-generator) values.</p>
-<p>Since we want to match the GUI outputs <strong><em>as closely as
-possible</em></strong>, we need to use the same <code>seed</code>
-values.</p>
-<p>Previously, we loaded the Evoked Drives using the
-<code>add_erp_drives_to_jones_model()</code> function. For this example,
-we will apply the drives from the exact <code>.json</code> configuration
-file used by the GUI. The <strong><em>only</em></strong> parameters that
-differ are the "event_seed" for each drive.</p>
+<p>Let's recreate our network like before:</p>
 
                 </div>
 
 
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            gui_default_url = (
-    "https://raw.githubusercontent.com/jonescompneurolab/hnn-data/refs/heads/main/tutorial_networks/gui_defaults.json"
-)
-urlretrieve(
-    gui_default_url,
-    "gui_default.json",
-);
-                        </code>
-                    </div>
-                </div>
+<!-- code cell -->
+<div class='code-cell'>
+    <div class='code-scroll-wrapper'>
+        <code class='language-python'>
+            net_default_gui = neymotin_2020_model(add_erp_drives=True)
+        </code>
+    </div>
+</div>
 
 
                 <!-- markdown cell -->
                 <div class='markdown-cell'>
-                    <p>We can then use the <code>read_network_configuration</code> function
-to load the file. Note that you can also save the network configuration
-file directly from the GUI to your local machine, and you can load the
-drives directly from your machine using the same function.</p>
+                    <p>If you want, you can also save the network configuration file
+directly from the GUI to your local machine, and you can load the
+network and drives directly from your machine using
+<code>hnn_core.read_network_configuration</code>, but this is
+optional.</p>
 
-                </div>
-
-
-                <!-- code cell -->
-                <div class='code-cell'>
-                    <div class='code-scroll-wrapper'>
-                        <code class='language-python'>
-                            from hnn_core import read_network_configuration  
-
-net_default_gui = read_network_configuration("gui_default.json")
-                        </code>
-                    </div>
                 </div>
 
 
@@ -505,20 +474,17 @@ Trial 1: 0.03 ms...
 
         Trial 1: 10.0 ms...
 Trial 1: 20.0 ms...
-
-        Trial 1: 30.0 ms...
+Trial 1: 30.0 ms...
 Trial 1: 40.0 ms...
-Trial 1: 50.0 ms...
 
-        Trial 1: 60.0 ms...
+        Trial 1: 50.0 ms...
+Trial 1: 60.0 ms...
 Trial 1: 70.0 ms...
 Trial 1: 80.0 ms...
 Trial 1: 90.0 ms...
-
-        Trial 1: 100.0 ms...
+Trial 1: 100.0 ms...
 Trial 1: 110.0 ms...
-
-        Trial 1: 120.0 ms...
+Trial 1: 120.0 ms...
 Trial 1: 130.0 ms...
 
         Trial 1: 140.0 ms...

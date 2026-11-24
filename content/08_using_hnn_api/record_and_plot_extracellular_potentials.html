@@ -79,9 +79,9 @@
 		    <div class="submenu">
 
 				<a href="/textbook/content/01_getting_started/challenge.html">1.1 Introducing HNN</a>
-				<a href="/textbook/content/01_getting_started/installation.html">1.3 Installation</a>
-				<a href="/textbook/content/01_getting_started/following_along.html">1.4 Follow Along with the Textbook</a>
-				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.5 Simulation Workflow</a>
+				<a href="/textbook/content/01_getting_started/installation.html">1.2 Installation</a>
+				<a href="/textbook/content/01_getting_started/following_along.html">1.3 Follow Along with the Textbook</a>
+				<a href="/textbook/content/01_getting_started/simulation_workflow.html">1.4 Simulation Workflow</a>
 			</div>
 		</div>
 		<div class="sidebar-list">
@@ -356,7 +356,6 @@ and around the HNN network model.</p>
                             import matplotlib.pyplot as plt
 
 from hnn_core import neymotin_2020_model, simulate_dipole
-from hnn_core.network_models import add_erp_drives_to_jones_model
                         </code>
                     </div>
                 </div>
@@ -380,10 +379,8 @@ potential (ERP) example for details.</p>
                 <div class='code-cell'>
                     <div class='code-scroll-wrapper'>
                         <code class='language-python'>
-                            net = neymotin_2020_model()
-add_erp_drives_to_jones_model(net)
-
-net.set_cell_positions(inplane_distance=30.)
+                            net = neymotin_2020_model(add_erp_drives=True)
+net.update_cell_positions(inplane_distance=30.)
                         </code>
                     </div>
                 </div>
@@ -515,7 +512,8 @@ dpl = simulate_dipole(net, tstop=170)
                     <div class='output-code'>
 
         Joblib will run 1 trial(s) in parallel by distributing trials over 1 jobs.
-Loading custom mechanism files from /home/runner/miniconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
+
+        Loading custom mechanism files from /home/runner/miniconda3/envs/textbook-stable-env/lib/python3.12/site-packages/hnn_core/mod/x86_64/libnrnmech.so
 Building the NEURON model
 
         [Done]
