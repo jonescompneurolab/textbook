@@ -27,6 +27,16 @@ define create-and-configure-env
 	conda env create --quiet --yes --file environment.yml --name $(1)
 endef
 
+# NEURON needs the shared library, not the pip Open MPI linker script.
+define configure-neuron-mpi
+	@if [ "$(OS)" = "Linux" ]; then \
+		prefix=$$(conda run -n $(1) python -c 'import sys; print(sys.prefix)') || exit $$?; \
+		if [ -f "$$prefix/lib/libmpi.so.40" ]; then \
+			conda env config vars set -n $(1) "MPI_LIB_NRN_PATH=$$prefix/lib/libmpi.so.40"; \
+		fi; \
+	fi
+endef
+
 all: build
 
 build:
@@ -59,6 +69,7 @@ clean:
 create-textbook-stable-env:
 	$(call create-and-configure-env,textbook-stable-env,false)
 	conda run -n textbook-stable-env pip install 'hnn_core[dev]==$(HNN_VERSION)'
+	$(call configure-neuron-mpi,textbook-stable-env)
 	@echo "Conda environment 'textbook-stable-env' successfully created."
 	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-env'"
 
@@ -69,7 +80,7 @@ create-textbook-dev-env:
 	LATEST_HASH=$$(git ls-remote https://github.com/jonescompneurolab/hnn-core.git master | cut -f1);
 	@# Install hnn-core in developer mode, forcing reinstall without cache
 	conda run -n textbook-dev-env pip install --upgrade --force-reinstall --no-cache-dir "hnn-core[dev] @ git+https://github.com/jonescompneurolab/hnn-core.git@master"
+	$(call configure-neuron-mpi,textbook-dev-env)
 
 	@echo "Conda environment 'textbook-dev-env' successfully created."
 	@echo -e "\n\nActivate your environment with 'conda activate textbook-dev-env'"
-
