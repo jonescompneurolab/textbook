@@ -1,0 +1,4 @@
+name: textbook-env
+dependencies:
+  - python=3.12
+  - pandoc

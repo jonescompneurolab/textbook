@@ -23,8 +23,8 @@ define create-and-configure-env
 			echo "Environment '$(1)' successfully removed."; \
 		} || true
 	)
-	@# Create a new raw conda environment
-	conda create --quiet --yes --name $(1) python=3.12
+	@# Create a new conda environment with pandoc
+	conda env create --quiet --yes --file environment.yml --name $(1)
 endef
 
 all: build
