@@ -7,9 +7,7 @@ dependencies:
   - ipyevents
   - markdown=3.4
   - mne
-  - mpi4py
   - nibabel
-  - openmpi>5
   - pandoc==3.6.2
   - pip==25.0
   - pooch==1.8.2
