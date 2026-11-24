@@ -38,12 +38,11 @@ jobs:
 
       - name: Test MPI
         run: |
-          conda run -n textbook-stable-env \
-          mpiexec -np 2 nrniv -mpi -python -c '
-          from neuron import h;
-          from mpi4py import MPI;
-          print(f"Hello from proc {MPI.COMM_WORLD.Get_rank()}");
-          h.quit()'
+          conda run -n textbook-stable-env python -c "
+          from hnn_core import neymotin_2020_model, MPIBackend, simulate_dipole
+          with MPIBackend():
+              simulate_dipole(neymotin_2020_model(), tstop=20)
+          print('--> SUCCESS: The test worked')"
 
       - name: Remove HTML output from .gitignore
         run: |
