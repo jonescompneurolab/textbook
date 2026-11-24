@@ -1,0 +1,11 @@
+beautifulsoup4
+ipyevents
+markdown
+mne
+nibabel
+pandoc
+pip
+pooch==1.8.2
+pypandoc
+pyvista[all]
+pyvistaqt

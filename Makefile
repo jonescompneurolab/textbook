@@ -23,8 +23,8 @@ define create-and-configure-env
 			echo "Environment '$(1)' successfully removed."; \
 		} || true
 	)
-	@# Create the new conda environment from environment.yml
-	conda env create --quiet --yes --file environment.yml --name $(1)
+	@# Create a new raw conda environment
+	conda create --quiet --yes --name $(1) python=3.12
 endef
 
 all: build
@@ -58,13 +58,14 @@ clean:
 
 create-textbook-stable-env:
 	$(call create-and-configure-env,textbook-stable-env,false)
+	conda run -n textbook-stable-env pip install -r requirements.txt
 	conda run -n textbook-stable-env pip install 'hnn_core[dev]==$(HNN_VERSION)'
 	@echo "Conda environment 'textbook-stable-env' successfully created."
 	@echo -e "\n\nActivate your environment with 'conda activate textbook-stable-env'"
 
 create-textbook-dev-env:
 	$(call create-and-configure-env,textbook-dev-env,true)
-
+	conda run -n textbook-dev-env pip install -r requirements.txt
 	@# Get the latest commit hash of hnn-core master branch
 	LATEST_HASH=$$(git ls-remote https://github.com/jonescompneurolab/hnn-core.git master | cut -f1);
 	@# Install hnn-core in developer mode, forcing reinstall without cache
